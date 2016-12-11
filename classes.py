@@ -1,17 +1,21 @@
+# coding=utf-8
+
 class Produto(object):
     def __init__(self):
         self.id = -1
         self.nome = "NULL"
         self.valor_inic = -1.0
         self.data_inser = -1
-        self.foreign_key = -1
+        self.id_Categoria = -1
+        self.nome_Categoria = "NULL"
 
-    def __init__(self, id, nome, valor_inic, data_inser,foreign_key):
+    def __init__(self, id, nome, valor_inic, data_inser, id_Categoria, nome_Categoria):
         self.id = id
         self.nome = nome
         self.valor_inic = valor_inic
         self.data_inser = data_inser
-        self.foreign_key = foreign_key
+        self.id_Categoria = id_Categoria
+        self.nome_Categoria = nome_Categoria
 
     def getId(self):
         return self.id
@@ -25,8 +29,11 @@ class Produto(object):
     def getData_inser(self):
         return self.data_inser
 
-    def getForeign_key(self):
-        return self.foreign_key
+    def getId_Categoria(self):
+        return self.id_Categoria
+
+    def getNome_Categoria(self):
+        return self.nome_Categoria
 
     def setId(self, id):
         self.id = id
@@ -40,8 +47,11 @@ class Produto(object):
     def setData_inser(self, data_inser):
         self.data_inser = data_inser
 
-    def setForeign_key(self,foreign_key):
-        self.foreign_key = foreign_key
+    def setId_Categoria(self, id_Categoria):
+        self.id_Categoria = id_Categoria
+
+    def setNome_Categoria(self, nome_Categoria):
+        self.nome_Categoria = nome_Categoria
 
 
 class Categoria(object):
