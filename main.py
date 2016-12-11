@@ -17,10 +17,10 @@ def main():
     #prod1 = Produto(4,'Empada', 5.0, 123123, 1, 'Salgados') #[id, nome, valor_inic, data_inser, id_Categoria, nome_Categoria]
     #bd.insertProduto(prod1)
 
-    #texto = bd.selectProdutoAll()
-    #print texto
+    texto = bd.selectProdutoId(4)
+    print texto
 
-    theBigProdMenu() #Chamada da janela grande
+    #theBigProdMenu() #Chamada da janela grande
 
 if __name__ == "__main__":
     main()

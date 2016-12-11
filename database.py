@@ -60,6 +60,11 @@ class Database(object):
         self.dbCursor.execute('SELECT * FROM Produto ORDER BY id')
         return self.dbCursor.fetchall()
 
+    def selectProdutoId(self, id):
+        value = [id]
+        self.dbCursor.execute('SELECT * FROM Produto WHERE id = ?', value)
+        return self.dbCursor.fetchall()
+
     def selectCategoriaAll(self):
         self.dbCursor.execute('SELECT * FROM Categoria ORDER BY id')
         return self.dbCursor.fetchall()
