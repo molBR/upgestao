@@ -1,9 +1,54 @@
 from Tkinter import *
 
-# funcao para teste
+# funcao de teste
 def Teste():
     print("Testado")
 # fim
+
+#funcao de destaque das abas
+def todos_apertado():
+    todos.config(relief=SUNKEN, background=cor2)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def doces_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=SUNKEN, background=cor2)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def salgados_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=SUNKEN, background=cor2)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def massas_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=SUNKEN, background=cor2)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def bebidas_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=SUNKEN, background=cor2)
+    outros.config(relief=RAISED, background=cor1)
+def outros_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=SUNKEN, background=cor2)
+#fim
 
 root=Tk()
 
@@ -16,7 +61,7 @@ menu.add_cascade(label="Arquivo", menu=subMenu1)
 subMenu1.add_command(label="Novo", command=Teste)
 subMenu1.add_command(label="Salvar", command=Teste)
 subMenu1.add_separator()
-subMenu1.add_command(label="Sair", command=Teste)
+subMenu1.add_command(label="Sair", command=root.destroy)
 
 subMenu2 = Menu(menu)
 menu.add_cascade(label="Editar", menu=subMenu2)
@@ -33,32 +78,39 @@ subMenu3.add_command(label="Arquivo Recente", command=Teste)
 
 # abas de opcoes
 cor1 = '#D32F2F'
+cor2 = '#E94545'
 
 toolbar = Frame(root, bg=cor1)
 
-opcao1 = Button(toolbar, text="   Doces   ", bg=cor1,  command=Teste)
-opcao1['font']=('bold')
-opcao1['fg']='white'
-opcao1.pack(side=LEFT, padx=1, pady=1)
-opcao2 = Button(toolbar, text="Salgados", bg=cor1, command=Teste)
-opcao2['font']=('bold')
-opcao2['fg']='white'
-opcao2.pack(side=LEFT, padx=1, pady=1)
-opcao3 = Button(toolbar, text="  Massas  ", bg=cor1, command=Teste)
-opcao3['font']=('bold')
-opcao3['fg']='white'
-opcao3.pack(side=LEFT, padx=1, pady=1)
-opcao4 = Button(toolbar, text="  Bebidas  ", bg=cor1, command=Teste)
-opcao4['font']=('bold')
-opcao4['fg']='white'
-opcao4.pack(side=LEFT, padx=1, pady=1)
-opcao5 = Button(toolbar, text="   Outros   ", bg=cor1, command=Teste)
-opcao5['font']=('bold')
-opcao5['fg']='white'
-opcao5.pack(side=LEFT, padx=1, pady=1)
+todos = Button(toolbar, text="   Todos   ", bg=cor1,  command=todos_apertado)
+todos['font']=('bold')
+todos['fg']='white'
+todos.pack(side=LEFT, padx=1, pady=1)
+doces = Button(toolbar, text="   Doces   ", bg=cor1,  command=doces_apertado)
+doces['font']=('bold')
+doces['fg']='white'
+doces.pack(side=LEFT, padx=1, pady=1)
+salgados = Button(toolbar, text="Salgados", bg=cor1, command=salgados_apertado)
+salgados['font']=('bold')
+salgados['fg']='white'
+salgados.pack(side=LEFT, padx=1, pady=1)
+massas = Button(toolbar, text="  Massas  ", bg=cor1, command=massas_apertado)
+massas['font']=('bold')
+massas['fg']='white'
+massas.pack(side=LEFT, padx=1, pady=1)
+bebidas = Button(toolbar, text=" Bebidas ", bg=cor1, command=bebidas_apertado)
+bebidas['font']=('bold')
+bebidas['fg']='white'
+bebidas.pack(side=LEFT, padx=1, pady=1)
+outros = Button(toolbar, text="   Outros   ", bg=cor1, command=outros_apertado)
+outros['font']=('bold')
+outros['fg']='white'
+outros.pack(side=LEFT, padx=1, pady=1)
 
 toolbar.pack(side=TOP, fill=X)
 # fim
+
+
 
 # barra de 'status'
 status = Label(root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
@@ -74,16 +126,16 @@ class Example(Frame):
         self.container2.pack(side=BOTTOM, fill=X, padx=15, pady=15)
 
 #"cabecalho" da tabela dos itens
-        self.objeto1 = Label(self.container1, text="       Codigo:")
+        self.objeto1 = Label(self.container1, text="Codigo:")
         self.objeto1["font"] = ["bold"]
         self.objeto1.pack(side=LEFT)
-        self.objeto2 = Label(self.container1, text="                                       ")
+        self.objeto2 = Label(self.container1, text="                             ")
         self.objeto2["font"] = ["bold"]
         self.objeto2.pack(side=LEFT)
         self.objeto3 = Label(self.container1, text="Nome:")
         self.objeto3["font"] = ["bold"]
         self.objeto3.pack(side=LEFT)
-        self.objeto4 = Label(self.container1, text="                                              ")
+        self.objeto4 = Label(self.container1, text="                                                       ")
         self.objeto4["font"] = ["bold"]
         self.objeto4.pack(side=LEFT)
         self.objeto5 = Label(self.container1, text="Valor:")
@@ -154,62 +206,54 @@ class Example(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
-                var1 = IntVar()
-                Checkbutton(self.frame, text="", variable=var1, background=cor, command=Teste).grid(row=row, sticky=W)
                 t="codigo"
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=1)
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=0)
             else:
                 cor = '#f0f0f0'
-                var1 = IntVar()
-                Checkbutton(self.frame, text="", variable=var1, background=cor).grid(row=row, sticky=W)
                 t = "codigo"
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=1)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "                                         "
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=2)
-            else:
-                cor = '#f0f0f0'
-                t = ""
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=2)
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=0)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "nome "
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=3)
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=30)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=3)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "                                               "
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=4)
-            else:
-                cor = '#f0f0f0'
-                t = ""
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=4)
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=30)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=1)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "R$" "  valor"
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=5)
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
                 t = "R$"  "  valor"
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=5)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "                                               "
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=6)
-            else:
-                cor = '#f0f0f0'
-                t = ""
-                Label(self.frame, text=t, font="bold", background=cor).grid(row=row, column=6)
-
+                ent = Entry(self.frame, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                var = StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=2)
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''
@@ -220,5 +264,5 @@ Example(root).pack(side="top", fill="both", expand=True)
 root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 root.title('Programa Guts')
 root.resizable(width=False, height=False)
-root.geometry('750x450')
+root.geometry('755x450')
 root.mainloop()
