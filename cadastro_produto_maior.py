@@ -77,7 +77,7 @@ subMenu3.add_command(label="Arquivo Recente", command=Teste)
 # fim
 
 # abas de opcoes
-cor1 = '#D32F2F'
+cor1 = '#CC2828'
 cor2 = '#E94545'
 
 toolbar = Frame(root, bg=cor1)
@@ -129,7 +129,7 @@ class Example(Frame):
         self.objeto1 = Label(self.container1, text="Codigo:")
         self.objeto1["font"] = ["bold"]
         self.objeto1.pack(side=LEFT)
-        self.objeto2 = Label(self.container1, text="                             ")
+        self.objeto2 = Label(self.container1, text="                                        ")
         self.objeto2["font"] = ["bold"]
         self.objeto2.pack(side=LEFT)
         self.objeto3 = Label(self.container1, text="Nome:")
