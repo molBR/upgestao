@@ -1,20 +1,58 @@
 import Tkinter as Tkin
 from database import database as db
 import cadastro_produto_menor as cpm
-from database import tratamentos as tr
-import tkMessageBox
-import cadastro_produto_deletar as cpd
-import cadastro_produto_editar_1 as cpe
 bd = db.Database(0)
 tm = cpm.TelaMenor()
-td = cpd.TelaMenorDel()
-te = cpe.TelaMenorEdit1()
 # funcao de teste
 def Teste():
     print("Testado")
 # fim
 
 #funcao de destaque das abas
+def todos_apertado():
+    todos.config(relief=SUNKEN, background=cor2)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+
+def doces_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=SUNKEN, background=cor2)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def salgados_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=SUNKEN, background=cor2)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def massas_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=SUNKEN, background=cor2)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=RAISED, background=cor1)
+def bebidas_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=SUNKEN, background=cor2)
+    outros.config(relief=RAISED, background=cor1)
+def outros_apertado():
+    todos.config(relief=RAISED, background=cor1)
+    doces.config(relief=RAISED, background=cor1)
+    salgados.config(relief=RAISED, background=cor1)
+    massas.config(relief=RAISED, background=cor1)
+    bebidas.config(relief=RAISED, background=cor1)
+    outros.config(relief=SUNKEN, background=cor2)
+#fim
 
 root=Tkin.Tk()
 
@@ -43,10 +81,37 @@ subMenu3.add_command(label="Arquivo Recente", command=Teste)
 # fim
 
 # abas de opcoes
+cor1 = '#CC2828'
+cor2 = '#E94545'
 
-cor1 = '#52bbeb'
 toolbar = Tkin.Frame(root, bg=cor1)
 
+todos = Tkin.Button(toolbar, text="   Todos   ", bg=cor1,  command=todos_apertado)
+todos['font']=('bold')
+todos['fg']='white'
+todos.pack(side=Tkin.LEFT, padx=1, pady=1)
+doces = Tkin.Button(toolbar, text="   Doces   ", bg=cor1,  command=doces_apertado)
+doces['font']=('bold')
+doces['fg']='white'
+doces.pack(side=Tkin.LEFT, padx=1, pady=1)
+salgados = Tkin.Button(toolbar, text="Salgados", bg=cor1, command=salgados_apertado)
+salgados['font']=('bold')
+salgados['fg']='white'
+salgados.pack(side=Tkin.LEFT, padx=1, pady=1)
+massas = Tkin.Button(toolbar, text="  Massas  ", bg=cor1, command=massas_apertado)
+massas['font']=('bold')
+massas['fg']='white'
+massas.pack(side=Tkin.LEFT, padx=1, pady=1)
+bebidas = Tkin.Button(toolbar, text=" Bebidas ", bg=cor1, command=bebidas_apertado)
+bebidas['font']=('bold')
+bebidas['fg']='white'
+bebidas.pack(side=Tkin.LEFT, padx=1, pady=1)
+outros = Tkin.Button(toolbar, text="   Outros   ", bg=cor1, command=outros_apertado)
+outros['font']=('bold')
+outros['fg']='white'
+outros.pack(side=Tkin.LEFT, padx=1, pady=1)
+
+toolbar.pack(side=Tkin.TOP, fill=Tkin.X)
 # fim
 
 
@@ -58,96 +123,15 @@ status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
 
 class Example(Tkin.Frame):
 
-    def todos_apertado(self):
-        self.todos.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.doces.config(relief=Tkin.RAISED, background=self.cor1)
-        self.salgados.config(relief=Tkin.RAISED, background=self.cor1)
-        self.massas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.outros.config(relief=Tkin.RAISED, background=self.cor1)
-        self.populate(bd.selectProduto())
 
-    def doces_apertado(self):
-        self.todos.config(relief=Tkin.RAISED, background=self.cor1)
-        self.doces.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.salgados.config(relief=Tkin.RAISED, background=self.cor1)
-        self.massas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.outros.config(relief=Tkin.RAISED, background=self.cor1)
-        self.populate(bd.selectProdutoDoces())
-
-    def salgados_apertado(self):
-        self.todos.config(relief=Tkin.RAISED, background=self.cor1)
-        self.doces.config(relief=Tkin.RAISED, background=self.cor1)
-        self.salgados.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.massas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.outros.config(relief=Tkin.RAISED, background=self.cor1)
-        self.populate(bd.selectProdutoSalgados())
-
-    def massas_apertado(self):
-        self.todos.config(relief=Tkin.RAISED, background=self.cor1)
-        self.doces.config(relief=Tkin.RAISED, background=self.cor1)
-        self.salgados.config(relief=Tkin.RAISED, background=self.cor1)
-        self.massas.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.outros.config(relief=Tkin.RAISED, background=self.cor1)
-        self.populate(bd.selectProdutoMassas())
-
-    def bebidas_apertado(self):
-        self.todos.config(relief=Tkin.RAISED, background=self.cor1)
-        self.doces.config(relief=Tkin.RAISED, background=self.cor1)
-        self.salgados.config(relief=Tkin.RAISED, background=self.cor1)
-        self.massas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.bebidas.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.outros.config(relief=Tkin.RAISED, background=self.cor1)
-        self.populate(bd.selectProdutoBebidas())
-
-    def outros_apertado(self):
-        self.todos.config(relief=Tkin.RAISED, background=self.cor1)
-        self.doces.config(relief=Tkin.RAISED, background=self.cor1)
-        self.salgados.config(relief=Tkin.RAISED, background=self.cor1)
-        self.massas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
-        self.outros.config(relief=Tkin.SUNKEN, background=self.cor2)
-        self.populate(bd.selectProdutoOutros())
-
-
-
-    # fim
     def __init__(self, root):
-        self.todos = Tkin.Button(toolbar, text="   Todos   ", bg=cor1, command=self.todos_apertado)
-        self.todos['font'] = ('bold')
-        self.todos['fg'] = 'white'
-        self.todos.pack(side=Tkin.LEFT, padx=1, pady=1)
-        self.doces = Tkin.Button(toolbar, text="   Doces   ", bg=cor1, command=self.doces_apertado)
-        self.doces['font'] = ('bold')
-        self.doces['fg'] = 'white'
-        self.doces.pack(side=Tkin.LEFT, padx=1, pady=1)
-        self.salgados = Tkin.Button(toolbar, text="Salgados", bg=cor1, command=self.salgados_apertado)
-        self.salgados['font'] = ('bold')
-        self.salgados['fg'] = 'white'
-        self.salgados.pack(side=Tkin.LEFT, padx=1, pady=1)
-        self.massas = Tkin.Button(toolbar, text="  Massas  ", bg=cor1, command=self.massas_apertado)
-        self.massas['font'] = ('bold')
-        self.massas['fg'] = 'white'
-        self.massas.pack(side=Tkin.LEFT, padx=1, pady=1)
-        self.bebidas = Tkin.Button(toolbar, text=" Bebidas ", bg=cor1, command=self.bebidas_apertado)
-        self.bebidas['font'] = ('bold')
-        self.bebidas['fg'] = 'white'
-        self.bebidas.pack(side=Tkin.LEFT, padx=1, pady=1)
-        self.outros = Tkin.Button(toolbar, text="   Outros   ", bg=cor1, command=self.outros_apertado)
-        self.outros['font'] = ('bold')
-        self.outros['fg'] = 'white'
-        self.outros.pack(side=Tkin.LEFT, padx=1, pady=1)
 
-        toolbar.pack(side=Tkin.TOP, fill=Tkin.X)
-        self.cor1 = '#52bbeb'
-        self.cor2 = '#E94545'
         self.container1 = Tkin.Frame(root)
         self.container2 = Tkin.Frame(root)
         self.container1.pack(fill=Tkin.X)
         self.container2.pack(side=Tkin.BOTTOM, fill=Tkin.X, padx=15, pady=15)
+
+#"cabecalho" da tabela dos itens
         self.objeto1 = Tkin.Label(self.container1, text="Codigo:")
         self.objeto1["font"] = ["bold"]
         self.objeto1.pack(side=Tkin.LEFT)
@@ -172,19 +156,19 @@ class Example(Tkin.Frame):
 
         self.espaco1 = Tkin.Label(self.container2, text="             ")
         self.espaco1.pack(side=Tkin.LEFT)
-        self.inserir = Tkin.Button(self.container2, text="Inserir", command=lambda:self.inserindo(bd))
+        self.inserir = Tkin.Button(self.container2, text="Inserir", command=lambda:self.help(bd))
         self.inserir["font"] = ("Arial", "10")
         self.inserir['padx'] = 10
         self.inserir.pack(side=Tkin.LEFT)
         self.espaco2 = Tkin.Label(self.container2, text="             ")
         self.espaco2.pack(side=Tkin.LEFT)
-        self.editar = Tkin.Button(self.container2, text="Editar", command=lambda:self.editando(bd))
+        self.editar = Tkin.Button(self.container2, text="Editar", command=Teste)
         self.editar["font"] = ("Arial", "10")
         self.editar['padx'] = 10
         self.editar.pack(side=Tkin.LEFT)
         self.espaco2 = Tkin.Label(self.container2, text="             ")
         self.espaco2.pack(side=Tkin.LEFT)
-        self.excluir = Tkin.Button(self.container2, text="Excluir", command=lambda:self.deletando(bd))
+        self.excluir = Tkin.Button(self.container2, text="Excluir", command=Teste)
         self.excluir["font"] = ("Arial", "10")
         self.excluir['padx'] = 10
         self.excluir.pack(side=Tkin.LEFT)
@@ -200,17 +184,13 @@ class Example(Tkin.Frame):
         pesquisado = self.pesquisar2.get()  # pesquisado = o que foi escrito no "Entry / barra de pesquisa"
         self.espaco4 = Tkin.Label(self.container2, text=" ")
         self.espaco4.pack(side=Tkin.LEFT)
-        self.ok = Tkin.Button(self.container2, text="Ok", command=lambda:self.pesquisando(self.pesquisar2.get()))
+        self.ok = Tkin.Button(self.container2, text="Ok", command=Teste)
         self.ok["font"] = ("Arial", "10")
         self.ok['padx'] = 10
         self.ok.pack(side=Tkin.LEFT)
 # fim
-        self.canvas = None
+
 # tabela dos itens
-
-
-        self.todos_apertado()
-    def createCanvas(self):
         Tkin.Frame.__init__(self, root)
         self.canvas = Tkin.Canvas(root, borderwidth=0, background="#ffffff")
         self.frame = Tkin.Frame(self.canvas, background="#f0f0f0")
@@ -219,56 +199,20 @@ class Example(Tkin.Frame):
 
         self.vsb.pack(side="right", fill="y")
         self.canvas.pack(side="left", fill="both", expand=True)
-        self.canvas.create_window((4, 4), window=self.frame, anchor="nw",
+        self.canvas.create_window((4,4), window=self.frame, anchor="nw",
                                   tags="self.frame")
+
         self.frame.bind("<Configure>", self.onFrameConfigure)
+        self.populate()
 
-    def deleteCanvas(self):
-        if self.canvas != None:
-            self.canvas.destroy()
-            self.vsb.destroy()
-            self.canvas = None
-        return
-
-    def inserindo(self,bd):
+    def help(self,bd):
         tm.FazTela(bd)
-        if(tm.GetWindow()!=None):
-            tm.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
-
-    def editando(self,bd):
-        te.FazTela(bd)
-        if(te.GetWindow()!=None):
-            te.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
-
-    def deletando(self, bd):
-        td.FazTela(bd)
-        if (td.GetWindow() != None):
-            td.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
-
-    def pesquisando(self,id):
-        if id == "":
-            self.populate(bd.selectProduto())
-            return
-        else:
-            try:
-                tr.VerificaDigit(id)
-            except:
-                tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
-            else:
-                self.todos_apertado()
-                self.populate(bd.selectProdutoId(self.pesquisar2.get()))
-
-
-
-    def populate(self,info):
+        self.populate()
+    def populate(self):
+        info = bd.selectProduto()
         '''Put in some fake data'''
         cor1 = '#ffffff'
-        cor2 = '#52bbeb'
-        self.deleteCanvas()
-        self.createCanvas()
+        cor2 = '#808080'
 
         for row in range(len(info)):
             if row % 2 == 0:
@@ -315,7 +259,6 @@ class Example(Tkin.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
-
 
 
     def onFrameConfigure(self, event):

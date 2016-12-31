@@ -39,19 +39,16 @@ class Database(object):
     def insertProduto(self, prod):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
                   prod.getData_inser(), prod.getId_Categoria(), prod.getNome_Categoria()]
-
         self.dbCursor.execute('INSERT INTO Produto VALUES (?, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
     def insertCategoria(self, id, nome, valor_inic, data_inser):
         values = [id, nome, data_inser]
-
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
         self.dbConnect.commit();
 
     def insertCategoria(self, categ):
         values = [categ.getId(), categ.getNome(), categ.getData_inser()]
-
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
         self.dbConnect.commit();
 
