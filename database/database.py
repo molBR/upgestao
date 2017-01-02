@@ -92,9 +92,16 @@ class Database(object):
         self.dbCursor.execute('SELECT * FROM Produto WHERE id = ?', value)
         return self.dbCursor.fetchone()
 
+
     def selectProdutoOnlyId(self):
         self.dbCursor.execute('SELECT id FROM Produto ORDER BY id')
         return self.dbCursor.fetchall()
+
+    def selectProdNameId(self,id):
+        value = [id]
+        self.dbCursor.execute('SELECT nome FROM Produto WHERE id = ?',value)
+        x = self.dbCursor.fetchone()
+        return x[0]
 
     def ExistsProduto(self,id):
         value = [id]

@@ -12,6 +12,13 @@ class TelaMenorDel():
         self.top.quit()
         self.top = None
 
+    def JanelaPequena(self,id,bd):
+        x = bd.selectProdNameId(id)
+
+
+        if tkMessageBox.askokcancel("Deletar","Deseja mesmo deletar " + str(x) + "?"):
+            bd.deleteGivenId(id)
+
     def GetWindow(self):
         return self.top
 
@@ -21,7 +28,7 @@ class TelaMenorDel():
         except:
            tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
         else:
-            bd.deleteGivenId(id)
+            self.JanelaPequena(id,bd)
         finally:
            self.CloseWindow()
 
