@@ -5,22 +5,24 @@ from database import tratamentos as tr
 import tkMessageBox
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
-bd = db.Database(0)
-tm = cpm.TelaMenor()
-td = cpd.TelaMenorDel()
-te = cpe.TelaMenorEdit1()
-# funcao de teste
-def Teste():
-    print("Testado")
-# fim
 
-#funcao de destaque das abas
+#Criacao dos objetos TopLevel a serem utilizados"
+bd = db.Database(0) #banco de dados
+tm = cpm.TelaMenor() #inserir
+td = cpd.TelaMenorDel() #deletar
+te = cpe.TelaMenorEdit1() #editar
 
+
+
+#Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
 root=Tkin.Tk()
 
-# menu principal
+
 menu = Tkin.Menu(root)
 root.config(menu=menu)
+
+def Teste():
+    print "testei"
 
 subMenu1 = Tkin.Menu(menu)
 menu.add_cascade(label="Arquivo", menu=subMenu1)
@@ -42,12 +44,10 @@ subMenu3.add_command(label="Ferramentas", command=Teste)
 subMenu3.add_command(label="Arquivo Recente", command=Teste)
 # fim
 
-# abas de opcoes
 
 cor1 = '#52bbeb'
 toolbar = Tkin.Frame(root, bg=cor1)
 
-# fim
 
 
 
@@ -58,6 +58,7 @@ status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
 
 class Example(Tkin.Frame):
 
+#Botoes de selecao das categorias de produtos
     def todos_apertado(self):
         self.todos.config(relief=Tkin.SUNKEN, background=self.cor2)
         self.doces.config(relief=Tkin.RAISED, background=self.cor1)
@@ -111,10 +112,9 @@ class Example(Tkin.Frame):
         self.bebidas.config(relief=Tkin.RAISED, background=self.cor1)
         self.outros.config(relief=Tkin.SUNKEN, background=self.cor2)
         self.populate(bd.selectProdutoOutros())
-
-
-
     # fim
+
+#Construtor
     def __init__(self, root):
         self.todos = Tkin.Button(toolbar, text="   Todos   ", bg=cor1, command=self.todos_apertado)
         self.todos['font'] = ('bold')
@@ -210,6 +210,8 @@ class Example(Tkin.Frame):
 
 
         self.todos_apertado()
+
+#funcao que cria o canvas, deve ser chamada toda vez que o mesmo e atualizado
     def createCanvas(self):
         Tkin.Frame.__init__(self, root)
         self.canvas = Tkin.Canvas(root, borderwidth=0, background="#ffffff")
@@ -222,32 +224,42 @@ class Example(Tkin.Frame):
         self.canvas.create_window((4, 4), window=self.frame, anchor="nw",
                                   tags="self.frame")
         self.frame.bind("<Configure>", self.onFrameConfigure)
+#fim
 
+#Funcao que deleta o canvas, sempre utilizado para atualiza-lo
     def deleteCanvas(self):
         if self.canvas != None:
             self.canvas.destroy()
             self.vsb.destroy()
             self.canvas = None
         return
+#fim
 
+#Funcao chamada sempre que o botao inserir e apertado
     def inserindo(self,bd):
         tm.FazTela(bd)
         if(tm.GetWindow()!=None):
             tm.GetWindow().wait_window()
         self.populate(bd.selectProduto())
+#fim
 
+#Funcao chamada sempre que o botao editar eh apertado
     def editando(self,bd):
         te.FazTela(bd)
         if(te.GetWindow()!=None):
             te.GetWindow().wait_window()
         self.populate(bd.selectProduto())
+#fim
 
+#Funcao chamada sempre que o botao deletar eh apertado
     def deletando(self, bd):
         td.FazTela(bd)
         if (td.GetWindow() != None):
             td.GetWindow().wait_window()
         self.populate(bd.selectProduto())
+#fim
 
+#Funcao chamada sempre que o botao pesquisar eh apertado
     def pesquisando(self,id):
         if id == "":
             self.populate(bd.selectProduto())
@@ -261,8 +273,7 @@ class Example(Tkin.Frame):
                 self.todos_apertado()
                 self.populate(bd.selectProdutoId(self.pesquisar2.get()))
 
-
-
+#Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
     def populate(self,info):
         '''Put in some fake data'''
         cor1 = '#ffffff'
@@ -323,7 +334,7 @@ class Example(Tkin.Frame):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 # fim
 
-
+#detalhes que o luquinha majna
 Example(root).pack(side="top", fill="both", expand=True)
 #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 root.title('Programa Guts')
@@ -331,3 +342,4 @@ root.resizable(width=False, height=True)
 #root.geometry('755x450')
 root.attributes("-fullscreen", True)
 root.mainloop()
+#fim

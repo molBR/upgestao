@@ -2,7 +2,7 @@ import database as db
 import produto as pr
 from datetime import datetime
 
-
+#Tratamento da insercao
 def ProdutosRecieve(id, nome, valor, tipo,bd):
     try:
         VerificaDigit(id)
@@ -22,14 +22,15 @@ def ProdutosRecieve(id, nome, valor, tipo,bd):
         if (tipo == "Outro"): tipo = 5
         p1 = pr.Produto(id, nome, valor, agora, tipo)
         return p1
+#fim
 
-
-
+#Recebe um id, faz a consulta no bd cria um objeto com as info do produto.
 def ObjetivaProduto(id, bd):
     x = bd.selectProdutoId(id)
     p1 = pr.Produto(x[0],x[1],x[2],x[3],x[4])
     return p1
 
+#Checa se existe um produto com o id
 def ProdutosCheck(valor,bd):
     try:
         VerificaDigit(valor)
@@ -38,7 +39,7 @@ def ProdutosCheck(valor,bd):
     except:
         raise Exception()
 
-
+#Tratamento do valor
 def VerificaComma(valor):
     for i in range(len(valor)):
         if (not valor[i].isdigit()):
@@ -46,34 +47,34 @@ def VerificaComma(valor):
                 raise Exception(valor)
     return True
 
-
+#Verifica se a string eh um numero
 def VerificaDigit(valor):
     if (valor.isdigit()):
         return True
     else:
         raise Exception(valor)
 
-
+#Verifica se a string tem somente letras
 def VerificaAlpha(nome):
     if (nome.isalpha()):
         return True
     else:
         raise Exception(nome)
 
-
+#Verifica se o produto eh de uma categoria valida
 def VerificaTipo(tipo):
     if (tipo == "Tipo de produto"):
         raise Exception(tipo)
     else:
         return True
 
-
+#Faz o tramento, deixando todas as letras minusculas e colocando a primeira letra maiuscula
 def TrataStr(nome):
     nome = nome.lower()
     nome = nome.capitalize()
     return nome
 
-
+#Faz um tratamento do valor
 def TrataValor(valor):
     if (valor.isdigit()):
         valor = valor + ",00"

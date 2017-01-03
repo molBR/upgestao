@@ -3,19 +3,23 @@ from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
 class TelaMenorEdit2():
+#Construtor
     def __init__(self):
         self.top = None
         self.OPTIONS = []
         self.cor1 = '#D32F2F'
 
+#Fehamento de janela
     def CloseWindow(self):
         self.top.destroy()
         self.top.quit()
         self.top = None
 
+#Retorna a janela como um objeto
     def GetWindow(self):
         return self.top
 
+#Manda para tratemento para verificacao de erros
     def SendToTR(self,id,nome,valor,tipo,bd):
         try:
             p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
@@ -28,6 +32,7 @@ class TelaMenorEdit2():
         finally:
             self.CloseWindow()
 
+#Criacao de telas
     def FazTela(self,p1,bd):
         if(self.top!=None):
             self.CloseWindow()

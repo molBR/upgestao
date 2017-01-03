@@ -3,25 +3,29 @@ from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
 class TelaMenorDel():
+
+#Construtor
     def __init__(self):
         self.top = None
         self.cor1 = '#D32F2F'
 
+#Fechamento da janela
     def CloseWindow(self):
         self.top.destroy()
         self.top.quit()
         self.top = None
 
+#Janela de verificacao para a confirmacao da delecao
     def JanelaPequena(self,id,bd):
         x = bd.selectProdNameId(id)
-
-
         if tkMessageBox.askokcancel("Deletar","Deseja mesmo deletar " + str(x) + "?"):
             bd.deleteGivenId(id)
 
+#Retorna o objeto da janela
     def GetWindow(self):
         return self.top
 
+#Funcao que manda para tratamento para a verificacao de erros
     def SendToTR(self,id,bd):
         try:
             tr.ProdutosCheck(id,bd)
@@ -32,6 +36,7 @@ class TelaMenorDel():
         finally:
            self.CloseWindow()
 
+#Criacao da tela
     def FazTela(self,bd):
         if(self.top!=None):
             self.CloseWindow()

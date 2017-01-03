@@ -4,19 +4,24 @@ from database import tratamentos as tr
 import cadastro_produto_editar_2 as cpe2
 import tkMessageBox
 class TelaMenorEdit1():
+
+#Construtor
     def __init__(self):
         self.top = None
         self.cor1 = '#D32F2F'
         self.pe2 = cpe2.TelaMenorEdit2()
 
+#Fechamento da janela
     def CloseWindow(self):
         self.top.destroy()
         self.top.quit()
         self.top = None
 
+#Retorna a janela como ojbeto
     def GetWindow(self):
         return self.top
 
+#Manda para tratamento para possiveis erros
     def SendToTR(self,id,bd):
         try:
             tr.ProdutosCheck(id,bd)
@@ -28,7 +33,7 @@ class TelaMenorEdit1():
         finally:
             self.CloseWindow()
 
-
+#Criacao da janela
     def FazTela(self,bd):
         if(self.top!=None):
             self.CloseWindow()
