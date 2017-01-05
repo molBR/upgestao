@@ -257,7 +257,7 @@ class Example(Tkin.Frame):
         if (td.GetWindow() != None):
             td.GetWindow().wait_window()
         self.populate(bd.selectProduto())
-#fim
+#
 
 #Funcao chamada sempre que o botao pesquisar eh apertado
     def pesquisando(self,id):
@@ -271,7 +271,7 @@ class Example(Tkin.Frame):
                 tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
             else:
                 self.todos_apertado()
-                self.populate(bd.selectProdutoId(self.pesquisar2.get()))
+                self.populate(bd.selectProdutoIdAll(id))
 
 #Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
     def populate(self,info):

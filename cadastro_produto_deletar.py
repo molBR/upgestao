@@ -50,7 +50,7 @@ class TelaMenorDel():
             salto1 = Label(info, text="       ")
             salto1.grid(row=0, column=0)
 
-            nome1 = Label(info, text="Nome:")
+            nome1 = Label(info, text="Id:")
             nome1['font']=['bold']
             nome1.grid(row=1, column=1, sticky=W)
 

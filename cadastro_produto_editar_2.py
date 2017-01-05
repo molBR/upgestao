@@ -23,7 +23,6 @@ class TelaMenorEdit2():
     def SendToTR(self,id,nome,valor,tipo,bd):
         try:
             p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
-            print "deu certo"
         except:
             tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
         else:
