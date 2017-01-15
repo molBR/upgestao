@@ -2,6 +2,23 @@ import database as db
 import produto as pr
 from datetime import datetime
 
+class Erro(Exception):
+    """Base class for exceptions in this module."""
+    pass
+
+class ErroEntrada(Erro):
+    """Exception raised for errors in the input.
+
+    Attributes:
+        expression -- input expression in which the error occurred
+        message -- explanation of the error
+    """
+
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+
+
 #Tratamento da insercao
 def ProdutosRecieve(id, nome, valor, tipo,bd):
     try:
@@ -35,16 +52,16 @@ def ProdutosCheck(valor,bd):
     try:
         VerificaDigit(valor)
         if (not bd.ExistsProduto(valor)):
-            raise Exception()
+            raise ErroEntrada(valor, "O ID digitado nao existe no atual banco de dados. Por favor, digite novamente.")
     except:
-        raise Exception()
+        raise ErroEntrada(valor, "Os caracteres nao estao de acordo. Por favor, digite novamente.")
 
 #Tratamento do valor
 def VerificaComma(valor):
     for i in range(len(valor)):
         if (not valor[i].isdigit()):
             if (valor[i] != ","):
-                raise Exception(valor)
+                raise ErroEntrada(valor, "O texto nao pode apresentar virgula(s).")
     return True
 
 #Verifica se a string eh um numero
@@ -52,19 +69,19 @@ def VerificaDigit(valor):
     if (valor.isdigit()):
         return True
     else:
-        raise Exception(valor)
+        raise ErroEntrada(valor, "O texto deve apenas ser composto por numeros.")
 
 #Verifica se a string tem somente letras
 def VerificaAlpha(nome):
     if (nome.isalpha()):
         return True
     else:
-        raise Exception(nome)
+        raise ErroEntrada(nome, "O texto deve apenas ser composto por letras.")
 
 #Verifica se o produto eh de uma categoria valida
 def VerificaTipo(tipo):
     if (tipo == "Tipo de produto"):
-        raise Exception(tipo)
+        raise ErroEntrada(tipo, "O produto digitado nao possui uma categoria valida.")
     else:
         return True
 

@@ -25,8 +25,8 @@ class TelaMenorEdit1():
     def SendToTR(self,id,bd):
         try:
             tr.ProdutosCheck(id,bd)
-        except:
-            tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
+        except Exception as e:
+            tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             p1 = tr.ObjetivaProduto(id,bd)
             self.pe2.FazTela(p1,bd)

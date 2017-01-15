@@ -23,8 +23,8 @@ class TelaMenorEdit2():
     def SendToTR(self,id,nome,valor,tipo,bd):
         try:
             p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
-        except:
-            tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
+        except Exception as e:
+            tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             bd.deleteGivenId(id)
             bd.insertProduto(p1)

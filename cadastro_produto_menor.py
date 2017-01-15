@@ -24,8 +24,8 @@ class TelaMenor():
                 raise Exception()
             else:
                 p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
-        except:
-            tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
+        except Exception as e:
+            tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             bd.insertProduto(p1)
         finally:

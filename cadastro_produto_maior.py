@@ -6,17 +6,17 @@ import tkMessageBox
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
 
+#class TelaMaior:
+
 #Criacao dos objetos TopLevel a serem utilizados"
-bd = db.Database(0) #banco de dados
-tm = cpm.TelaMenor() #inserir
-td = cpd.TelaMenorDel() #deletar
-te = cpe.TelaMenorEdit1() #editar
 
+bd = db.Database(0)  # banco de dados
+tm = cpm.TelaMenor()  # inserir
+td = cpd.TelaMenorDel()  # deletar
+te = cpe.TelaMenorEdit1()  # editar
 
-
-#Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
-root=Tkin.Tk()
-
+# Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
+root = Tkin.Tk()
 
 menu = Tkin.Menu(root)
 root.config(menu=menu)
@@ -267,13 +267,14 @@ class Example(Tkin.Frame):
         else:
             try:
                 tr.VerificaDigit(id)
-            except:
-                tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
+            except Exception as e:
+                tkMessageBox.showerror("Erro encontrado", e.message)
             else:
                 self.todos_apertado()
                 self.populate(bd.selectProdutoIdAll(id))
 
 #Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
+
     def populate(self,info):
         '''Put in some fake data'''
         cor1 = '#ffffff'
@@ -326,8 +327,6 @@ class Example(Tkin.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
-
-
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''
