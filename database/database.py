@@ -36,7 +36,7 @@ class Database(object):
 #Insere o produto recebendo um objeto produto
     def insertProduto(self, prod):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
-         prod.getData_inser(),prod.getForeign_key()]
+                  prod.getData_insert(), prod.getForeign_key()]
 
         self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?,?)',values)
         self.dbConnect.commit()
@@ -47,7 +47,7 @@ class Database(object):
         self.dbConnect.commit();
 #Insere categoria recebendo um objeto
     def insertCategoria(self, categ):
-        values = [categ.getId(), categ.getNome(), categ.getData_inser()]
+        values = [categ.getId(), categ.getNome(), categ.getData_insert()]
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
         self.dbConnect.commit();
 #Seleciona todos os produtos

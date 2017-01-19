@@ -2,17 +2,21 @@ from Tkinter import *
 from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
+
+
 class TelaMenor():
-#Cosntrutor
+#Construtor
     def __init__(self):
         self.top = None
         self.OPTIONS = []
         self.cor1 = '#D32F2F'
+
 #Funcao de fechamento da janela
     def CloseWindow(self):
         self.top.destroy()
         self.top.quit()
         self.top = None
+
 #Retorna o valor objeto da janela
     def GetWindow(self):
         return self.top
@@ -21,10 +25,10 @@ class TelaMenor():
     def SendToTR(self,id,nome,valor,tipo,bd):
         try:
             if(bd.ExistsProduto(id)):
-                raise Exception()
+                p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
             else:
-                p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
-        except Exception as e:
+                raise ErroEntrada(id, "O ID digitado (" + id + ") nao existe no atual banco de dados. Por favor, digite novamente.")
+        except ErroEntrada as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             bd.insertProduto(p1)
@@ -48,6 +52,7 @@ class TelaMenor():
                 "Outro"
                 ]
             #fim
+
             # criacao e posicao dos widgets
             info = Frame(self.top)
             info.grid(sticky=N+S+W+E)

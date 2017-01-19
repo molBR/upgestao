@@ -2,12 +2,12 @@ class Categoria(object):
     def __init__(self):
         self.id = -1
         self.nome = "NULL"
-        self.data_inser = -1
+        self.data_insert = -1
 
-    def __init__(self, id, nome, data_inser):
+    def __init__(self, id, nome, data_insert):
         self.id = id
         self.nome = nome
-        self.data_inser = data_inser
+        self.data_insert = data_insert
 
     def getId(self):
         return self.id
@@ -15,8 +15,8 @@ class Categoria(object):
     def getNome(self):
         return self.nome
 
-    def getData_inser(self):
-        return self.data_inser
+    def getData_insert(self):
+        return self.data_insert
 
     def setId(self, id):
         self.id = id
@@ -24,5 +24,5 @@ class Categoria(object):
     def setNome(self, nome):
         self.nome = nome
 
-    def setData_inser(self, data_inser):
-        self.data_inser = data_inser
+    def setData_insert(self, data_insert):
+        self.data_insert = data_insert

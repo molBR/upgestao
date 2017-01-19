@@ -2,32 +2,31 @@ import database as db
 import produto as pr
 from datetime import datetime
 
+#Classes criadas para caracterizar os erros do programa
+
 class Erro(Exception):
-    """Base class for exceptions in this module."""
     pass
 
 class ErroEntrada(Erro):
-    """Exception raised for errors in the input.
-
-    Attributes:
-        expression -- input expression in which the error occurred
-        message -- explanation of the error
-    """
-
-    def __init__(self, expression, message):
+   def __init__(self, expression, message):
         self.expression = expression
         self.message = message
 
+class ErroIntegridade(Erro):
+   def __init__(self, expression, message):
+       self.expression = expression
+       self.message = message
 
-#Tratamento da insercao
-def ProdutosRecieve(id, nome, valor, tipo,bd):
+#Tratamento de dados
+
+def ProdutosReceive(id, nome, valor, tipo,bd):
     try:
         VerificaDigit(id)
         VerificaAlpha(nome)
         VerificaComma(valor)
         VerificaTipo(tipo)
-    except:
-        raise Exception()
+    except Erro as e:
+        tkMessageBox.showerror("Erro encontrado", e.message)
     else:
         nome = TrataStr(nome)
         valor = TrataValor(valor)
@@ -49,12 +48,18 @@ def ObjetivaProduto(id, bd):
 
 #Checa se existe um produto com o id
 def ProdutosCheck(valor,bd):
+    VerificaDigit(valor)
+    if (not bd.ExistsProduto(valor)):
+        raise ErroIntegridade(valor, "O ID digitado: \"" + str(valor) + "\" nao existe no atual banco de dados. Por favor, digite novamente.")
+
+"""
     try:
         VerificaDigit(valor)
         if (not bd.ExistsProduto(valor)):
-            raise ErroEntrada(valor, "O ID digitado nao existe no atual banco de dados. Por favor, digite novamente.")
+            raise ErroEntrada(id, "O ID digitado (" + id + ") nao existe no atual banco de dados. Por favor, digite novamente.")
     except:
         raise ErroEntrada(valor, "Os caracteres nao estao de acordo. Por favor, digite novamente.")
+"""
 
 #Tratamento do valor
 def VerificaComma(valor):

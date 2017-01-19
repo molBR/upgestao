@@ -22,8 +22,8 @@ class TelaMenorEdit2():
 #Manda para tratemento para verificacao de erros
     def SendToTR(self,id,nome,valor,tipo,bd):
         try:
-            p1 = tr.ProdutosRecieve(id,nome,valor,tipo,bd)
-        except Exception as e:
+            p1 = tr.ProdutosReceive(id,nome,valor,tipo,bd)
+        except Erro as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             bd.deleteGivenId(id)

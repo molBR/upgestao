@@ -6,9 +6,8 @@ import tkMessageBox
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
 
-#class TelaMaior:
 
-#Criacao dos objetos TopLevel a serem utilizados"
+#Criacao dos objetos TopLevel a serem utilizados
 
 bd = db.Database(0)  # banco de dados
 tm = cpm.TelaMenor()  # inserir

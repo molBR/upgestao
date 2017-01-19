@@ -2,8 +2,8 @@ from Tkinter import *
 from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
-class TelaMenorDel():
 
+class TelaMenorDel():
 #Construtor
     def __init__(self):
         self.top = None

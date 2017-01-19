@@ -3,8 +3,8 @@ from database import database as db
 from database import tratamentos as tr
 import cadastro_produto_editar_2 as cpe2
 import tkMessageBox
-class TelaMenorEdit1():
 
+class TelaMenorEdit1():
 #Construtor
     def __init__(self):
         self.top = None
