@@ -2,31 +2,15 @@ import database as db
 import produto as pr
 from datetime import datetime
 
-#Classes criadas para caracterizar os erros do programa
-
-class Erro(Exception):
-    pass
-
-class ErroEntrada(Erro):
-   def __init__(self, expression, message):
-        self.expression = expression
-        self.message = message
-
-class ErroIntegridade(Erro):
-   def __init__(self, expression, message):
-       self.expression = expression
-       self.message = message
-
-#Tratamento de dados
-
-def ProdutosReceive(id, nome, valor, tipo,bd):
+#Tratamento da insercao
+def ProdutosRecieve(id, nome, valor, tipo,bd):
     try:
         VerificaDigit(id)
         VerificaAlpha(nome)
         VerificaComma(valor)
         VerificaTipo(tipo)
-    except Erro as e:
-        tkMessageBox.showerror("Erro encontrado", e.message)
+    except:
+        raise Exception()
     else:
         nome = TrataStr(nome)
         valor = TrataValor(valor)
@@ -48,25 +32,19 @@ def ObjetivaProduto(id, bd):
 
 #Checa se existe um produto com o id
 def ProdutosCheck(valor,bd):
-    VerificaDigit(valor)
-    if (not bd.ExistsProduto(valor)):
-        raise ErroIntegridade(valor, "O ID digitado: \"" + str(valor) + "\" nao existe no atual banco de dados. Por favor, digite novamente.")
-
-"""
     try:
         VerificaDigit(valor)
         if (not bd.ExistsProduto(valor)):
-            raise ErroEntrada(id, "O ID digitado (" + id + ") nao existe no atual banco de dados. Por favor, digite novamente.")
+            raise Exception()
     except:
-        raise ErroEntrada(valor, "Os caracteres nao estao de acordo. Por favor, digite novamente.")
-"""
+        raise Exception()
 
 #Tratamento do valor
 def VerificaComma(valor):
     for i in range(len(valor)):
         if (not valor[i].isdigit()):
             if (valor[i] != ","):
-                raise ErroEntrada(valor, "O texto nao pode apresentar virgula(s).")
+                raise Exception(valor)
     return True
 
 #Verifica se a string eh um numero
@@ -74,19 +52,19 @@ def VerificaDigit(valor):
     if (valor.isdigit()):
         return True
     else:
-        raise ErroEntrada(valor, "O texto deve apenas ser composto por numeros.")
+        raise Exception(valor)
 
 #Verifica se a string tem somente letras
 def VerificaAlpha(nome):
     if (nome.isalpha()):
         return True
     else:
-        raise ErroEntrada(nome, "O texto deve apenas ser composto por letras.")
+        raise Exception(nome)
 
 #Verifica se o produto eh de uma categoria valida
 def VerificaTipo(tipo):
     if (tipo == "Tipo de produto"):
-        raise ErroEntrada(tipo, "O produto digitado nao possui uma categoria valida.")
+        raise Exception(tipo)
     else:
         return True
 
