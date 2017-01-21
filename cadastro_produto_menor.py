@@ -1,8 +1,9 @@
+# encoding: utf-8
+
 from Tkinter import *
 from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
-
 
 class TelaMenor():
 #Construtor

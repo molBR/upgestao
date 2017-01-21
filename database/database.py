@@ -13,22 +13,26 @@ class Database(object):
             self.dbConnect = sqlite3.connect('database/GutsDados.db')
         self.dbCursor = self.dbConnect.cursor()
 
-#Funcao que cria o bd
-    def createDB(self):
-        self.dbCursor.execute('''CREATE TABLE Categoria (
+        self.tables = [
+            '''CREATE TABLE Categoria (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             data_inser INTEGER NOT NULL
-        );''')
-
-        self.dbCursor.execute('''CREATE TABLE Produto (
+        );''',
+            '''CREATE TABLE Produto (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             valor_inic varchar(100) NOT NULL,
             data_inser varchar(100) NOT NULL,
             Id_Categoria INTEGER NOT NULL,
             FOREIGN KEY (Id_Categoria) REFERENCES Categoria(id)
-       );''')
+       );''']
+
+#Funcao que cria o bd
+    def createDB(self):
+        self.dbCursor.execute(tables[1])
+
+        self.dbCursor.execute(tables[2])
 
 #Insere o produto recebendo varios valores
     def insertProduto(self, id, nome, valor_inic, data_inser):
@@ -41,7 +45,7 @@ class Database(object):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
                   prod.getData_insert(), prod.getForeign_key()]
 
-        self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?,?)', values)
+        self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
 #Insere categoria recebendo varios valores
@@ -59,8 +63,8 @@ class Database(object):
 #Seleciona todos os produtos
     def selectProduto(self):
         self.dbCursor.execute('SELECT * FROM Produto ORDER BY id')
-        x = self.dbCursor.fetchall()
-        return x
+        aux = self.dbCursor.fetchall()
+        return aux
 
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):
@@ -90,7 +94,8 @@ class Database(object):
 #Seleciona categoria
     def selectCategoria(self):
         self.dbCursor.execute('SELECT * FROM Categoria ORDER BY id')
-        print self.dbCursor.fetchone()
+        aux =  self.dbCursor.fetchall()
+        return aux
 
 #Conta quantos produtos tem
     def ContadorProduto(self):

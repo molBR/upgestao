@@ -1,4 +1,6 @@
-﻿class Produto(object):
+﻿# encoding: utf-8
+
+class Produto(object):
     def __init__(self):
         self.id = -1
         self.nome = "NULL"

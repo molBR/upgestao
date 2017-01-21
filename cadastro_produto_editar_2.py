@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from Tkinter import *
 from database import database as db
 from database import tratamentos as tr
@@ -9,7 +11,7 @@ class TelaMenorEdit2():
         self.OPTIONS = []
         self.cor1 = '#D32F2F'
 
-#Fehamento de janela
+#Fechamento de janela
     def CloseWindow(self):
         self.top.destroy()
         self.top.quit()

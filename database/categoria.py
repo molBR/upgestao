@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Categoria(object):
     def __init__(self):
         self.id = -1

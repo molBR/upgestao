@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 import database as db
 import produto as pr
 from datetime import datetime
@@ -66,7 +68,7 @@ def VerificaComma(valor):
     for i in range(len(valor)):
         if (not valor[i].isdigit()):
             if (valor[i] != ","):
-                raise ErroEntrada(valor, "O texto nao pode apresentar virgula(s).")
+                raise ErroEntrada(valor, "O valor deve apresentar apenas números e vírgula(s).")
     return True
 
 #Verifica se a string eh um numero
@@ -86,7 +88,7 @@ def VerificaAlpha(nome):
 #Verifica se o produto eh de uma categoria valida
 def VerificaTipo(tipo):
     if (tipo == "Tipo de produto"):
-        raise ErroEntrada(tipo, "O produto digitado nao possui uma categoria valida.")
+        raise ErroEntrada(tipo, "O produto digitado nao possui uma categoria valida. Por favor, escolha uma categoria.")
     else:
         return True
 
