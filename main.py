@@ -1,8 +1,9 @@
 # encoding: utf-8
 
-#import classes
-#import database
-import cadastro_produto_maior
+import database.backup as backupFile
+
+#import cadastro_produto_maior
+
 
 def main():
     #bd = Database()
@@ -21,6 +22,8 @@ def main():
     #texto = bd.selectProdutoId(4)
     #print texto
 
+    backup = backupFile.Backup()
+    backup.exportSQL()
 
 
 if __name__ == "__main__":
