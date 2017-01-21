@@ -4,6 +4,7 @@ from Tkinter import *
 from database import database as db
 from database import tratamentos as tr
 import tkMessageBox
+
 class TelaMenorEdit2():
 #Construtor
     def __init__(self):

@@ -15,10 +15,10 @@ def main():
 
 
     #Funcionalidade de criação de um arquivo sql para backup
-    """
+    #"""
     backup = backupFile.Backup()
     backup.exportSQL()
-    """
+    #"""
 
 if __name__ == "__main__":
     main()

@@ -7,20 +7,21 @@ from datetime import datetime
 #Classes criadas para caracterizar os erros do programa
 
 class Erro(Exception):
-    pass
+    def __init__(self, expression='null', message='null'):
+        self.expression = expression
+        self.message = message
 
 class ErroEntrada(Erro):
-   def __init__(self, expression, message):
+   def __init__(self, expression='null', message='null'):
         self.expression = expression
         self.message = message
 
 class ErroIntegridade(Erro):
-   def __init__(self, expression, message):
+   def __init__(self, expression='null', message='null'):
        self.expression = expression
        self.message = message
 
 #Tratamento de dados
-
 def ProdutosReceive(id, nome, valor, tipo,bd):
     try:
         VerificaDigit(id)
@@ -53,15 +54,6 @@ def ProdutosCheck(valor,bd):
     VerificaDigit(valor)
     if (not bd.ExistsProduto(valor)):
         raise ErroIntegridade(valor, "O ID digitado: \"" + str(valor) + "\" nao existe no atual banco de dados. Por favor, digite novamente.")
-
-"""
-    try:
-        VerificaDigit(valor)
-        if (not bd.ExistsProduto(valor)):
-            raise ErroEntrada(id, "O ID digitado (" + id + ") nao existe no atual banco de dados. Por favor, digite novamente.")
-    except:
-        raise ErroEntrada(valor, "Os caracteres nao estao de acordo. Por favor, digite novamente.")
-"""
 
 #Tratamento do valor
 def VerificaComma(valor):
