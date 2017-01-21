@@ -6,14 +6,16 @@ import tkMessageBox
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
 
-#Criacao dos objetos TopLevel a serem utilizados"
-bd = db.Database(0) #banco de dados
-tm = cpm.TelaMenor() #inserir
-td = cpd.TelaMenorDel() #deletar
-te = cpe.TelaMenorEdit1() #editar
 
-#Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
-root=Tkin.Tk()
+#Criacao dos objetos TopLevel a serem utilizados
+
+bd = db.Database(0)  # banco de dados
+tm = cpm.TelaMenor()  # inserir
+td = cpd.TelaMenorDel()  # deletar
+te = cpe.TelaMenorEdit1()  # editar
+
+# Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
+root = Tkin.Tk()
 
 menu = Tkin.Menu(root)
 root.config(menu=menu)
@@ -23,9 +25,8 @@ def Teste():
 
 subMenu1 = Tkin.Menu(menu)
 menu.add_cascade(label="Arquivo", menu=subMenu1)
-subMenu1.add_command(label="Nova Venda", command=Teste)
-subMenu1.add_command(label="Historico", command=Teste)
-subMenu1.add_command(label="Inserir Produto", command=Teste)
+subMenu1.add_command(label="Novo", command=Teste)
+subMenu1.add_command(label="Salvar", command=Teste)
 subMenu1.add_separator()
 subMenu1.add_command(label="Sair", command=root.destroy)
 
@@ -42,8 +43,12 @@ subMenu3.add_command(label="Ferramentas", command=Teste)
 subMenu3.add_command(label="Arquivo Recente", command=Teste)
 # fim
 
+
 cor1 = '#52bbeb'
 toolbar = Tkin.Frame(root, bg=cor1)
+
+
+
 
 # barra de 'status'
 status = Tkin.Label(root, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
@@ -251,7 +256,7 @@ class Example(Tkin.Frame):
         if (td.GetWindow() != None):
             td.GetWindow().wait_window()
         self.populate(bd.selectProduto())
-#fim
+#
 
 #Funcao chamada sempre que o botao pesquisar eh apertado
     def pesquisando(self,id):
@@ -261,13 +266,14 @@ class Example(Tkin.Frame):
         else:
             try:
                 tr.VerificaDigit(id)
-            except:
-                tkMessageBox.showerror("Erro encontrado", "Digite valores validos!")
+            except Exception as e:
+                tkMessageBox.showerror("Erro encontrado", e.message)
             else:
                 self.todos_apertado()
-                self.populate(bd.selectProdutoId(self.pesquisar2.get()))
+                self.populate(bd.selectProdutoIdAll(id))
 
 #Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
+
     def populate(self,info):
         '''Put in some fake data'''
         cor1 = '#ffffff'
@@ -321,8 +327,6 @@ class Example(Tkin.Frame):
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
 
-
-
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
@@ -332,7 +336,7 @@ class Example(Tkin.Frame):
 Example(root).pack(side="top", fill="both", expand=True)
 #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 root.title('Programa Guts')
-#root.resizable(width=False, height=True)
+root.resizable(width=False, height=True)
 #root.geometry('755x450')
 root.attributes("-fullscreen", True)
 root.mainloop()

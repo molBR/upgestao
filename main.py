@@ -1,12 +1,14 @@
-# coding=utf-8
+#coding=utf-8
 
-from database import *
-from cadastro_produto_maior import *
+#import classes
+#import database
+import cadastro_produto_maior
 
 def main():
     #bd = Database()
     print 'Gut\'s is running.'
 
+    #menu = TelaMaior()
         #Criacao do BD
     #bd.createDB()
 
@@ -19,7 +21,7 @@ def main():
     #texto = bd.selectProdutoId(4)
     #print texto
 
-    #theBigProdMenu() #Chamada da janela grande
+
 
 if __name__ == "__main__":
     main()
