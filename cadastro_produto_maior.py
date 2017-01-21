@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 import Tkinter as Tkin
 from database import database as db
 import cadastro_produto_menor as cpm
