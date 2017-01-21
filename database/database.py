@@ -13,7 +13,6 @@ class Database(object):
 
 #Funcao que cria o bd
     def createDB(self):
-
         self.dbCursor.execute('''CREATE TABLE Categoria (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
@@ -28,11 +27,13 @@ class Database(object):
             Id_Categoria INTEGER NOT NULL,
             FOREIGN KEY (Id_Categoria) REFERENCES Categoria(id)
        );''')
+
 #Insere o produto recebendo varios valores
     def insertProduto(self, id, nome, valor_inic, data_inser):
         values = [id, nome, valor_inic, data_inser]
         self.dbCursor.execute( 'INSERT INTO Produto VALUES (id, nome, valor_inic, data_inser)', values)
-        self.dbConnect.commit();
+        self.dbConnect.commit()
+
 #Insere o produto recebendo um objeto produto
     def insertProduto(self, prod):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
@@ -40,21 +41,25 @@ class Database(object):
 
         self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?,?)',values)
         self.dbConnect.commit()
+
 #Insere categoria recebendo varios valores
     def insertCategoria(self, id, nome, valor_inic, data_inser):
         values = [id, nome, data_inser]
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
-        self.dbConnect.commit();
+        self.dbConnect.commit()
+
 #Insere categoria recebendo um objeto
     def insertCategoria(self, categ):
         values = [categ.getId(), categ.getNome(), categ.getData_insert()]
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
-        self.dbConnect.commit();
+        self.dbConnect.commit()
+
 #Seleciona todos os produtos
     def selectProduto(self):
         self.dbCursor.execute('SELECT * FROM Produto ORDER BY id')
         x = self.dbCursor.fetchall()
         return x
+
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):
         self.dbCursor.execute('Select * FROM Produto WHERE Id_Categoria = 1')

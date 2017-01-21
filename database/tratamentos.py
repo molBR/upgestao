@@ -26,7 +26,7 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
         VerificaComma(valor)
         VerificaTipo(tipo)
     except Erro as e:
-        raise e
+        raise e             #Apenas repassando os possiveis erros para o nivel superior
     else:
         nome = TrataStr(nome)
         valor = TrataValor(valor)

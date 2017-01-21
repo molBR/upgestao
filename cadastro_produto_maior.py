@@ -273,7 +273,6 @@ class Example(Tkin.Frame):
                 self.populate(bd.selectProdutoIdAll(id))
 
 #Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
-
     def populate(self,info):
         '''Put in some fake data'''
         cor1 = '#ffffff'
