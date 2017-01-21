@@ -31,7 +31,6 @@ class Database(object):
 #Funcao que cria o bd
     def createDB(self):
         self.dbCursor.execute(tables[1])
-
         self.dbCursor.execute(tables[2])
 
 #Insere o produto recebendo varios valores
