@@ -10,6 +10,9 @@ import cadastro_produto_editar_1 as cpe
 
 #Criacao dos objetos TopLevel a serem utilizados
 
+#Criacao do BD
+#bd.createDB()
+
 bd = db.Database(0)  # banco de dados
 tm = cpm.TelaMenor()  # inserir
 td = cpd.TelaMenorDel()  # deletar
@@ -341,3 +344,5 @@ root.resizable(width=False, height=True)
 root.attributes("-fullscreen", True)
 root.mainloop()
 #fim
+
+bd.close()

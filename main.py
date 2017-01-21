@@ -1,24 +1,20 @@
 # encoding: utf-8
 
-import database.backup as backupFile
+import database.database as db
 
 import cadastro_produto_maior
 
-
 def main():
     print 'Gut\'s is running.'
-    #bd = Database()
 
-        #menu = TelaMaior()
-    #Criacao do BD
-        #bd.createDB()
+    #menu = TelaMaior()
 
 
-    #Funcionalidade de criação de um arquivo sql para backup
-    #"""
-    backup = backupFile.Backup()
-    backup.exportSQL()
-    #"""
+    #Funcionalidade de backup
+    bd = db.Database(0)
+    bd.exportSQL()
+    #bd.importSQL()
+    bd.close()
 
 if __name__ == "__main__":
     main()

@@ -29,7 +29,7 @@ class TelaMenorEdit2():
         except tr.Erro as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
-            bd.deleteGivenId(id)
+            bd.deleteProduto(id)
             bd.insertProduto(p1)
         finally:
             self.CloseWindow()

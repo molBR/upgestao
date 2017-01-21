@@ -17,7 +17,7 @@ class Database(object):
             '''CREATE TABLE Categoria (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
-            data_inser INTEGER NOT NULL
+            data_inser varchar(100) NOT NULL,
         );''',
             '''CREATE TABLE Produto (
             id INTEGER PRIMARY KEY NOT NULL,
@@ -28,16 +28,17 @@ class Database(object):
             FOREIGN KEY (Id_Categoria) REFERENCES Categoria(id)
        );''']
 
-#Funcao que cria o bd
-    def createDB(self):
-        self.dbCursor.execute(tables[1])
-        self.dbCursor.execute(tables[2])
+        #Para verificar se o banco já possui seu create table
+        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Categoria';")
+        categoriaExistence = self.dbCursor.fetchall()
 
-#Insere o produto recebendo varios valores
-    def insertProduto(self, id, nome, valor_inic, data_inser):
-        values = [id, nome, valor_inic, data_inser]
-        self.dbCursor.execute( 'INSERT INTO Produto VALUES (id, nome, valor_inic, data_inser)', values)
-        self.dbConnect.commit()
+        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Produto';")
+        produtoExistence = self.dbCursor.fetchall()
+
+        if(not categoriaExistence and not produtoExistence):
+            self.dbCursor.execute(self.tables[0])
+            self.dbCursor.execute(self.tables[1])
+
 
 #Insere o produto recebendo um objeto produto
     def insertProduto(self, prod):
@@ -45,12 +46,6 @@ class Database(object):
                   prod.getData_insert(), prod.getForeign_key()]
 
         self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?, ?)', values)
-        self.dbConnect.commit()
-
-#Insere categoria recebendo varios valores
-    def insertCategoria(self, id, nome, valor_inic, data_inser):
-        values = [id, nome, data_inser]
-        self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
         self.dbConnect.commit()
 
 #Insere categoria recebendo um objeto
@@ -135,13 +130,50 @@ class Database(object):
         else:
             return True
 
-#Deleta o produto dado o seu id
-    def deleteGivenId(self,id):
-        print id
+#Deleta o produto dado seu id
+    def deleteProduto(self, id):
         value = [id]
         self.dbCursor.execute('DELETE FROM Produto WHERE id = ?', value)
+        self.dbConnect.commit()
+
+#Deleta a categoria dado seu id         O CERTO É VERIFICAR SE ALGUM PRODUTO ESTÁ ATRELADA A CATEGORIA!!!!
+    def deleteCategoria(self, id):
+        value = [id]
+        self.dbCursor.execute('DELETE FROM Categoria WHERE id = ?', value)
         self.dbConnect.commit()
 
 #Fecha a ligacao com o banco de dados
     def close(self):
         self.dbCursor.close()
+
+    # Método que salva os dados atuais do sistema em um arquivo com código SQL
+    def exportSQL(self, fileName='dados.sql'):
+
+        buffer = ''
+
+        # Insert Categoria
+        dadosCategoria = self.selectCategoria()
+        sizeCategoria = len(dadosCategoria)
+        for i in range(0, sizeCategoria):
+            buffer = buffer + 'INSERT INTO Categoria VALUES ((' + str(dadosCategoria[i][0]) + '), (\'' + \
+                     dadosCategoria[i][1] + \
+                     '\'), (' + str(dadosCategoria[i][2]) + '));' + '\n'
+
+        # Insert Produto
+        dadosProduto = self.selectProduto()
+        sizeProduto = len(dadosProduto)
+        for i in range(0, sizeProduto):
+            buffer = buffer + 'INSERT INTO Produto VALUES ((' + str(dadosProduto[i][0]) + '), (\'' + dadosProduto[i][1] + \
+                     '\'), (\'' + str(dadosProduto[i][2]) +'\'), (\'' + str(dadosProduto[i][3]) + \
+                     '\'), (' + str(dadosProduto[i][4]) + '));' + '\n'
+
+        file = open(fileName, 'w')
+        # Escrita da string criada e fechamento do arquivo
+        file.write(buffer)
+        file.close()
+
+    # Método que insere dados ao sistema ao ler um arquivo com código SQL
+    def importSQL(self, fileName='dados.sql'):
+        file = open(fileName, 'r')
+        script = file.read()
+        self.dbCursor.executescript(script)
