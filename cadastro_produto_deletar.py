@@ -49,40 +49,42 @@ class TelaMenorDel():
             info = Frame(self.top)
             info.grid(sticky=N+S+W+E)
 
-            salto1 = Label(info, text="       ")
+            salto1 = Label(info, text="          ")
             salto1.grid(row=0, column=0)
 
-            nome1 = Label(info, text="Id:")
+            nome1 = Label(info, text="Id:") #comeco id
             nome1['font']=['bold']
             nome1.grid(row=1, column=1, sticky=W)
 
             nome2 = Entry(info)
             nome2["width"]=40
-            nome2.grid(row=2, column=1)
+            nome2["font"] = ("Arial", "10")
+            nome2.grid(row=2, column=1) #fim id
 
+            salto2 = Label(info, text="")
+            salto2.grid(row=3, column=0)
 
-            pronto = Button(info, text="Pronto", bg=self.cor1, bd=3,command=lambda: self.SendToTR(nome2.get(),bd))
+            #comeco pronto
+            pronto = Button(info, text="Pronto", bg=self.cor1,command=lambda: self.SendToTR(nome2.get(),bd))
             pronto['font']=['bold']
             pronto['fg']='white'
-            pronto.grid(row=9, column=1)
+            pronto['padx'] = 1
+            pronto['pady'] = 1
+            pronto.grid(row=4, column=1) #fim pronto
 
-            salto5 = Label(info, text="")
-            salto5.grid(row=10, column=1)
-
-            espaco1 = Label(info, text="       ")
-            espaco1.grid(row=10, column=2)
+            salto3 = Label(info, text="          ")
+            salto3.grid(row=5, column=2)
             #fim
 
             # barra de "status"
             status = Label(info, text="Estado: Normal", bg="white", bd=1, relief=SUNKEN, anchor=W)
-            status.grid(row= 11, column=0, sticky=S+W+E, columnspan=3)
+            status.grid(row=6, column=0, sticky=S+W+E, columnspan=3)
             #fim
 
             # formatacao da janela
-            self.top.title('Cadastro do Produto')
+            self.top.title('Excluir Produto')
                 #top.iconbitmap(r'c:\Python27\DLLs\icon.ico')
             self.top.resizable(width=False, height=False)
-            self.top.geometry('298x276')
             self.top.protocol("WM_DELETE_WINDOW", lambda:self.CloseWindow())
             self.top.mainloop()
             #fim
