@@ -17,16 +17,25 @@ class Database(object):
             '''CREATE TABLE Categoria (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
-            data_inser varchar(100) NOT NULL,
+            data_inser varchar(100) NOT NULL
         );''',
             '''CREATE TABLE Produto (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             valor_inic varchar(100) NOT NULL,
             data_inser varchar(100) NOT NULL,
-            Id_Categoria INTEGER NOT NULL,
+            id_categoria INTEGER NOT NULL,
             FOREIGN KEY (Id_Categoria) REFERENCES Categoria(id)
-       );''']
+       );''',
+            '''CREATE TABLE Venda (
+            id INTEGER PRIMARY KEY NOT NULL,
+            nome_cliente varchar(500) NOT NULL,
+            id_inst varchar(500) NOT NULL,
+            valor varchar(100) NOT NULL,
+            data_pedido varchar(100) NOT NULL,
+            data_evento varchar(100) NOT NULL,
+            data_inser varchar(100) NOT NULL,
+        );''']
 
         #Para verificar se o banco já possui seu create table
         self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Categoria';")
