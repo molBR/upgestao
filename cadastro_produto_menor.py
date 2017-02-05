@@ -28,7 +28,7 @@ class TelaMenor():
             if(not bd.ExistsProduto(id)):
                 p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
             else:
-                raise tr.ErroEntrada(id, "O ID digitado (" + id + ") nao existe no atual banco de dados. Por favor, digite novamente.")
+                raise tr.ErroEntrada(id, "O ID digitado (" + id + ") já existe no atual banco de dados. Escolha outro Id")
         except tr.ErroEntrada as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
