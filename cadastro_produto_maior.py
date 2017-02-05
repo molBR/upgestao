@@ -354,4 +354,5 @@ root.geometry('1061x581')
 root.mainloop()
 #fim
 
+#Não esquecer de fechar o bd já que ele está sendo aberto neste arquivo!!!
 bd.close()
