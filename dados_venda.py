@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from Tkinter import *
 
 root=Tk()

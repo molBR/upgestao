@@ -1,11 +1,10 @@
+# encoding: utf-8
+
 from Tkinter import *
 
 
 class Menu():
-
-    def __init__(self):
-
-        root = Tk()
+    def __init__(self, root):
 
         cor1 = '#ffffff'
         cor2 = '#d32f2f'
@@ -20,7 +19,7 @@ class Menu():
         salto2 = Label (frame1, text="", bg=cor1)
         salto2.grid(row=1, column=0)
 
-        titulo = Label (frame1, text="Programa Guts", bg=cor1, fg=cor2)
+        titulo = Label (frame1, text="Gut's Orçamento", bg=cor1, fg=cor2)
         titulo["font"]=("Arial", "44", "bold")
         titulo.grid(row=2, column=1)
 
@@ -33,7 +32,6 @@ class Menu():
 
         salto4 = Label (frame1, text="", bg=cor1)
         salto4.grid(row=5, column=0)
-
 
         # fim
 
@@ -56,7 +54,7 @@ class Menu():
         salto7 = Label (frame2, text="", bg=cor1)
         salto7.grid(row=6, column=0)
 
-        venda = Button(frame2, text="        Nova  Venda        ", bg=cor2, fg=cor1, bd=2)
+        venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2)
         venda["font"]=("Arial", "16", "bold")
         venda.grid(row=7, column=1, pady=5)
 
@@ -70,14 +68,14 @@ class Menu():
         salto9 = Label (frame2, text="", bg=cor1)
         salto9.grid(row=10, column=1)
 
-        historico = Button(frame2, text="  Historico de Vendas  ", bg=cor2, fg=cor1, bd=2)
+        historico = Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2)
         historico["font"]=("Arial", "16", "bold")
         historico.grid(row=11, column=1, pady=5)
 
         salto10 = Label (frame2, text="", bg=cor1)
         salto10.grid(row=12, column=2)
 
-        inserir = Button(frame2, text="      Inserir  Produto      ", bg=cor2, fg=cor1, bd=2)
+        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2)
         inserir["font"]=("Arial", "16", "bold")
         inserir.grid(row=13, column=1, pady=5)
 
@@ -98,12 +96,12 @@ class Menu():
         # fim botoes
 
         # barra de 'status'
-        status = Label(root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status = Label(root, text="Estado: Executando", bg="white", bd=1, relief=SUNKEN, anchor=W)
         status.grid(row=1, column=0, sticky=S+W+E, columnspan=2)
         # fim
 
         #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-        root.title('Programa Guts')
+        root.title('Gut\'s Orçamento - Menu Principal')
         root.resizable(width=False, height=False)
         root.geometry('1061x581')
         root.mainloop()
