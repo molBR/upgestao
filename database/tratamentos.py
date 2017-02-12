@@ -53,7 +53,7 @@ def ObjetivaProduto(id, bd):
 def ProdutosCheck(valor,bd):
     VerificaDigit(valor)
     if (not bd.ExistsProduto(valor)):
-        raise ErroIntegridade(valor, "O ID digitado: \"" + str(valor) + "\" nao existe no atual banco de dados. Por favor, digite novamente.")
+        raise ErroIntegridade(valor, "O ID digitado: \"" + str(valor) + "\" não existe no atual banco de dados. Por favor, digite novamente.")
 
 #Tratamento do valor
 def VerificaComma(valor):
@@ -68,7 +68,7 @@ def VerificaDigit(valor):
     if (valor.isdigit()):
         return True
     else:
-        raise ErroEntrada(valor, "O texto deve apenas ser composto por numeros.")
+        raise ErroEntrada(valor, "O texto deve apenas ser composto por números.")
 
 #Verifica se a string tem somente letras
 def VerificaAlpha(nome):
@@ -80,7 +80,7 @@ def VerificaAlpha(nome):
 #Verifica se o produto eh de uma categoria valida
 def VerificaTipo(tipo):
     if (tipo == "Tipo de produto"):
-        raise ErroEntrada(tipo, "O produto digitado nao possui uma categoria valida. Por favor, escolha uma categoria.")
+        raise ErroEntrada(tipo, "O produto digitado não possui uma categoria válida. Por favor, escolha uma categoria.")
     else:
         return True
 

@@ -49,7 +49,7 @@ class TelaMenorEdit1():
             salto1 = Label(info, text="        ")
             salto1.grid(row=0, column=0)
 
-            nome1 = Label(info, text="Codigo:") #comeco codigo
+            nome1 = Label(info, text="Código:") #comeco codigo
             nome1['font']=['bold']
             nome1.grid(row=1, column=1, sticky=W)
 

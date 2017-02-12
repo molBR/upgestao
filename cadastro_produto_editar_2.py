@@ -59,7 +59,7 @@ class TelaMenorEdit2():
             salto1 = Label(info, text="        ")
             salto1.grid(row=0, column=0)
 
-            id1 = Label(info, text="Id:") #comeco id
+            id1 = Label(info, text="Código:") #comeco id
             id1['font'] = ['bold']
             id1.grid(row=1, column=1, sticky=W)
 
@@ -125,7 +125,7 @@ class TelaMenorEdit2():
             #fim
 
             # formatacao da janela
-            self.top.title('Edicao do Produto')
+            self.top.title('Edição do Produto')
                 #top.iconbitmap(r'c:\Python27\DLLs\icon.ico')
             self.top.resizable(width=False, height=False)
             self.top.protocol("WM_DELETE_WINDOW", lambda:self.CloseWindow())
