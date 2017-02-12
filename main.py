@@ -13,14 +13,6 @@ import cadastro_produto_editar_1 as cpe
 def main():
     print 'Gut\'s is running.'
 
-    # Criacao do BD
-
-
-    # Criacao dos objetos TopLevel a serem utilizados
-
-
-    # fim
-
     root = Tkin.Tk()
 
     # detalhes que o luquinha majna
