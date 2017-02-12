@@ -37,7 +37,6 @@ class Database(object):
         );''',
             '''CREATE TABLE Endereco (
             id INTEGER PRIMARY KEY NOT NULL,
-            nome_local varchar(500),
             nome_endereco varchar(500) NOT NULL,
             id_cliente INTEGER NOT NULL,
             FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
@@ -56,13 +55,11 @@ class Database(object):
         );''',
             '''CREATE TABLE Venda (
             id INTEGER PRIMARY KEY NOT NULL,
-            nome_cliente varchar(500) NOT NULL,
+            id_cliente INTEGER NOT NULL,
             nome_contato varchar(500),
             tipo_festa varchar(500),
             num_pessoas varchar(500),
             endereco_nome varchar(500),
-            telefone varchar(500),
-            email varchar(500),
             data_evento varchar(100),
             data_insert varchar(100) NOT NULL,
             custo_local varchar(100) NOT NULL,
@@ -302,8 +299,7 @@ class Database(object):
         sizeEndereco = len(dadosEndereco)
         for i in range(0, sizeEndereco):
             buffer = buffer + 'INSERT INTO Endereco VALUES ((' + str(dadosEndereco[i][0]) + '), (\'' \
-                    + dadosEndereco[i][1] + '\'), (' + dadosEndereco[i][2] + '\'), (' \
-                    + str(dadosEndereco[i][2]) + '));' + '\n'
+                    + dadosEndereco[i][1] + '\'), (' + str(dadosEndereco[i][2]) + '));' + '\n'
 
         # Insert Telefone
         dadosTelefone = self.selectTelefone()
@@ -324,13 +320,12 @@ class Database(object):
         sizeVenda = len(dadosVenda)
         for i in range(0, sizeVenda):
             buffer = buffer + 'INSERT INTO Venda VALUES ((' + str(dadosVenda[i][0]) + '), (\'' \
-                    + dadosVenda[i][1] + '\'), (\'' + dadosVenda[i][2] + '\'), (\'' \
+                    + str(dadosVenda[i][1]) + '\'), (\'' + dadosVenda[i][2] + '\'), (\'' \
                     + dadosVenda[i][3] + '\'), (\'' + str(dadosVenda[i][4]) + '\'), (\'' \
                     + dadosVenda[i][5] + '\'), (\'' + str(dadosVenda[i][6]) + '\'), (\'' \
-                    + dadosVenda[i][7] + '\'), (\'' + str(dadosVenda[i][8]) + '\'), (\'' \
+                    + str(dadosVenda[i][7]) + '\'), (\'' + str(dadosVenda[i][8]) + '\'), (\'' \
                     + str(dadosVenda[i][9]) + '\'), (\'' + str(dadosVenda[i][10]) + '\'), (\'' \
-                    + str(dadosVenda[i][11]) + '\'), (\'' + str(dadosVenda[i][12]) + '\'), (\'' \
-                    + str(dadosVenda[i][13]) + '\'));' + '\n'
+                    + str(dadosVenda[i][11]) + '\'));' + '\n'
 
         # Insert Prod_Vendido
         dadosProdVend = self.selectProdVendido()
