@@ -73,11 +73,13 @@ class TelaMaior (Tkin.Frame):
 
 #Construtor
     def __init__(self, root):
-
-        # Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
-        self.root = root
+        self.root = None
 
 
+    def FazTela(self):
+
+# Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
+        self.root = Tkin.Toplevel()
 
         menu = Tkin.Menu(self.root)
         self.root.config(menu=menu)
@@ -159,7 +161,8 @@ class TelaMaior (Tkin.Frame):
         self.objeto3 = Tkin.Label(self.container1, text="Nome:")
         self.objeto3["font"] = ["bold"]
         self.objeto3.pack(side=Tkin.LEFT)
-        self.objeto4 = Tkin.Label(self.container1, text="                                                                                                                 ")
+        self.objeto4 = Tkin.Label(self.container1,
+                                  text="                                                                                                                 ")
         self.objeto4["font"] = ["bold"]
         self.objeto4.pack(side=Tkin.LEFT)
         self.objeto5 = Tkin.Label(self.container1, text="Valor:")
@@ -168,30 +171,31 @@ class TelaMaior (Tkin.Frame):
         self.objeto6 = Tkin.Label(self.container1, text="                                              ")
         self.objeto6["font"] = ["bold"]
         self.objeto6.pack(side=Tkin.LEFT)
-# fim
+        # fim
 
-# espaco com "inserir", "editar", "excluir" e "pesquisar"
+        # espaco com "inserir", "editar", "excluir" e "pesquisar"
 
         self.salto1 = Tkin.Label(self.container2, text="", bg=self.cor3)
         self.salto1.pack(side=Tkin.LEFT)
 
-        self.espaco1 = Tkin.Label(self.container3, text="                                                               ", bg=self.cor3)
+        self.espaco1 = Tkin.Label(self.container3, text="                                                               ",
+                                  bg=self.cor3)
         self.espaco1.pack(side=Tkin.LEFT)
-        self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda:self.inserindo(self.bd), bg=self.cor3)
+        self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd), bg=self.cor3)
         self.inserir["font"] = ['bold']
         self.inserir['padx'] = 1
         self.inserir['pady'] = 1
         self.inserir.pack(side=Tkin.LEFT)
         self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
         self.espaco2.pack(side=Tkin.LEFT)
-        self.editar = Tkin.Button(self.container3, text="Editar", command=lambda:self.editando(self.bd), bg=self.cor3)
+        self.editar = Tkin.Button(self.container3, text="Editar", command=lambda: self.editando(self.bd), bg=self.cor3)
         self.editar["font"] = ['bold']
         self.editar['padx'] = 1
         self.editar['pady'] = 1
         self.editar.pack(side=Tkin.LEFT)
         self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
         self.espaco2.pack(side=Tkin.LEFT)
-        self.excluir = Tkin.Button(self.container3, text="Excluir", command=lambda:self.deletando(self.bd), bg=self.cor3)
+        self.excluir = Tkin.Button(self.container3, text="Excluir", command=lambda: self.deletando(self.bd), bg=self.cor3)
         self.excluir["font"] = ['bold']
         self.excluir['padx'] = 1
         self.excluir['pady'] = 1
@@ -208,7 +212,7 @@ class TelaMaior (Tkin.Frame):
         pesquisado = self.pesquisar2.get()  # pesquisado = o que foi escrito no "Entry / barra de pesquisa"
         self.espaco4 = Tkin.Label(self.container3, text=" ", bg=self.cor3)
         self.espaco4.pack(side=Tkin.LEFT)
-        self.ok = Tkin.Button(self.container3, text="Ok", command=lambda:self.pesquisando(self.pesquisar2.get()), bg=self.cor3)
+        self.ok = Tkin.Button(self.container3, text="Ok", command=lambda: self.pesquisando(self.pesquisar2.get()), bg=self.cor3)
         self.ok["font"] = ['bold']
         self.ok['padx'] = 1
         self.ok['pady'] = 1
@@ -216,11 +220,10 @@ class TelaMaior (Tkin.Frame):
 
         self.salto2 = Tkin.Label(self.container4, text="", bg=self.cor3)
         self.salto2.pack(side=Tkin.LEFT)
-# fim
+        # fim
         self.canvas = None
-# tabela dos itens
+        # tabela dos itens
         self.todos_apertado()
-
 
 
 #funcao que cria o canvas, deve ser chamada toda vez que o mesmo e atualizado

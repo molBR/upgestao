@@ -2,73 +2,86 @@
 
 from Tkinter import *
 
+
+
 # funcao de teste
-def Teste():
+def Teste(self):
     print("Testado")
-# fim
 
-root=Tk()
+class TelaMaior(Frame):
 
-# menu principal
-menu = Menu(root)
-root.config(menu=menu)
 
-subMenu1 = Menu(menu)
-menu.add_cascade(label="Menu", menu=subMenu1)
-subMenu1.add_command(label="Recarregar", command=Teste)
-subMenu1.add_separator()
-subMenu1.add_command(label="Sair", command=root.destroy)
 
-subMenu2 = Menu(menu)
-menu.add_cascade(label="Arquivo", menu=subMenu2)
-subMenu2.add_command(label="Historico de Vendas", command=Teste)
-subMenu2.add_command(label="Clientes", command=Teste)
-subMenu2.add_command(label="Produtos", command=Teste)
+    def __init__(self,root):
+        self.root = None
 
-subMenu3 = Menu(menu)
-menu.add_cascade(label="...", menu=subMenu3)
-# fim
+    def FazTela(self):
+        #TelaMaior(root).pack(side="top", fill="both", expand=True)
+        # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 
-# abas de opcoes
-cor1 = '#D32F2F'
-q = "quantidades"
-info = 71
 
-toolbar = Frame(root, bg=cor1)
+        # fim
 
-ordenar = Label(toolbar, text=" Ordenar Por:", bg=cor1, font="bold", fg="white")
-ordenar.pack(side=LEFT, pady=1)
-variable = StringVar(toolbar)
-variable.set("Nome")
-opcoes = OptionMenu(toolbar, variable, "Nome", "Data  ", "Valor ")
-opcoes.config(bg=cor1, font="white", fg="white")
-opcoes["menu"].config(bg=cor1, font="white", fg="white")
-opcoes.pack(side=LEFT)
-for espaco in range(info):
-    t = " "
-    Label(toolbar, text=t, bg=cor1).pack(side=LEFT)
-vendas = Label(toolbar, text="Vendas Realizadas:", bg=cor1, font="bold", fg="white")
-vendas.pack(side=LEFT, pady=10)
-quantidade = Label(toolbar, text=q, bg=cor1, font="bold", fg="white")
-quantidade.pack(side=LEFT)
+        self.root = Toplevel()
 
-toolbar.pack(side=TOP, fill=X)
-# fim
+        # menu principal
+        menu = Menu(self.root)
+        self.root.config(menu=menu)
 
-# barra de 'status'
-status = Label(root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-status.pack(side=BOTTOM, fill=X)
-# fim
+        subMenu1 = Menu(menu)
+        menu.add_cascade(label="Menu", menu=subMenu1)
+        subMenu1.add_command(label="Recarregar", command=Teste)
+        subMenu1.add_separator()
+        subMenu1.add_command(label="Sair", command=self.root.destroy)
 
-class Example(Frame):
-    def __init__(self, root):
+        subMenu2 = Menu(menu)
+        menu.add_cascade(label="Arquivo", menu=subMenu2)
+        subMenu2.add_command(label="Historico de Vendas", command=Teste)
+        subMenu2.add_command(label="Clientes", command=Teste)
+        subMenu2.add_command(label="Produtos", command=Teste)
+
+        subMenu3 = Menu(menu)
+        menu.add_cascade(label="...", menu=subMenu3)
+        # fim
+
+        # abas de opcoes
+        cor1 = '#D32F2F'
+        q = "quantidades"
+        info = 71
+
+        toolbar = Frame(self.root, bg=cor1)
+
+        ordenar = Label(toolbar, text=" Ordenar Por:", bg=cor1, font="bold", fg="white")
+        ordenar.pack(side=LEFT, pady=1)
+        variable = StringVar(toolbar)
+        variable.set("Nome")
+        opcoes = OptionMenu(toolbar, variable, "Nome", "Data  ", "Valor ")
+        opcoes.config(bg=cor1, font="white", fg="white")
+        opcoes["menu"].config(bg=cor1, font="white", fg="white")
+        opcoes.pack(side=LEFT)
+        for espaco in range(info):
+            t = " "
+            Label(toolbar, text=t, bg=cor1).pack(side=LEFT)
+        vendas = Label(toolbar, text="Vendas Realizadas:", bg=cor1, font="bold", fg="white")
+        vendas.pack(side=LEFT, pady=10)
+        quantidade = Label(toolbar, text=q, bg=cor1, font="bold", fg="white")
+        quantidade.pack(side=LEFT)
+
+        toolbar.pack(side=TOP, fill=X)
+        # fim
+
+        # barra de 'status'
+        status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status.pack(side=BOTTOM, fill=X)
+        # fim
+
 
         cor3='#E6E6E6'
 
-        self.container1 = Frame(root)
-        self.container2 = Frame(root, bg=cor3)
-        self.container3 = Frame(root, bg=cor3)
-        self.container4 = Frame(root, bg=cor3)
+        self.container1 = Frame(self.root)
+        self.container2 = Frame(self.root, bg=cor3)
+        self.container3 = Frame(self.root, bg=cor3)
+        self.container4 = Frame(self.root, bg=cor3)
         self.container1.pack(fill=X)
         self.container2.pack(side=BOTTOM, fill=X)
         self.container3.pack(side=BOTTOM, fill=X)
@@ -141,10 +154,10 @@ class Example(Frame):
 # fim
 
 # tabela dos itens
-        Frame.__init__(self, root)  # comeco frame dos produtos
-        self.canvas1 = Canvas(root, borderwidth=0, background="#ffffff")
+        Frame.__init__(self, self.root)  # comeco frame dos produtos
+        self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
         self.frame1 = Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = Scrollbar(root, orient="vertical", command=self.canvas1.yview)
+        self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
         self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
         self.canvas1.pack(side="left", fill="both", expand=True)
@@ -156,10 +169,10 @@ class Example(Frame):
 
         self.populate1()  # fim frame dos produtos
 
-        Frame.__init__(self, root)  # comeco frame venda
-        self.canvas2 = Canvas(root, borderwidth=0, background="#ffffff")
+        Frame.__init__(self, self.root)  # comeco frame venda
+        self.canvas2 = Canvas(self.root, borderwidth=0, background="#ffffff")
         self.frame2 = Frame(self.canvas2, background="#f0f0f0")
-        self.vsb2 = Scrollbar(root, orient="vertical", command=self.canvas2.yview)
+        self.vsb2 = Scrollbar(self.root, orient="vertical", command=self.canvas2.yview)
         self.canvas2.configure(yscrollcommand=self.vsb2.set)
 
         self.canvas2.pack(side="left", fill="both", expand=True)
@@ -170,6 +183,14 @@ class Example(Frame):
         self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
         self.populate2()  # fim frame venda
+
+        self.root.title('Programa Guts')
+        self.root.resizable(width=False, height=False)
+        self.root.geometry('1061x581')
+        self.root.mainloop()
+
+
+
 
     def populate1(self):  # comeco produtos
         info = 40
@@ -900,10 +921,3 @@ class Example(Frame):
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas2.configure(scrollregion=self.canvas2.bbox("all"))  # fim scroolbar frame2
 # fim
-
-Example(root).pack(side="top", fill="both", expand=True)
-#root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-root.title('Programa Guts')
-root.resizable(width=False, height=False)
-root.geometry('1061x581')
-root.mainloop()

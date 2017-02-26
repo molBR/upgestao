@@ -1,10 +1,19 @@
 # encoding: utf-8
 
 from Tkinter import *
+import cadastro_produto_maior as cpm
+import cadastro_clientes_maior as ccm
+import venda_produtos as vp
+import vendas_historico as vh
+
 
 
 class Menu():
     def __init__(self, root):
+        a = cpm.TelaMaior(root)
+        b = ccm.TelaMaior(root)
+        c = vp.TelaMaior(root)
+        d = vh.TelaMaior(root)
 
         cor1 = '#ffffff'
         cor2 = '#d32f2f'
@@ -54,28 +63,28 @@ class Menu():
         salto7 = Label (frame2, text="", bg=cor1)
         salto7.grid(row=6, column=0)
 
-        venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2)
+        venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2,command = lambda: c.FazTela())
         venda["font"]=("Arial", "16", "bold")
         venda.grid(row=7, column=1, pady=5)
 
         salto8 = Label (frame2, text="                       ", bg=cor1)
         salto8.grid(row=8, column=2)
 
-        cadastro = Button(frame2, text="    Cadastrar Cliente    ", bg=cor2, fg=cor1, bd=2)
+        cadastro = Button(frame2, text="    Cadastrar Cliente    ", bg=cor2, fg=cor1, bd=2,command = lambda: b.FazTela())
         cadastro["font"]=("Arial", "16", "bold")
         cadastro.grid(row=9, column=1, pady=5)
 
         salto9 = Label (frame2, text="", bg=cor1)
         salto9.grid(row=10, column=1)
 
-        historico = Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2)
+        historico = Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2,command = lambda: d.FazTela())
         historico["font"]=("Arial", "16", "bold")
         historico.grid(row=11, column=1, pady=5)
 
         salto10 = Label (frame2, text="", bg=cor1)
         salto10.grid(row=12, column=2)
 
-        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2)
+        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,command = lambda:a.FazTela())
         inserir["font"]=("Arial", "16", "bold")
         inserir.grid(row=13, column=1, pady=5)
 
@@ -105,3 +114,6 @@ class Menu():
         root.resizable(width=False, height=False)
         root.geometry('1061x581')
         root.mainloop()
+
+root = Tk()
+a = Menu(root)

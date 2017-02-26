@@ -1,61 +1,28 @@
 from Tkinter import *
 
+
 # funcao de teste
 def Teste():
     print("Testado")
+
+
 # fim
 
-root=Tk()
-
-# menu principal
-menu = Menu(root)
-root.config(menu=menu)
-
-subMenu1 = Menu(menu)
-menu.add_cascade(label="Menu", menu=subMenu1)
-subMenu1.add_command(label="Recarregar", command=Teste)
-subMenu1.add_separator()
-subMenu1.add_command(label="Sair", command=root.destroy)
-
-subMenu2 = Menu(menu)
-menu.add_cascade(label="Arquivo", menu=subMenu2)
-subMenu2.add_command(label="Historico de Vendas", command=Teste)
-subMenu2.add_command(label="Clientes", command=Teste)
-subMenu2.add_command(label="Produtos", command=Teste)
-
-subMenu3 = Menu(menu)
-menu.add_cascade(label="...", menu=subMenu3)
-# fim
-
-# abas de opcoes
-cor1 = '#D32F2F'
-v = "valor"
-
-toolbar = Frame(root, bg=cor1)
-
-clientes = Label(toolbar, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
-clientes.pack(side=LEFT, pady=10)
-valor = Label(toolbar, text=v, bg=cor1, font="bold", fg="white")
-valor.pack(side=LEFT)
-
-toolbar.pack(side=TOP, fill=X)
-# fim
-
-# barra de 'status'
-status = Label(root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-status.pack(side=BOTTOM, fill=X)
-# fim
-
-class Example(Frame):
+class TelaMaior(Frame):
     def __init__(self, root):
+        self.root = None
 
+
+
+    def FazTela(self):
+        self.root = Toplevel()
         cor3 = '#E6E6E6'
         info = 53
 
-        self.container1 = Frame(root)
-        self.container2 = Frame(root, bg=cor3)
-        self.container3 = Frame(root, bg=cor3)
-        self.container4 = Frame(root, bg=cor3)
+        self.container1 = Frame(self.root)
+        self.container2 = Frame(self.root, bg=cor3)
+        self.container3 = Frame(self.root, bg=cor3)
+        self.container4 = Frame(self.root, bg=cor3)
         self.container1.pack(fill=X)
         self.container2.pack(side=BOTTOM, fill=X)
         self.container3.pack(side=BOTTOM, fill=X)
@@ -71,12 +38,13 @@ class Example(Frame):
         self.dados["font"] = ["bold"]
         self.dados.pack(side=LEFT)
 
-# espaco com "salvar docx", "excluir" e "pesquisar"
+        # espaco com "salvar docx", "excluir" e "pesquisar"
 
         self.salto1 = Label(self.container2, text="", bg=cor3)
         self.salto1.pack(side=LEFT)
 
-        self.espaco1 = Label(self.container3, text="                                                          ", bg=cor3)
+        self.espaco1 = Label(self.container3, text="                                                          ",
+                             bg=cor3)
         self.espaco1.pack(side=LEFT)
         self.cadastro = Button(self.container3, text="Cadastrar", command=Teste, bg=cor3)
         self.cadastro["font"] = ['bold']
@@ -107,36 +75,82 @@ class Example(Frame):
         self.excluir['pady'] = 1
         self.excluir.pack(side=LEFT)
 
-
         self.salto2 = Label(self.container4, text="", bg=cor3)
         self.salto2.pack(side=LEFT)
-# fim
+        # fim
 
-# tabela dos itens
-        Frame.__init__(self, root)
-        self.canvas1 = Canvas(root, borderwidth=0, background="#ffffff")
+        # tabela dos itens
+        Frame.__init__(self, self.root)
+        self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
         self.frame1 = Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = Scrollbar(root, orient="vertical", command=self.canvas1.yview)
+        self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
         self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
         self.canvas1.pack(side="left", fill="both", expand=True)
         self.vsb1.pack(side="left", fill="y")
-        self.canvas1.create_window((4,4), window=self.frame1, anchor="nw",
-                                  tags="self.frame1")
+        self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
+                                   tags="self.frame1")
 
         self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
         self.populate1()
 
-        Frame.__init__(self, root)
-        self.canvas2 = Canvas(root, borderwidth=0, background="#fafafa")
+        Frame.__init__(self, self.root)
+        self.canvas2 = Canvas(self.root, borderwidth=0, background="#fafafa")
         self.frame2 = Frame(self.canvas2, background="#fafafa")
 
         self.canvas2.pack(side="left", fill="both", expand=True)
         self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
-                               tags="self.frame2")
+                                   tags="self.frame2")
 
         self.populate2()
+
+        # menu principal
+        menu = Menu(self.root)
+        self.root.config(menu=menu)
+
+        subMenu1 = Menu(menu)
+        menu.add_cascade(label="Menu", menu=subMenu1)
+        subMenu1.add_command(label="Recarregar", command=Teste)
+        subMenu1.add_separator()
+        subMenu1.add_command(label="Sair", command=self.root.destroy)
+
+        subMenu2 = Menu(menu)
+        menu.add_cascade(label="Arquivo", menu=subMenu2)
+        subMenu2.add_command(label="Historico de Vendas", command=Teste)
+        subMenu2.add_command(label="Clientes", command=Teste)
+        subMenu2.add_command(label="Produtos", command=Teste)
+
+        subMenu3 = Menu(menu)
+        menu.add_cascade(label="...", menu=subMenu3)
+        # fim
+
+        # abas de opcoes
+        cor1 = '#D32F2F'
+        v = "valor"
+
+        toolbar = Frame(self.root, bg=cor1)
+
+        clientes = Label(toolbar, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
+        clientes.pack(side=LEFT, pady=10)
+        valor = Label(toolbar, text=v, bg=cor1, font="bold", fg="white")
+        valor.pack(side=LEFT)
+
+        toolbar.pack(side=TOP, fill=X)
+        # fim
+
+        # barra de 'status'
+        status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status.pack(side=BOTTOM, fill=X)
+
+        # fim
+
+
+        # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
+        self.root.title('Programa Guts')
+        self.root.resizable(width=False, height=False)
+        self.root.geometry('1061x581')
+        self.root.mainloop()
 
     def populate1(self):
         info = 20
@@ -144,8 +158,9 @@ class Example(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t="nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=57)
+                t = "nome"
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold",
+                width=57)
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
@@ -153,7 +168,8 @@ class Example(Frame):
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=57)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold",
+                width=57)
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
@@ -165,12 +181,12 @@ class Example(Frame):
 
     def populate2(self):
         cor = '#fafafa'
-        nome="nome"
-        endereco="endereco"
-        data="data"
-        email="email"
-        telefone="telefone"
-        celular="celular"
+        nome = "nome"
+        endereco = "endereco"
+        data = "data"
+        email = "email"
+        telefone = "telefone"
+        celular = "celular"
 
         salto1 = Label(self.frame2, text="               ", bg=cor)
         salto1.grid(row=0, column=0)
@@ -256,11 +272,6 @@ class Example(Frame):
         celular2.config(textvariable=var, relief='flat')
         celular2.grid(row=17, column=1)
 
+
 # fim
 
-Example(root).pack(side="top", fill="both", expand=True)
-#root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-root.title('Programa Guts')
-root.resizable(width=False, height=False)
-root.geometry('1061x581')
-root.mainloop()
