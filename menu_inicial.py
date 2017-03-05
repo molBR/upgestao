@@ -5,21 +5,30 @@ import cadastro_produto_maior as cpm
 import cadastro_clientes_maior as ccm
 import venda_produtos as vp
 import vendas_historico as vh
+from database import tratamentos as tr
+
+
 
 
 
 class Menu():
+
+
+
+
     def __init__(self, root):
-        a = cpm.TelaMaior(root)
-        b = ccm.TelaMaior(root)
-        c = vp.TelaMaior(root)
-        d = vh.TelaMaior(root)
+
+        self.root = root
+        produto = cpm.TelaMaior()
+        clientes = ccm.TelaMaior()
+        vendas = vp.TelaMaior()
+        hist = vh.TelaMaior()
 
         cor1 = '#ffffff'
         cor2 = '#d32f2f'
 
         # comeco titulo e imagem
-        frame1 = Frame (root, background=cor1)
+        frame1 = Frame (self.root, background=cor1)
         frame1.grid(row=0, column=0)
 
         salto1 = Label (frame1, text="                ", bg=cor1)
@@ -45,7 +54,7 @@ class Menu():
         # fim
 
         # comeco botoes
-        frame2 = Frame (root, background=cor1)
+        frame2 = Frame (self.root, background=cor1)
         frame2.grid(row=0, column=1)
 
         salto1 = Label (frame2, text="                       ", bg=cor1)
@@ -63,28 +72,28 @@ class Menu():
         salto7 = Label (frame2, text="", bg=cor1)
         salto7.grid(row=6, column=0)
 
-        venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2,command = lambda: c.FazTela())
+        venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2,command = lambda: self.ChamaTela(vendas))
         venda["font"]=("Arial", "16", "bold")
         venda.grid(row=7, column=1, pady=5)
 
         salto8 = Label (frame2, text="                       ", bg=cor1)
         salto8.grid(row=8, column=2)
 
-        cadastro = Button(frame2, text="    Cadastrar Cliente    ", bg=cor2, fg=cor1, bd=2,command = lambda: b.FazTela())
+        cadastro = Button(frame2, text="    Cadastrar Cliente    ", bg=cor2, fg=cor1, bd=2,command = lambda: self.ChamaTela(clientes))
         cadastro["font"]=("Arial", "16", "bold")
         cadastro.grid(row=9, column=1, pady=5)
 
         salto9 = Label (frame2, text="", bg=cor1)
         salto9.grid(row=10, column=1)
 
-        historico = Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2,command = lambda: d.FazTela())
+        historico = Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2,command = lambda: self.ChamaTela(hist))
         historico["font"]=("Arial", "16", "bold")
         historico.grid(row=11, column=1, pady=5)
 
         salto10 = Label (frame2, text="", bg=cor1)
         salto10.grid(row=12, column=2)
 
-        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,command = lambda:a.FazTela())
+        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,command = lambda: self.ChamaTela(produto))
         inserir["font"]=("Arial", "16", "bold")
         inserir.grid(row=13, column=1, pady=5)
 
@@ -105,15 +114,31 @@ class Menu():
         # fim botoes
 
         # barra de 'status'
-        status = Label(root, text="Estado: Executando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status = Label(self.root, text="Estado: Executando", bg="white", bd=1, relief=SUNKEN, anchor=W)
         status.grid(row=1, column=0, sticky=S+W+E, columnspan=2)
         # fim
 
         #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-        root.title('Gut\'s Orçamento - Menu Principal')
-        root.resizable(width=False, height=False)
-        root.geometry('1061x581')
-        root.mainloop()
+        self.root.title('Gut\'s Orçamento - Menu Principal')
+        self.root.resizable(width=False, height=False)
+        self.root.geometry('1061x581')
+        self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
+        self.root.mainloop()
+
+
+    def CloseWindow(self):
+        self.root.destroy()
+        self.root.quit()
+        self.root = None
+
+    def ChamaTela(self, tela):
+        tela.FazTela()
+
+
+
+
+
+
 
 root = Tk()
 a = Menu(root)

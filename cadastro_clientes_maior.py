@@ -1,4 +1,5 @@
 from Tkinter import *
+from database import tratamentos as tr
 
 
 # funcao de teste
@@ -9,148 +10,161 @@ def Teste():
 # fim
 
 class TelaMaior(Frame):
-    def __init__(self, root):
+    def __init__(self):
         self.root = None
 
+    def GetWindow(self):
+        return self.root
 
+    def CloseWindow(self):
+        self.root.destroy()
+        self.root.quit()
+        self.root = None
 
     def FazTela(self):
-        self.root = Toplevel()
-        cor3 = '#E6E6E6'
-        info = 53
 
-        self.container1 = Frame(self.root)
-        self.container2 = Frame(self.root, bg=cor3)
-        self.container3 = Frame(self.root, bg=cor3)
-        self.container4 = Frame(self.root, bg=cor3)
-        self.container1.pack(fill=X)
-        self.container2.pack(side=BOTTOM, fill=X)
-        self.container3.pack(side=BOTTOM, fill=X)
-        self.container4.pack(side=BOTTOM, fill=X)
+        if (self.root != None):
+            self.CloseWindow()
+            self.root = None
+            self.FazTela()
+        else:
+            self.root = Toplevel()
+            cor3 = '#E6E6E6'
+            info = 53
 
-        self.cliente = Label(self.container1, text="Clientes:")
-        self.cliente["font"] = ["bold"]
-        self.cliente.pack(side=LEFT)
-        for espaco in range(info):
-            t = " "
-            Label(self.container1, text=t).pack(side=LEFT)
-        self.dados = Label(self.container1, text="Dados:")
-        self.dados["font"] = ["bold"]
-        self.dados.pack(side=LEFT)
+            self.container1 = Frame(self.root)
+            self.container2 = Frame(self.root, bg=cor3)
+            self.container3 = Frame(self.root, bg=cor3)
+            self.container4 = Frame(self.root, bg=cor3)
+            self.container1.pack(fill=X)
+            self.container2.pack(side=BOTTOM, fill=X)
+            self.container3.pack(side=BOTTOM, fill=X)
+            self.container4.pack(side=BOTTOM, fill=X)
 
-        # espaco com "salvar docx", "excluir" e "pesquisar"
+            self.cliente = Label(self.container1, text="Clientes:")
+            self.cliente["font"] = ["bold"]
+            self.cliente.pack(side=LEFT)
+            for espaco in range(info):
+                t = " "
+                Label(self.container1, text=t).pack(side=LEFT)
+            self.dados = Label(self.container1, text="Dados:")
+            self.dados["font"] = ["bold"]
+            self.dados.pack(side=LEFT)
 
-        self.salto1 = Label(self.container2, text="", bg=cor3)
-        self.salto1.pack(side=LEFT)
+            # espaco com "salvar docx", "excluir" e "pesquisar"
 
-        self.espaco1 = Label(self.container3, text="                                                          ",
-                             bg=cor3)
-        self.espaco1.pack(side=LEFT)
-        self.cadastro = Button(self.container3, text="Cadastrar", command=Teste, bg=cor3)
-        self.cadastro["font"] = ['bold']
-        self.cadastro['padx'] = 1
-        self.cadastro['pady'] = 1
-        self.cadastro.pack(side=LEFT)
-        self.espaco2 = Label(self.container3, text="                    ", bg=cor3)
-        self.espaco2.pack(side=LEFT)
-        self.pesquisar1 = Label(self.container3, text="Pesquisar: ", bg=cor3)
-        self.pesquisar1["font"] = ['bold']
-        self.pesquisar1.pack(side=LEFT)
-        self.pesquisar2 = Entry(self.container3)
-        self.pesquisar2["width"] = 40
-        self.pesquisar2["font"] = ("Arial", "10")
-        self.pesquisar2.pack(side=LEFT)
-        self.espaco3 = Label(self.container3, text=" ", bg=cor3)
-        self.espaco3.pack(side=LEFT)
-        self.ok = Button(self.container3, text="Ok", command=Teste, bg=cor3)
-        self.ok["font"] = ['bold']
-        self.ok['padx'] = 1
-        self.ok['pady'] = 1
-        self.ok.pack(side=LEFT)
-        self.espaco4 = Label(self.container3, text="                    ", bg=cor3)
-        self.espaco4.pack(side=LEFT)
-        self.excluir = Button(self.container3, text="Excluir", command=Teste, bg=cor3)
-        self.excluir["font"] = ['bold']
-        self.excluir['padx'] = 1
-        self.excluir['pady'] = 1
-        self.excluir.pack(side=LEFT)
+            self.salto1 = Label(self.container2, text="", bg=cor3)
+            self.salto1.pack(side=LEFT)
 
-        self.salto2 = Label(self.container4, text="", bg=cor3)
-        self.salto2.pack(side=LEFT)
-        # fim
+            self.espaco1 = Label(self.container3, text="                                                          ",
+                                 bg=cor3)
+            self.espaco1.pack(side=LEFT)
+            self.cadastro = Button(self.container3, text="Cadastrar", command=Teste, bg=cor3)
+            self.cadastro["font"] = ['bold']
+            self.cadastro['padx'] = 1
+            self.cadastro['pady'] = 1
+            self.cadastro.pack(side=LEFT)
+            self.espaco2 = Label(self.container3, text="                    ", bg=cor3)
+            self.espaco2.pack(side=LEFT)
+            self.pesquisar1 = Label(self.container3, text="Pesquisar: ", bg=cor3)
+            self.pesquisar1["font"] = ['bold']
+            self.pesquisar1.pack(side=LEFT)
+            self.pesquisar2 = Entry(self.container3)
+            self.pesquisar2["width"] = 40
+            self.pesquisar2["font"] = ("Arial", "10")
+            self.pesquisar2.pack(side=LEFT)
+            self.espaco3 = Label(self.container3, text=" ", bg=cor3)
+            self.espaco3.pack(side=LEFT)
+            self.ok = Button(self.container3, text="Ok", command=Teste, bg=cor3)
+            self.ok["font"] = ['bold']
+            self.ok['padx'] = 1
+            self.ok['pady'] = 1
+            self.ok.pack(side=LEFT)
+            self.espaco4 = Label(self.container3, text="                    ", bg=cor3)
+            self.espaco4.pack(side=LEFT)
+            self.excluir = Button(self.container3, text="Excluir", command=Teste, bg=cor3)
+            self.excluir["font"] = ['bold']
+            self.excluir['padx'] = 1
+            self.excluir['pady'] = 1
+            self.excluir.pack(side=LEFT)
 
-        # tabela dos itens
-        Frame.__init__(self, self.root)
-        self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
-        self.frame1 = Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
-        self.canvas1.configure(yscrollcommand=self.vsb1.set)
+            self.salto2 = Label(self.container4, text="", bg=cor3)
+            self.salto2.pack(side=LEFT)
+            # fim
 
-        self.canvas1.pack(side="left", fill="both", expand=True)
-        self.vsb1.pack(side="left", fill="y")
-        self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
-                                   tags="self.frame1")
+            # tabela dos itens
+            Frame.__init__(self, self.root)
+            self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
+            self.frame1 = Frame(self.canvas1, background="#f0f0f0")
+            self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
+            self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
-        self.frame1.bind("<Configure>", self.onFrameConfigure1)
+            self.canvas1.pack(side="left", fill="both", expand=True)
+            self.vsb1.pack(side="left", fill="y")
+            self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
+                                       tags="self.frame1")
 
-        self.populate1()
+            self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-        Frame.__init__(self, self.root)
-        self.canvas2 = Canvas(self.root, borderwidth=0, background="#fafafa")
-        self.frame2 = Frame(self.canvas2, background="#fafafa")
+            self.populate1()
 
-        self.canvas2.pack(side="left", fill="both", expand=True)
-        self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
-                                   tags="self.frame2")
+            Frame.__init__(self, self.root)
+            self.canvas2 = Canvas(self.root, borderwidth=0, background="#fafafa")
+            self.frame2 = Frame(self.canvas2, background="#fafafa")
 
-        self.populate2()
+            self.canvas2.pack(side="left", fill="both", expand=True)
+            self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
+                                       tags="self.frame2")
 
-        # menu principal
-        menu = Menu(self.root)
-        self.root.config(menu=menu)
+            self.populate2()
 
-        subMenu1 = Menu(menu)
-        menu.add_cascade(label="Menu", menu=subMenu1)
-        subMenu1.add_command(label="Recarregar", command=Teste)
-        subMenu1.add_separator()
-        subMenu1.add_command(label="Sair", command=self.root.destroy)
+            # menu principal
+            menu = Menu(self.root)
+            self.root.config(menu=menu)
 
-        subMenu2 = Menu(menu)
-        menu.add_cascade(label="Arquivo", menu=subMenu2)
-        subMenu2.add_command(label="Historico de Vendas", command=Teste)
-        subMenu2.add_command(label="Clientes", command=Teste)
-        subMenu2.add_command(label="Produtos", command=Teste)
+            subMenu1 = Menu(menu)
+            menu.add_cascade(label="Menu", menu=subMenu1)
+            subMenu1.add_command(label="Recarregar", command=Teste)
+            subMenu1.add_separator()
+            subMenu1.add_command(label="Sair", command=self.root.destroy)
 
-        subMenu3 = Menu(menu)
-        menu.add_cascade(label="...", menu=subMenu3)
-        # fim
+            subMenu2 = Menu(menu)
+            menu.add_cascade(label="Arquivo", menu=subMenu2)
+            subMenu2.add_command(label="Historico de Vendas", command=Teste)
+            subMenu2.add_command(label="Clientes", command=Teste)
+            subMenu2.add_command(label="Produtos", command=Teste)
 
-        # abas de opcoes
-        cor1 = '#D32F2F'
-        v = "valor"
+            subMenu3 = Menu(menu)
+            menu.add_cascade(label="...", menu=subMenu3)
+            # fim
 
-        toolbar = Frame(self.root, bg=cor1)
+            # abas de opcoes
+            cor1 = '#D32F2F'
+            v = "valor"
 
-        clientes = Label(toolbar, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
-        clientes.pack(side=LEFT, pady=10)
-        valor = Label(toolbar, text=v, bg=cor1, font="bold", fg="white")
-        valor.pack(side=LEFT)
+            toolbar = Frame(self.root, bg=cor1)
 
-        toolbar.pack(side=TOP, fill=X)
-        # fim
+            clientes = Label(toolbar, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
+            clientes.pack(side=LEFT, pady=10)
+            valor = Label(toolbar, text=v, bg=cor1, font="bold", fg="white")
+            valor.pack(side=LEFT)
 
-        # barra de 'status'
-        status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-        status.pack(side=BOTTOM, fill=X)
+            toolbar.pack(side=TOP, fill=X)
+            # fim
 
-        # fim
+            # barra de 'status'
+            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+            status.pack(side=BOTTOM, fill=X)
+
+            # fim
 
 
-        # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-        self.root.title('Programa Guts')
-        self.root.resizable(width=False, height=False)
-        self.root.geometry('1061x581')
-        self.root.mainloop()
+            # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
+            self.root.title('Programa Guts')
+            self.root.resizable(width=False, height=False)
+            self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
+            self.root.geometry('1061x581')
+            self.root.mainloop()
 
     def populate1(self):
         info = 20

@@ -6,6 +6,9 @@ from datetime import datetime
 
 #Classes criadas para caracterizar os erros do programa
 
+
+
+
 class Erro(Exception):
     def __init__(self, expression='null', message='null'):
         self.expression = expression

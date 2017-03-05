@@ -12,8 +12,14 @@ class TelaMaior(Frame):
 
 
 
-    def __init__(self,root):
+    def __init__(self):
         self.root = None
+
+    def CloseWindow(self):
+        self.root.destroy()
+        self.root.quit()
+        self.root = None
+
 
     def FazTela(self):
         #TelaMaior(root).pack(side="top", fill="both", expand=True)
@@ -21,173 +27,178 @@ class TelaMaior(Frame):
 
 
         # fim
+        if (self.root != None):
+            self.CloseWindow()
+            self.root = None
+            self.FazTela()
+        else:
+            self.root = Toplevel()
 
-        self.root = Toplevel()
+            # menu principal
+            menu = Menu(self.root)
+            self.root.config(menu=menu)
 
-        # menu principal
-        menu = Menu(self.root)
-        self.root.config(menu=menu)
+            subMenu1 = Menu(menu)
+            menu.add_cascade(label="Menu", menu=subMenu1)
+            subMenu1.add_command(label="Recarregar", command=Teste)
+            subMenu1.add_separator()
+            subMenu1.add_command(label="Sair", command=self.root.destroy)
 
-        subMenu1 = Menu(menu)
-        menu.add_cascade(label="Menu", menu=subMenu1)
-        subMenu1.add_command(label="Recarregar", command=Teste)
-        subMenu1.add_separator()
-        subMenu1.add_command(label="Sair", command=self.root.destroy)
+            subMenu2 = Menu(menu)
+            menu.add_cascade(label="Arquivo", menu=subMenu2)
+            subMenu2.add_command(label="Historico de Vendas", command=Teste)
+            subMenu2.add_command(label="Clientes", command=Teste)
+            subMenu2.add_command(label="Produtos", command=Teste)
 
-        subMenu2 = Menu(menu)
-        menu.add_cascade(label="Arquivo", menu=subMenu2)
-        subMenu2.add_command(label="Historico de Vendas", command=Teste)
-        subMenu2.add_command(label="Clientes", command=Teste)
-        subMenu2.add_command(label="Produtos", command=Teste)
+            subMenu3 = Menu(menu)
+            menu.add_cascade(label="...", menu=subMenu3)
+            # fim
 
-        subMenu3 = Menu(menu)
-        menu.add_cascade(label="...", menu=subMenu3)
-        # fim
+            # abas de opcoes
+            cor1 = '#D32F2F'
+            q = "quantidades"
+            info = 71
 
-        # abas de opcoes
-        cor1 = '#D32F2F'
-        q = "quantidades"
-        info = 71
+            toolbar = Frame(self.root, bg=cor1)
 
-        toolbar = Frame(self.root, bg=cor1)
+            ordenar = Label(toolbar, text=" Ordenar Por:", bg=cor1, font="bold", fg="white")
+            ordenar.pack(side=LEFT, pady=1)
+            variable = StringVar(toolbar)
+            variable.set("Nome")
+            opcoes = OptionMenu(toolbar, variable, "Nome", "Data  ", "Valor ")
+            opcoes.config(bg=cor1, font="white", fg="white")
+            opcoes["menu"].config(bg=cor1, font="white", fg="white")
+            opcoes.pack(side=LEFT)
+            for espaco in range(info):
+                t = " "
+                Label(toolbar, text=t, bg=cor1).pack(side=LEFT)
+            vendas = Label(toolbar, text="Vendas Realizadas:", bg=cor1, font="bold", fg="white")
+            vendas.pack(side=LEFT, pady=10)
+            quantidade = Label(toolbar, text=q, bg=cor1, font="bold", fg="white")
+            quantidade.pack(side=LEFT)
 
-        ordenar = Label(toolbar, text=" Ordenar Por:", bg=cor1, font="bold", fg="white")
-        ordenar.pack(side=LEFT, pady=1)
-        variable = StringVar(toolbar)
-        variable.set("Nome")
-        opcoes = OptionMenu(toolbar, variable, "Nome", "Data  ", "Valor ")
-        opcoes.config(bg=cor1, font="white", fg="white")
-        opcoes["menu"].config(bg=cor1, font="white", fg="white")
-        opcoes.pack(side=LEFT)
-        for espaco in range(info):
-            t = " "
-            Label(toolbar, text=t, bg=cor1).pack(side=LEFT)
-        vendas = Label(toolbar, text="Vendas Realizadas:", bg=cor1, font="bold", fg="white")
-        vendas.pack(side=LEFT, pady=10)
-        quantidade = Label(toolbar, text=q, bg=cor1, font="bold", fg="white")
-        quantidade.pack(side=LEFT)
+            toolbar.pack(side=TOP, fill=X)
+            # fim
 
-        toolbar.pack(side=TOP, fill=X)
-        # fim
-
-        # barra de 'status'
-        status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-        status.pack(side=BOTTOM, fill=X)
-        # fim
+            # barra de 'status'
+            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+            status.pack(side=BOTTOM, fill=X)
+            # fim
 
 
-        cor3='#E6E6E6'
+            cor3='#E6E6E6'
 
-        self.container1 = Frame(self.root)
-        self.container2 = Frame(self.root, bg=cor3)
-        self.container3 = Frame(self.root, bg=cor3)
-        self.container4 = Frame(self.root, bg=cor3)
-        self.container1.pack(fill=X)
-        self.container2.pack(side=BOTTOM, fill=X)
-        self.container3.pack(side=BOTTOM, fill=X)
-        self.container4.pack(side=BOTTOM, fill=X)
+            self.container1 = Frame(self.root)
+            self.container2 = Frame(self.root, bg=cor3)
+            self.container3 = Frame(self.root, bg=cor3)
+            self.container4 = Frame(self.root, bg=cor3)
+            self.container1.pack(fill=X)
+            self.container2.pack(side=BOTTOM, fill=X)
+            self.container3.pack(side=BOTTOM, fill=X)
+            self.container4.pack(side=BOTTOM, fill=X)
 
-        # "cabecalho" da tabela dos itens
+            # "cabecalho" da tabela dos itens
 
-        self.nome = Label(self.container1, text=" Nome:")
-        self.nome["font"] = ["bold"]
-        self.nome.pack(side=LEFT)
-        self.pulo1 = Label(self.container1, text="                                                 ")
-        self.pulo1["font"] = ["bold"]
-        self.pulo1.pack(side=LEFT)
-        self.data = Label(self.container1, text="Data:")
-        self.data["font"] = ["bold"]
-        self.data.pack(side=LEFT)
-        self.pulo2 = Label(self.container1, text="                  ")
-        self.pulo2["font"] = ["bold"]
-        self.pulo2.pack(side=LEFT)
-        self.valor = Label(self.container1, text="Valor:")
-        self.valor["font"] = ["bold"]
-        self.valor.pack(side=LEFT)
-        self.pulo3 = Label(self.container1, text="                                ")
-        self.pulo3.pack(side=LEFT)
-        self.dados = Label(self.container1, text="Dados Gerais:")
-        self.dados["font"] = ["bold"]
-        self.dados.pack(side=LEFT)
-        # fim
+            self.nome = Label(self.container1, text=" Nome:")
+            self.nome["font"] = ["bold"]
+            self.nome.pack(side=LEFT)
+            self.pulo1 = Label(self.container1, text="                                                 ")
+            self.pulo1["font"] = ["bold"]
+            self.pulo1.pack(side=LEFT)
+            self.data = Label(self.container1, text="Data:")
+            self.data["font"] = ["bold"]
+            self.data.pack(side=LEFT)
+            self.pulo2 = Label(self.container1, text="                  ")
+            self.pulo2["font"] = ["bold"]
+            self.pulo2.pack(side=LEFT)
+            self.valor = Label(self.container1, text="Valor:")
+            self.valor["font"] = ["bold"]
+            self.valor.pack(side=LEFT)
+            self.pulo3 = Label(self.container1, text="                                ")
+            self.pulo3.pack(side=LEFT)
+            self.dados = Label(self.container1, text="Dados Gerais:")
+            self.dados["font"] = ["bold"]
+            self.dados.pack(side=LEFT)
+            # fim
 
-# espaco com "salvar docx", "excluir" e "pesquisar"
+    # espaco com "salvar docx", "excluir" e "pesquisar"
 
-        t = "VALOR"
+            t = "VALOR"
 
-        self.salto1 = Label(self.container2, text="", bg=cor3)
-        self.salto1.pack(side=LEFT)
+            self.salto1 = Label(self.container2, text="", bg=cor3)
+            self.salto1.pack(side=LEFT)
 
-        self.espaco1 = Label(self.container3, text="                                                                          ", bg=cor3)
-        self.espaco1.pack(side=LEFT)
-        self.pesquisar1 = Label(self.container3, text="Pesquisar: ", bg=cor3)
-        self.pesquisar1["font"] = ['bold']
-        self.pesquisar1.pack(side=LEFT)
-        self.pesquisar2 = Entry(self.container3)
-        self.pesquisar2["width"] = 25
-        self.pesquisar2["font"] = ("Arial", "10")
-        self.pesquisar2.pack(side=LEFT)
-        self.espaco2 = Label(self.container3, text=" ", bg=cor3)
-        self.espaco2.pack(side=LEFT)
-        self.ok = Button(self.container3, text="Ok", command=Teste, bg=cor3)
-        self.ok["font"] = ['bold']
-        self.ok['padx'] = 1
-        self.ok['pady'] = 1
-        self.ok.pack(side=LEFT)
-        self.espaco3 = Label(self.container3, text="                    ", bg=cor3)
-        self.espaco3.pack(side=LEFT)
-        self.salvar = Button(self.container3, text="Salvar Docx", command=Teste, bg=cor3)
-        self.salvar["font"] = ['bold']
-        self.salvar['padx'] = 1
-        self.salvar['pady'] = 1
-        self.salvar.pack(side=LEFT)
-        self.espaco4 = Label(self.container3, text="                    ", bg=cor3)
-        self.espaco4.pack(side=LEFT)
-        self.excluir = Button(self.container3, text="Excluir", command=Teste, bg=cor3)
-        self.excluir["font"] = ['bold']
-        self.excluir['padx'] = 1
-        self.excluir['pady'] = 1
-        self.excluir.pack(side=LEFT)
+            self.espaco1 = Label(self.container3, text="                                                                          ", bg=cor3)
+            self.espaco1.pack(side=LEFT)
+            self.pesquisar1 = Label(self.container3, text="Pesquisar: ", bg=cor3)
+            self.pesquisar1["font"] = ['bold']
+            self.pesquisar1.pack(side=LEFT)
+            self.pesquisar2 = Entry(self.container3)
+            self.pesquisar2["width"] = 25
+            self.pesquisar2["font"] = ("Arial", "10")
+            self.pesquisar2.pack(side=LEFT)
+            self.espaco2 = Label(self.container3, text=" ", bg=cor3)
+            self.espaco2.pack(side=LEFT)
+            self.ok = Button(self.container3, text="Ok", command=Teste, bg=cor3)
+            self.ok["font"] = ['bold']
+            self.ok['padx'] = 1
+            self.ok['pady'] = 1
+            self.ok.pack(side=LEFT)
+            self.espaco3 = Label(self.container3, text="                    ", bg=cor3)
+            self.espaco3.pack(side=LEFT)
+            self.salvar = Button(self.container3, text="Salvar Docx", command=Teste, bg=cor3)
+            self.salvar["font"] = ['bold']
+            self.salvar['padx'] = 1
+            self.salvar['pady'] = 1
+            self.salvar.pack(side=LEFT)
+            self.espaco4 = Label(self.container3, text="                    ", bg=cor3)
+            self.espaco4.pack(side=LEFT)
+            self.excluir = Button(self.container3, text="Excluir", command=Teste, bg=cor3)
+            self.excluir["font"] = ['bold']
+            self.excluir['padx'] = 1
+            self.excluir['pady'] = 1
+            self.excluir.pack(side=LEFT)
 
-        self.salto2 = Label(self.container4, text="", bg=cor3)
-        self.salto2.pack(side=LEFT)
-# fim
+            self.salto2 = Label(self.container4, text="", bg=cor3)
+            self.salto2.pack(side=LEFT)
+    # fim
 
-# tabela dos itens
-        Frame.__init__(self, self.root)  # comeco frame dos produtos
-        self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
-        self.frame1 = Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
-        self.canvas1.configure(yscrollcommand=self.vsb1.set)
+    # tabela dos itens
+            Frame.__init__(self, self.root)  # comeco frame dos produtos
+            self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
+            self.frame1 = Frame(self.canvas1, background="#f0f0f0")
+            self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
+            self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
-        self.canvas1.pack(side="left", fill="both", expand=True)
-        self.vsb1.pack(side="left", fill="y")
-        self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
-                                   tags="self.frame1")
+            self.canvas1.pack(side="left", fill="both", expand=True)
+            self.vsb1.pack(side="left", fill="y")
+            self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
+                                       tags="self.frame1")
 
-        self.frame1.bind("<Configure>", self.onFrameConfigure1)
+            self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-        self.populate1()  # fim frame dos produtos
+            self.populate1()  # fim frame dos produtos
 
-        Frame.__init__(self, self.root)  # comeco frame venda
-        self.canvas2 = Canvas(self.root, borderwidth=0, background="#ffffff")
-        self.frame2 = Frame(self.canvas2, background="#f0f0f0")
-        self.vsb2 = Scrollbar(self.root, orient="vertical", command=self.canvas2.yview)
-        self.canvas2.configure(yscrollcommand=self.vsb2.set)
+            Frame.__init__(self, self.root)  # comeco frame venda
+            self.canvas2 = Canvas(self.root, borderwidth=0, background="#ffffff")
+            self.frame2 = Frame(self.canvas2, background="#f0f0f0")
+            self.vsb2 = Scrollbar(self.root, orient="vertical", command=self.canvas2.yview)
+            self.canvas2.configure(yscrollcommand=self.vsb2.set)
 
-        self.canvas2.pack(side="left", fill="both", expand=True)
-        self.vsb2.pack(side="left", fill="y")
-        self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
-                                   tags="self.frame2")
+            self.canvas2.pack(side="left", fill="both", expand=True)
+            self.vsb2.pack(side="left", fill="y")
+            self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
+                                       tags="self.frame2")
 
-        self.frame2.bind("<Configure>", self.onFrameConfigure2)
+            self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
-        self.populate2()  # fim frame venda
+            self.populate2()  # fim frame venda
 
-        self.root.title('Programa Guts')
-        self.root.resizable(width=False, height=False)
-        self.root.geometry('1061x581')
-        self.root.mainloop()
+            self.root.title('Programa Guts')
+            self.root.resizable(width=False, height=False)
+            self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
+            self.root.geometry('1061x581')
+            self.root.mainloop()
 
 
 
