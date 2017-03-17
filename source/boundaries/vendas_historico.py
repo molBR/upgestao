@@ -19,7 +19,7 @@ class TelaMaior(Frame):
         self.root = None
 
 
-    def FazTela(self):
+    def FazTela(self, root):
         #TelaMaior(root).pack(side="top", fill="both", expand=True)
         # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 

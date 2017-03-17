@@ -1,10 +1,11 @@
 # encoding: utf-8
 
-from Tkinter import *
-from database import database as db
-from database import tratamentos as tr
-import cadastro_produto_editar_2 as cpe2
 import tkMessageBox
+from Tkinter import *
+
+import cadastro_produto_editar_2 as cpe2
+from source.entities import tratamentos as tr
+
 
 class TelaMenorEdit1():
 #Construtor

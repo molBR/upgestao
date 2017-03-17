@@ -1,5 +1,4 @@
 from Tkinter import *
-from database import tratamentos as tr
 
 
 # funcao de teste
@@ -21,7 +20,7 @@ class TelaMaior(Frame):
         self.root.quit()
         self.root = None
 
-    def FazTela(self):
+    def FazTela(self, root):
 
         if (self.root != None):
             self.CloseWindow()

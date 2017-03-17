@@ -1,9 +1,10 @@
 # encoding: utf-8
 
-from Tkinter import *
-from database import database as db
-from database import tratamentos as tr
 import tkMessageBox
+from Tkinter import *
+
+from source.entities import tratamentos as tr
+
 
 class TelaMenorDel():
 #Construtor

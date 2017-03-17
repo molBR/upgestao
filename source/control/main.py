@@ -1,11 +1,15 @@
 # encoding: utf-8
 
-import Tkinter as Tkin
-from menu_inicial import Menu
-from database import database as db
-#import cadastro_produto_menor as cpm
-from cadastro_produto_maior import TelaMaior
-#import tkMessageBox
+from Tkinter import *
+
+from source.entities import database as db
+from source.control import control as ctrl
+
+from source.boundaries import cadastro_produto_maior as cadProdMaior
+from source.boundaries import cadastro_clientes_maior as cadClientMaior
+from source.boundaries import venda_produtos as vendProd
+from source.boundaries import vendas_historico as vendHist
+from source.boundaries import menu_inicial as menuInicial
 
 def raw_backup():
     # Funcionalidade de backup
@@ -14,6 +18,7 @@ def raw_backup():
     # bd.importSQL()
     bd.close()
 
+"""                                                     Não está sendo usado no momento
 #Classe de controle criada para fazer a comunicação entre as telas
 class Control(Tkin.Tk):
     def __init__(self):
@@ -84,26 +89,24 @@ class PageTwo(Tkin.Frame):
         button = Tkin.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
         button.pack()
+"""
 
 def main():
     print 'Gut\'s is running.'
+    root = Tk()
+                #Instância das classes que existirão durante execução
+    #ctrl.Control.start(Control)
+    objMenuInic = menuInicial.Menu()
+    objControl = ctrl.Control()
+    #objCadProdMaiorproduto = cadProdMaior.TelaMaior()
+    #objcadClientMaior = cadClientMaior.TelaMaior()
+    #objVendProd = vendProd.TelaMaior()
+    #objVendHist = vendHist.TelaMaior()
 
-### Tela do menu inicial
-    #root = Tkin.tk()
-    app = Control()         #Magia ta rolando aqui
+    objControl.start(root)
+    objMenuInic.FazTela(root)
 
-### Tela de cadastro de produto
-    # detalhes que o luquinha majna
-#    TelaMaior(root).pack(side="top", fill="both", expand=True)
-
-    # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-#    root.title('Programa Guts')
-#    root.resizable(width=False, height=True)
-#    root.geometry('1061x581')
-    # root.attributes("-fullscreen", True)
-#    root.mainloop()
-    # fim
-###
+    root.mainloop()
 
     raw_backup()    #Call da função que realiza backup no fim da execução do programa
 #fim
