@@ -1,20 +1,14 @@
 # encoding: utf-8
 
 from Tkinter import *
+
 import cadastro_produto_maior as cpm
 import cadastro_clientes_maior as ccm
 import venda_produtos as vp
 import vendas_historico as vh
-from database import tratamentos as tr
-
-
-
 
 
 class Menu():
-
-
-
 
     def __init__(self, root):
 
@@ -50,7 +44,6 @@ class Menu():
 
         salto4 = Label (frame1, text="", bg=cor1)
         salto4.grid(row=5, column=0)
-
         # fim
 
         # comeco botoes
@@ -133,12 +126,6 @@ class Menu():
 
     def ChamaTela(self, tela):
         tela.FazTela()
-
-
-
-
-
-
 
 root = Tk()
 a = Menu(root)

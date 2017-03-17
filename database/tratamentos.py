@@ -1,13 +1,11 @@
 # encoding: utf-8
 
-import database as db
-import produto as pr
 from datetime import datetime
 
-#Classes criadas para caracterizar os erros do programa
+import produto as pr
 
 
-
+#Classes criadas para caracterizar os erros do programa - Não utilizadas no momento
 
 class Erro(Exception):
     def __init__(self, expression='null', message='null'):

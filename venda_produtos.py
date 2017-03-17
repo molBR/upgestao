@@ -64,6 +64,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=SUNKEN, background=self.cor2)
+
     def __init__(self):
         self.setRootNull()
 

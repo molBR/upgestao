@@ -10,8 +10,6 @@ def Teste(self):
 
 class TelaMaior(Frame):
 
-
-
     def __init__(self):
         self.root = None
 

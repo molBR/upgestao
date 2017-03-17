@@ -335,7 +335,7 @@ class Database(object):
                      + '(\'' + dadosProdVend[i][1] + '\'), (\'' + str(dadosProdVend[i][2]) + '\'), (' \
                      + str(dadosProdVend[i][3]) + '), (\'' + dadosProdVend[i][4] + '\'));' + '\n'
 
-        # Escrita da string criada no arquivo
+        # Escrita da string criada "buffer" no arquivo
         file = open(fileName, 'w')
         file.write(buffer)
         file.close()
