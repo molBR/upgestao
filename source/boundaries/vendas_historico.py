@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 from Tkinter import *
-
-
+from source.control import control as ctrl
 
 # funcao de teste
 def Teste(self):
@@ -13,43 +12,15 @@ class TelaMaior(Frame):
     def __init__(self):
         self.root = None
 
-    def CloseWindow(self):
-        self.root.destroy()
-        self.root.quit()
-        self.root = None
-
-
     def FazTela(self, root):
-        #TelaMaior(root).pack(side="top", fill="both", expand=True)
-        # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-
-
-        # fim
-        if (self.root != None):
-            self.CloseWindow()
-            self.root = None
-            self.FazTela()
-        else:
             self.root = Toplevel()
+            ctrl.Control.start(self.root)
 
-            # menu principal
-            menu = Menu(self.root)
-            self.root.config(menu=menu)
+            self.root.title('Guts\' Orçamento - Histórico de Vendas')
 
-            subMenu1 = Menu(menu)
-            menu.add_cascade(label="Menu", menu=subMenu1)
-            subMenu1.add_command(label="Recarregar", command=Teste)
-            subMenu1.add_separator()
-            subMenu1.add_command(label="Sair", command=self.root.destroy)
-
-            subMenu2 = Menu(menu)
-            menu.add_cascade(label="Arquivo", menu=subMenu2)
-            subMenu2.add_command(label="Historico de Vendas", command=Teste)
-            subMenu2.add_command(label="Clientes", command=Teste)
-            subMenu2.add_command(label="Produtos", command=Teste)
-
-            subMenu3 = Menu(menu)
-            menu.add_cascade(label="...", menu=subMenu3)
+            # barra de 'status'
+            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+            status.pack(side=BOTTOM, fill=X)
             # fim
 
             # abas de opcoes
@@ -76,11 +47,6 @@ class TelaMaior(Frame):
             quantidade.pack(side=LEFT)
 
             toolbar.pack(side=TOP, fill=X)
-            # fim
-
-            # barra de 'status'
-            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-            status.pack(side=BOTTOM, fill=X)
             # fim
 
 
@@ -191,14 +157,6 @@ class TelaMaior(Frame):
             self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
             self.populate2()  # fim frame venda
-
-            self.root.title('Programa Guts')
-            self.root.resizable(width=False, height=False)
-            self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
-            self.root.geometry('1061x581')
-            self.root.mainloop()
-
-
 
 
     def populate1(self):  # comeco produtos

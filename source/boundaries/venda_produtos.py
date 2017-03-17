@@ -2,6 +2,7 @@
 
 from Tkinter import *
 
+from source.control import control as ctrl
 
 # funcao de teste
 def Teste():
@@ -9,9 +10,7 @@ def Teste():
 # fim
 
 #funcao de destaque das abas
-
 #fim
-
 
 # menu principal
 class TelaMaior(Frame):
@@ -67,7 +66,16 @@ class TelaMaior(Frame):
 
 
     def FazTela(self, root):
-        self.root = root
+        self.root = Toplevel()
+        ctrl.Control.start(self.root)
+
+        self.root.title('Guts\' Orçamento - Nova Venda')
+
+    # barra de 'status'
+        status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status.pack(side=BOTTOM, fill=X)
+    # fim
+
     # abas de opcoes
         self.cor1 = '#D32F2F'
         cor2 = '#E94545'
@@ -101,11 +109,6 @@ class TelaMaior(Frame):
 
         toolbar.pack(side=TOP, fill=X)
     # fim
-
-    # barra de 'status'
-    #    status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-    #    status.pack(side=BOTTOM, fill=X)
-        # fim
 
         self.cor3='#E6E6E6'
 
@@ -240,14 +243,9 @@ class TelaMaior(Frame):
 
         self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
-        """
-        self.populate2() #fim frame venda
-        self.root.title('Programa Guts')
-        self.root.resizable(width=False, height=False)
-        self.root.geometry('1061x581')
-        self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
-        self.root.mainloop()
-        """
+
+
+
     def populate1(self): #comeco produtos
         info = 20
         for row in range(info):
@@ -362,16 +360,8 @@ class TelaMaior(Frame):
                 ent.grid(row=row, column=2)
         #fim venda
 
-    """
-    def CloseWindow(self):
-        self.root.destroy()
-        self.root.quit()
-        self.root = None
-    """
+
     def onFrameConfigure2(self, event): #comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas2.configure(scrollregion=self.canvas2.bbox("all")) #fim scroolbar frame2
 # fim
-
-#Example(root).pack(side="top", fill="both", expand=True)
-#root.iconbitmap(r'C:\Python27\DLLs\icon.ico')

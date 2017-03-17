@@ -8,6 +8,7 @@ import cadastro_produto_editar_1 as cpe
 import cadastro_produto_menor as cpm
 from source.entities import database as db
 from source.entities import tratamentos as tr
+from source.control import control as ctrl
 
 
 class TelaMaior (Tkin.Frame):
@@ -76,42 +77,16 @@ class TelaMaior (Tkin.Frame):
     def __init__(self):
         self.root = None
 
-    def CloseWindow(self):
-        self.root.destroy()
-        self.root.quit()
-        self.root = None
-
     def FazTela(self, root):
-# Nao sei descrever o que e isso, tem que perguntar pro luquinha mito
-        if (self.root != None):
-            self.CloseWindow()
-            self.root = None
-            self.FazTela()
-        else:
             self.root = Tkin.Toplevel()
-            menu = Tkin.Menu(self.root)
-            self.root.config(menu=menu)
+            ctrl.Control.start(self.root)
 
-            ###
-            subMenu1 = Tkin.Menu(menu)
-            menu.add_cascade(label="Menu", menu=subMenu1)
-            subMenu1.add_command(label="Recarregar")
-            subMenu1.add_separator()
-            subMenu1.add_command(label="Sair", command=self.root.destroy)
-
-            subMenu2 = Tkin.Menu(menu)
-            menu.add_cascade(label="Arquivo", menu=subMenu2)
-            subMenu2.add_command(label="Historico de Vendas")
-            subMenu2.add_command(label="Clientes")
-            subMenu2.add_command(label="Produtos")
-
-            subMenu3 = Tkin.Menu(menu)
-            menu.add_cascade(label="...", menu=subMenu3)
-            # fim
+            self.root.title('Guts\' Orçamento - Cadastro de Produtos')
 
             # barra de 'status'
             status = Tkin.Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
             status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
+            #
 
             self.bd = db.Database(0)  # banco de dados
             self.tm = cpm.TelaMenor()  # inserir
@@ -232,11 +207,6 @@ class TelaMaior (Tkin.Frame):
             self.canvas = None
             # tabela dos itens
             self.todos_apertado()
-            self.root.title('Programa Guts')
-            self.root.resizable(width=False, height=False)
-            self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
-            self.root.geometry('1061x581')
-            self.root.mainloop()
 
 
 

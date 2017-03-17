@@ -1,6 +1,8 @@
+# encoding: utf-8
+
 from Tkinter import *
 
-root=Tk()
+root = Toplevel()
 
 cor = '#D32F2F'
 info = 25

@@ -11,8 +11,9 @@ from source.boundaries import venda_produtos as vendProd
 from source.boundaries import vendas_historico as vendHist
 from source.boundaries import menu_inicial as menuInicial
 
+
+# Funcionalidade de backup
 def raw_backup():
-    # Funcionalidade de backup
     bd = db.Database(0)
     bd.exportSQL()
     # bd.importSQL()
@@ -107,6 +108,9 @@ def main():
     objMenuInic.FazTela(root)
 
     root.mainloop()
+
+                        #Depois que o loop for terminado pelo usuário é que termina a
+    root.quit()         #execução do tinker por .quit()
 
     raw_backup()    #Call da função que realiza backup no fim da execução do programa
 #fim

@@ -1,10 +1,13 @@
+# encoding: utf-8
+
 from Tkinter import *
+
+from source.control import control as ctrl
 
 
 # funcao de teste
 def Teste():
     print("Testado")
-
 
 # fim
 
@@ -21,13 +24,16 @@ class TelaMaior(Frame):
         self.root = None
 
     def FazTela(self, root):
-
-        if (self.root != None):
-            self.CloseWindow()
-            self.root = None
-            self.FazTela()
-        else:
             self.root = Toplevel()
+            ctrl.Control.start(self.root)
+
+            self.root.title('Guts\' Orçamento - Cadastro de Clientes')
+
+            # barra de 'status'
+            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+            status.pack(side=BOTTOM, fill=X)
+            # fim
+
             cor3 = '#E6E6E6'
             info = 53
 
@@ -117,26 +123,6 @@ class TelaMaior(Frame):
 
             self.populate2()
 
-            # menu principal
-            menu = Menu(self.root)
-            self.root.config(menu=menu)
-
-            subMenu1 = Menu(menu)
-            menu.add_cascade(label="Menu", menu=subMenu1)
-            subMenu1.add_command(label="Recarregar", command=Teste)
-            subMenu1.add_separator()
-            subMenu1.add_command(label="Sair", command=self.root.destroy)
-
-            subMenu2 = Menu(menu)
-            menu.add_cascade(label="Arquivo", menu=subMenu2)
-            subMenu2.add_command(label="Historico de Vendas", command=Teste)
-            subMenu2.add_command(label="Clientes", command=Teste)
-            subMenu2.add_command(label="Produtos", command=Teste)
-
-            subMenu3 = Menu(menu)
-            menu.add_cascade(label="...", menu=subMenu3)
-            # fim
-
             # abas de opcoes
             cor1 = '#D32F2F'
             v = "valor"
@@ -151,19 +137,6 @@ class TelaMaior(Frame):
             toolbar.pack(side=TOP, fill=X)
             # fim
 
-            # barra de 'status'
-            status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
-            status.pack(side=BOTTOM, fill=X)
-
-            # fim
-
-
-            # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-            self.root.title('Programa Guts')
-            self.root.resizable(width=False, height=False)
-            self.root.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
-            self.root.geometry('1061x581')
-            self.root.mainloop()
 
     def populate1(self):
         info = 20

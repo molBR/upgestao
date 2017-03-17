@@ -23,12 +23,10 @@ class Menu(Frame):
         hist = vendHist.TelaMaior()
 
 
-        # root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-        root.title('Gut\'s Orçamento - Menu Principal')
-        root.resizable(width=False, height=False)
-        root.geometry('1061x581')
-        root.protocol("WM_DELETE_WINDOW", lambda: ctrl.Control.CloseWindow(root))
-        ###
+        # barra de 'status'
+        status = Label(root, text="Estado: Executando", bg="white", bd=1, relief=SUNKEN, anchor=W)
+        status.grid(row=1, column=0, sticky=S + W + E, columnspan=2)
+        # fim
 
         cor1 = '#ffffff'
         cor2 = '#d32f2f'
