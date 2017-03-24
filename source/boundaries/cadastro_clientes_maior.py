@@ -12,19 +12,11 @@ def Teste():
 # fim
 
 class TelaMaior(Frame):
-    def __init__(self):
-        self.root = None
-
-    def GetWindow(self):
-        return self.root
-
-    def CloseWindow(self):
-        self.root.destroy()
-        self.root.quit()
-        self.root = None
 
     def FazTela(self, root):
-            self.root = Toplevel()
+            self.root = root
+            for widget in self.root.winfo_children():
+                widget.destroy()
             ctrl.Control.start(self.root)
 
             self.root.title('Guts\' Orçamento - Cadastro de Clientes')

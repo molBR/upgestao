@@ -13,7 +13,9 @@ class TelaMaior(Frame):
         self.root = None
 
     def FazTela(self, root):
-            self.root = Toplevel()
+            self.root = root
+            for widget in self.root.winfo_children():
+                widget.destroy()
             ctrl.Control.start(self.root)
 
             self.root.title('Guts\' Orçamento - Histórico de Vendas')

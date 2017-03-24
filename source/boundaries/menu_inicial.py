@@ -22,6 +22,7 @@ class Menu(Frame):
         vendas = vendProd.TelaMaior()
         hist = vendHist.TelaMaior()
 
+        ctrl.Control.start(root)
 
         # barra de 'status'
         status = Label(root, text="Estado: Executando", bg="white", bd=1, relief=SUNKEN, anchor=W)
@@ -80,7 +81,7 @@ class Menu(Frame):
         salto7.grid(row=6, column=0)
 
         venda = Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2,
-                       command=lambda: ctrl.Control.ChamaTela(vendas, root))
+                       command=lambda : ctrl.Control.ChamaTela(vendas, root))
         venda["font"] = ("Arial", "16", "bold")
         venda.grid(row=7, column=1, pady=5)
 

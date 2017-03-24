@@ -104,7 +104,7 @@ def main():
     #objVendProd = vendProd.TelaMaior()
     #objVendHist = vendHist.TelaMaior()
 
-    objControl.start(root)
+    # root = Toplevel()
     objMenuInic.FazTela(root)
 
     root.mainloop()
