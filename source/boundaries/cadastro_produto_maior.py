@@ -70,8 +70,8 @@ class TelaMaior (Tkin.Frame):
     # fim
 
 #Destrutor para fechar o banco de dados
-    def __del__(self):
-        self.bd.close()
+    #def __del__(self):
+        #self.bd.close() //Estava fechando o bd de TelaMaior mesmo que nâo tenha aberto essa janela e por consequencia não tenha aberto bd
 
 #Construtor
     def __init__(self):

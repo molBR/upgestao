@@ -80,8 +80,14 @@ class Database(object):
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             data_insert varchar(100) NOT NULL,
-            data_modif varchar(100) NOT NULL,
-            FOREIGN KEY (id_venda) REFERENCES Venda(id)
+            data_modif varchar(100) NOT NULL
+        );''',
+            '''CREATE TABLE relac_ModeloPacote_Produto (
+            id INTEGER PRIMARY KEY NOT NULL,
+            id_modeloPacote INTEGER PRIMARY KEY NOT NULL,
+            id_produto INTEGER PRIMARY KEY NOT NULL,
+            FOREIGN KEY (id_modelo) REFERENCES ModeloPacote(id),
+            FOREIGN KEY (id_produto) REFERENCES Produto(id)
         );'''
         ]
 
