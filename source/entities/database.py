@@ -76,7 +76,7 @@ class Database(object):
             nome_categoria varchar(500) NOT NULL,
             FOREIGN KEY (id_venda) REFERENCES Venda(id)
         );''',
-            '''CREATE TABLE ModeloPacote (
+            '''CREATE TABLE Modelo_Pacote (
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             data_insert varchar(100) NOT NULL,
@@ -84,9 +84,9 @@ class Database(object):
         );''',
             '''CREATE TABLE relac_ModeloPacote_Produto (
             id INTEGER PRIMARY KEY NOT NULL,
-            id_modeloPacote INTEGER PRIMARY KEY NOT NULL,
-            id_produto INTEGER PRIMARY KEY NOT NULL,
-            FOREIGN KEY (id_modelo) REFERENCES ModeloPacote(id),
+            id_modeloPacote INTEGER NOT NULL,
+            id_produto INTEGER NOT NULL,
+            FOREIGN KEY (id_modeloPacote) REFERENCES Modelo_Pacote(id),
             FOREIGN KEY (id_produto) REFERENCES Produto(id)
         );'''
         ]
@@ -116,6 +116,12 @@ class Database(object):
         self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Prod_Vendido';")
         prodVendExistence = self.dbCursor.fetchall()
 
+        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Modelo_Pacote';")
+        modelPacExistence = self.dbCursor.fetchall()
+
+        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='relac_ModeloPacote_Produto';")
+        relModelPacProdExistence = self.dbCursor.fetchall()
+
         if(not categoriaExistence):
             self.dbCursor.execute(self.tables[0])
         if(not produtoExistence):
@@ -132,6 +138,10 @@ class Database(object):
             self.dbCursor.execute(self.tables[6])
         if(not prodVendExistence):
             self.dbCursor.execute(self.tables[7])
+        if (not modelPacExistence):
+            self.dbCursor.execute(self.tables[8])
+        if (not relModelPacProdExistence):
+            self.dbCursor.execute(self.tables[9])
 
 #Seleciona todas as categorias
     def selectCategoria(self):
@@ -178,6 +188,12 @@ class Database(object):
 #Seleciona todos os produtos vendidos
     def selectProdVendido(self):
         self.dbCursor.execute('SELECT * FROM Prod_Vendido ORDER BY id')
+        aux = self.dbCursor.fetchall()
+        return aux
+
+# Seleciona todos os modelos de produtos produtos
+    def selectModelPacot(self):
+        self.dbCursor.execute('SELECT * FROM Modelo_Pacote ORDER BY id')
         aux = self.dbCursor.fetchall()
         return aux
 
@@ -233,14 +249,10 @@ class Database(object):
         self.dbCursor.execute('SELECT * FROM Produto WHERE id = ?', value)
         return self.dbCursor.fetchone()
 
+# Pega o id de todos os produtos
     def selectProdutoIdAll(self, id):
         value = [id]
         self.dbCursor.execute('SELECT * FROM Produto WHERE id = ?', value)
-        return self.dbCursor.fetchall()
-
-#Pega o id de todos os produtos
-    def selectProdutoOnlyId(self):
-        self.dbCursor.execute('SELECT id FROM Produto ORDER BY id')
         return self.dbCursor.fetchall()
 
 #Pega somente o nome de um produto especifico
@@ -343,6 +355,14 @@ class Database(object):
 
         # Insert Prod_Vendido
         dadosProdVend = self.selectProdVendido()
+        sizeProdVend = len(dadosProdVend)
+        for i in range(0, sizeProdVend):
+            buffer = buffer + 'INSERT INTO Venda VALUES ((' + str(dadosProdVend[i][0]) + '), ' \
+                     + '(\'' + dadosProdVend[i][1] + '\'), (\'' + str(dadosProdVend[i][2]) + '\'), (' \
+                     + str(dadosProdVend[i][3]) + '), (\'' + dadosProdVend[i][4] + '\'));' + '\n'
+
+        # Insert Modelo_Pacote
+        dadosProdVend = self.selectModelPacot()
         sizeProdVend = len(dadosProdVend)
         for i in range(0, sizeProdVend):
             buffer = buffer + 'INSERT INTO Venda VALUES ((' + str(dadosProdVend[i][0]) + '), ' \
