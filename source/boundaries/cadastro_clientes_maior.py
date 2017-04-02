@@ -3,16 +3,15 @@
 from Tkinter import *
 
 from source.control import control as ctrl
+import cadastro_clientes_menor as cadClientMenor
 
 
 # funcao de teste
 def Teste():
     print("Testado")
-
 # fim
 
 class TelaMaior(Frame):
-
     def FazTela(self, root):
             self.root = root
             for widget in self.root.winfo_children():
@@ -28,6 +27,10 @@ class TelaMaior(Frame):
 
             cor3 = '#E6E6E6'
             info = 53
+
+            #Criação da classe de tela menor de cadastro de cliente
+            clientMenor = cadClientMenor.clienteCadastro()
+
 
             self.container1 = Frame(self.root)
             self.container2 = Frame(self.root, bg=cor3)
@@ -56,7 +59,7 @@ class TelaMaior(Frame):
             self.espaco1 = Label(self.container3, text="                                                          ",
                                  bg=cor3)
             self.espaco1.pack(side=LEFT)
-            self.cadastro = Button(self.container3, text="Cadastrar", command=Teste, bg=cor3)
+            self.cadastro = Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(root), bg=cor3)
             self.cadastro["font"] = ['bold']
             self.cadastro['padx'] = 1
             self.cadastro['pady'] = 1
@@ -249,7 +252,5 @@ class TelaMaior(Frame):
         var.set(celular)
         celular2.config(textvariable=var, relief='flat')
         celular2.grid(row=17, column=1)
-
-
 # fim
 

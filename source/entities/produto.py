@@ -6,14 +6,14 @@ class Produto(object):
         self.nome = "NULL"
         self.valor_inic = -1.0
         self.data_insert = -1
-        self.foreign_key = -1
+        self.id_categoria = -1
 
-    def __init__(self, id, nome, valor_inic, data_insert, foreign_key):
+    def __init__(self, id, nome, valor_inic, data_insert, id_categoria):
         self.id = id
         self.nome = nome
         self.valor_inic = valor_inic
         self.data_insert = data_insert
-        self.foreign_key = foreign_key
+        self.id_categoria = id_categoria
 
 
     def getId(self):
@@ -28,8 +28,8 @@ class Produto(object):
     def getData_insert(self):
         return self.data_insert
 
-    def getForeign_key(self):
-        return self.foreign_key
+    def getId_categoria(self):
+        return self.id_categoria
 
     def setId(self, id):
         self.id = id
@@ -43,5 +43,5 @@ class Produto(object):
     def setData_insert(self, data_insert):
         self.data_insert = data_insert
 
-    def setForeign_key(self,foreign_key):
-        self.foreign_key = foreign_key
+    def setId_categoria(self, id_categoria):
+        self.id_categoria = id_categoria

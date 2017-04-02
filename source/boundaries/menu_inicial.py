@@ -124,5 +124,3 @@ class Menu(Frame):
         salto17 = Label(frame2, text="", bg=cor1)
         salto17.grid(row=20, column=2)
         # fim botoes
-
-
