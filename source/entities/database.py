@@ -10,7 +10,8 @@ class Database(object):
         if(loc==1):
             self.dbConnect = sqlite3.connect('GutsDados.db')
         else:
-            self.dbConnect = sqlite3.connect('source/GutsDados.db')
+            self.dbConnect = sqlite3.connect('../GutsDados.db')
+            #self.dbConnect = sqlite3.connect('source/GutsDados.db')
         self.dbCursor = self.dbConnect.cursor()
 
         self.tables = [
@@ -65,7 +66,7 @@ class Database(object):
             custo_local varchar(100) NOT NULL,
             custo_diversos varchar(100) NOT NULL,
             subtrair varchar(100) NOT NULL,
-            valor_total varchar(100) NOT NULL
+            valor_total varchar(100) NOT NULL,
             FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
         );''',
             '''CREATE TABLE Prod_Vendido (
