@@ -85,6 +85,46 @@ class TelaMaior (Tkin.Frame):
 
             self.root.title('Guts\' Orçamento - Cadastro de Produtos')
 
+            ###
+            self.toolbar1 = Tkin.Frame(self.root, bg="white")
+
+            self.menu = Tkin.Label(self.toolbar1, text="   MENU ", bg="white")
+            self.menu["font"] = ("Arial", "10")
+            self.menu.pack(side=Tkin.LEFT)
+            self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+            self.espaco1["font"] = ("Arial", "12")
+            self.espaco1.pack(side=Tkin.LEFT)
+            self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT)
+            self.novavenda["font"] = ("Arial", "10")
+            self.novavenda.pack(side=Tkin.LEFT, padx=1, pady=1)
+            self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+            self.espaco2["font"] = ("Arial", "12")
+            self.espaco2.pack(side=Tkin.LEFT)
+            self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT)
+            self.cadastrarcliente["font"] = ("Arial", "10")
+            self.cadastrarcliente.pack(side=Tkin.LEFT, padx=1, pady=1)
+            self.espaco3 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+            self.espaco3["font"] = ("Arial", "12")
+            self.espaco3.pack(side=Tkin.LEFT)
+            self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT)
+            self.historicovenda["font"] = ("Arial", "10")
+            self.historicovenda.pack(side=Tkin.LEFT, padx=1, pady=1)
+            self.espaco4 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+            self.espaco4["font"] = ("Arial", "12")
+            self.espaco4.pack(side=Tkin.LEFT)
+            self.inserirproduto = Tkin.Button(self.toolbar1, text="Inserir Produto", bg="light grey", relief=Tkin.FLAT)
+            self.inserirproduto["font"] = ("Arial", "10")
+            self.inserirproduto.pack(side=Tkin.LEFT, padx=1, pady=1)
+            self.espaco5 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+            self.espaco5["font"] = ("Arial", "12")
+            self.espaco5.pack(side=Tkin.LEFT)
+            self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT)
+            self.inserirtipo["font"] = ("Arial", "10")
+            self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
+
+            self.toolbar1.pack(side=Tkin.TOP, fill=Tkin.X)
+            # fim
+
             # barra de 'status'
             status = Tkin.Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
             status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
@@ -99,34 +139,34 @@ class TelaMaior (Tkin.Frame):
             self.cor2 = '#E94545'
             self.cor3 = '#E6E6E6'
 
-            self.toolbar = Tkin.Frame(self.root, bg=self.cor1)
+            self.toolbar2 = Tkin.Frame(self.root, bg=self.cor1)
 
-            self.todos = Tkin.Button(self.toolbar, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
+            self.todos = Tkin.Button(self.toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
             self.todos['font'] = ('bold')
             self.todos['fg'] = 'white'
             self.todos.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.doces = Tkin.Button(self.toolbar, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
+            self.doces = Tkin.Button(self.toolbar2, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
             self.doces['font'] = ('bold')
             self.doces['fg'] = 'white'
             self.doces.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.salgados = Tkin.Button(self.toolbar, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
+            self.salgados = Tkin.Button(self.toolbar2, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
             self.salgados['font'] = ('bold')
             self.salgados['fg'] = 'white'
             self.salgados.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.massas = Tkin.Button(self.toolbar, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
+            self.massas = Tkin.Button(self.toolbar2, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
             self.massas['font'] = ('bold')
             self.massas['fg'] = 'white'
             self.massas.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.bebidas = Tkin.Button(self.toolbar, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
+            self.bebidas = Tkin.Button(self.toolbar2, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
             self.bebidas['font'] = ('bold')
             self.bebidas['fg'] = 'white'
             self.bebidas.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.outros = Tkin.Button(self.toolbar, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
+            self.outros = Tkin.Button(self.toolbar2, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
             self.outros['font'] = ('bold')
             self.outros['fg'] = 'white'
             self.outros.pack(side=Tkin.LEFT, padx=1, pady=6)
 
-            self.toolbar.pack(side=Tkin.TOP, fill=Tkin.X)
+            self.toolbar2.pack(side=Tkin.TOP, fill=Tkin.X)
 
             self.container1 = Tkin.Frame(self.root)
             self.container2 = Tkin.Frame(self.root, bg=self.cor3)
@@ -284,49 +324,64 @@ class TelaMaior (Tkin.Frame):
 
         for row in range(len(info)):
             if row % 2 == 0:
-                t=info[row][0]
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', font="bold", width=29)
-                var = Tkin.StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                var = Tkin.IntVar()
+                c = Tkin.Checkbutton(self.frame, variable=var, background=cor1)
+                c.grid(row=row, column=0)
             else:
-                t=info[row][0]
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', font="bold", width=29)
-                var = Tkin.StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                var = Tkin.IntVar()
+                c = Tkin.Checkbutton(self.frame, variable=var, background=cor2)
+                c.grid(row=row, column=0)
         for row in range(len(info)):
             if row % 2 == 0:
-                t=info[row][1]
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', font="bold", width=56)
+                t=info[row][0]
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', width=29)
+                ent["font"] = ("Arial", "13")
                 var = Tkin.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
             else:
-                t=info[row][1]
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', font="bold", width=56)
+                t=info[row][0]
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', width=29)
+                ent["font"] = ("Arial", "13")
                 var = Tkin.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
         for row in range(len(info)):
             if row % 2 == 0:
-                t="R$ " + str(info[row][2])
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', font="bold", width=29)
+                t=info[row][1]
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', width=56)
+                ent["font"] = ("Arial", "13")
                 var = Tkin.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
             else:
-                t="R$ " + str(info[row][2])
-                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', font="bold", width=29)
+                t=info[row][1]
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', width=56)
+                ent["font"] = ("Arial", "13")
                 var = Tkin.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
+        for row in range(len(info)):
+            if row % 2 == 0:
+                t="R$ " + str(info[row][2])
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor1, fg='black', width=29)
+                ent["font"] = ("Arial", "13")
+                var = Tkin.StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=3)
+            else:
+                t="R$ " + str(info[row][2])
+                ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', width=29)
+                ent["font"] = ("Arial", "13")
+                var = Tkin.StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=3)
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

@@ -21,6 +21,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=RAISED, background=self.cor1)
 
     def doces_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -29,6 +30,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=RAISED, background=self.cor1)
 
     def salgados_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -37,6 +39,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=RAISED, background=self.cor1)
 
     def massas_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -45,6 +48,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=SUNKEN, background=self.cor2)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=RAISED, background=self.cor1)
 
     def bebidas_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -53,6 +57,7 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=SUNKEN, background=self.cor2)
         self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=RAISED, background=self.cor1)
 
     def outros_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -61,6 +66,16 @@ class TelaMaior(Frame):
         self.massas.config(relief=RAISED, background=self.cor1)
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=SUNKEN, background=self.cor2)
+        self.tipos.config(relief=RAISED, background=self.cor1)
+
+    def tipos_apertado(self):
+        self.todos.config(relief=RAISED, background=self.cor1)
+        self.doces.config(relief=RAISED, background=self.cor1)
+        self.salgados.config(relief=RAISED, background=self.cor1)
+        self.massas.config(relief=RAISED, background=self.cor1)
+        self.bebidas.config(relief=RAISED, background=self.cor1)
+        self.outros.config(relief=RAISED, background=self.cor1)
+        self.tipos.config(relief=SUNKEN, background=self.cor2)
 
     #def __init__(self):
 
@@ -74,6 +89,46 @@ class TelaMaior(Frame):
 
         self.root.title('Guts\' Orçamento - Nova Venda')
 
+        # menu
+        toolbar1 = Frame(self.root, bg="white")
+
+        self.menu = Label(toolbar1, text="   MENU ", bg="white")
+        self.menu["font"] = ("Arial", "10")
+        self.menu.pack(side=LEFT)
+        self.espaco1 = Label(toolbar1, text=" | ", bg="white")
+        self.espaco1["font"] = ("Arial", "12")
+        self.espaco1.pack(side=LEFT)
+        self.novavenda = Button(toolbar1, text="Nova Venda", bg="light grey", relief=FLAT)
+        self.novavenda["font"] = ("Arial", "10")
+        self.novavenda.pack(side=LEFT, padx=1, pady=1)
+        self.espaco2 = Label(toolbar1, text=" | ", bg="white")
+        self.espaco2["font"] = ("Arial", "12")
+        self.espaco2.pack(side=LEFT)
+        self.cadastrarcliente = Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=FLAT)
+        self.cadastrarcliente["font"] = ("Arial", "10")
+        self.cadastrarcliente.pack(side=LEFT, padx=1, pady=1)
+        self.espaco3 = Label(toolbar1, text=" | ", bg="white")
+        self.espaco3["font"] = ("Arial", "12")
+        self.espaco3.pack(side=LEFT)
+        self.historicovenda = Button(toolbar1, text="Historico de Vendas", bg="white", relief=FLAT)
+        self.historicovenda["font"] = ("Arial", "10")
+        self.historicovenda.pack(side=LEFT, padx=1, pady=1)
+        self.espaco4 = Label(toolbar1, text=" | ", bg="white")
+        self.espaco4["font"] = ("Arial", "12")
+        self.espaco4.pack(side=LEFT)
+        self.inserirproduto = Button(toolbar1, text="Inserir Produto", bg="white", relief=FLAT)
+        self.inserirproduto["font"] = ("Arial", "10")
+        self.inserirproduto.pack(side=LEFT, padx=1, pady=1)
+        self.espaco5 = Label(toolbar1, text=" | ", bg="white")
+        self.espaco5["font"] = ("Arial", "12")
+        self.espaco5.pack(side=LEFT)
+        self.inserirtipo = Button(toolbar1, text="Inserir Tipo", bg="white", relief=FLAT)
+        self.inserirtipo["font"] = ("Arial", "10")
+        self.inserirtipo.pack(side=LEFT, padx=1, pady=1)
+
+        toolbar1.pack(side=TOP, fill=X)
+        # fim
+
     # barra de 'status'
         status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
         status.pack(side=BOTTOM, fill=X)
@@ -81,36 +136,40 @@ class TelaMaior(Frame):
 
     # abas de opcoes
         self.cor1 = '#D32F2F'
-        cor2 = '#E94545'
+        self.cor2 = '#E94545'
 
-        toolbar = Frame(self.root, bg=self.cor1)
+        toolbar2 = Frame(self.root, bg=self.cor1)
 
-        self.todos = Button(toolbar, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
-        self.todos['font'] = ('bold')
+        self.todos = Button(toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
+        self.todos["font"] = ("Arial", "12")
         self.todos['fg'] = 'white'
-        self.todos.pack(side=LEFT, padx=1, pady=6)
-        self.doces = Button(toolbar, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
-        self.doces['font'] = ('bold')
+        self.todos.pack(side=LEFT, padx=1, pady=1)
+        self.doces = Button(toolbar2, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
+        self.doces["font"] = ("Arial", "12")
         self.doces['fg'] = 'white'
-        self.doces.pack(side=LEFT, padx=1, pady=6)
-        self.salgados = Button(toolbar, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
-        self.salgados['font'] = ('bold')
+        self.doces.pack(side=LEFT, padx=1, pady=1)
+        self.salgados = Button(toolbar2, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
+        self.salgados["font"] = ("Arial", "12")
         self.salgados['fg'] = 'white'
-        self.salgados.pack(side=LEFT, padx=1, pady=6)
-        self.massas = Button(toolbar, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
-        self.massas['font'] = ('bold')
+        self.salgados.pack(side=LEFT, padx=1, pady=1)
+        self.massas = Button(toolbar2, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
+        self.massas["font"] = ("Arial", "12")
         self.massas['fg'] = 'white'
-        self.massas.pack(side=LEFT, padx=1, pady=6)
-        self.bebidas = Button(toolbar, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
-        self.bebidas['font'] = ('bold')
+        self.massas.pack(side=LEFT, padx=1, pady=1)
+        self.bebidas = Button(toolbar2, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
+        self.bebidas["font"] = ("Arial", "12")
         self.bebidas['fg'] = 'white'
-        self.bebidas.pack(side=LEFT, padx=1, pady=6)
-        self.outros = Button(toolbar, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
-        self.outros['font'] = ('bold')
+        self.bebidas.pack(side=LEFT, padx=1, pady=1)
+        self.outros = Button(toolbar2, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
+        self.outros["font"] = ("Arial", "12")
         self.outros['fg'] = 'white'
-        self.outros.pack(side=LEFT, padx=1, pady=6)
+        self.outros.pack(side=LEFT, padx=1, pady=1)
+        self.tipos = Button(toolbar2, text="   Tipos   ", bg=self.cor1, command=self.tipos_apertado)
+        self.tipos["font"] = ("Arial", "12")
+        self.tipos['fg'] = 'white'
+        self.tipos.pack(side=LEFT, padx=1, pady=1)
 
-        toolbar.pack(side=TOP, fill=X)
+        toolbar2.pack(side=TOP, fill=X)
     # fim
 
         self.cor3='#E6E6E6'
@@ -246,62 +305,78 @@ class TelaMaior(Frame):
 
         self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
-
-
+        self.populate2()  # fim frame dos produtos
 
     def populate1(self): #comeco produtos
         info = 20
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+            else:
+                cor = '#f0f0f0'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+        for row in range(info):
+            if row % 2 == 0:
+                cor = '#ffffff'
                 t="codigo"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
                 t = "codigo"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "nome "
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "R$" "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
+                ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
                 t = "R$"  "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
+                ent.grid(row=row, column=3)
         #fim produtos
 
     def onFrameConfigure1(self, event): #comeco scroolbar frame1
@@ -313,55 +388,72 @@ class TelaMaior(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
+                var = IntVar()
+                c = Checkbutton(self.frame2, variable=var, background=cor)
+                c.grid(row=row, column=0)
+            else:
+                cor = '#f0f0f0'
+                var = IntVar()
+                c = Checkbutton(self.frame2, variable=var, background=cor)
+                c.grid(row=row, column=0)
+        for row in range(info):
+            if row % 2 == 0:
+                cor = '#ffffff'
                 t="codigo"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
                 t = "codigo"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "nome "
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=25)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "quantidade"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
+                ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
                 t = "quantidade"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', font="bold", width=15)
+                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
-        #fim venda
+                ent.grid(row=row, column=3)
+        #fim
 
 
     def onFrameConfigure2(self, event): #comeco scroolbar frame2

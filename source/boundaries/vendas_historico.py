@@ -20,6 +20,46 @@ class TelaMaior(Frame):
 
             self.root.title('Guts\' Orçamento - Histórico de Vendas')
 
+            # menu principal
+            toolbar1 = Frame(self.root, bg="white")
+
+            self.menu = Label(toolbar1, text="   MENU ", bg="white")
+            self.menu["font"] = ("Arial", "10")
+            self.menu.pack(side=LEFT)
+            self.espaco1 = Label(toolbar1, text=" | ", bg="white")
+            self.espaco1["font"] = ("Arial", "12")
+            self.espaco1.pack(side=LEFT)
+            self.novavenda = Button(toolbar1, text="Nova Venda", bg="white", relief=FLAT)
+            self.novavenda["font"] = ("Arial", "10")
+            self.novavenda.pack(side=LEFT, padx=1, pady=1)
+            self.espaco2 = Label(toolbar1, text=" | ", bg="white")
+            self.espaco2["font"] = ("Arial", "12")
+            self.espaco2.pack(side=LEFT)
+            self.cadastrarcliente = Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=FLAT)
+            self.cadastrarcliente["font"] = ("Arial", "10")
+            self.cadastrarcliente.pack(side=LEFT, padx=1, pady=1)
+            self.espaco3 = Label(toolbar1, text=" | ", bg="white")
+            self.espaco3["font"] = ("Arial", "12")
+            self.espaco3.pack(side=LEFT)
+            self.historicovenda = Button(toolbar1, text="Historico de Vendas", bg="light grey", relief=FLAT)
+            self.historicovenda["font"] = ("Arial", "10")
+            self.historicovenda.pack(side=LEFT, padx=1, pady=1)
+            self.espaco4 = Label(toolbar1, text=" | ", bg="white")
+            self.espaco4["font"] = ("Arial", "12")
+            self.espaco4.pack(side=LEFT)
+            self.inserirproduto = Button(toolbar1, text="Inserir Produto", bg="white", relief=FLAT)
+            self.inserirproduto["font"] = ("Arial", "10")
+            self.inserirproduto.pack(side=LEFT, padx=1, pady=1)
+            self.espaco5 = Label(toolbar1, text=" | ", bg="white")
+            self.espaco5["font"] = ("Arial", "12")
+            self.espaco5.pack(side=LEFT)
+            self.inserirtipo = Button(toolbar1, text="Inserir Tipo", bg="white", relief=FLAT)
+            self.inserirtipo["font"] = ("Arial", "10")
+            self.inserirtipo.pack(side=LEFT, padx=1, pady=1)
+
+            toolbar1.pack(side=TOP, fill=X)
+            # fim
+
             # barra de 'status'
             status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
             status.pack(side=BOTTOM, fill=X)
@@ -166,54 +206,71 @@ class TelaMaior(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+            else:
+                cor = '#f0f0f0'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+        for row in range(info):
+            if row % 2 == 0:
+                cor = '#ffffff'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=28)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=28)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=28)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=28)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "data"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=13)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=13)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
                 t = "data"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=13)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=13)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
+                ent.grid(row=row, column=2)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "R$" "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=14)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=14)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
+                ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
                 t = "R$"  "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold", width=14)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=14)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
+                ent.grid(row=row, column=3)
                 # fim produtos
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1

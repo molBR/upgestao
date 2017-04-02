@@ -51,7 +51,7 @@ class Menu(Frame):
 
 
         ###
-        self.photo = PhotoImage(file="../../    menu.gif")
+        self.photo = PhotoImage(file="../../menu.gif")
         #self.photo = PhotoImage(file="menu.gif")
         logo = Label(frame1, image=self.photo, bg=cor1)
         logo.grid(row=4, column=1)
@@ -105,23 +105,24 @@ class Menu(Frame):
         salto10 = Label(frame2, text="", bg=cor1)
         salto10.grid(row=12, column=2)
 
-        inserir = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,
+        inserirproduto = Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,
                          command=lambda: ctrl.Control.ChamaTela(produto, root))
-        inserir["font"] = ("Arial", "16", "bold")
-        inserir.grid(row=13, column=1, pady=5)
+        inserirproduto["font"] = ("Arial", "16", "bold")
+        inserirproduto.grid(row=13, column=1, pady=5)
 
         salto11 = Label(frame2, text="", bg=cor1)
         salto11.grid(row=14, column=0)
+
+        inserirtipo = Button(frame2, text="         Inserir Tipo         ", bg=cor2, fg=cor1, bd=2)
+        inserirtipo["font"] = ("Arial", "16", "bold")
+        inserirtipo.grid(row=15, column=1, pady=5)
+
         salto12 = Label(frame2, text="", bg=cor1)
-        salto12.grid(row=15, column=2)
+        salto12.grid(row=16, column=2)
         salto13 = Label(frame2, text="", bg=cor1)
-        salto13.grid(row=16, column=2)
+        salto13.grid(row=17, column=2)
         salto14 = Label(frame2, text="", bg=cor1)
-        salto14.grid(row=17, column=0)
+        salto14.grid(row=18, column=0)
         salto15 = Label(frame2, text="", bg=cor1)
-        salto15.grid(row=18, column=2)
-        salto16 = Label(frame2, text="", bg=cor1)
-        salto16.grid(row=19, column=2)
-        salto17 = Label(frame2, text="", bg=cor1)
-        salto17.grid(row=20, column=2)
-        # fim botoes
+        salto15.grid(row=19, column=2)
+        # fim

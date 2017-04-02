@@ -20,6 +20,60 @@ class TelaMaior(Frame):
 
             self.root.title('Guts\' Orçamento - Cadastro de Clientes')
 
+            # menu principal
+            toolbar1 = Frame(self.root, bg="white")
+
+            menu = Label(toolbar1, text="   MENU ", bg="white")
+            menu["font"] = ("Arial", "10")
+            menu.pack(side=LEFT)
+            espaco1 = Label(toolbar1, text=" | ", bg="white")
+            espaco1["font"] = ("Arial", "12")
+            espaco1.pack(side=LEFT)
+            novavenda = Button(toolbar1, text="Nova Venda", bg="white", relief=FLAT)
+            novavenda["font"] = ("Arial", "10")
+            novavenda.pack(side=LEFT, padx=1, pady=1)
+            espaco2 = Label(toolbar1, text=" | ", bg="white")
+            espaco2["font"] = ("Arial", "12")
+            espaco2.pack(side=LEFT)
+            cadastrarcliente = Button(toolbar1, text="Cadastrar Cliente", bg="light grey", relief=FLAT)
+            cadastrarcliente["font"] = ("Arial", "10")
+            cadastrarcliente.pack(side=LEFT, padx=1, pady=1)
+            espaco3 = Label(toolbar1, text=" | ", bg="white")
+            espaco3["font"] = ("Arial", "12")
+            espaco3.pack(side=LEFT)
+            historicovenda = Button(toolbar1, text="Historico de Vendas", bg="white", relief=FLAT)
+            historicovenda["font"] = ("Arial", "10")
+            historicovenda.pack(side=LEFT, padx=1, pady=1)
+            espaco4 = Label(toolbar1, text=" | ", bg="white")
+            espaco4["font"] = ("Arial", "12")
+            espaco4.pack(side=LEFT)
+            inserirproduto = Button(toolbar1, text="Inserir Produto", bg="white", relief=FLAT)
+            inserirproduto["font"] = ("Arial", "10")
+            inserirproduto.pack(side=LEFT, padx=1, pady=1)
+            espaco5 = Label(toolbar1, text=" | ", bg="white")
+            espaco5["font"] = ("Arial", "12")
+            espaco5.pack(side=LEFT)
+            inserirtipo = Button(toolbar1, text="Inserir Tipo", bg="white", relief=FLAT)
+            inserirtipo["font"] = ("Arial", "10")
+            inserirtipo.pack(side=LEFT, padx=1, pady=1)
+
+            toolbar1.pack(side=TOP, fill=X)
+            # fim
+
+            # abas de opcoes
+            cor1 = '#D32F2F'
+            v = "valor"
+
+            toolbar2 = Frame(self.root, bg=cor1)
+
+            clientes = Label(toolbar2, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
+            clientes.pack(side=LEFT, pady=10)
+            valor = Label(toolbar2, text=v, bg=cor1, font="bold", fg="white")
+            valor.pack(side=LEFT)
+
+            toolbar2.pack(side=TOP, fill=X)
+            # fim
+
             # barra de 'status'
             status = Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=SUNKEN, anchor=W)
             status.pack(side=BOTTOM, fill=X)
@@ -111,27 +165,17 @@ class TelaMaior(Frame):
             Frame.__init__(self, self.root)
             self.canvas2 = Canvas(self.root, borderwidth=0, background="#fafafa")
             self.frame2 = Frame(self.canvas2, background="#fafafa")
+            self.vsb2 = Scrollbar(self.root, orient="vertical", command=self.canvas2.yview)
+            self.canvas2.configure(yscrollcommand=self.vsb2.set)
 
             self.canvas2.pack(side="left", fill="both", expand=True)
+            self.vsb2.pack(side="left", fill="y")
             self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
                                        tags="self.frame2")
 
+            self.frame2.bind("<Configure>", self.onFrameConfigure2)
+
             self.populate2()
-
-            # abas de opcoes
-            cor1 = '#D32F2F'
-            v = "valor"
-
-            toolbar = Frame(self.root, bg=cor1)
-
-            clientes = Label(toolbar, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
-            clientes.pack(side=LEFT, pady=10)
-            valor = Label(toolbar, text=v, bg=cor1, font="bold", fg="white")
-            valor.pack(side=LEFT)
-
-            toolbar.pack(side=TOP, fill=X)
-            # fim
-
 
     def populate1(self):
         info = 20
@@ -139,22 +183,33 @@ class TelaMaior(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+            else:
+                cor = '#f0f0f0'
+                var = IntVar()
+                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c.grid(row=row, column=0)
+        for row in range(info):
+            if row % 2 == 0:
+                cor = '#ffffff'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold",
-                width=57)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', font="bold",
-                width=57)
+                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
+                ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=0)
+                ent.grid(row=row, column=1)
 
     def onFrameConfigure1(self, event):
         '''Reset the scroll region to encompass the inner frame'''
@@ -252,5 +307,12 @@ class TelaMaior(Frame):
         var.set(celular)
         celular2.config(textvariable=var, relief='flat')
         celular2.grid(row=17, column=1)
+
+        salto7 = Label(self.frame2, text="", bg=cor)
+        salto7.grid(row=18, column=0)
+
+    def onFrameConfigure2(self, event):  # comeco scroolbar frame2
+        '''Reset the scroll region to encompass the inner frame'''
+        self.canvas2.configure(scrollregion=self.canvas2.bbox("all"))  # fim scroolbar frame2
 # fim
 
