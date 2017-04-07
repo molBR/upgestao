@@ -23,7 +23,7 @@ class TelaMaior(Frame):
             # menu principal
             toolbar1 = Frame(self.root, bg="white")
 
-            self.menu = Label(toolbar1, text="   MENU ", bg="white")
+            self.menu = Label(toolbar1, text="   Menu Inicial ", bg="white")
             self.menu["font"] = ("Arial", "10")
             self.menu.pack(side=LEFT)
             self.espaco1 = Label(toolbar1, text=" | ", bg="white")

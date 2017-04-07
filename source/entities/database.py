@@ -202,7 +202,7 @@ class Database(object):
 #Insere o produto recebendo um objeto produto
     def insertProduto(self, prod):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
-                  prod.getData_insert(), prod.getForeign_key()]
+                  prod.getData_insert(), prod.getId_categoria()]
 
         self.dbCursor.execute( 'INSERT INTO Produto VALUES (?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()

@@ -99,7 +99,7 @@ class TelaMenorEdit2():
             salto4.grid(row=9, column=0)
 
             variable = StringVar(info) #comeco opcoes
-            variable.set(self.OPTIONS[int(p1.getForeign_key())])
+            variable.set(self.OPTIONS[int(p1.getId_categoria())])
 
             droplist = apply(OptionMenu, (info, variable) + tuple(self.OPTIONS))
             droplist.grid(row=10, column=1) #fim opcoes

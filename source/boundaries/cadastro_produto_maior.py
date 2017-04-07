@@ -88,7 +88,7 @@ class TelaMaior (Tkin.Frame):
             ###
             self.toolbar1 = Tkin.Frame(self.root, bg="white")
 
-            self.menu = Tkin.Label(self.toolbar1, text="   MENU ", bg="white")
+            self.menu = Tkin.Label(self.toolbar1, text="   Menu Inicial ", bg="white")
             self.menu["font"] = ("Arial", "10")
             self.menu.pack(side=Tkin.LEFT)
             self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
