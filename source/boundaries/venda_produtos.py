@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from Tkinter import *
-
+from source.entities import database as db
 from source.control import control as ctrl
 
 # funcao de teste
@@ -81,6 +81,9 @@ class TelaMaior(Frame):
 
 
     def FazTela(self, root):
+
+        self.bd = db.Database(0)  # banco de dados
+
         self.root = root
         for widget in self.root.winfo_children():
             widget.destroy()
@@ -290,7 +293,9 @@ class TelaMaior(Frame):
 
         self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-        self.populate1() #fim frame dos produtos
+        self.pacote1 = [self.canvas1,self.frame1,self.vsb1,"self.frame1"]
+
+        self.populate1(self.bd.selectProduto()) #fim frame dos produtos
 
         Frame.__init__(self, self.root) #comeco frame venda
         self.canvas2 = Canvas(self.root, borderwidth=0, background="#ffffff")
@@ -305,26 +310,52 @@ class TelaMaior(Frame):
 
         self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
+        self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2"]
+
         self.populate2()  # fim frame dos produtos
 
-    def populate1(self): #comeco produtos
-        info = 20
-        for row in range(info):
+
+    def deleteCanvas(self,pacote):
+        if pacote[0] != None:
+            pacote[0].destroy()
+            pacote[2].destroy()
+            pacote[0] = None
+        return
+
+    #  self.pacote1 = [self.canvas1,self.frame1,self.vsb1]
+    def createCanvas(self,pacote):
+        #Frame.__init__(self, self.root)
+        pacote[0] = Canvas(self.root, borderwidth=0, background="#ffffff")
+        pacote[1] = Frame(pacote[0], background="#f0f0f0")
+        pacote[2] = Scrollbar(self.root, orient="vertical", command=pacote[0].yview)
+        pacote[0].configure(yscrollcommand=pacote[2].set)
+
+        pacote[0].pack(side="left", fill="both", expand=True)
+        pacote[2].pack(side="left", fill="y")
+        pacote[0].create_window((4,4), window=pacote[1], anchor="nw",
+                                  tags=pacote[3])
+        pacote[1].bind("<Configure>", self.onFrameConfigure1)
+
+    def populate1(self,info): #comeco produtos
+        self.deleteCanvas(self.pacote1)
+        self.createCanvas(self.pacote1)
+
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
                 var = IntVar()
-                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c = Checkbutton(self.pacote1[1], variable=var, background=cor)
                 c.grid(row=row, column=0)
             else:
                 cor = '#f0f0f0'
                 var = IntVar()
-                c = Checkbutton(self.frame1, variable=var, background=cor)
+                c = Checkbutton(self.pacote1[1], variable=var, background=cor)
                 c.grid(row=row, column=0)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t="codigo"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                t=info[row][0]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -332,18 +363,18 @@ class TelaMaior(Frame):
                 ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
-                t = "codigo"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                t = info[row][0]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "nome "
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                t = info[row][1]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -351,18 +382,18 @@ class TelaMaior(Frame):
                 ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
-                t = "nome"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                t = info[row][1]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "R$" "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                t = info[row][2]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -370,8 +401,8 @@ class TelaMaior(Frame):
                 ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
-                t = "R$"  "  valor"
-                ent = Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
+                t = info[row][2]
+                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -381,26 +412,29 @@ class TelaMaior(Frame):
 
     def onFrameConfigure1(self, event): #comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
-        self.canvas1.configure(scrollregion=self.canvas1.bbox("all")) #fim scroolbar frame1
+        self.pacote1[0].configure(scrollregion=self.pacote1[0].bbox("all")) #fim scroolbar frame1
 
     def populate2(self): #comeco venda
+
+        self.deleteCanvas(self.pacote2)
+        self.createCanvas(self.pacote2)
         info = 20
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 var = IntVar()
-                c = Checkbutton(self.frame2, variable=var, background=cor)
+                c = Checkbutton(self.pacote2[1], variable=var, background=cor)
                 c.grid(row=row, column=0)
             else:
                 cor = '#f0f0f0'
                 var = IntVar()
-                c = Checkbutton(self.frame2, variable=var, background=cor)
+                c = Checkbutton(self.pacote2[1], variable=var, background=cor)
                 c.grid(row=row, column=0)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t="codigo"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -409,7 +443,7 @@ class TelaMaior(Frame):
             else:
                 cor = '#f0f0f0'
                 t = "codigo"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -419,7 +453,7 @@ class TelaMaior(Frame):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "nome "
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -428,7 +462,7 @@ class TelaMaior(Frame):
             else:
                 cor = '#f0f0f0'
                 t = "nome"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=25)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -438,7 +472,7 @@ class TelaMaior(Frame):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "quantidade"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)
@@ -447,7 +481,7 @@ class TelaMaior(Frame):
             else:
                 cor = '#f0f0f0'
                 t = "quantidade"
-                ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
+                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = StringVar()
                 var.set(t)

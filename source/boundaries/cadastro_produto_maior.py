@@ -262,7 +262,7 @@ class TelaMaior (Tkin.Frame):
 
         self.vsb.pack(side="right", fill="y")
         self.canvas.pack(side="left", fill="both", expand=True)
-        self.canvas.create_window((4, 4), window=self.frame, anchor="nw", tags="self.frame")
+        self.canvas.create_window((4, 4), window=self.frame, anchor="nw", tags="self.frame1")
         self.frame.bind("<Configure>", self.onFrameConfigure)
 #fim
 
