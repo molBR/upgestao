@@ -14,6 +14,11 @@ def Teste():
 
 # menu principal
 class TelaMaior(Frame):
+
+    def __init__(self):
+        self.listaProduto = []
+        self.listaSelec = []
+
     def todos_apertado(self):
         self.todos.config(relief=SUNKEN, background=self.cor2)
         self.doces.config(relief=RAISED, background=self.cor1)
@@ -22,6 +27,10 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        #self.listaProduto = self.bd.selectProduto()
+        self.populate1(self.trataLista(self.bd.selectProduto()))
+        self.populate2(self.listaSelec)
+
 
     def doces_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -31,6 +40,8 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        self.populate1(self.trataLista(self.bd.selectProdutoDoces()))
+        self.populate2(self.listaSelec)
 
     def salgados_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -40,6 +51,8 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        self.populate1(self.trataLista(self.bd.selectProdutoSalgados()))
+        self.populate2(self.listaSelec)
 
     def massas_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -49,6 +62,8 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        self.populate1(self.trataLista(self.bd.selectProdutoMassas()))
+        self.populate2(self.listaSelec)
 
     def bebidas_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -58,6 +73,8 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=SUNKEN, background=self.cor2)
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        self.populate1(self.trataLista(self.bd.selectProdutoBebidas()))
+        self.populate2(self.listaSelec)
 
     def outros_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -67,6 +84,8 @@ class TelaMaior(Frame):
         self.bebidas.config(relief=RAISED, background=self.cor1)
         self.outros.config(relief=SUNKEN, background=self.cor2)
         self.tipos.config(relief=RAISED, background=self.cor1)
+        self.populate1(self.trataLista(self.bd.selectProdutoOutros()))
+        self.populate2(self.listaSelec)
 
     def tipos_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -79,12 +98,26 @@ class TelaMaior(Frame):
 
     #def __init__(self):
 
+#
+    def trataLista(self,commandBD):
+        self.listaProduto = commandBD
+        if(self.listaSelec):
+            print self.listaSelec[0]
+            aux = len(self.listaProduto)-1
+            percorre = 0
+            while(percorre<=aux):
+                for j in range(len(self.listaSelec)):
+                    if(self.listaProduto[percorre] == self.listaSelec[j]):
+                        self.listaProduto.pop(percorre)
+                        aux = aux - 1
+                percorre = percorre + 1
+        return self.listaProduto
+
 
     def FazTela(self, root):
-
         self.bd = db.Database(0)  # banco de dados
-
         self.root = root
+        self.listaProduto = self.bd.selectProduto()
         for widget in self.root.winfo_children():
             widget.destroy()
 
@@ -231,7 +264,7 @@ class TelaMaior(Frame):
 
         self.espaco1 = Label(self.container3, text="               ", bg=self.cor3)
         self.espaco1.pack(side=LEFT)
-        self.selecionar = Button(self.container3, text="Selecionar", command=Teste, bg=self.cor3)
+        self.selecionar = Button(self.container3, text="Selecionar", command=lambda:self.PegaCheck(), bg=self.cor3)
         self.selecionar["font"] = ['bold']
         self.selecionar['padx'] = 1
         self.selecionar['pady'] = 1
@@ -254,7 +287,7 @@ class TelaMaior(Frame):
         self.ok.pack(side=LEFT)
         self.espaco4 = Label(self.container3, text="                     ", bg=self.cor3)
         self.espaco4.pack(side=LEFT)
-        self.remover = Button(self.container3, text="Remover", command=Teste, bg=self.cor3)
+        self.remover = Button(self.container3, text="Remover", command=lambda:self.RemoveCheck(), bg=self.cor3)
         self.remover["font"] = ['bold']
         self.remover['padx'] = 1
         self.remover['pady'] = 1
@@ -281,6 +314,7 @@ class TelaMaior(Frame):
 
     # tabela dos itens
         Frame.__init__(self, self.root) #comeco frame dos produtos
+
         self.canvas1 = Canvas(self.root, borderwidth=0, background="#ffffff")
         self.frame1 = Frame(self.canvas1, background="#f0f0f0")
         self.vsb1 = Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
@@ -293,9 +327,8 @@ class TelaMaior(Frame):
 
         self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-        self.pacote1 = [self.canvas1,self.frame1,self.vsb1,"self.frame1"]
-
-        self.populate1(self.bd.selectProduto()) #fim frame dos produtos
+        self.pacote1 = [self.canvas1,self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
+        self.populate1(self.listaProduto) #fim frame dos produtos
 
         Frame.__init__(self, self.root) #comeco frame venda
         self.canvas2 = Canvas(self.root, borderwidth=0, background="#ffffff")
@@ -310,14 +343,17 @@ class TelaMaior(Frame):
 
         self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
-        self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2"]
 
-        self.populate2()  # fim frame dos produtos
+        self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2",self.onFrameConfigure2]
+        self.todos_apertado()
+        self.populate2(self.listaSelec)  # fim frame dos produtos
+
 
 
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
             pacote[0].destroy()
+            pacote[1].destroy()
             pacote[2].destroy()
             pacote[0] = None
         return
@@ -334,163 +370,183 @@ class TelaMaior(Frame):
         pacote[2].pack(side="left", fill="y")
         pacote[0].create_window((4,4), window=pacote[1], anchor="nw",
                                   tags=pacote[3])
-        pacote[1].bind("<Configure>", self.onFrameConfigure1)
+        pacote[1].bind("<Configure>", pacote[4])
+
+    def PegaCheck(self):
+        for i in range(len(self.listaProduto)):
+            if(self.listaCheckbox[i].get()==1):
+                self.listaSelec.append(self.listaProduto[i])
+        self.todos_apertado()
+        self.populate2(self.listaSelec)
+
+    def RemoveCheck(self):
+        for i in range(len(self.listaSelec)):
+            if(self.listaCheckbox2[i].get()==1):
+                self.listaSelec.pop(i)
+        self.todos_apertado()
+
 
     def populate1(self,info): #comeco produtos
         self.deleteCanvas(self.pacote1)
         self.createCanvas(self.pacote1)
+        self.listaCheckbox = []
+        if(info!=None):
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    var = IntVar()
+                    c = Checkbutton(self.pacote1[1], variable=var, background=cor)
+                    c.grid(row=row, column=0)
+                else:
+                    cor = '#f0f0f0'
+                    var = IntVar()
+                    c = Checkbutton(self.pacote1[1], variable=var, background=cor)
+                    c.grid(row=row, column=0)
+                self.listaCheckbox.append(var)
 
-        for row in range(len(info)):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                var = IntVar()
-                c = Checkbutton(self.pacote1[1], variable=var, background=cor)
-                c.grid(row=row, column=0)
-            else:
-                cor = '#f0f0f0'
-                var = IntVar()
-                c = Checkbutton(self.pacote1[1], variable=var, background=cor)
-                c.grid(row=row, column=0)
-        for row in range(len(info)):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t=info[row][0]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-            else:
-                cor = '#f0f0f0'
-                t = info[row][0]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-        for row in range(len(info)):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = info[row][1]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
-            else:
-                cor = '#f0f0f0'
-                t = info[row][1]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
-        for row in range(len(info)):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = info[row][2]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
-            else:
-                cor = '#f0f0f0'
-                t = info[row][2]
-                ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
-        #fim produtos
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t=info[row][0]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=1)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][0]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=1)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t = info[row][1]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=2)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][1]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=2)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t = info[row][2]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=3)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][2]
+                    ent = Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=3)
+            #fim produtos
 
     def onFrameConfigure1(self, event): #comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
         self.pacote1[0].configure(scrollregion=self.pacote1[0].bbox("all")) #fim scroolbar frame1
 
-    def populate2(self): #comeco venda
-
+    def populate2(self,info): #comeco venda
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
-        info = 20
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                var = IntVar()
-                c = Checkbutton(self.pacote2[1], variable=var, background=cor)
-                c.grid(row=row, column=0)
-            else:
-                cor = '#f0f0f0'
-                var = IntVar()
-                c = Checkbutton(self.pacote2[1], variable=var, background=cor)
-                c.grid(row=row, column=0)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t="codigo"
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-            else:
-                cor = '#f0f0f0'
-                t = "codigo"
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "nome "
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
-            else:
-                cor = '#f0f0f0'
-                t = "nome"
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=2)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "quantidade"
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
-            else:
-                cor = '#f0f0f0'
-                t = "quantidade"
-                ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                ent["font"] = ("Arial", "13")
-                var = StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
+        self.listaCheckbox2 = []
+        if(info!=None):
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    var = IntVar()
+                    c = Checkbutton(self.pacote2[1], variable=var, background=cor)
+                    c.grid(row=row, column=0)
+                else:
+                    cor = '#f0f0f0'
+                    var = IntVar()
+                    c = Checkbutton(self.pacote2[1], variable=var, background=cor)
+                    c.grid(row=row, column=0)
+                self.listaCheckbox2.append(var)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t=info[row][0]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=1)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][0]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=1)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t = info[row][1]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=2)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][1]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=2)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    cor = '#ffffff'
+                    t = info[row][2]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=3)
+                else:
+                    cor = '#f0f0f0'
+                    t = info[row][2]
+                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent["font"] = ("Arial", "13")
+                    var = StringVar()
+                    var.set(t)
+                    ent.config(textvariable=var, relief='flat')
+                    ent.grid(row=row, column=3)
+
+
         #fim
 
 
     def onFrameConfigure2(self, event): #comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
-        self.canvas2.configure(scrollregion=self.canvas2.bbox("all")) #fim scroolbar frame2
+        self.pacote2[0].configure(scrollregion=self.pacote2[0].bbox("all")) #fim scroolbar frame2
 # fim
