@@ -3,6 +3,8 @@
 from Tkinter import *
 from source.entities import database as db
 from source.control import control as ctrl
+from source.entities import tratamentos as tr
+import tkMessageBox
 
 # funcao de teste
 def Teste():
@@ -18,6 +20,7 @@ class TelaMaior(Frame):
     def __init__(self):
         self.listaProduto = []
         self.listaSelec = []
+        self.SomaQuant = []
 
     def todos_apertado(self):
         self.todos.config(relief=SUNKEN, background=self.cor2)
@@ -42,6 +45,7 @@ class TelaMaior(Frame):
         self.tipos.config(relief=RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoDoces()))
         self.populate2(self.listaSelec)
+        print self.SomaQuant
 
     def salgados_apertado(self):
         self.todos.config(relief=RAISED, background=self.cor1)
@@ -102,7 +106,6 @@ class TelaMaior(Frame):
     def trataLista(self,commandBD):
         self.listaProduto = commandBD
         if(self.listaSelec):
-            print self.listaSelec[0]
             aux = len(self.listaProduto)-1
             percorre = 0
             while(percorre<=aux):
@@ -113,6 +116,20 @@ class TelaMaior(Frame):
                 percorre = percorre + 1
         return self.listaProduto
 
+    def pesquisando(self, id):
+        if id == "":
+            self.populate1(self.trataLista(self.bd.selectProduto()))
+            self.populate2(self.listaSelec)
+            return
+        else:
+            try:
+                tr.VerificaDigit(id)
+            except Exception as e:
+                tkMessageBox.showerror("Erro encontrado", e.message)
+            else:
+                #self.todos_apertado()
+                self.populate1(self.trataLista(self.bd.selectProdutoIdAll(id)))
+                self.populate2(self.listaSelec)
 
     def FazTela(self, root):
         self.bd = db.Database(0)  # banco de dados
@@ -280,7 +297,7 @@ class TelaMaior(Frame):
         self.pesquisar2.pack(side=LEFT)
         self.espaco3 = Label(self.container3, text=" ", bg=self.cor3)
         self.espaco3.pack(side=LEFT)
-        self.ok = Button(self.container3, text="Ok", command=Teste, bg=self.cor3)
+        self.ok = Button(self.container3, text="Ok", command=lambda:self.pesquisando(self.pesquisar2.get()), bg=self.cor3)
         self.ok["font"] = ['bold']
         self.ok['padx'] = 1
         self.ok['pady'] = 1
@@ -294,7 +311,7 @@ class TelaMaior(Frame):
         self.remover.pack(side=LEFT)
         self.espaco5 = Label(self.container3, text="                             ", bg=self.cor3)
         self.espaco5.pack(side=LEFT)
-        self.total1 = Label(self.container3, text="Total: ", bg=self.cor3)
+        self.total1 = Label(self.container3, text="Total", bg=self.cor3)
         self.total1["font"] = ['bold']
         self.total1.pack(side=LEFT)
         self.total2 = Label(self.container3, text=t, bg=self.cor3)
@@ -525,22 +542,18 @@ class TelaMaior(Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row][2]
-                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                    ent["font"] = ("Arial", "13")
-                    var = StringVar()
-                    var.set(t)
-                    ent.config(textvariable=var, relief='flat')
-                    ent.grid(row=row, column=3)
+                    var = IntVar()
+                    ent1 = Entry(self.pacote2[1])
+                    ent1.config(textvariable=var, relief='flat')
+                    ent1.grid(row=row, column=3)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row][2]
-                    ent = Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
-                    ent["font"] = ("Arial", "13")
-                    var = StringVar()
-                    var.set(t)
-                    ent.config(textvariable=var, relief='flat')
-                    ent.grid(row=row, column=3)
+                    var = IntVar()
+                    ent1 = Entry(self.pacote2[1])
+                    ent1.config(textvariable=var, relief='flat')
+                    ent1.grid(row=row, column=3)
+
+
 
 
         #fim
