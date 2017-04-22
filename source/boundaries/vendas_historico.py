@@ -19,19 +19,22 @@ class TelaMaior(Frame):
             # menu principal
             toolbar1 = Frame(self.root, bg="white")
 
-            self.menu = Label(toolbar1, text="   Menu Inicial ", bg="white")
+            self.menu = Button(toolbar1, text="   Menu Inicial ", bg="white", relief=FLAT,
+                               command=lambda: control.Application(control, 0))
             self.menu["font"] = ("Arial", "10")
             self.menu.pack(side=LEFT)
             self.espaco1 = Label(toolbar1, text=" | ", bg="white")
             self.espaco1["font"] = ("Arial", "12")
             self.espaco1.pack(side=LEFT)
-            self.novavenda = Button(toolbar1, text="Nova Venda", bg="white", relief=FLAT)
+            self.novavenda = Button(toolbar1, text="Nova Venda", bg="white", relief=FLAT,
+                               command=lambda: control.Application(control, 1))
             self.novavenda["font"] = ("Arial", "10")
             self.novavenda.pack(side=LEFT, padx=1, pady=1)
             self.espaco2 = Label(toolbar1, text=" | ", bg="white")
             self.espaco2["font"] = ("Arial", "12")
             self.espaco2.pack(side=LEFT)
-            self.cadastrarcliente = Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=FLAT)
+            self.cadastrarcliente = Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=FLAT,
+                               command=lambda: control.Application(control, 2))
             self.cadastrarcliente["font"] = ("Arial", "10")
             self.cadastrarcliente.pack(side=LEFT, padx=1, pady=1)
             self.espaco3 = Label(toolbar1, text=" | ", bg="white")
@@ -43,13 +46,15 @@ class TelaMaior(Frame):
             self.espaco4 = Label(toolbar1, text=" | ", bg="white")
             self.espaco4["font"] = ("Arial", "12")
             self.espaco4.pack(side=LEFT)
-            self.inserirproduto = Button(toolbar1, text="Inserir Produto", bg="white", relief=FLAT)
+            self.inserirproduto = Button(toolbar1, text="Inserir Produto", bg="white", relief=FLAT,
+                               command=lambda: control.Application(control, 4))
             self.inserirproduto["font"] = ("Arial", "10")
             self.inserirproduto.pack(side=LEFT, padx=1, pady=1)
             self.espaco5 = Label(toolbar1, text=" | ", bg="white")
             self.espaco5["font"] = ("Arial", "12")
             self.espaco5.pack(side=LEFT)
-            self.inserirtipo = Button(toolbar1, text="Inserir Tipo", bg="white", relief=FLAT)
+            self.inserirtipo = Button(toolbar1, text="Inserir Tipo", bg="white", relief=FLAT,
+                               command=lambda: control.Application(control, 5))
             self.inserirtipo["font"] = ("Arial", "10")
             self.inserirtipo.pack(side=LEFT, padx=1, pady=1)
 

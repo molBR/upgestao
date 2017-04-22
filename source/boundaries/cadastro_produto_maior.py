@@ -86,26 +86,29 @@ class TelaMaior (Tkin.Frame):
 
             ###
             self.toolbar1 = Tkin.Frame(self.root, bg="white")
-
-            self.menu = Tkin.Label(self.toolbar1, text="   Menu Inicial ", bg="white")
+            self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
+                               command=lambda: control.Application(control, 0))
             self.menu["font"] = ("Arial", "10")
             self.menu.pack(side=Tkin.LEFT)
             self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco1["font"] = ("Arial", "12")
             self.espaco1.pack(side=Tkin.LEFT)
-            self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT)
+            self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT,
+                               command=lambda: control.Application(control, 1))
             self.novavenda["font"] = ("Arial", "10")
             self.novavenda.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco2["font"] = ("Arial", "12")
             self.espaco2.pack(side=Tkin.LEFT)
-            self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT)
+            self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT,
+                               command=lambda: control.Application(control, 2))
             self.cadastrarcliente["font"] = ("Arial", "10")
             self.cadastrarcliente.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco3 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco3["font"] = ("Arial", "12")
             self.espaco3.pack(side=Tkin.LEFT)
-            self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT)
+            self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT,
+                               command=lambda: control.Application(control, 3))
             self.historicovenda["font"] = ("Arial", "10")
             self.historicovenda.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco4 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
@@ -117,7 +120,8 @@ class TelaMaior (Tkin.Frame):
             self.espaco5 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco5["font"] = ("Arial", "12")
             self.espaco5.pack(side=Tkin.LEFT)
-            self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT)
+            self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT,
+                               command=lambda: control.Application(control, 5))
             self.inserirtipo["font"] = ("Arial", "10")
             self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
 

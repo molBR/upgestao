@@ -36,7 +36,7 @@ class Control():
 
         if screen == 0:
             self.menuInic.FazTela(self.root, self)
-        elif screen ==  1:
+        elif screen == 1:
             self.vendas.FazTela(self.root, self)
         elif screen == 2:
             self.clientes.FazTela(self.root, self)
@@ -44,6 +44,8 @@ class Control():
             self.hist.FazTela(self.root, self)
         elif screen == 4:
             self.produto.FazTela(self.root, self)
+        elif screen == 5:
+            self.menuInic.FazTela(self.root, self)
 
     @staticmethod
     def start(root):
