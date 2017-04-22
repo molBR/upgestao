@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 from Tkinter import *
-from source.control import control as ctrl
 
 
 class clienteCadastro(Frame):

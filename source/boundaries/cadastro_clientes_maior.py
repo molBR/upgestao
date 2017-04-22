@@ -2,7 +2,6 @@
 
 from Tkinter import *
 
-from source.control import control as ctrl
 import cadastro_clientes_menor as cadClientMenor
 
 
@@ -12,11 +11,11 @@ def Teste():
 # fim
 
 class TelaMaior(Frame):
-    def FazTela(self, root):
+    def FazTela(self, root, control):
             self.root = root
             for widget in self.root.winfo_children():
                 widget.destroy()
-            ctrl.Control.start(self.root)
+            #ctrl.Control.start(self.root)
 
             self.root.title('Guts\' Orçamento - Cadastro de Clientes')
 

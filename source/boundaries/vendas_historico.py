@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 from Tkinter import *
-from source.control import control as ctrl
 
 # funcao de teste
 def Teste(self):
@@ -12,11 +11,8 @@ class TelaMaior(Frame):
     def __init__(self):
         self.root = None
 
-    def FazTela(self, root):
+    def FazTela(self, root, control):
             self.root = root
-            for widget in self.root.winfo_children():
-                widget.destroy()
-            ctrl.Control.start(self.root)
 
             self.root.title('Guts\' Orçamento - Histórico de Vendas')
 

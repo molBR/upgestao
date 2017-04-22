@@ -2,7 +2,6 @@
 
 from Tkinter import *
 from source.entities import database as db
-from source.control import control as ctrl
 
 # funcao de teste
 def Teste():
@@ -80,7 +79,7 @@ class TelaMaior(Frame):
     #def __init__(self):
 
 
-    def FazTela(self, root):
+    def FazTela(self, root, control):
 
         self.bd = db.Database(0)  # banco de dados
 
@@ -88,7 +87,7 @@ class TelaMaior(Frame):
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        ctrl.Control.start(self.root)
+        #ctrl.Control.start(self.root)
 
         self.root.title('Guts\' Orçamento - Nova Venda')
 

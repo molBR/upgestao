@@ -11,7 +11,6 @@ from source.boundaries import venda_produtos as vendProd
 from source.boundaries import vendas_historico as vendHist
 from source.boundaries import menu_inicial as menuInicial
 
-
 # Funcionalidade de backup
 def raw_backup():
     bd = db.Database(0)
@@ -22,11 +21,19 @@ def raw_backup():
 
 def main():
     print 'Gut\'s is running.'
+
     root = Tk()
+    produto = cadProdMaior.TelaMaior()
+    clientes = cadClientMaior.TelaMaior()
+    vendas = vendProd.TelaMaior()
+    hist = vendHist.TelaMaior()
+    menuInic = menuInicial.Menu()
 
-    objMenuInic = menuInicial.Menu()
+    control = ctrl.Control(root, produto, clientes, vendas, hist, menuInic)
+    control.Application(control, 0)
+    #objMenuInic = menuInicial.Menu()
 
-    objMenuInic.FazTela(root)
+    #objMenuInic.FazTela(root)
 
     root.mainloop()
                         #Depois que o loop for terminado pelo usuário é que termina a

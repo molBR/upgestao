@@ -8,7 +8,6 @@ import cadastro_produto_editar_1 as cpe
 import cadastro_produto_menor as cpm
 from source.entities import database as db
 from source.entities import tratamentos as tr
-from source.control import control as ctrl
 
 
 class TelaMaior (Tkin.Frame):
@@ -77,11 +76,11 @@ class TelaMaior (Tkin.Frame):
     def __init__(self):
         self.root = None
 
-    def FazTela(self, root):
+    def FazTela(self, root, control):
             self.root = root
             for widget in self.root.winfo_children():
                 widget.destroy()
-            ctrl.Control.start(self.root)
+            #ctrl.Control.start(self.root)
 
             self.root.title('Guts\' Orçamento - Cadastro de Produtos')
 
