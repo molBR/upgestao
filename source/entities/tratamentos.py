@@ -43,6 +43,40 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
         p1 = pr.Produto(id, nome, valor, agora, tipo)
         return p1
 #fim
+def mergeSort(alist):
+    print("Splitting ",alist)
+    if len(alist)>1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+
+        i=0
+        j=0
+        k=0
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i][0] < righthalf[j][0]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+    return alist
+
+
 
 #Recebe um id, faz a consulta no bd cria um objeto com as info do produto.
 def ObjetivaProduto(id, bd):
