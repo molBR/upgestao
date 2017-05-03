@@ -16,7 +16,7 @@ INSERT INTO Produto VALUES ((19), ('Porfavorzinho'), ('2,10'), ('14:24:17'), (2)
 INSERT INTO Produto VALUES ((20), ('Sa'), ('2,10'), ('14:25:04'), (2));
 INSERT INTO Produto VALUES ((21), ('Vaicarai'), ('2,10'), ('14:29:37'), (2));
 INSERT INTO Produto VALUES ((22), ('Oie'), ('2132,04'), ('14:32:54'), (4));
-INSERT INTO Produto VALUES ((23), ('As'), ('2,10'), ('14:34:27'), (1));
+INSERT INTO Produto VALUES ((23), ('As'), ('3,10'), ('08:32:16'), (1));
 INSERT INTO Produto VALUES ((24), ('Asda'), ('2,10'), ('14:35:13'), (1));
 INSERT INTO Produto VALUES ((25), ('Asda'), ('2,10'), ('14:45:20'), (2));
 INSERT INTO Produto VALUES ((26), ('Asdad'), ('2,30'), ('16:02:49'), (2));

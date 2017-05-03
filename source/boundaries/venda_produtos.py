@@ -6,6 +6,7 @@ from source.entities import database as db
 from source.entities import tratamentos as tr
 import tkMessageBox
 
+
 # funcao de teste
 def Teste():
     print("Testado")
@@ -399,12 +400,20 @@ class TelaMaior(Frame):
             if(self.listaCheckbox[i].get()==1):
                 self.listaSelec.append(self.listaProduto[i])
         self.todos_apertado()
+        self.listaSelec = tr.mergeSort(self.listaSelec)
         self.populate2(self.listaSelec)
 
+
+
     def RemoveCheck(self):
+        print self.listaSelec[0][0]
+        print self.listaCheckbox2
+        aux = 0
         for i in range(len(self.listaSelec)):
             if(self.listaCheckbox2[i].get()==1):
-                self.listaSelec.pop(i)
+                self.listaSelec.pop(i-aux)
+                aux = aux + 1
+        del self.listaCheckbox2
         self.todos_apertado()
 
 

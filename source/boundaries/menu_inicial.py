@@ -40,8 +40,8 @@ class Menu(Frame):
         salto3.grid(row=3, column=2)
 
         ###
-        #self.photo = PhotoImage(file="../../menu.gif")
-        self.photo = PhotoImage(file="menu.gif")
+        self.photo = PhotoImage(file="../../menu.gif")
+        #self.photo = PhotoImage(file="menu.gif")
         logo = Label(frame1, image=self.photo, bg=cor1)
         logo.grid(row=4, column=1)
         ###
