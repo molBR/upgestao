@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-from Tkinter import *
+import Tkinter as tk
 
 from source.entities import database as db
 from source.control import control as ctrl
@@ -22,22 +22,20 @@ def raw_backup():
 def main():
     print 'Gut\'s is running.'
 
-    root = Tk()
-    produto = cadProdMaior.TelaMaior()
-    clientes = cadClientMaior.TelaMaior()
-    vendas = vendProd.TelaMaior()
-    hist = vendHist.TelaMaior()
-    menuInic = menuInicial.Menu()
 
-    control = ctrl.Control(root, produto, clientes, vendas, hist, menuInic)
-    control.Application(control, 0)
+    control = ctrl.Control()
+    control.mainloop()
+
+    #control.Application(control, 0)
+
+    #root.mainloop()
+
+    # Depois que o loop for terminado pelo usuário é que termina a
+    #root.quit()
     #objMenuInic = menuInicial.Menu()
 
     #objMenuInic.FazTela(root)
 
-    root.mainloop()
-                        #Depois que o loop for terminado pelo usuário é que termina a
-    root.quit()         #execução do tinker por .quit()
 
     raw_backup()    #Call da função que realiza backup no fim da execução do programa
 #fim

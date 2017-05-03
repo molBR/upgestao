@@ -10,7 +10,7 @@ from source.entities import database as db
 from source.entities import tratamentos as tr
 
 
-class TelaMaior (Tkin.Frame):
+class CadProd (Tkin.Frame):
 
 #Botoes de selecao das categorias de produtos
     def todos_apertado(self):

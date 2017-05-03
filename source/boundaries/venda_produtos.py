@@ -2,7 +2,6 @@
 
 from Tkinter import *
 from source.entities import database as db
-#from source.control import control as ctrl
 from source.entities import tratamentos as tr
 import tkMessageBox
 
@@ -15,12 +14,13 @@ def Teste():
 #fim
 
 # menu principal
-class TelaMaior(Frame):
+class VendProd(Frame):
 
     def __init__(self):
         self.listaProduto = []
         self.listaSelec = []
         self.SomaQuant = []
+        self.fechaTela = FALSE
 
     def todos_apertado(self):
         self.todos.config(relief=SUNKEN, background=self.cor2)
@@ -100,10 +100,7 @@ class TelaMaior(Frame):
         self.outros.config(relief=RAISED, background=self.cor1)
         self.tipos.config(relief=SUNKEN, background=self.cor2)
 
-    #def __init__(self):
-
-#
-    def trataLista(self,commandBD):
+    def trataLista(self, commandBD):
         self.listaProduto = commandBD
         if(self.listaSelec):
             aux = len(self.listaProduto)-1
@@ -131,14 +128,21 @@ class TelaMaior(Frame):
                 self.populate1(self.trataLista(self.bd.selectProdutoIdAll(id)))
                 self.populate2(self.listaSelec)
 
+    #ISSO TEM QUE SAIR EVENTUALMENTE!!!
+    def mudaTela(self, control, tela):
+        control.screen = tela
+        self.fechaTela = TRUE
+        print "botão executou"
+        return
+
     def FazTela(self, root, control):
+        self.fechaTela = FALSE
         self.bd = db.Database(0)  # banco de dados
         self.root = root
         self.listaProduto = self.bd.selectProduto()
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        #ctrl.Control.start(self.root)
 
         self.root.title('Guts\' Orçamento - Nova Venda')
 
@@ -146,7 +150,7 @@ class TelaMaior(Frame):
         toolbar1 = Frame(self.root, bg="white")
 
         self.menu = Button(toolbar1, text="   Menu Inicial ", bg="white", relief=FLAT,
-                           command=lambda: control.Application(control, 0))
+                           command=lambda: self.mudaTela(control, 0))
         self.menu["font"] = ("Arial", "10")
         self.menu.pack(side=LEFT)
         self.espaco1 = Label(toolbar1, text=" | ", bg="white")
@@ -370,7 +374,8 @@ class TelaMaior(Frame):
         self.todos_apertado()
         self.populate2(self.listaSelec)  # fim frame dos produtos
 
-
+        if(self.fechaTela == TRUE):
+            return
 
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
@@ -557,9 +562,6 @@ class TelaMaior(Frame):
                     ent1 = Entry(self.pacote2[1])
                     ent1.config(textvariable=var, relief='flat')
                     ent1.grid(row=row, column=3)
-
-
-
 
         #fim
 

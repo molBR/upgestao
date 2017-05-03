@@ -6,7 +6,7 @@ from Tkinter import *
 def Teste(self):
     print("Testado")
 
-class TelaMaior(Frame):
+class VendHist(Frame):
 
     def __init__(self):
         self.root = None

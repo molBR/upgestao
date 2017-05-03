@@ -10,7 +10,8 @@ def Teste():
     print("Testado")
 # fim
 
-class TelaMaior(Frame):
+class CadClient(Frame):
+
     def FazTela(self, root, control):
             self.root = root
             for widget in self.root.winfo_children():
