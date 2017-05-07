@@ -16,6 +16,9 @@ class Control(tk.Tk):
 
         self.tela = {}
         container = tk.Frame(self)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
         #self.title('Guts\' Orçamento - Menu Principal')
         self.resizable(width=False, height=False)
@@ -23,16 +26,14 @@ class Control(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", lambda: quit())
 
         #self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
-        #self.tela["cadProdMaior"] = cadProdMaior.CadProd(parent=container, controller=self)
-        #self.tela["cadClientMaior"] = cadClientMaior.CadClient(parent=container, controller=self)
-        #self.tela["vendHist"] = vendHist.VendHist(parent=container, controller=self)
-        self.tela["vendProd"] = vendProd.VendProd(parent=container, controller=self)
-
-        #Não sei ao certo o que é essa configuração de grid
         #self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
+        # self.tela["cadProdMaior"] = cadProdMaior.CadProd(parent=container, controller=self)
         # self.tela["cadProdMaior"].grid(row=0, column=0, sticky="nsew")
+        # self.tela["cadClientMaior"] = cadClientMaior.CadClient(parent=container, controller=self)
         # self.tela["cadClientMaior"].grid(row=0, column=0, sticky="nsew")
-        # self.tela["vendHist"].grid(row=0, column=0, sticky="nsew")
+        #self.tela["vendHist"] = vendHist.VendHist(parent=container, controller=self)
+        #self.tela["vendHist"].grid(row=0, column=0, sticky="nsew")
+        self.tela["vendProd"] = vendProd.VendProd(parent=container, controller=self)
         self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
 
         #self.show_frame("menuInicial")
@@ -40,6 +41,9 @@ class Control(tk.Tk):
 
     #Mostra a tela desejada, que é mandada por parametro
     def show_frame(self, page_name):
+        if(page_name == 'vendProd'):
+            self.title('Gut\'s Orçamento - Nova Venda')
+
         frame = self.tela[page_name]
         frame.tkraise()
 

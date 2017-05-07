@@ -17,7 +17,7 @@ class Menu(tk.Frame):
         #ctrl.Control.start(root)
 
         # barra de 'status'
-        status = tk.Label(self.controller, text="Estado: Executando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        status = tk.Label(self, text="Estado: Executando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
         status.grid(row=1, column=0, sticky=tk.S + tk.W + tk.E, columnspan=2)
         # fim
 
@@ -25,7 +25,7 @@ class Menu(tk.Frame):
         cor2 = '#d32f2f'
 
         # comeco titulo e imagem
-        frame1 = tk.Frame(self.controller, background=cor1)
+        frame1 = tk.Frame(self, background=cor1)
         frame1.grid(row=0, column=0)
 
         salto1 = tk.Label(frame1, text="                ", bg=cor1)
@@ -34,7 +34,7 @@ class Menu(tk.Frame):
         salto2 = tk.Label(frame1, text="", bg=cor1)
         salto2.grid(row=1, column=0)
 
-        titulo = tk.Label(frame1, text="Guts' Orçamento", bg=cor1, fg=cor2)
+        titulo = tk.Label(frame1, text="Gut's Orçamento", bg=cor1, fg=cor2)
         titulo["font"] = ("Arial", "44", "bold")
         titulo.grid(row=2, column=1)
 
@@ -53,7 +53,7 @@ class Menu(tk.Frame):
         # fim
 
         # comeco botoes
-        frame2 = tk.Frame(self.controller, background=cor1)
+        frame2 = tk.Frame(self, background=cor1)
         frame2.grid(row=0, column=1)
 
         salto1 = tk.Label(frame2, text="                       ", bg=cor1)
@@ -117,3 +117,4 @@ class Menu(tk.Frame):
         salto15 = tk.Label(frame2, text="", bg=cor1)
         salto15.grid(row=19, column=2)
         # fim
+

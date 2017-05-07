@@ -135,14 +135,11 @@ class VendProd(tk.Frame):
         self.bd = db.Database(0)  # banco de dados
         self.root = self.controller
         self.listaProduto = self.bd.selectProduto()
-        for widget in self.root.winfo_children():
-            widget.destroy()
-
-
-        self.root.title('Guts\' Orçamento - Nova Venda')
+        #for widget in self.root.winfo_children():
+        #    widget.destroy()
 
         # menu
-        toolbar1 = tk.Frame(self.root, bg="white")
+        toolbar1 = tk.Frame(self, bg="white")
 
         self.menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
                            command=lambda: Teste())
@@ -183,19 +180,21 @@ class VendProd(tk.Frame):
         self.inserirtipo["font"] = ("Arial", "10")
         self.inserirtipo.pack(side=tk.LEFT, padx=1, pady=1)
 
+        #toolbar1.pack(side=tk.TOP, fill=tk.X)
         toolbar1.pack(side=tk.TOP, fill=tk.X)
         # fim
 
     # barra de 'status'
-        status = tk.Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
         status.pack(side=tk.BOTTOM, fill=tk.X)
     # fim
+
 
     # abas de opcoes
         self.cor1 = '#D32F2F'
         self.cor2 = '#E94545'
 
-        toolbar2 = tk.Frame(self.root, bg=self.cor1)
+        toolbar2 = tk.Frame(self, bg=self.cor1)
 
         self.todos = tk.Button(toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
         self.todos["font"] = ("Arial", "12")
@@ -231,11 +230,13 @@ class VendProd(tk.Frame):
 
         self.cor3='#E6E6E6'
 
-        self.container1 = tk.Frame(self.root)
-        self.container2 = tk.Frame(self.root, bg=self.cor3)
-        self.container3 = tk.Frame(self.root, bg=self.cor3)
-        self.container4 = tk.Frame(self.root, bg=self.cor3)
+        self.container1 = tk.Frame(self)
+        self.frameProd = tk.Frame(self)
+        self.container2 = tk.Frame(self, bg=self.cor3)
+        self.container3 = tk.Frame(self, bg=self.cor3)
+        self.container4 = tk.Frame(self, bg=self.cor3)
         self.container1.pack(fill=tk.X)
+        self.frameProd.pack(fill=tk.X)
         self.container2.pack(side=tk.BOTTOM, fill=tk.X)
         self.container3.pack(side=tk.BOTTOM, fill=tk.X)
         self.container4.pack(side=tk.BOTTOM, fill=tk.X)
@@ -276,6 +277,46 @@ class VendProd(tk.Frame):
         self.objeto11.pack(side=tk.LEFT)
     # fim
 
+        # tabela dos itens
+        # comeco frame dos produtos
+        self.canvas1 = tk.Canvas(self, borderwidth=0, background="#ffffff")
+        self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
+        self.vsb1 = tk.Scrollbar(self.container1, orient="vertical", command=self.canvas1.yview)
+        self.canvas1.configure(yscrollcommand=self.vsb1.set)
+
+        self.canvas1.pack(side=tk.LEFT, fill="both", expand=True)
+        self.vsb1.pack(side=tk.LEFT, fill="y")
+        self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
+                                   tags="self.frame1")
+
+        self.frame1.bind("<Configure>", self.onFrameConfigure1)
+
+        self.pacote1 = [self.canvas1, self.frame1, self.vsb1, "self.frame1", self.onFrameConfigure1]
+        self.populate1(self.listaProduto)
+        # fim frame dos produtos
+
+        """
+        # comeco frame venda
+        #tk.Frame.__init__(self, self.root)
+        frameVend = tk.Frame(self)
+        frameVend.pack()
+        self.canvas2 = tk.Canvas(frameVend, borderwidth=0, background="#ffffff")
+        self.frame2 = tk.Frame(self.canvas2, background="#f0f0f0")
+        self.vsb2 = tk.Scrollbar(frameVend, orient="vertical", command=self.canvas2.yview)
+        self.canvas2.configure(yscrollcommand=self.vsb2.set)
+
+        self.canvas2.pack(side="left", fill="both", expand=True)
+        self.vsb2.pack(side="left", fill="y")
+        self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
+                                   tags="self.frame2")
+
+        self.frame2.bind("<Configure>", self.onFrameConfigure2)
+
+        self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2", self.onFrameConfigure2]
+        self.todos_apertado()
+        self.populate2(self.listaSelec)
+        # fim frame dos produtos
+        """
     # espaco com "inserir", "editar", "excluir" e "pesquisar"
 
         t = "VALOR"
@@ -334,11 +375,13 @@ class VendProd(tk.Frame):
     # fim
 
     # tabela dos itens
-        tk.Frame.__init__(self, self.root) #comeco frame dos produtos
-
-        self.canvas1 = tk.Canvas(self.root, borderwidth=0, background="#ffffff")
+        """
+        # comeco frame dos produtos
+        frameProd = tk.Frame(self)
+        frameProd.pack()
+        self.canvas1 = tk.Canvas(frameProd, borderwidth=0, background="#ffffff")
         self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = tk.Scrollbar(self.root, orient="vertical", command=self.canvas1.yview)
+        self.vsb1 = tk.Scrollbar(frameProd, orient="vertical", command=self.canvas1.yview)
         self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
         self.canvas1.pack(side="left", fill="both", expand=True)
@@ -349,7 +392,9 @@ class VendProd(tk.Frame):
         self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
         self.pacote1 = [self.canvas1,self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
-        self.populate1(self.listaProduto) #fim frame dos produtos
+        self.populate1(self.listaProduto)
+        #fim frame dos produtos
+
 
         tk.Frame.__init__(self, self.root) #comeco frame venda
         self.canvas2 = tk.Canvas(self.root, borderwidth=0, background="#ffffff")
@@ -368,10 +413,7 @@ class VendProd(tk.Frame):
         self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2",self.onFrameConfigure2]
         self.todos_apertado()
         self.populate2(self.listaSelec)  # fim frame dos produtos
-
-        if(self.fechaTela == tk.TRUE):
-            return
-
+"""
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
             pacote[0].destroy()
