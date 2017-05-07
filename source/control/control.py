@@ -17,25 +17,26 @@ class Control(tk.Tk):
         self.tela = {}
         container = tk.Frame(self)
 
-        self.title('Guts\' Orçamento - Menu Principal')
+        #self.title('Guts\' Orçamento - Menu Principal')
         self.resizable(width=False, height=False)
         self.geometry('1120x600')
         self.protocol("WM_DELETE_WINDOW", lambda: quit())
 
-        self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
+        #self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
         #self.tela["cadProdMaior"] = cadProdMaior.CadProd(parent=container, controller=self)
         #self.tela["cadClientMaior"] = cadClientMaior.CadClient(parent=container, controller=self)
         #self.tela["vendHist"] = vendHist.VendHist(parent=container, controller=self)
-        #self.tela["vendProd"] = vendProd.VendProd(parent=container, controller=self)
+        self.tela["vendProd"] = vendProd.VendProd(parent=container, controller=self)
 
         #Não sei ao certo o que é essa configuração de grid
-        self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
+        #self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
         # self.tela["cadProdMaior"].grid(row=0, column=0, sticky="nsew")
         # self.tela["cadClientMaior"].grid(row=0, column=0, sticky="nsew")
         # self.tela["vendHist"].grid(row=0, column=0, sticky="nsew")
-        # self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
+        self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("menuInicial")
+        #self.show_frame("menuInicial")
+        self.show_frame("vendProd")
 
     #Mostra a tela desejada, que é mandada por parametro
     def show_frame(self, page_name):
