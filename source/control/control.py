@@ -25,8 +25,8 @@ class Control(tk.Tk):
         self.geometry('1120x600')
         self.protocol("WM_DELETE_WINDOW", lambda: quit())
 
-        #self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
-        #self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
+        self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
+        self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
         # self.tela["cadProdMaior"] = cadProdMaior.CadProd(parent=container, controller=self)
         # self.tela["cadProdMaior"].grid(row=0, column=0, sticky="nsew")
         # self.tela["cadClientMaior"] = cadClientMaior.CadClient(parent=container, controller=self)
@@ -37,7 +37,7 @@ class Control(tk.Tk):
         self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
 
         #self.show_frame("menuInicial")
-        self.show_frame("vendProd")
+        self.show_frame("menuInicial")
 
     #Mostra a tela desejada, que é mandada por parametro
     def show_frame(self, page_name):

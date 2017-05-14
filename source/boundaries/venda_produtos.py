@@ -142,7 +142,7 @@ class VendProd(tk.Frame):
         toolbar1 = tk.Frame(self, bg="white")
 
         self.menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
-                           command=lambda: Teste())
+                           command=lambda: self.controller.show_frame("menuInicial"))
         self.menu["font"] = ("Arial", "10")
         self.menu.pack(side=tk.LEFT)
         self.espaco1 = tk.Label(toolbar1, text=" | ", bg="white")

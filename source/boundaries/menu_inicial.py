@@ -72,7 +72,7 @@ class Menu(tk.Frame):
         salto7.grid(row=6, column=0)
 
         venda = tk.Button(frame2, text="        Nova Venda        ", bg=cor2, fg=cor1, bd=2,
-                          command=lambda: Teste())
+                          command=lambda: self.controller.show_frame("vendProd"))
         venda["font"] = ("Arial", "16", "bold")
         venda.grid(row=7, column=1, pady=5)
 
