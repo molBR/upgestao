@@ -6,7 +6,7 @@ class Database(object):
     dbConnect = None
     dbCursor = None
 
-    def __init__(self,loc):
+    def __init__(self, loc):
         if(loc==1):
             self.dbConnect = sqlite3.connect('GutsDados.db')
         else:
