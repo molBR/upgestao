@@ -14,7 +14,6 @@ class Menu(tk.Frame):
         self.FazTela()
 
     def FazTela(self):
-        #ctrl.Control.start(root)
 
         # barra de 'status'
         status = tk.Label(self, text="Estado: Executando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
@@ -80,7 +79,7 @@ class Menu(tk.Frame):
         salto8.grid(row=8, column=2)
 
         cadastro = tk.Button(frame2, text="    Cadastrar Cliente    ", bg=cor2, fg=cor1, bd=2,
-                          command=lambda: Teste())
+                          command=lambda: self.controller.show_frame("cadClientMaior"))
         cadastro["font"] = ("Arial", "16", "bold")
         cadastro.grid(row=9, column=1, pady=5)
 
@@ -88,7 +87,7 @@ class Menu(tk.Frame):
         salto9.grid(row=10, column=1)
 
         historico = tk.Button(frame2, text="  Histórico de Vendas  ", bg=cor2, fg=cor1, bd=2,
-                           command=lambda: Teste())
+                           command=lambda: self.controller.show_frame("vendHist"))
         historico["font"] = ("Arial", "16", "bold")
         historico.grid(row=11, column=1, pady=5)
 
@@ -96,7 +95,7 @@ class Menu(tk.Frame):
         salto10.grid(row=12, column=2)
 
         inserirproduto = tk.Button(frame2, text="      Inserir Produto      ", bg=cor2, fg=cor1, bd=2,
-                         command=lambda: Teste())
+                         command=lambda: self.controller.show_frame("cadProdMaior"))
         inserirproduto["font"] = ("Arial", "16", "bold")
         inserirproduto.grid(row=13, column=1, pady=5)
 

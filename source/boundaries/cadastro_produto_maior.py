@@ -9,6 +9,8 @@ import cadastro_produto_menor as cpm
 from source.entities import database as db
 from source.entities import tratamentos as tr
 
+def Teste():
+    print("Testado")
 
 class CadProd (Tkin.Frame):
 
@@ -73,42 +75,38 @@ class CadProd (Tkin.Frame):
         #self.bd.close() //Estava fechando o bd de TelaMaior mesmo que nâo tenha aberto essa janela e por consequencia não tenha aberto bd
 
 #Construtor
-    def __init__(self):
-        self.root = None
+    def __init__(self, parent, controller):
+        Tkin.Frame.__init__(self, parent)
+        self.controller = controller
+        self.FazTela()
 
-    def FazTela(self, root, control):
-            self.root = root
-            for widget in self.root.winfo_children():
-                widget.destroy()
-            #ctrl.Control.start(self.root)
-
-            self.root.title('Guts\' Orçamento - Cadastro de Produtos')
+    def FazTela(self):
 
             ###
-            self.toolbar1 = Tkin.Frame(self.root, bg="white")
+            self.toolbar1 = Tkin.Frame(self, bg="white")
             self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
-                               command=lambda: control.Application(control, 0))
+                               command=lambda: self.controller.show_frame("menuInicial"))
             self.menu["font"] = ("Arial", "10")
             self.menu.pack(side=Tkin.LEFT)
             self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco1["font"] = ("Arial", "12")
             self.espaco1.pack(side=Tkin.LEFT)
             self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT,
-                               command=lambda: control.Application(control, 1))
+                               command=lambda: self.controller.show_frame("vendProd"))
             self.novavenda["font"] = ("Arial", "10")
             self.novavenda.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco2["font"] = ("Arial", "12")
             self.espaco2.pack(side=Tkin.LEFT)
             self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT,
-                               command=lambda: control.Application(control, 2))
+                               command=lambda: self.controller.show_frame("cadClientMaior"))
             self.cadastrarcliente["font"] = ("Arial", "10")
             self.cadastrarcliente.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco3 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
             self.espaco3["font"] = ("Arial", "12")
             self.espaco3.pack(side=Tkin.LEFT)
             self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT,
-                               command=lambda: control.Application(control, 3))
+                               command=lambda: self.controller.show_frame("vendHist"))
             self.historicovenda["font"] = ("Arial", "10")
             self.historicovenda.pack(side=Tkin.LEFT, padx=1, pady=1)
             self.espaco4 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
@@ -121,7 +119,7 @@ class CadProd (Tkin.Frame):
             self.espaco5["font"] = ("Arial", "12")
             self.espaco5.pack(side=Tkin.LEFT)
             self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT,
-                               command=lambda: control.Application(control, 5))
+                               command=lambda: Teste())
             self.inserirtipo["font"] = ("Arial", "10")
             self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
 
@@ -129,7 +127,7 @@ class CadProd (Tkin.Frame):
             # fim
 
             # barra de 'status'
-            status = Tkin.Label(self.root, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
+            status = Tkin.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
             status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
             #
 
@@ -142,7 +140,7 @@ class CadProd (Tkin.Frame):
             self.cor2 = '#E94545'
             self.cor3 = '#E6E6E6'
 
-            self.toolbar2 = Tkin.Frame(self.root, bg=self.cor1)
+            self.toolbar2 = Tkin.Frame(self, bg=self.cor1)
 
             self.todos = Tkin.Button(self.toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
             self.todos['font'] = ('bold')
@@ -171,10 +169,10 @@ class CadProd (Tkin.Frame):
 
             self.toolbar2.pack(side=Tkin.TOP, fill=Tkin.X)
 
-            self.container1 = Tkin.Frame(self.root)
-            self.container2 = Tkin.Frame(self.root, bg=self.cor3)
-            self.container3 = Tkin.Frame(self.root, bg=self.cor3)
-            self.container4 = Tkin.Frame(self.root, bg=self.cor3)
+            self.container1 = Tkin.Frame(self)
+            self.container2 = Tkin.Frame(self, bg=self.cor3)
+            self.container3 = Tkin.Frame(self, bg=self.cor3)
+            self.container4 = Tkin.Frame(self, bg=self.cor3)
             self.container1.pack(fill=Tkin.X)
             self.container2.pack(side=Tkin.BOTTOM, fill=Tkin.X)
             self.container3.pack(side=Tkin.BOTTOM, fill=Tkin.X)
@@ -257,10 +255,10 @@ class CadProd (Tkin.Frame):
 
 #funcao que cria o canvas, deve ser chamada toda vez que o mesmo e atualizado
     def createCanvas(self):
-        Tkin.Frame.__init__(self, self.root)
-        self.canvas = Tkin.Canvas(self.root, borderwidth=0, background="#ffffff")
+        #Tkin.Frame.__init__(self, self)
+        self.canvas = Tkin.Canvas(self, borderwidth=0, background="#ffffff")
         self.frame = Tkin.Frame(self.canvas, background="#f0f0f0")
-        self.vsb = Tkin.Scrollbar(self.root, orient="vertical", command=self.canvas.yview)
+        self.vsb = Tkin.Scrollbar(self, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.vsb.set)
 
         self.vsb.pack(side="right", fill="y")

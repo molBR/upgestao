@@ -22,7 +22,6 @@ def raw_backup():
 def main():
     print 'Gut\'s is running.'
 
-
     control = ctrl.Control()
     control.mainloop()
 

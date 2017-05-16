@@ -155,21 +155,21 @@ class VendProd(tk.Frame):
         self.espaco2["font"] = ("Arial", "12")
         self.espaco2.pack(side=tk.LEFT)
         self.cadastrarcliente = tk.Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=tk.FLAT,
-                                       command=lambda: Teste())
+                                       command=lambda: self.controller.show_frame("cadClientMaior"))
         self.cadastrarcliente["font"] = ("Arial", "10")
         self.cadastrarcliente.pack(side=tk.LEFT, padx=1, pady=1)
         self.espaco3 = tk.Label(toolbar1, text=" | ", bg="white")
         self.espaco3["font"] = ("Arial", "12")
         self.espaco3.pack(side=tk.LEFT)
         self.historicovenda = tk.Button(toolbar1, text="Historico de Vendas", bg="white", relief=tk.FLAT,
-                                     command=lambda: Teste())
+                                     command=lambda: self.controller.show_frame("vendHist"))
         self.historicovenda["font"] = ("Arial", "10")
         self.historicovenda.pack(side=tk.LEFT, padx=1, pady=1)
         self.espaco4 = tk.Label(toolbar1, text=" | ", bg="white")
         self.espaco4["font"] = ("Arial", "12")
         self.espaco4.pack(side=tk.LEFT)
         self.inserirproduto = tk.Button(toolbar1, text="Inserir Produto", bg="white", relief=tk.FLAT,
-                                     command=lambda: Teste())
+                                     command=lambda: self.controller.show_frame("cadProdMaior"))
         self.inserirproduto["font"] = ("Arial", "10")
         self.inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
         self.espaco5 = tk.Label(toolbar1, text=" | ", bg="white")
@@ -183,6 +183,7 @@ class VendProd(tk.Frame):
         #toolbar1.pack(side=tk.TOP, fill=tk.X)
         toolbar1.pack(side=tk.TOP, fill=tk.X)
         # fim
+
 
     # barra de 'status'
         status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
@@ -235,8 +236,8 @@ class VendProd(tk.Frame):
         self.container2 = tk.Frame(self, bg=self.cor3)
         self.container3 = tk.Frame(self, bg=self.cor3)
         self.container4 = tk.Frame(self, bg=self.cor3)
-        self.container1.pack(fill=tk.X)
-        self.frameProd.pack(fill=tk.X)
+        self.container1.pack(side=tk.TOP, fill=tk.X)
+        self.frameProd.pack(side=tk.BOTTOM, fill=tk.X)
         self.container2.pack(side=tk.BOTTOM, fill=tk.X)
         self.container3.pack(side=tk.BOTTOM, fill=tk.X)
         self.container4.pack(side=tk.BOTTOM, fill=tk.X)
@@ -278,14 +279,15 @@ class VendProd(tk.Frame):
     # fim
 
         # tabela dos itens
+
         # comeco frame dos produtos
         self.canvas1 = tk.Canvas(self, borderwidth=0, background="#ffffff")
         self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = tk.Scrollbar(self.container1, orient="vertical", command=self.canvas1.yview)
+        self.vsb1 = tk.Scrollbar(self, orient="vertical", command=self.canvas1.yview)
         self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
+        self.vsb1.pack(side=tk.RIGHT, fill="y")
         self.canvas1.pack(side=tk.LEFT, fill="both", expand=True)
-        self.vsb1.pack(side=tk.LEFT, fill="y")
         self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
                                    tags="self.frame1")
 
@@ -295,18 +297,14 @@ class VendProd(tk.Frame):
         self.populate1(self.listaProduto)
         # fim frame dos produtos
 
-        """
         # comeco frame venda
-        #tk.Frame.__init__(self, self.root)
-        frameVend = tk.Frame(self)
-        frameVend.pack()
-        self.canvas2 = tk.Canvas(frameVend, borderwidth=0, background="#ffffff")
+        self.canvas2 = tk.Canvas(self, borderwidth=0, background="#ffffff")
         self.frame2 = tk.Frame(self.canvas2, background="#f0f0f0")
-        self.vsb2 = tk.Scrollbar(frameVend, orient="vertical", command=self.canvas2.yview)
+        self.vsb2 = tk.Scrollbar(self, orient="vertical", command=self.canvas2.yview)
         self.canvas2.configure(yscrollcommand=self.vsb2.set)
 
         self.canvas2.pack(side="left", fill="both", expand=True)
-        self.vsb2.pack(side="left", fill="y")
+        self.vsb2.pack(side="right", fill="y")
         self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
                                    tags="self.frame2")
 
@@ -316,7 +314,7 @@ class VendProd(tk.Frame):
         self.todos_apertado()
         self.populate2(self.listaSelec)
         # fim frame dos produtos
-        """
+
     # espaco com "inserir", "editar", "excluir" e "pesquisar"
 
         t = "VALOR"
@@ -374,46 +372,7 @@ class VendProd(tk.Frame):
         self.salto2.pack(side=tk.LEFT)
     # fim
 
-    # tabela dos itens
-        """
-        # comeco frame dos produtos
-        frameProd = tk.Frame(self)
-        frameProd.pack()
-        self.canvas1 = tk.Canvas(frameProd, borderwidth=0, background="#ffffff")
-        self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
-        self.vsb1 = tk.Scrollbar(frameProd, orient="vertical", command=self.canvas1.yview)
-        self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
-        self.canvas1.pack(side="left", fill="both", expand=True)
-        self.vsb1.pack(side="left", fill="y")
-        self.canvas1.create_window((4,4), window=self.frame1, anchor="nw",
-                                  tags="self.frame1")
-
-        self.frame1.bind("<Configure>", self.onFrameConfigure1)
-
-        self.pacote1 = [self.canvas1,self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
-        self.populate1(self.listaProduto)
-        #fim frame dos produtos
-
-
-        tk.Frame.__init__(self, self.root) #comeco frame venda
-        self.canvas2 = tk.Canvas(self.root, borderwidth=0, background="#ffffff")
-        self.frame2 = tk.Frame(self.canvas2, background="#f0f0f0")
-        self.vsb2 = tk.Scrollbar(self.root, orient="vertical", command=self.canvas2.yview)
-        self.canvas2.configure(yscrollcommand=self.vsb2.set)
-
-        self.canvas2.pack(side="left", fill="both", expand=True)
-        self.vsb2.pack(side="left", fill="y")
-        self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
-                                  tags="self.frame2")
-
-        self.frame2.bind("<Configure>", self.onFrameConfigure2)
-
-
-        self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2",self.onFrameConfigure2]
-        self.todos_apertado()
-        self.populate2(self.listaSelec)  # fim frame dos produtos
-"""
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
             pacote[0].destroy()
@@ -425,9 +384,9 @@ class VendProd(tk.Frame):
     #  self.pacote1 = [self.canvas1,self.frame1,self.vsb1]
     def createCanvas(self,pacote):
         #Frame.__init__(self, self.root)
-        pacote[0] = tk.Canvas(self.root, borderwidth=0, background="#ffffff")
+        pacote[0] = tk.Canvas(self, borderwidth=0, background="#ffffff")
         pacote[1] = tk.Frame(pacote[0], background="#f0f0f0")
-        pacote[2] = tk.Scrollbar(self.root, orient="vertical", command=pacote[0].yview)
+        pacote[2] = tk.Scrollbar(self, orient="vertical", command=pacote[0].yview)
         pacote[0].configure(yscrollcommand=pacote[2].set)
 
         pacote[0].pack(side="left", fill="both", expand=True)
@@ -443,7 +402,6 @@ class VendProd(tk.Frame):
         self.todos_apertado()
         self.listaSelec = tr.mergeSort(self.listaSelec)
         self.populate2(self.listaSelec)
-
 
 
     def RemoveCheck(self):
@@ -480,7 +438,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t=info[row][0]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -489,7 +447,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row][0]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
