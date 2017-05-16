@@ -1,10 +1,10 @@
 # encoding: utf-8
-
+from Docx.documentoShow import docx
 from Tkinter import *
-
 # funcao de teste
 def Teste(self):
     print("Testado")
+
 
 class TelaMaior(Frame):
 
@@ -153,7 +153,7 @@ class TelaMaior(Frame):
             self.ok.pack(side=LEFT)
             self.espaco3 = Label(self.container3, text="                    ", bg=cor3)
             self.espaco3.pack(side=LEFT)
-            self.salvar = Button(self.container3, text="Salvar Docx", command=Teste, bg=cor3)
+            self.salvar = Button(self.container3, text="Salvar Docx", bg=cor3, command=lambda: docx(3,4,5))
             self.salvar["font"] = ['bold']
             self.salvar['padx'] = 1
             self.salvar['pady'] = 1
