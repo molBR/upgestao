@@ -3,6 +3,7 @@
 from datetime import datetime
 
 import produto as pr
+import cliente as cl
 
 
 #Classes criadas para caracterizar os erros do programa - Não utilizadas no momento
@@ -43,6 +44,16 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
         p1 = pr.Produto(id, nome, valor, agora, tipo)
         return p1
 #fim
+
+def ClientesReceive(id,nome,data_insert,tem_endereco,tem_telefone,tem_email):
+    try:
+        VerificaDigit(id)
+    except Erro as e:
+        raise e
+    else:
+        c1 = cl.Cliente(id,nome,data_insert,tem_endereco,tem_telefone,tem_email)
+        return c1;
+
 def mergeSort(alist):
     print("Splitting ",alist)
     if len(alist)>1:

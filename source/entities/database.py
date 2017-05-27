@@ -213,6 +213,9 @@ class Database(object):
         self.dbCursor.execute('INSERT INTO Categoria VALUES (?, ?, ?)', values)
         self.dbConnect.commit()
 
+    def insertCliente(self,Cliente):
+        values = [Cliente.getNome(),Cliente.get]
+
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):
         self.dbCursor.execute('Select * FROM Produto WHERE Id_Categoria = 1')

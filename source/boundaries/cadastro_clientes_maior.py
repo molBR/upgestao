@@ -227,9 +227,9 @@ class CadClient(tk.Frame):
         nome = info[0][1]
         endereco = info[0][3]
         data = info[0][2]
-        email = info[0][5]
-        telefone = info[0][4]
-        celular = info[0][4]
+        email = info[0][3]
+        telefone = info[0][5]
+        celular = info[0][5]
 
         salto1 = tk.Label(self.frame2, text="               ", bg=cor)
         salto1.grid(row=0, column=0)
