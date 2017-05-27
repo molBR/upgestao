@@ -4,6 +4,9 @@ from Tkinter import *
 
 
 class clienteCadastro(Frame):
+    def Testado(self):
+        print "oi"
+
     def FazTela(self, root):
 
         #root = Toplevel()
@@ -83,7 +86,7 @@ class clienteCadastro(Frame):
         espaco1 = Label(info2, text="                                                                                                     ")
         espaco1.grid(row=0, column=0)
 
-        pronto = Button(info2, text="Pronto", bg=cor)
+        pronto = Button(info2, text="Pronto", bg=cor,command=lambda:self.Testado())
         pronto["font"]=['bold']
         pronto['fg']='white'
         pronto['padx']=1
@@ -93,10 +96,10 @@ class clienteCadastro(Frame):
         espaco2 = Label(info2, text="                                                                                                     ")
         espaco2.grid(row=2, column=2)
 
-        status = Label(info2, text="Estado: Normal", bg="white", bd=1, relief=SUNKEN, anchor=W)
-        status.grid(row=3, column=0, sticky=S + W + E, columnspan=3)
+       # status = Label(info2, text="Estado: Normal", bg="white", bd=1, relief=SUNKEN, anchor=W)
+       # status.grid(row=3, column=0, sticky=S + W + E, columnspan=3)
 
         #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
-        root.title('Cadastro do Cliente')
-        root.resizable(width=False, height=False)
+#        root.title('Cadastro do Cliente')
+#        root.resizable(width=False, height=False)
         root.mainloop()

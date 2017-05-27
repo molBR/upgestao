@@ -3,6 +3,7 @@
 import Tkinter as tk
 
 import cadastro_clientes_menor as cadClientMenor
+from source.entities import database as db
 
 
 # funcao de teste
@@ -81,6 +82,9 @@ class CadClient(tk.Frame):
             status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
             status.pack(side=tk.BOTTOM, fill=tk.X)
             # fim
+
+            self.bd = db.Database(0)  # banco de dados
+            print self.bd.selectCliente()
 
             cor3 = '#E6E6E6'
             info = 53
@@ -163,7 +167,7 @@ class CadClient(tk.Frame):
 
             self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-            self.populate1()
+            self.populate1(self.bd.selectCliente())
 
             #Frame.__init__(self, self.root)
             self.canvas2 = tk.Canvas(self, borderwidth=0, background="#fafafa")
@@ -178,12 +182,12 @@ class CadClient(tk.Frame):
 
             self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
-            self.populate2()
+            self.populate2(self.bd.selectCliente())
 
-    def populate1(self):
-        info = 20
+    def populate1(self,info):
+
         '''Put in some fake data'''
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
                 var = tk.IntVar()
@@ -194,10 +198,10 @@ class CadClient(tk.Frame):
                 var = tk.IntVar()
                 c = tk.Checkbutton(self.frame1, variable=var, background=cor)
                 c.grid(row=row, column=0)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -206,7 +210,7 @@ class CadClient(tk.Frame):
                 ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -218,14 +222,14 @@ class CadClient(tk.Frame):
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
 
-    def populate2(self):
+    def populate2(self,info):
         cor = '#fafafa'
-        nome = "nome"
-        endereco = "endereco"
-        data = "data"
-        email = "email"
-        telefone = "telefone"
-        celular = "celular"
+        nome = info[0][1]
+        endereco = info[0][3]
+        data = info[0][2]
+        email = info[0][5]
+        telefone = info[0][4]
+        celular = info[0][4]
 
         salto1 = tk.Label(self.frame2, text="               ", bg=cor)
         salto1.grid(row=0, column=0)

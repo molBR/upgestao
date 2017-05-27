@@ -219,7 +219,7 @@ class CadProd (Tkin.Frame):
             self.editar['padx'] = 1
             self.editar['pady'] = 1
             self.editar.pack(side=Tkin.LEFT)
-            self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
+            self.espaco2 = Tkin.Label(self.container3, text="                ", bg=self.cor3)
             self.espaco2.pack(side=Tkin.LEFT)
             self.excluir = Tkin.Button(self.container3, text="Excluir", command=lambda: self.deletando(self.bd), bg=self.cor3)
             self.excluir["font"] = ['bold']
@@ -375,6 +375,7 @@ class CadProd (Tkin.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=3)
+
             else:
                 t="R$ " + str(info[row][2])
                 ent = Tkin.Entry(self.frame, state='readonly', readonlybackground=cor2, fg='black', width=29)
