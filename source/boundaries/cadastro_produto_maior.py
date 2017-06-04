@@ -204,30 +204,18 @@ class CadProd (Tkin.Frame):
             self.salto1 = Tkin.Label(self.container2, text="", bg=self.cor3)
             self.salto1.pack(side=Tkin.LEFT)
 
-            self.espaco1 = Tkin.Label(self.container3, text="                                                               ",
+            self.espaco1 = Tkin.Label(self.container3,
+                                      text="                                                               ",
                                       bg=self.cor3)
             self.espaco1.pack(side=Tkin.LEFT)
-            self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd), bg=self.cor3)
+            self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd),
+                                       bg=self.cor3)
             self.inserir["font"] = ['bold']
             self.inserir['padx'] = 1
             self.inserir['pady'] = 1
             self.inserir.pack(side=Tkin.LEFT)
             self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
             self.espaco2.pack(side=Tkin.LEFT)
-            self.editar = Tkin.Button(self.container3, text="Editar", command=lambda: self.editando(self.bd), bg=self.cor3)
-            self.editar["font"] = ['bold']
-            self.editar['padx'] = 1
-            self.editar['pady'] = 1
-            self.editar.pack(side=Tkin.LEFT)
-            self.espaco2 = Tkin.Label(self.container3, text="                ", bg=self.cor3)
-            self.espaco2.pack(side=Tkin.LEFT)
-            self.excluir = Tkin.Button(self.container3, text="Excluir", command=lambda: self.deletando(self.bd), bg=self.cor3)
-            self.excluir["font"] = ['bold']
-            self.excluir['padx'] = 1
-            self.excluir['pady'] = 1
-            self.excluir.pack(side=Tkin.LEFT)
-            self.espaco3 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
-            self.espaco3.pack(side=Tkin.LEFT)
             self.pesquisar1 = Tkin.Label(self.container3, text="Pesquisar: ", bg=self.cor3)
             self.pesquisar1["font"] = ['bold']
             self.pesquisar1.pack(side=Tkin.LEFT)
@@ -238,7 +226,8 @@ class CadProd (Tkin.Frame):
             pesquisado = self.pesquisar2.get()  # pesquisado = o que foi escrito no "Entry / barra de pesquisa"
             self.espaco4 = Tkin.Label(self.container3, text=" ", bg=self.cor3)
             self.espaco4.pack(side=Tkin.LEFT)
-            self.ok = Tkin.Button(self.container3, text="Ok", command=lambda: self.pesquisando(self.pesquisar2.get()), bg=self.cor3)
+            self.ok = Tkin.Button(self.container3, text="Ok", command=lambda: self.pesquisando(self.pesquisar2.get()),
+                                  bg=self.cor3)
             self.ok["font"] = ['bold']
             self.ok['padx'] = 1
             self.ok['pady'] = 1
@@ -320,18 +309,11 @@ class CadProd (Tkin.Frame):
         '''Put in some fake data'''
         cor1 = '#ffffff'
         cor2 = '#f0f0f0'
+        photo1 = Tkin.PhotoImage(file="pencil.gif")
+        photo2 = Tkin.PhotoImage(file="trash.gif")
         self.deleteCanvas()
         self.createCanvas()
 
-        for row in range(len(info)):
-            if row % 2 == 0:
-                var = Tkin.IntVar()
-                c = Tkin.Checkbutton(self.frame, variable=var, background=cor1)
-                c.grid(row=row, column=0)
-            else:
-                var = Tkin.IntVar()
-                c = Tkin.Checkbutton(self.frame, variable=var, background=cor2)
-                c.grid(row=row, column=0)
         for row in range(len(info)):
             if row % 2 == 0:
                 t=info[row][0]
@@ -384,6 +366,24 @@ class CadProd (Tkin.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=3)
+        for row in range(len(info)):
+            if row % 2 == 0:
+                button1 = Tkin.Button(self.frame, width=16, height=16, image=photo1, relief=Tkin.FLAT, command=Teste)
+                button1.grid(row=row, column=4)
+                button1.image = photo1
+            else:
+                button1 = Tkin.Button(self.frame, width=16, height=16, image=photo1, relief=Tkin.FLAT, command=Teste)
+                button1.grid(row=row, column=4)
+                button1.image = photo1
+        for row in range(len(info)):
+            if row % 2 == 0:
+                button2 = Tkin.Button(self.frame, width=20, height=20, image=photo2, relief=Tkin.FLAT, command=Teste)
+                button2.grid(row=row, column=5)
+                button2.image = photo2
+            else:
+                button2 = Tkin.Button(self.frame, width=20, height=20, image=photo2, relief=Tkin.FLAT, command=Teste)
+                button2.grid(row=row, column=5)
+                button2.image = photo2
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

@@ -55,7 +55,7 @@ root=Tk()
 # menu principal
 toolbar1 = Frame(root, bg="white")
 
-menu = Label(toolbar1, text="   MENU ", bg="white")
+menu = Label(toolbar1, text="   Menu Inicial ", bg="white")
 menu["font"] = ("Arial", "10")
 menu.pack(side=LEFT)
 espaco1 = Label(toolbar1, text=" | ", bg="white")
@@ -176,18 +176,6 @@ class Example(Frame):
         self.inserir.pack(side=LEFT)
         self.espaco2 = Label(self.container2, text="             ")
         self.espaco2.pack(side=LEFT)
-        self.editar = Button(self.container2, text="Editar", command=Teste)
-        self.editar["font"] = ("Arial", "10")
-        self.editar['padx'] = 10
-        self.editar.pack(side=LEFT)
-        self.espaco2 = Label(self.container2, text="             ")
-        self.espaco2.pack(side=LEFT)
-        self.excluir = Button(self.container2, text="Excluir", command=Teste)
-        self.excluir["font"] = ("Arial", "10")
-        self.excluir['padx'] = 10
-        self.excluir.pack(side=LEFT)
-        self.espaco3 = Label(self.container2, text="             ")
-        self.espaco3.pack(side=LEFT)
         self.pesquisar1 = Label(self.container2, text="Pesquisar: ")
         self.pesquisar1["font"] = ("Arial", "10")
         self.pesquisar1.pack(side=LEFT)
@@ -237,18 +225,6 @@ class Example(Frame):
 
     def populate1(self):
         info = 20
-        '''Put in some fake data'''
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                var = IntVar()
-                c = Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
-            else:
-                cor = '#f0f0f0'
-                var = IntVar()
-                c = Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
@@ -287,6 +263,19 @@ class Example(Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
+        for row in range(info):
+            if row % 2 == 0:
+                photo1 = PhotoImage(file="arrow.gif")
+                button1 = Button(self.frame1, width=20, height=20, image=photo1, relief=FLAT, command=Teste)
+                button1.grid(row=row, column=3)
+                button1.image = photo1
+                del photo1
+            else:
+                photo1 = PhotoImage(file="arrow.gif")
+                button1 = Button(self.frame1, width=20, height=20, image=photo1, relief=FLAT, command=Teste)
+                button1.grid(row=row, column=3)
+                button1.image = photo1
+                del photo1
 
     def onFrameConfigure1(self, event):
         '''Reset the scroll region to encompass the inner frame'''
@@ -297,17 +286,6 @@ class Example(Frame):
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
-                var = IntVar()
-                c = Checkbutton(self.frame2, variable=var, background=cor)
-                c.grid(row=row, column=0)
-            else:
-                cor = '#f0f0f0'
-                var = IntVar()
-                c = Checkbutton(self.frame2, variable=var, background=cor)
-                c.grid(row=row, column=0)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
                 t="codigo"
                 ent = Entry(self.frame2, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
@@ -343,6 +321,19 @@ class Example(Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
+        for row in range(info):
+            if row % 2 == 0:
+                photo2 = PhotoImage(file="x.gif")
+                button2 = Button(self.frame2, width=20, height=20, image=photo2, relief=FLAT, command=Teste)
+                button2.grid(row=row, column=3)
+                button2.image = photo2
+                del photo2
+            else:
+                photo2 = PhotoImage(file="x.gif")
+                button2 = Button(self.frame2, width=20, height=20, image=photo2, relief=FLAT, command=Teste)
+                button2.grid(row=row, column=3)
+                button2.image = photo2
+                del photo2
 
     def onFrameConfigure2(self, event): #comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''

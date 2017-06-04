@@ -157,13 +157,6 @@ class VendHist(tk.Frame):
             self.salvar['padx'] = 1
             self.salvar['pady'] = 1
             self.salvar.pack(side=tk.LEFT)
-            self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
-            self.espaco4.pack(side=tk.LEFT)
-            self.excluir = tk.Button(self.container3, text="Excluir", command=Teste, bg=cor3)
-            self.excluir["font"] = ['bold']
-            self.excluir['padx'] = 1
-            self.excluir['pady'] = 1
-            self.excluir.pack(side=tk.LEFT)
 
             self.salto2 = tk.Label(self.container4, text="", bg=cor3)
             self.salto2.pack(side=tk.LEFT)
@@ -203,41 +196,22 @@ class VendHist(tk.Frame):
 
     def populate1(self):  # comeco produtos
         info = 40
+        photo1 = tk.PhotoImage(file="eye.gif")
+        photo2 = tk.PhotoImage(file="x.gif")
         for row in range(info):
             if row % 2 == 0:
-                cor = '#ffffff'
-                var = tk.IntVar()
-                c = tk.Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
+                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1.grid(row=row, column=1)
+                button1.image = photo1
             else:
-                cor = '#f0f0f0'
-                var = tk.IntVar()
-                c = tk.Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
+                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1.grid(row=row, column=1)
+                button1.image = photo1
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "nome"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=28)
-                ent["font"] = ("Arial", "13")
-                var = tk.StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-            else:
-                cor = '#f0f0f0'
-                t = "nome"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=28)
-                ent["font"] = ("Arial", "13")
-                var = tk.StringVar()
-                var.set(t)
-                ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=1)
-        for row in range(info):
-            if row % 2 == 0:
-                cor = '#ffffff'
-                t = "data"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=13)
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -245,32 +219,60 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
-                t = "data"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=13)
+                t = "nome"
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
+        for row in range(info):
+            if row % 2 == 0:
+                cor = '#ffffff'
+                t = "data"
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=10)
+                ent["font"] = ("Arial", "13")
+                var = tk.StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=3)
+            else:
+                cor = '#f0f0f0'
+                t = "data"
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=10)
+                ent["font"] = ("Arial", "13")
+                var = tk.StringVar()
+                var.set(t)
+                ent.config(textvariable=var, relief='flat')
+                ent.grid(row=row, column=3)
         for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "R$" "  valor"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=14)
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
+                ent.grid(row=row, column=4)
             else:
                 cor = '#f0f0f0'
                 t = "R$"  "  valor"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=14)
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
-                ent.grid(row=row, column=3)
+                ent.grid(row=row, column=4)
+        for row in range(info):
+            if row % 2 == 0:
+                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2.grid(row=row, column=5)
+                button2.image = photo2
+            else:
+                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2.grid(row=row, column=5)
+                button2.image = photo2
                 # fim produtos
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1

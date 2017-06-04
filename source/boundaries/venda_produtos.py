@@ -360,6 +360,10 @@ class VendProd(tk.Frame):
         self.total2 = tk.Label(self.container3, text=t, bg=self.cor3)
         self.total2["font"] = ['bold']
         self.total2.pack(side=tk.LEFT)
+        self.photo = tk.PhotoImage(file="repeat.gif")
+        self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=Teste)
+        self.calcular.pack(side=tk.LEFT)
+        self.calcular.image = self.photo
         self.espaco6 = tk.Label(self.container3, text="                             ", bg=self.cor3)
         self.espaco6.pack(side=tk.LEFT)
         self.continuar = tk.Button(self.container3, text="Continuar", command=Teste, bg=self.cor3)
@@ -420,6 +424,7 @@ class VendProd(tk.Frame):
         self.deleteCanvas(self.pacote1)
         self.createCanvas(self.pacote1)
         self.listaCheckbox = []
+        photo1 = tk.PhotoImage(file="arrow.gif")
         if(info!=None):
             for row in range(len(info)):
                 if row % 2 == 0:
@@ -491,6 +496,15 @@ class VendProd(tk.Frame):
                     var.set(t)
                     ent.config(textvariable=var, relief='flat')
                     ent.grid(row=row, column=3)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                    button1.grid(row=row, column=4)
+                    button1.image = photo1
+                else:
+                    button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                    button1.grid(row=row, column=4)
+                    button1.image = photo1
             #fim produtos
 
     def onFrameConfigure1(self, event): #comeco scroolbar frame1
@@ -501,6 +515,7 @@ class VendProd(tk.Frame):
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
         self.listaCheckbox2 = []
+        photo2 = tk.PhotoImage(file="x.gif")
         if(info!=None):
             for row in range(len(info)):
                 if row % 2 == 0:
@@ -565,6 +580,15 @@ class VendProd(tk.Frame):
                     ent1 = tk.Entry(self.pacote2[1])
                     ent1.config(textvariable=var, relief='flat')
                     ent1.grid(row=row, column=3)
+            for row in range(len(info)):
+                if row % 2 == 0:
+                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                    button2.grid(row=row, column=4)
+                    button2.image = photo2
+                else:
+                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                    button2.grid(row=row, column=4)
+                    button2.image = photo2
         #fim
 
 

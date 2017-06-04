@@ -113,14 +113,14 @@ class CadClient(tk.Frame):
             self.dados.pack(side=tk.LEFT)
 
             # espaco com "salvar docx", "excluir" e "pesquisar"
-
             self.salto1 = tk.Label(self.container2, text="", bg=cor3)
             self.salto1.pack(side=tk.LEFT)
 
             self.espaco1 = tk.Label(self.container3, text="                                                          ",
-                                 bg=cor3)
+                                    bg=cor3)
             self.espaco1.pack(side=tk.LEFT)
-            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(self), bg=cor3)
+            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(self),
+                                      bg=cor3)
             self.cadastro["font"] = ['bold']
             self.cadastro['padx'] = 1
             self.cadastro['pady'] = 1
@@ -141,13 +141,6 @@ class CadClient(tk.Frame):
             self.ok['padx'] = 1
             self.ok['pady'] = 1
             self.ok.pack(side=tk.LEFT)
-            self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
-            self.espaco4.pack(side=tk.LEFT)
-            self.excluir = tk.Button(self.container3, text="Excluir", command=Teste, bg=cor3)
-            self.excluir["font"] = ['bold']
-            self.excluir['padx'] = 1
-            self.excluir['pady'] = 1
-            self.excluir.pack(side=tk.LEFT)
 
             self.salto2 = tk.Label(self.container4, text="", bg=cor3)
             self.salto2.pack(side=tk.LEFT)
@@ -187,22 +180,23 @@ class CadClient(tk.Frame):
     def populate1(self,info):
 
         '''Put in some fake data'''
-        for row in range(len(info)):
+        info = 20
+        photo1 = tk.PhotoImage(file="eye.gif")
+        photo2 = tk.PhotoImage(file="x.gif")
+        for row in range(info):
             if row % 2 == 0:
-                cor = '#ffffff'
-                var = tk.IntVar()
-                c = tk.Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
+                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1.grid(row=row, column=0)
+                button1.image = photo1
             else:
-                cor = '#f0f0f0'
-                var = tk.IntVar()
-                c = tk.Checkbutton(self.frame1, variable=var, background=cor)
-                c.grid(row=row, column=0)
-        for row in range(len(info)):
+                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1.grid(row=row, column=0)
+                button1.image = photo1
+        for row in range(info):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
+                t = "nome"
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -210,13 +204,22 @@ class CadClient(tk.Frame):
                 ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
-                t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=57)
+                t = "nome"
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
+        for row in range(info):
+            if row % 2 == 0:
+                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2.grid(row=row, column=2)
+                button2.image = photo2
+            else:
+                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2.grid(row=row, column=2)
+                button2.image = photo2
 
     def onFrameConfigure1(self, event):
         '''Reset the scroll region to encompass the inner frame'''

@@ -40,12 +40,9 @@ class Menu(tk.Frame):
         salto3 = tk.Label(frame1, text="                ", bg=cor1)
         salto3.grid(row=3, column=2)
 
-        ###
-      #  self.photo = PhotoImage(file="../../menu.gif")
-#        self.photo = tk.PhotoImage(file="menu.gif")
-       # logo = tk.Label(frame1, image=self.photo, bg=cor1)
-        #logo.grid(row=4, column=1)
-        ###
+        self.photo = tk.PhotoImage(file="menu.gif")
+        logo = tk.Label(frame1, image=self.photo, bg=cor1)
+        logo.grid(row=4, column=1)
 
         salto4 = tk.Label(frame1, text="", bg=cor1)
         salto4.grid(row=5, column=0)
