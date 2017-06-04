@@ -45,14 +45,30 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
         return p1
 #fim
 
-def ClientesReceive(id,nome,data_insert,tem_endereco,tem_telefone,tem_email):
+def ClientesReceive(nome,endereco,telefone,email):
     try:
-        VerificaDigit(id)
+        verificaArroba(email)
+        verificaTamTel(telefone)
     except Erro as e:
         raise e
     else:
-        c1 = cl.Cliente(id,nome,data_insert,tem_endereco,tem_telefone,tem_email)
-        return c1;
+        agora = datetime.now().strftime('%H:%M:%S')
+        c1 = cl.Cliente(nome,agora,endereco,telefone,email)
+        return c1
+
+def verificaArroba(email):
+    print len(email)
+    for i in range(0,len(email)):
+        if(email[i]=='@'):
+            return True
+    raise ErroEntrada(email,"O e-mail não tem '@'")
+
+def verificaTamTel(telefone):
+    print "bbb"
+    if len(telefone)>15:
+        raise ErroEntrada(telefone, "Tamanho do telefone é inválido")
+    else: return True
+
 
 def mergeSort(alist):
     print("Splitting ",alist)

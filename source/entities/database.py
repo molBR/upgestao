@@ -196,8 +196,8 @@ class Database(object):
         self.dbConnect.commit()
 
     def insertCliente(self,Cliente):
-        values = [Cliente.getNome(), Cliente.getData_insert(), Cliente.getTem_endereco(), Cliente.getTem_telefone(), Cliente.getTem_email()]
-        self.dbCursor.execute('INSERT INTO Cliente VALUES (NULL, ?, ?, ?, ?)', values) #O NULL no id do insert into cliente é para fazer com que o id seja auto incrementavel
+        values = [Cliente.getNome(), Cliente.getData_insert(), Cliente.getEndereco(), Cliente.getTelefone(), Cliente.getEmail()]
+        self.dbCursor.execute('INSERT INTO Cliente VALUES (NULL, ?, ?, ?, ?, ?)', values) #O NULL no id do insert into cliente é para fazer com que o id seja auto incrementavel
         self.dbConnect.commit()
 
 #Seleciona todos os produtos da categoria doces
