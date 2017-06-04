@@ -27,6 +27,7 @@ class clienteCadastro():
     def FazTela(self):
 
         self.top = Toplevel()
+        self.top.title('Guts\' Orçamento - Novo Cliente')
 
         cor = '#D32F2F'
         info = 25
