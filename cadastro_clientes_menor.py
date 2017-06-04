@@ -4,18 +4,35 @@ from Tkinter import *
 from source.entities import tratamentos as tr
 
 
-class clienteCadastro(Frame):
+class clienteCadastro():
+# Construtor
+    def __init__(self):
+        self.top = None
+    #    self.FazTela()
+
+#Funcao de fechamento da janela
+    def CloseWindow(self):
+        self.top.destroy()
+        #self.top.quit()
+        self.top = None
+
+#Retorna o valor objeto da janela
+    def GetWindow(self):
+        return self.top
+
     def Testado(self, id,nome,endereco,data,email,telefone):
-        c1 = tr.ClientesReceive(id,nome,endereco,data,email,telefone)
+        #c1 = tr.ClientesReceive(id,nome,endereco,data,email,telefone)
+        self.CloseWindow()
 
-    def FazTela(self, root):
+    def FazTela(self):
 
-        #root = Toplevel()
+        self.top = Toplevel()
+
 
         cor = '#D32F2F'
         info = 25
 
-        info1 = Frame(root)
+        info1 = Frame(self.top)
         info1.grid(sticky=N+W+E)
 
         salto1 = Label(info1, text="          ")
@@ -81,7 +98,7 @@ class clienteCadastro(Frame):
         telefone2["font"] = ("Arial", "10")
         telefone2.grid(row=8, column=3)
 
-        info2 = Frame(root)
+        info2 = Frame(self.top)
         info2.grid(sticky=S+W+E)
 
         espaco1 = Label(info2, text="                                                                                                     ")
@@ -103,4 +120,4 @@ class clienteCadastro(Frame):
         #root.iconbitmap(r'C:\Python27\DLLs\icon.ico')
 #        root.title('Cadastro do Cliente')
 #        root.resizable(width=False, height=False)
-        root.mainloop()
+        #root.mainloop()

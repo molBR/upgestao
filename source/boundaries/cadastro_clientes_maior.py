@@ -119,7 +119,8 @@ class CadClient(tk.Frame):
             self.espaco1 = tk.Label(self.container3, text="                                                          ",
                                     bg=cor3)
             self.espaco1.pack(side=tk.LEFT)
-            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(self),
+            #self.formCadastro = tk.Toplevel()
+            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(),
                                       bg=cor3)
             self.cadastro["font"] = ['bold']
             self.cadastro['padx'] = 1
@@ -224,6 +225,15 @@ class CadClient(tk.Frame):
     def onFrameConfigure1(self, event):
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
+
+    # Funcao chamada sempre que o botao inserir e apertado
+    def inserindo(self):
+        self.tm.FazTela()
+        if (self.tm.GetWindow() != None):
+            self.tm.GetWindow().wait_window()
+        #self.populate(bd.selectProduto())
+
+    # fim
 
     def populate2(self,info):
         cor = '#fafafa'
