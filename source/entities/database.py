@@ -30,29 +30,11 @@ class Database(object):
        );''',
             '''CREATE TABLE Cliente (
             id INTEGER PRIMARY KEY NOT NULL,
-            nome_cliente varchar(500),
+            nome_cliente varchar(100),
             data_insert varchar(100) NOT NULL,
-            tem_endereco varchar(1) NOT NULL,
-            tem_telefone varchar(1) NOT NULL,
-            tem_email varchar(1) NOT NULL
-        );''',
-            '''CREATE TABLE Endereco (
-            id INTEGER PRIMARY KEY NOT NULL,
-            nome_endereco varchar(500) NOT NULL,
-            id_cliente INTEGER NOT NULL,
-            FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
-        );''',
-            '''CREATE TABLE Telefone (
-            id INTEGER PRIMARY KEY NOT NULL,
-            numero varchar(500) NOT NULL,
-            id_cliente INTEGER NOT NULL,
-            FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
-        );''',
-            '''CREATE TABLE Email (
-            id INTEGER PRIMARY KEY NOT NULL,
-            email varchar(500) NOT NULL,
-            id_cliente INTEGER NOT NULL,
-            FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
+            endereco varchar(500) NOT NULL,
+            telefone varchar(32) NOT NULL,
+            email varchar(64) NOT NULL
         );''',
             '''CREATE TABLE Venda (
             id INTEGER PRIMARY KEY NOT NULL,
@@ -214,7 +196,9 @@ class Database(object):
         self.dbConnect.commit()
 
     def insertCliente(self,Cliente):
-        values = [Cliente.getNome(),Cliente.get]
+        values = [Cliente.getNome(), Cliente.getData_insert(), Cliente.getTem_endereco(), Cliente.getTem_telefone(), Cliente.getTem_email()]
+        self.dbCursor.execute('INSERT INTO Cliente VALUES (NULL, ?, ?, ?, ?)', values) #O NULL no id do insert into cliente é para fazer com que o id seja auto incrementavel
+        self.dbConnect.commit()
 
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):

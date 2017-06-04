@@ -28,7 +28,6 @@ class clienteCadastro():
 
         self.top = Toplevel()
 
-
         cor = '#D32F2F'
         info = 25
 
