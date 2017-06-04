@@ -81,7 +81,8 @@ class CadProd (Tkin.Frame):
         self.FazTela()
 
     def FazTela(self):
-
+            self.photo1 = Tkin.PhotoImage(file="pencil.gif")
+            self.photo2 = Tkin.PhotoImage(file="trash.gif")
             ###
             self.toolbar1 = Tkin.Frame(self, bg="white")
             self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
@@ -309,8 +310,6 @@ class CadProd (Tkin.Frame):
         '''Put in some fake data'''
         cor1 = '#ffffff'
         cor2 = '#f0f0f0'
-        photo1 = Tkin.PhotoImage(file="pencil.gif")
-        photo2 = Tkin.PhotoImage(file="trash.gif")
         self.deleteCanvas()
         self.createCanvas()
 
@@ -368,22 +367,22 @@ class CadProd (Tkin.Frame):
                 ent.grid(row=row, column=3)
         for row in range(len(info)):
             if row % 2 == 0:
-                button1 = Tkin.Button(self.frame, width=16, height=16, image=photo1, relief=Tkin.FLAT, command=Teste)
+                button1 = Tkin.Button(self.frame, width=16, height=16, image=self.photo1, relief=Tkin.FLAT, command=Teste)
                 button1.grid(row=row, column=4)
-                button1.image = photo1
+                button1.image = self.photo1
             else:
-                button1 = Tkin.Button(self.frame, width=16, height=16, image=photo1, relief=Tkin.FLAT, command=Teste)
+                button1 = Tkin.Button(self.frame, width=16, height=16, image=self.photo1, relief=Tkin.FLAT, command=Teste)
                 button1.grid(row=row, column=4)
-                button1.image = photo1
+                button1.image = self.photo1
         for row in range(len(info)):
             if row % 2 == 0:
-                button2 = Tkin.Button(self.frame, width=20, height=20, image=photo2, relief=Tkin.FLAT, command=Teste)
+                button2 = Tkin.Button(self.frame, width=20, height=20, image=self.photo2, relief=Tkin.FLAT, command=Teste)
                 button2.grid(row=row, column=5)
-                button2.image = photo2
+                button2.image = self.photo2
             else:
-                button2 = Tkin.Button(self.frame, width=20, height=20, image=photo2, relief=Tkin.FLAT, command=Teste)
+                button2 = Tkin.Button(self.frame, width=20, height=20, image=self.photo2, relief=Tkin.FLAT, command=Teste)
                 button2.grid(row=row, column=5)
-                button2.image = photo2
+                button2.image = self.photo2
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

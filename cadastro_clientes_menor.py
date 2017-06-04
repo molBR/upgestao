@@ -8,8 +8,6 @@ class clienteCadastro(Frame):
     def Testado(self, id,nome,endereco,data,email,telefone):
         c1 = tr.ClientesReceive(id,nome,endereco,data,email,telefone)
 
-
-
     def FazTela(self, root):
 
         #root = Toplevel()
