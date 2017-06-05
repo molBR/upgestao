@@ -15,7 +15,7 @@ from source.boundaries import menu_inicial as menuInicial
 
 # Funcionalidade de backup
 def raw_backup():
-    bd = db.Database(0)
+    bd = db.Database()
     bd.exportSQL()
     # bd.importSQL()
     bd.close()

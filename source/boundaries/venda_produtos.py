@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 import Tkinter as tk
+import os as os
+
 from source.entities import database as db
 from source.entities import tratamentos as tr
 import tkMessageBox
@@ -132,7 +134,7 @@ class VendProd(tk.Frame):
 
     def FazTela(self):
         self.fechaTela = tk.FALSE
-        self.bd = db.Database(0)  # banco de dados
+        self.bd = db.Database()  # banco de dados
         self.root = self.controller
         self.listaProduto = self.bd.selectProduto()
         #for widget in self.root.winfo_children():
@@ -360,7 +362,7 @@ class VendProd(tk.Frame):
         self.total2 = tk.Label(self.container3, text=t, bg=self.cor3)
         self.total2["font"] = ['bold']
         self.total2.pack(side=tk.LEFT)
-        self.photo = tk.PhotoImage(file="repeat.gif")
+        self.photo = tk.PhotoImage(file= os.getcwd() + "/source/images/repeat.gif")
         self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=Teste)
         self.calcular.pack(side=tk.LEFT)
         self.calcular.image = self.photo
@@ -424,7 +426,7 @@ class VendProd(tk.Frame):
         self.deleteCanvas(self.pacote1)
         self.createCanvas(self.pacote1)
         self.listaCheckbox = []
-        photo1 = tk.PhotoImage(file="arrow.gif")
+        photo1 = tk.PhotoImage(file=os.getcwd() + "/source/images/arrow.gif")
         if(info!=None):
             for row in range(len(info)):
                 if row % 2 == 0:
@@ -515,7 +517,7 @@ class VendProd(tk.Frame):
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
         self.listaCheckbox2 = []
-        photo2 = tk.PhotoImage(file="x.gif")
+        photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         if(info!=None):
             for row in range(len(info)):
                 if row % 2 == 0:

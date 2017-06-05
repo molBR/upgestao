@@ -2,6 +2,7 @@
 
 import Tkinter as Tkin
 import tkMessageBox
+import os as os
 
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
@@ -81,167 +82,174 @@ class CadProd (Tkin.Frame):
         self.FazTela()
 
     def FazTela(self):
-            self.photo1 = Tkin.PhotoImage(file="pencil.gif")
-            self.photo2 = Tkin.PhotoImage(file="trash.gif")
-            ###
-            self.toolbar1 = Tkin.Frame(self, bg="white")
-            self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
-                               command=lambda: self.controller.show_frame("menuInicial"))
-            self.menu["font"] = ("Arial", "10")
-            self.menu.pack(side=Tkin.LEFT)
-            self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
-            self.espaco1["font"] = ("Arial", "12")
-            self.espaco1.pack(side=Tkin.LEFT)
-            self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT,
-                               command=lambda: self.controller.show_frame("vendProd"))
-            self.novavenda["font"] = ("Arial", "10")
-            self.novavenda.pack(side=Tkin.LEFT, padx=1, pady=1)
-            self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
-            self.espaco2["font"] = ("Arial", "12")
-            self.espaco2.pack(side=Tkin.LEFT)
-            self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT,
-                               command=lambda: self.controller.show_frame("cadClientMaior"))
-            self.cadastrarcliente["font"] = ("Arial", "10")
-            self.cadastrarcliente.pack(side=Tkin.LEFT, padx=1, pady=1)
-            self.espaco3 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
-            self.espaco3["font"] = ("Arial", "12")
-            self.espaco3.pack(side=Tkin.LEFT)
-            self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT,
-                               command=lambda: self.controller.show_frame("vendHist"))
-            self.historicovenda["font"] = ("Arial", "10")
-            self.historicovenda.pack(side=Tkin.LEFT, padx=1, pady=1)
-            self.espaco4 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
-            self.espaco4["font"] = ("Arial", "12")
-            self.espaco4.pack(side=Tkin.LEFT)
-            self.inserirproduto = Tkin.Button(self.toolbar1, text="Inserir Produto", bg="light grey", relief=Tkin.FLAT)
-            self.inserirproduto["font"] = ("Arial", "10")
-            self.inserirproduto.pack(side=Tkin.LEFT, padx=1, pady=1)
-            self.espaco5 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
-            self.espaco5["font"] = ("Arial", "12")
-            self.espaco5.pack(side=Tkin.LEFT)
-            self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT,
-                               command=lambda: Teste())
-            self.inserirtipo["font"] = ("Arial", "10")
-            self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
+        """
+        if (os.OS == "ce"):
+            path = system.sys.path[0]
+        else:
+            path = system.os.curdir
+        """
 
-            self.toolbar1.pack(side=Tkin.TOP, fill=Tkin.X)
-            # fim
+        #dir1 = os.getcwd() + "\images\pencil.gif"
 
-            # barra de 'status'
-            status = Tkin.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
-            status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
-            #
+        self.photo1 = Tkin.PhotoImage(file= os.getcwd() + "\source\images\\pencil.gif")
+        self.photo2 = Tkin.PhotoImage(file= os.getcwd() + "\source\images\\trash.gif")
+        ###
+        self.toolbar1 = Tkin.Frame(self, bg="white")
+        self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
+                           command=lambda: self.controller.show_frame("menuInicial"))
+        self.menu["font"] = ("Arial", "10")
+        self.menu.pack(side=Tkin.LEFT)
+        self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+        self.espaco1["font"] = ("Arial", "12")
+        self.espaco1.pack(side=Tkin.LEFT)
+        self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT,
+                           command=lambda: self.controller.show_frame("vendProd"))
+        self.novavenda["font"] = ("Arial", "10")
+        self.novavenda.pack(side=Tkin.LEFT, padx=1, pady=1)
+        self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+        self.espaco2["font"] = ("Arial", "12")
+        self.espaco2.pack(side=Tkin.LEFT)
+        self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT,
+                           command=lambda: self.controller.show_frame("cadClientMaior"))
+        self.cadastrarcliente["font"] = ("Arial", "10")
+        self.cadastrarcliente.pack(side=Tkin.LEFT, padx=1, pady=1)
+        self.espaco3 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+        self.espaco3["font"] = ("Arial", "12")
+        self.espaco3.pack(side=Tkin.LEFT)
+        self.historicovenda = Tkin.Button(self.toolbar1, text="Historico de Vendas", bg="white", relief=Tkin.FLAT,
+                           command=lambda: self.controller.show_frame("vendHist"))
+        self.historicovenda["font"] = ("Arial", "10")
+        self.historicovenda.pack(side=Tkin.LEFT, padx=1, pady=1)
+        self.espaco4 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+        self.espaco4["font"] = ("Arial", "12")
+        self.espaco4.pack(side=Tkin.LEFT)
+        self.inserirproduto = Tkin.Button(self.toolbar1, text="Inserir Produto", bg="light grey", relief=Tkin.FLAT)
+        self.inserirproduto["font"] = ("Arial", "10")
+        self.inserirproduto.pack(side=Tkin.LEFT, padx=1, pady=1)
+        self.espaco5 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
+        self.espaco5["font"] = ("Arial", "12")
+        self.espaco5.pack(side=Tkin.LEFT)
+        self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT,
+                           command=lambda: Teste())
+        self.inserirtipo["font"] = ("Arial", "10")
+        self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
 
-            self.bd = db.Database(0)  # banco de dados
-            self.tm = cpm.TelaMenor()  # inserir
-            self.td = cpd.TelaMenorDel()  # deletar
-            self.te = cpe.TelaMenorEdit1()  # editar
+        self.toolbar1.pack(side=Tkin.TOP, fill=Tkin.X)
+        # fim
 
-            self.cor1 = '#D32F2F'
-            self.cor2 = '#E94545'
-            self.cor3 = '#E6E6E6'
+        # barra de 'status'
+        status = Tkin.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=Tkin.SUNKEN, anchor=Tkin.W)
+        status.pack(side=Tkin.BOTTOM, fill=Tkin.X)
+        #
 
-            self.toolbar2 = Tkin.Frame(self, bg=self.cor1)
+        self.bd = db.Database()  # banco de dados
+        self.tm = cpm.TelaMenor()  # inserir
+        self.td = cpd.TelaMenorDel()  # deletar
+        self.te = cpe.TelaMenorEdit1()  # editar
 
-            self.todos = Tkin.Button(self.toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
-            self.todos['font'] = ('bold')
-            self.todos['fg'] = 'white'
-            self.todos.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.doces = Tkin.Button(self.toolbar2, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
-            self.doces['font'] = ('bold')
-            self.doces['fg'] = 'white'
-            self.doces.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.salgados = Tkin.Button(self.toolbar2, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
-            self.salgados['font'] = ('bold')
-            self.salgados['fg'] = 'white'
-            self.salgados.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.massas = Tkin.Button(self.toolbar2, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
-            self.massas['font'] = ('bold')
-            self.massas['fg'] = 'white'
-            self.massas.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.bebidas = Tkin.Button(self.toolbar2, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
-            self.bebidas['font'] = ('bold')
-            self.bebidas['fg'] = 'white'
-            self.bebidas.pack(side=Tkin.LEFT, padx=1, pady=6)
-            self.outros = Tkin.Button(self.toolbar2, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
-            self.outros['font'] = ('bold')
-            self.outros['fg'] = 'white'
-            self.outros.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.cor1 = '#D32F2F'
+        self.cor2 = '#E94545'
+        self.cor3 = '#E6E6E6'
 
-            self.toolbar2.pack(side=Tkin.TOP, fill=Tkin.X)
+        self.toolbar2 = Tkin.Frame(self, bg=self.cor1)
 
-            self.container1 = Tkin.Frame(self)
-            self.container2 = Tkin.Frame(self, bg=self.cor3)
-            self.container3 = Tkin.Frame(self, bg=self.cor3)
-            self.container4 = Tkin.Frame(self, bg=self.cor3)
-            self.container1.pack(fill=Tkin.X)
-            self.container2.pack(side=Tkin.BOTTOM, fill=Tkin.X)
-            self.container3.pack(side=Tkin.BOTTOM, fill=Tkin.X)
-            self.container4.pack(side=Tkin.BOTTOM, fill=Tkin.X)
+        self.todos = Tkin.Button(self.toolbar2, text="   Todos   ", bg=self.cor1, command=self.todos_apertado)
+        self.todos['font'] = ('bold')
+        self.todos['fg'] = 'white'
+        self.todos.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.doces = Tkin.Button(self.toolbar2, text="   Doces   ", bg=self.cor1, command=self.doces_apertado)
+        self.doces['font'] = ('bold')
+        self.doces['fg'] = 'white'
+        self.doces.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.salgados = Tkin.Button(self.toolbar2, text="Salgados", bg=self.cor1, command=self.salgados_apertado)
+        self.salgados['font'] = ('bold')
+        self.salgados['fg'] = 'white'
+        self.salgados.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.massas = Tkin.Button(self.toolbar2, text="  Massas  ", bg=self.cor1, command=self.massas_apertado)
+        self.massas['font'] = ('bold')
+        self.massas['fg'] = 'white'
+        self.massas.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.bebidas = Tkin.Button(self.toolbar2, text=" Bebidas ", bg=self.cor1, command=self.bebidas_apertado)
+        self.bebidas['font'] = ('bold')
+        self.bebidas['fg'] = 'white'
+        self.bebidas.pack(side=Tkin.LEFT, padx=1, pady=6)
+        self.outros = Tkin.Button(self.toolbar2, text="   Outros   ", bg=self.cor1, command=self.outros_apertado)
+        self.outros['font'] = ('bold')
+        self.outros['fg'] = 'white'
+        self.outros.pack(side=Tkin.LEFT, padx=1, pady=6)
 
-            self.objeto1 = Tkin.Label(self.container1, text="Codigo:")
-            self.objeto1["font"] = ["bold"]
-            self.objeto1.pack(side=Tkin.LEFT)
-            self.objeto2 = Tkin.Label(self.container1, text="                                                 ")
-            self.objeto2["font"] = ["bold"]
-            self.objeto2.pack(side=Tkin.LEFT)
-            self.objeto3 = Tkin.Label(self.container1, text="Nome:")
-            self.objeto3["font"] = ["bold"]
-            self.objeto3.pack(side=Tkin.LEFT)
-            self.objeto4 = Tkin.Label(self.container1,
-                                      text="                                                                                                                 ")
-            self.objeto4["font"] = ["bold"]
-            self.objeto4.pack(side=Tkin.LEFT)
-            self.objeto5 = Tkin.Label(self.container1, text="Valor:")
-            self.objeto5["font"] = ["bold"]
-            self.objeto5.pack(side=Tkin.LEFT)
-            self.objeto6 = Tkin.Label(self.container1, text="                                              ")
-            self.objeto6["font"] = ["bold"]
-            self.objeto6.pack(side=Tkin.LEFT)
-            # fim
+        self.toolbar2.pack(side=Tkin.TOP, fill=Tkin.X)
 
-            # espaco com "inserir", "editar", "excluir" e "pesquisar"
+        self.container1 = Tkin.Frame(self)
+        self.container2 = Tkin.Frame(self, bg=self.cor3)
+        self.container3 = Tkin.Frame(self, bg=self.cor3)
+        self.container4 = Tkin.Frame(self, bg=self.cor3)
+        self.container1.pack(fill=Tkin.X)
+        self.container2.pack(side=Tkin.BOTTOM, fill=Tkin.X)
+        self.container3.pack(side=Tkin.BOTTOM, fill=Tkin.X)
+        self.container4.pack(side=Tkin.BOTTOM, fill=Tkin.X)
 
-            self.salto1 = Tkin.Label(self.container2, text="", bg=self.cor3)
-            self.salto1.pack(side=Tkin.LEFT)
+        self.objeto1 = Tkin.Label(self.container1, text="Codigo:")
+        self.objeto1["font"] = ["bold"]
+        self.objeto1.pack(side=Tkin.LEFT)
+        self.objeto2 = Tkin.Label(self.container1, text="                                                 ")
+        self.objeto2["font"] = ["bold"]
+        self.objeto2.pack(side=Tkin.LEFT)
+        self.objeto3 = Tkin.Label(self.container1, text="Nome:")
+        self.objeto3["font"] = ["bold"]
+        self.objeto3.pack(side=Tkin.LEFT)
+        self.objeto4 = Tkin.Label(self.container1,
+                                  text="                                                                                                                 ")
+        self.objeto4["font"] = ["bold"]
+        self.objeto4.pack(side=Tkin.LEFT)
+        self.objeto5 = Tkin.Label(self.container1, text="Valor:")
+        self.objeto5["font"] = ["bold"]
+        self.objeto5.pack(side=Tkin.LEFT)
+        self.objeto6 = Tkin.Label(self.container1, text="                                              ")
+        self.objeto6["font"] = ["bold"]
+        self.objeto6.pack(side=Tkin.LEFT)
+        # fim
 
-            self.espaco1 = Tkin.Label(self.container3,
-                                      text="                                                               ",
-                                      bg=self.cor3)
-            self.espaco1.pack(side=Tkin.LEFT)
-            self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd),
-                                       bg=self.cor3)
-            self.inserir["font"] = ['bold']
-            self.inserir['padx'] = 1
-            self.inserir['pady'] = 1
-            self.inserir.pack(side=Tkin.LEFT)
-            self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
-            self.espaco2.pack(side=Tkin.LEFT)
-            self.pesquisar1 = Tkin.Label(self.container3, text="Pesquisar: ", bg=self.cor3)
-            self.pesquisar1["font"] = ['bold']
-            self.pesquisar1.pack(side=Tkin.LEFT)
-            self.pesquisar2 = Tkin.Entry(self.container3)
-            self.pesquisar2["width"] = 25
-            self.pesquisar2["font"] = ("Arial", "10")
-            self.pesquisar2.pack(side=Tkin.LEFT)
-            pesquisado = self.pesquisar2.get()  # pesquisado = o que foi escrito no "Entry / barra de pesquisa"
-            self.espaco4 = Tkin.Label(self.container3, text=" ", bg=self.cor3)
-            self.espaco4.pack(side=Tkin.LEFT)
-            self.ok = Tkin.Button(self.container3, text="Ok", command=lambda: self.pesquisando(self.pesquisar2.get()),
+        # espaco com "inserir", "editar", "excluir" e "pesquisar"
+
+        self.salto1 = Tkin.Label(self.container2, text="", bg=self.cor3)
+        self.salto1.pack(side=Tkin.LEFT)
+
+        self.espaco1 = Tkin.Label(self.container3,
+                                  text="                                                               ",
                                   bg=self.cor3)
-            self.ok["font"] = ['bold']
-            self.ok['padx'] = 1
-            self.ok['pady'] = 1
-            self.ok.pack(side=Tkin.LEFT)
+        self.espaco1.pack(side=Tkin.LEFT)
+        self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd),
+                                   bg=self.cor3)
+        self.inserir["font"] = ['bold']
+        self.inserir['padx'] = 1
+        self.inserir['pady'] = 1
+        self.inserir.pack(side=Tkin.LEFT)
+        self.espaco2 = Tkin.Label(self.container3, text="                    ", bg=self.cor3)
+        self.espaco2.pack(side=Tkin.LEFT)
+        self.pesquisar1 = Tkin.Label(self.container3, text="Pesquisar: ", bg=self.cor3)
+        self.pesquisar1["font"] = ['bold']
+        self.pesquisar1.pack(side=Tkin.LEFT)
+        self.pesquisar2 = Tkin.Entry(self.container3)
+        self.pesquisar2["width"] = 25
+        self.pesquisar2["font"] = ("Arial", "10")
+        self.pesquisar2.pack(side=Tkin.LEFT)
+        pesquisado = self.pesquisar2.get()  # pesquisado = o que foi escrito no "Entry / barra de pesquisa"
+        self.espaco4 = Tkin.Label(self.container3, text=" ", bg=self.cor3)
+        self.espaco4.pack(side=Tkin.LEFT)
+        self.ok = Tkin.Button(self.container3, text="Ok", command=lambda: self.pesquisando(self.pesquisar2.get()),
+                              bg=self.cor3)
+        self.ok["font"] = ['bold']
+        self.ok['padx'] = 1
+        self.ok['pady'] = 1
+        self.ok.pack(side=Tkin.LEFT)
 
-            self.salto2 = Tkin.Label(self.container4, text="", bg=self.cor3)
-            self.salto2.pack(side=Tkin.LEFT)
-            # fim
-            self.canvas = None
-            # tabela dos itens
-            self.todos_apertado()
-
-
+        self.salto2 = Tkin.Label(self.container4, text="", bg=self.cor3)
+        self.salto2.pack(side=Tkin.LEFT)
+        # fim
+        self.canvas = None
+        # tabela dos itens
+        self.todos_apertado()
 
 #funcao que cria o canvas, deve ser chamada toda vez que o mesmo e atualizado
     def createCanvas(self):

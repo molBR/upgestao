@@ -10,7 +10,7 @@ class clienteCadastro():
 # Construtor
     def __init__(self):
         self.top = None
-        self.bd = db.Database(0)
+        self.bd = db.Database()
     #    self.FazTela()
 
 #Funcao de fechamento da janela

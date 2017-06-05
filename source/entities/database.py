@@ -6,12 +6,12 @@ class Database(object):
     dbConnect = None
     dbCursor = None
 
-    def __init__(self, loc):
-        if(loc==1):
-            self.dbConnect = sqlite3.connect('GutsDados.db')
-        else:
-            self.dbConnect = sqlite3.connect('../GutsDados.db')
-            #self.dbConnect = sqlite3.connect('source/GutsDados.db')
+    def __init__(self):
+        #if(loc==1):
+            #self.dbConnect = sqlite3.connect('GutsDados.db')
+        #else:
+            #self.dbConnect = sqlite3.connect('../GutsDados.db')
+        self.dbConnect = sqlite3.connect('source/GutsDados.db')
         self.dbCursor = self.dbConnect.cursor()
 
         self.tables = [

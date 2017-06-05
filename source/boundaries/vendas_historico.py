@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 import Tkinter as tk
+import os as os
 
 # funcao de teste
 def Teste():
@@ -196,8 +197,8 @@ class VendHist(tk.Frame):
 
     def populate1(self):  # comeco produtos
         info = 40
-        photo1 = tk.PhotoImage(file="eye.gif")
-        photo2 = tk.PhotoImage(file="x.gif")
+        photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
+        photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(info):
             if row % 2 == 0:
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)

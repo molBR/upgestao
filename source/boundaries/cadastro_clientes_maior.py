@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 import Tkinter as tk
+import os as os
+
 
 import cadastro_clientes_menor as cadClientMenor
 from source.entities import database as db
@@ -83,7 +85,7 @@ class CadClient(tk.Frame):
             status.pack(side=tk.BOTTOM, fill=tk.X)
             # fim
 
-            self.bd = db.Database(0)  # banco de dados
+            self.bd = db.Database()  # banco de dados
             print self.bd.selectCliente()
 
             cor3 = '#E6E6E6'
@@ -182,8 +184,8 @@ class CadClient(tk.Frame):
 
         '''Put in some fake data'''
         info = 20
-        photo1 = tk.PhotoImage(file="eye.gif")
-        photo2 = tk.PhotoImage(file="x.gif")
+        photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
+        photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(info):
             if row % 2 == 0:
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
