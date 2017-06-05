@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 import tkMessageBox
-from Tkinter import *
 
 from source.entities import tratamentos as tr
 
@@ -48,6 +47,7 @@ class TelaMenorDel():
             #self.top=Toplevel()
             self.top = True
             self.SendToTR(str(p1.getId()), p1.getNome(), p1.getValor_inic(), p1.getId_categoria(), bd)
+
             """
             # criacao e posicao dos widgets
             info = Frame(self.top)
