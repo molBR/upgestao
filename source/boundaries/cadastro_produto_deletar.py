@@ -14,8 +14,8 @@ class TelaMenorDel():
 
 #Fechamento da janela
     def CloseWindow(self):
-        self.top.destroy()
-        self.top.quit()
+        #self.top.destroy()
+        #self.top.quit()
         self.top = None
 
 #Janela de verificacao para a confirmacao da delecao
@@ -29,23 +29,26 @@ class TelaMenorDel():
         return self.top
 
 #Funcao que manda para tratamento para a verificacao de erros
-    def SendToTR(self,id,bd):
+    def SendToTR(self, id, nome, valor, tipo, bd):
         try:
-            tr.ProdutosCheck(id,bd)
+            p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
         except Exception as e:
            tkMessageBox.showerror("Erro encontrado", e.message)
         else:
-            self.JanelaPequena(id,bd)
+            self.JanelaPequena(id, bd)
         finally:
            self.CloseWindow()
 
 #Criacao da tela
-    def FazTela(self,bd):
+    def FazTela(self, bd, p1):
         if(self.top!=None):
             self.CloseWindow()
-            self.FazTela()
+            self.FazTela(bd, p1)
         else:
-            self.top=Toplevel()
+            #self.top=Toplevel()
+            self.top = True
+            self.SendToTR(str(p1.getId()), p1.getNome(), p1.getValor_inic(), p1.getId_categoria(), bd)
+            """
             # criacao e posicao dos widgets
             info = Frame(self.top)
             info.grid(sticky=N+S+W+E)
@@ -57,8 +60,8 @@ class TelaMenorDel():
             nome1['font']=['bold']
             nome1.grid(row=1, column=1, sticky=W)
 
-            nome2 = Entry(info)
-            nome2["width"]=40
+            nome2 =  Label(info, text= p1.getId())
+            nome2["width"]=20
             nome2["font"] = ("Arial", "10")
             nome2.grid(row=2, column=1) #fim id
 
@@ -66,7 +69,7 @@ class TelaMenorDel():
             salto2.grid(row=3, column=0)
 
             #comeco pronto
-            pronto = Button(info, text="Pronto", bg=self.cor1,command=lambda: self.SendToTR(nome2.get(),bd))
+            pronto = Button(info, text="Pronto", bg=self.cor1,command=lambda: self.SendToTR(str(p1.getId()), p1.getNome(), p1.getValor_inic(), p1.getId_categoria(), bd))
             pronto['font']=['bold']
             pronto['fg']='white'
             pronto['padx'] = 1
@@ -89,3 +92,4 @@ class TelaMenorDel():
             self.top.protocol("WM_DELETE_WINDOW", lambda:self.CloseWindow())
             self.top.mainloop()
             #fim
+            """

@@ -12,7 +12,7 @@ class TelaMenorEdit1():
     def __init__(self):
         self.top = None
         self.cor1 = '#D32F2F'
-        self.pe2 = cpe2.TelaMenorEdit2()
+        self.pe2 = cpe2.ProdutoEdicao()
 
 #Fechamento da janela
     def CloseWindow(self):
@@ -25,19 +25,19 @@ class TelaMenorEdit1():
         return self.top
 
 #Manda para tratamento para possiveis erros
-    def SendToTR(self,id,bd):
+    def SendToTR(self, id, bd):
         try:
             tr.ProdutosCheck(id,bd)
         except Exception as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
-            p1 = tr.ObjetivaProduto(id,bd)
+            p1 = tr.ObjetivaProduto(id, bd)
             self.pe2.FazTela(p1,bd)
         finally:
             self.CloseWindow()
 
 #Criacao da janela
-    def FazTela(self,bd):
+    def FazTela(self, bd, id):
         if(self.top!=None):
             self.CloseWindow()
             self.FazTela(bd)
@@ -54,16 +54,21 @@ class TelaMenorEdit1():
             nome1['font']=['bold']
             nome1.grid(row=1, column=1, sticky=W)
 
-            nome2 = Entry(info)
+            nome2 = Label(info, text= id)  # comeco codigo
             nome2["width"]=40
-            nome2["font"] = ("Arial", "10")
-            nome2.grid(row=2, column=1) #fim codigo
+            nome2['font'] = ("Arial", "10")
+            nome2.grid(row=2, column=1)
+
+            #nome2 = Entry(info)
+            #nome2["width"]=40
+            #nome2["font"] = ("Arial", "10")
+            #nome2.grid(row=2, column=1) #fim codigo
 
             salto2 = Label(info, text="")
             salto2.grid(row=3, column=0)
 
             #comeco pronto
-            pronto = Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(nome2.get(),bd))
+            pronto = Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(id, bd))
             pronto['font']=['bold']
             pronto['fg']='white'
             pronto['padx'] = 1

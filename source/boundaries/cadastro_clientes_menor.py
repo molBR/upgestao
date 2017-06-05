@@ -30,10 +30,12 @@ class clienteCadastro():
             tkMessageBox.showerror("Erro encontrado,e.message")
         else:
             self.bd.insertCliente(c1)
-
         self.CloseWindow()
 
     def FazTela(self):
+        #Condicional para que não sejam abertas duas janelas simultaneamente
+        if(self.top!=None):
+            return
 
         self.top = Toplevel()
         self.top.title('Guts\' Orçamento - Novo Cliente')

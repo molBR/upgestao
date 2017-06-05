@@ -6,9 +6,12 @@ import os as os
 
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
+import cadastro_produto_editar_2 as cadProdEdit
 import cadastro_produto_menor as cpm
+
 from source.entities import database as db
 from source.entities import tratamentos as tr
+from source.entities import produto as prod
 
 def Teste():
     print("Testado")
@@ -79,6 +82,7 @@ class CadProd (Tkin.Frame):
     def __init__(self, parent, controller):
         Tkin.Frame.__init__(self, parent)
         self.controller = controller
+        self.prodEdit = cadProdEdit.ProdutoEdicao()
         self.FazTela()
 
     def FazTela(self):
@@ -219,7 +223,7 @@ class CadProd (Tkin.Frame):
                                   text="                                                               ",
                                   bg=self.cor3)
         self.espaco1.pack(side=Tkin.LEFT)
-        self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(self.bd),
+        self.inserir = Tkin.Button(self.container3, text="Inserir", command=lambda: self.inserindo(),
                                    bg=self.cor3)
         self.inserir["font"] = ['bold']
         self.inserir['padx'] = 1
@@ -276,27 +280,27 @@ class CadProd (Tkin.Frame):
 #fim
 
 #Funcao chamada sempre que o botao inserir e apertado
-    def inserindo(self,bd):
-        self.tm.FazTela(bd)
+    def inserindo(self):
+        self.tm.FazTela(self.bd)
         if(self.tm.GetWindow()!=None):
             self.tm.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
+        self.populate(self.bd.selectProduto())
 #fim
 
 #Funcao chamada sempre que o botao editar eh apertado
-    def editando(self, bd):
-        self.te.FazTela(bd)
+    def editando(self, id):
+        self.prodEdit.FazTela(self.bd, prod.Produto.selectProdId(id, self.bd))
         if(self.te.GetWindow()!=None):
             self.te.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
+        self.populate(self.bd.selectProduto())
 #fim
 
 #Funcao chamada sempre que o botao deletar eh apertado
-    def deletando(self, bd):
-        self.td.FazTela(bd)
+    def deletando(self, id):
+        self.td.FazTela(self.bd, prod.Produto.selectProdId(id, self.bd))
         if (self.td.GetWindow() != None):
             self.td.GetWindow().wait_window()
-        self.populate(bd.selectProduto())
+        self.populate(self.bd.selectProduto())
 #
 
 #Funcao chamada sempre que o botao pesquisar eh apertado
@@ -314,8 +318,7 @@ class CadProd (Tkin.Frame):
                 self.populate(self.bd.selectProdutoIdAll(id))
 
 #Funcao que popula o canvas de dados, ele recebe por parametro os dados e formata-o
-    def populate(self,info):
-        '''Put in some fake data'''
+    def populate(self, info):
         cor1 = '#ffffff'
         cor2 = '#f0f0f0'
         self.deleteCanvas()
@@ -373,24 +376,18 @@ class CadProd (Tkin.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=3)
+
+        #Botão editar
         for row in range(len(info)):
-            if row % 2 == 0:
-                button1 = Tkin.Button(self.frame, width=16, height=16, image=self.photo1, relief=Tkin.FLAT, command=Teste)
-                button1.grid(row=row, column=4)
-                button1.image = self.photo1
-            else:
-                button1 = Tkin.Button(self.frame, width=16, height=16, image=self.photo1, relief=Tkin.FLAT, command=Teste)
-                button1.grid(row=row, column=4)
-                button1.image = self.photo1
+            button1 = Tkin.Button(self.frame, width=16, height=16, image=self.photo1, relief=Tkin.FLAT, command= lambda row=row: self.editando(info[row][0]))
+            button1.grid(row=row, column=4)                                                                 #usando "lambda row=row:" é um artificio para que info[row] não acesse somente a
+            button1.image = self.photo1                                                                     #ultima posição de row
+
+        # Botão excluir
         for row in range(len(info)):
-            if row % 2 == 0:
-                button2 = Tkin.Button(self.frame, width=20, height=20, image=self.photo2, relief=Tkin.FLAT, command=Teste)
-                button2.grid(row=row, column=5)
-                button2.image = self.photo2
-            else:
-                button2 = Tkin.Button(self.frame, width=20, height=20, image=self.photo2, relief=Tkin.FLAT, command=Teste)
-                button2.grid(row=row, column=5)
-                button2.image = self.photo2
+            button2 = Tkin.Button(self.frame, width=20, height=20, image=self.photo2, relief=Tkin.FLAT, command= lambda row=row: self.deletando(info[row][0]))
+            button2.grid(row=row, column=5)
+            button2.image = self.photo2
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

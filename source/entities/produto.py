@@ -1,5 +1,7 @@
 ﻿# encoding: utf-8
 
+from source.entities import database as db
+
 class Produto(object):
     def __init__(self):
         self.id = -1
@@ -15,6 +17,11 @@ class Produto(object):
         self.data_insert = data_insert
         self.id_categoria = id_categoria
 
+    @staticmethod
+    def selectProdId(id, bd):
+        auxInfo = bd.selectProdutoId(id)
+        auxProd = Produto(auxInfo[0], auxInfo[1], auxInfo[2], auxInfo[3], auxInfo[4])
+        return auxProd
 
     def getId(self):
         return self.id

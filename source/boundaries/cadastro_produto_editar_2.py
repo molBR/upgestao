@@ -6,7 +6,7 @@ import Tkinter as tk
 from source.entities import tratamentos as tr
 
 
-class TelaMenorEdit2():
+class ProdutoEdicao():
 #Construtor
     def __init__(self):
         self.top = None
@@ -36,7 +36,7 @@ class TelaMenorEdit2():
             self.CloseWindow()
 
 #Criacao de telas
-    def FazTela(self,p1,bd):
+    def FazTela(self, bd, p1):
         if(self.top!=None):
             self.CloseWindow()
             self.FazTela()
@@ -62,9 +62,9 @@ class TelaMenorEdit2():
 
             id1 = tk.Label(info, text="Código:") #comeco id
             id1['font'] = ['bold']
-            id1.grid(row=1, column=1, sticky=W)
+            id1.grid(row=1, column=1, sticky=tk.W)
 
-            id2 = tk.Label(info,text=p1.getId())
+            id2 = tk.Label(info,text = p1.getId())
             id2["width"] = 20
             id2["font"] = ("Arial", "10")
             id2.grid(row=2, column=1) #fim id
@@ -74,7 +74,7 @@ class TelaMenorEdit2():
 
             nome1 = tk.Label(info, text="Nome:") #comeco nome
             nome1['font']=['bold']
-            nome1.grid(row=4, column=1, sticky=W)
+            nome1.grid(row=4, column=1, sticky=tk.W)
 
             nome2 = tk.Entry(info)
             nome2.insert(0,p1.getNome())
@@ -87,7 +87,7 @@ class TelaMenorEdit2():
 
             valor1 = tk.Label(info, text="Valor:") #comeco valor
             valor1['font']=['bold']
-            valor1.grid(row=7, column=1, sticky=W)
+            valor1.grid(row=7, column=1, sticky=tk.W)
 
             valor2 = tk.Entry(info)
             valor2.insert(0,p1.getValor_inic())
@@ -108,7 +108,7 @@ class TelaMenorEdit2():
             salto5.grid(row=11, column=0)
 
             #comeco pronto
-            pronto = tk.Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(str(p1.getId()),nome2.get(),valor2.get(),variable.get(),bd))
+            pronto = tk.Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(str(p1.getId()), nome2.get(), valor2.get(), variable.get(), bd))
             pronto['font']=['bold']
             pronto['fg']='white'
             pronto['padx'] = 1
