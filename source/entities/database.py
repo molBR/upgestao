@@ -84,15 +84,6 @@ class Database(object):
         self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Cliente';")
         clienteExistence = self.dbCursor.fetchall()
 
-        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Endereco';")
-        enderecoExistence = self.dbCursor.fetchall()
-
-        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Telefone';")
-        telefoneExistence = self.dbCursor.fetchall()
-
-        self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Email';")
-        emailExistence = self.dbCursor.fetchall()
-
         self.dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Venda';")
         vendaExistence = self.dbCursor.fetchall()
 
@@ -111,20 +102,14 @@ class Database(object):
             self.dbCursor.execute(self.tables[1])
         if(not clienteExistence):
             self.dbCursor.execute(self.tables[2])
-        if(not enderecoExistence):
-            self.dbCursor.execute(self.tables[3])
-        if (not telefoneExistence):
-            self.dbCursor.execute(self.tables[4])
-        if (not emailExistence):
-            self.dbCursor.execute(self.tables[5])
         if(not vendaExistence):
-            self.dbCursor.execute(self.tables[6])
+            self.dbCursor.execute(self.tables[3])
         if(not prodVendExistence):
-            self.dbCursor.execute(self.tables[7])
+            self.dbCursor.execute(self.tables[4])
         if (not modelPacExistence):
-            self.dbCursor.execute(self.tables[8])
+            self.dbCursor.execute(self.tables[5])
         if (not relModelPacProdExistence):
-            self.dbCursor.execute(self.tables[9])
+            self.dbCursor.execute(self.tables[6])
 
 #Seleciona todas as categorias
     def selectCategoria(self):
@@ -141,24 +126,6 @@ class Database(object):
 #Seleciona todos os clientes
     def selectCliente(self):
         self.dbCursor.execute('SELECT * FROM Cliente ORDER BY id')
-        aux = self.dbCursor.fetchall()
-        return aux
-
-#Seleciona todos os enderecos
-    def selectEndereco(self):
-        self.dbCursor.execute('SELECT * FROM Endereco ORDER BY id')
-        aux = self.dbCursor.fetchall()
-        return aux
-
-# Seleciona todos os telefones
-    def selectTelefone(self):
-        self.dbCursor.execute('SELECT * FROM Telefone ORDER BY id')
-        aux = self.dbCursor.fetchall()
-        return aux
-
-# Seleciona todos os emails
-    def selectEmail(self):
-        self.dbCursor.execute('SELECT * FROM Email ORDER BY id')
         aux = self.dbCursor.fetchall()
         return aux
 
@@ -307,27 +274,6 @@ class Database(object):
                     + dadosCliente[i][1] + '\'), (\'' + str(dadosCliente[i][2]) + '\'), (\'' \
                     + dadosCliente[i][3] + '\'), (\'' + dadosCliente[i][4] + '\'), (\'' \
                     + dadosCliente[i][5] + '\'));' + '\n'
-
-        # Insert Endereco
-        dadosEndereco = self.selectEndereco()
-        sizeEndereco = len(dadosEndereco)
-        for i in range(0, sizeEndereco):
-            buffer = buffer + 'INSERT INTO Endereco VALUES ((' + str(dadosEndereco[i][0]) + '), (\'' \
-                    + dadosEndereco[i][1] + '\'), (' + str(dadosEndereco[i][2]) + '));' + '\n'
-
-        # Insert Telefone
-        dadosTelefone = self.selectTelefone()
-        sizeTelefone = len(dadosTelefone)
-        for i in range(0, sizeTelefone):
-            buffer = buffer + 'INSERT INTO Telefone VALUES ((' + str(dadosTelefone[i][0]) + '), (\'' \
-                    + dadosTelefone[i][1] + '\'), (' + str(dadosTelefone[i][2]) + '));' + '\n'
-
-        # Insert Email
-        dadosEmail = self.selectEmail()
-        sizeEmail = len(dadosEmail)
-        for i in range(0, sizeEmail):
-            buffer = buffer + 'INSERT INTO Email VALUES ((' + str(dadosEmail[i][0]) + '), (\'' \
-                    + dadosEmail[i][1] + '\'), (' + str(dadosEmail[i][2]) + '));' + '\n'
 
         # Insert Venda
         dadosVenda = self.selectVenda()
