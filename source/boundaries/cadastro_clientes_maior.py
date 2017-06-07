@@ -3,7 +3,6 @@
 import Tkinter as tk
 import os as os
 
-
 import cadastro_clientes_menor as cadClientMenor
 from source.entities import database as db
 
@@ -183,10 +182,10 @@ class CadClient(tk.Frame):
     def populate1(self,info):
 
         '''Put in some fake data'''
-        info = 20
+        #info = 20
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
-        for row in range(info):
+        for row in range(0,len(info)):
             if row % 2 == 0:
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
                 button1.grid(row=row, column=0)
@@ -195,10 +194,10 @@ class CadClient(tk.Frame):
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
                 button1.grid(row=row, column=0)
                 button1.image = photo1
-        for row in range(info):
+        for row in range(0,len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -207,14 +206,14 @@ class CadClient(tk.Frame):
                 ent.grid(row=row, column=1)
             else:
                 cor = '#f0f0f0'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
-        for row in range(info):
+        for row in range(0,len(info)):
             if row % 2 == 0:
                 button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
                 button2.grid(row=row, column=2)
