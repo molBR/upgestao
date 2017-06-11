@@ -107,7 +107,8 @@ class Database(object):
         return aux
 
     def selectClienteId(self,id):
-        self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id',id)
+        value = [id]
+        self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id',value)
         aux = self.dbCursor.fetchall()
         return aux
 #Seleciona todas as vendas

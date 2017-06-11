@@ -52,7 +52,7 @@ def ClientesReceive(nome,endereco,telefone,email):
     except Erro as e:
         raise e
     else:
-        agora = datetime.now().strftime('%H:%M:%S')
+        agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
         c1 = cl.Cliente(nome,agora,endereco,telefone,email)
         return c1
 

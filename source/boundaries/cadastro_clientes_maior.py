@@ -19,8 +19,8 @@ class CadClient(tk.Frame):
         self.clientMenor = cadClientMenor.clienteCadastro()
         self.controller = controller
         self.FazTela()
-    #def visualiza(self,id):
-
+    def visualiza(self,id):
+        self.populate2(self.bd.selectClienteId(id))
 
     def cadastraClin(self):
         self.clientMenor.FazTela()
@@ -228,7 +228,7 @@ class CadClient(tk.Frame):
                 button1.grid(row=row, column=0)
                 button1.image = photo1
             else:
-                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=lambda row=row: self.visualiza(info[row][0]))
                 button1.grid(row=row, column=0)
                 button1.image = photo1
         for row in range(0,len(info)):
@@ -272,9 +272,8 @@ class CadClient(tk.Frame):
         nome = info[0][1]
         endereco = info[0][3]
         data = info[0][2]
-        email = info[0][3]
-        telefone = info[0][5]
-        celular = info[0][5]
+        email = info[0][5]
+        telefone = info[0][4]
         salto1 = tk.Label(self.pacote2[1], text="               ", bg=cor)
         salto1.grid(row=0, column=0)
 
@@ -347,17 +346,6 @@ class CadClient(tk.Frame):
 
         salto6 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto6.grid(row=15, column=0)
-
-        celular1 = tk.Label(self.pacote2[1], text="Celular:", bg=cor)
-        celular1['font'] = ['bold']
-        celular1.grid(row=16, column=1, sticky=tk.W)
-        celular2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
-        celular2["width"] = 58
-        celular2["font"] = ['bold']
-        var = tk.StringVar()
-        var.set(celular)
-        celular2.config(textvariable=var, relief='flat')
-        celular2.grid(row=17, column=1)
 
         salto7 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto7.grid(row=18, column=0)
