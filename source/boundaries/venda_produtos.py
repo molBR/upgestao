@@ -2,10 +2,10 @@
 
 import Tkinter as tk
 import os as os
+import tkMessageBox
 
 from source.entities import database as db
 from source.entities import tratamentos as tr
-import tkMessageBox
 
 
 # funcao de teste
@@ -499,15 +499,16 @@ class VendProd(tk.Frame):
                     ent.config(textvariable=var, relief='flat')
                     ent.grid(row=row, column=3)
             for row in range(len(info)):
-                if row % 2 == 0:
-                    button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
-                    button1.grid(row=row, column=4)
-                    button1.image = photo1
-                else:
-                    button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
-                    button1.grid(row=row, column=4)
-                    button1.image = photo1
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.selecionaProduto(row))
+                button1.grid(row=row, column=4)
+                button1.image = photo1
             #fim produtos
+
+    def selecionaProduto(self, row):
+        self.listaSelec.append(self.listaProduto[row])
+        self.todos_apertado()
+        self.listaSelec = tr.mergeSort(self.listaSelec)
+        self.populate2(self.listaSelec)
 
     def onFrameConfigure1(self, event): #comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
