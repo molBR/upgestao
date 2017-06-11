@@ -62,10 +62,7 @@ class CadClient(tk.Frame):
 
 
     def FazTela(self):
-
             # menu principal
-
-
             toolbar1 = tk.Frame(self, bg="white")
             menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
                                command=lambda: self.controller.show_frame("menuInicial"))
