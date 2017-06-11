@@ -193,6 +193,11 @@ class Database(object):
         x = self.dbCursor.fetchone()
         return x[0]
 
+    def selectClientNameId(self,id):
+        value = [id]
+        self.dbCursor.execute('SELECT nome_cliente FROM Cliente WHERE id = ?', value)
+        x = self.dbCursor.fetchone()
+        return x[0]
 #Verifica se o produto existe pelo seu id
     def ExistsProduto(self,id):
         value = [id]
@@ -209,6 +214,10 @@ class Database(object):
         self.dbCursor.execute('DELETE FROM Produto WHERE id = ?', value)
         self.dbConnect.commit()
 
+    def deleteCliente(self,id):
+        value = [id]
+        self.dbCursor.execute('DELETE FROM Cliente WHERE id = ?', value)
+        self.dbConnect.commit()
 #Deleta a categoria dado seu id         O CERTO É VERIFICAR SE ALGUM PRODUTO ESTÁ ATRELADA A CATEGORIA!!!!
     def deleteCategoria(self, id):
         value = [id]

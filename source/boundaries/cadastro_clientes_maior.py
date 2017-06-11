@@ -2,7 +2,7 @@
 
 import Tkinter as tk
 import os as os
-
+import tkMessageBox
 import cadastro_clientes_menor as cadClientMenor
 from source.entities import database as db
 
@@ -21,6 +21,16 @@ class CadClient(tk.Frame):
         self.FazTela()
     def visualiza(self,id):
         self.populate2(self.bd.selectClienteId(id))
+
+    def deletar(self,id):
+        self.JanelaPequena(id)
+        self.populate1(self.bd.selectCliente())
+        self.populate2(self.bd.selectCliente())
+
+    def JanelaPequena(self,id):
+        x = self.bd.selectClientNameId(id)
+        if tkMessageBox.askokcancel("Deletar", "Deseja mesmo deletar " + str(x) + "?"):
+            self.bd.deleteCliente(id)
 
     def cadastraClin(self):
         self.clientMenor.FazTela()
@@ -252,11 +262,11 @@ class CadClient(tk.Frame):
                 ent.grid(row=row, column=1)
         for row in range(0,len(info)):
             if row % 2 == 0:
-                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=lambda row=row: self.deletar(info[row][0]))
                 button2.grid(row=row, column=2)
                 button2.image = photo2
             else:
-                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=lambda row=row: self.deletar(info[row][0]))
                 button2.grid(row=row, column=2)
                 button2.image = photo2
 
