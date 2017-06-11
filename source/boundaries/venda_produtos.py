@@ -409,7 +409,6 @@ class VendProd(tk.Frame):
         self.listaSelec = tr.mergeSort(self.listaSelec)
         self.populate2(self.listaSelec)
 
-
     def RemoveCheck(self):
         print self.listaSelec[0][0]
         print self.listaCheckbox2
@@ -584,16 +583,15 @@ class VendProd(tk.Frame):
                     ent1.config(textvariable=var, relief='flat')
                     ent1.grid(row=row, column=3)
             for row in range(len(info)):
-                if row % 2 == 0:
-                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                    button2.grid(row=row, column=4)
-                    button2.image = photo2
-                else:
-                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                    button2.grid(row=row, column=4)
-                    button2.image = photo2
+                button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command= lambda row=row: self.deselecionaProduto(row))
+                button2.grid(row=row, column=4)
+                button2.image = photo2
         #fim
 
+    def deselecionaProduto(self, row):
+        self.listaSelec.pop(row)
+        del self.listaCheckbox2
+        self.todos_apertado()
 
     def onFrameConfigure2(self, event): #comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
