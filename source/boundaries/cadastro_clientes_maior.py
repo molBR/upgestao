@@ -3,6 +3,7 @@
 import Tkinter as tk
 import os as os
 import tkMessageBox
+
 import cadastro_clientes_menor as cadClientMenor
 from source.entities import database as db
 
