@@ -378,7 +378,6 @@ class VendProd(tk.Frame):
         self.salto2.pack(side=tk.LEFT)
     # fim
 
-
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
             pacote[0].destroy()
@@ -392,7 +391,7 @@ class VendProd(tk.Frame):
         #Frame.__init__(self, self.root)
         pacote[0] = tk.Canvas(self, borderwidth=0, background="#ffffff")
         pacote[1] = tk.Frame(pacote[0], background="#f0f0f0")
-        pacote[2] = tk.Scrollbar(self, orient="vertical", command=pacote[0].yview)
+        pacote[2] = tk.Scrollbar(self, orient="vertical", command = pacote[0].yview)
         pacote[0].configure(yscrollcommand=pacote[2].set)
 
         pacote[0].pack(side="left", fill="both", expand=True)
