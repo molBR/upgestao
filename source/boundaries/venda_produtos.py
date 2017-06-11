@@ -245,10 +245,10 @@ class VendProd(tk.Frame):
         self.container4.pack(side=tk.BOTTOM, fill=tk.X)
 
     #"cabecalho" da tabela dos itens
-        self.objeto1 = tk.Label(self.container1, text="Codigo:")
+        self.objeto1 = tk.Label(self.container1, text="Codigo\t")
         self.objeto1["font"] = ["bold"]
         self.objeto1.pack(side=tk.LEFT)
-        self.objeto2 = tk.Label(self.container1, text="                  ")
+        self.objeto2 = tk.Label(self.container1, text= "\t")
         self.objeto2["font"] = ["bold"]
         self.objeto2.pack(side=tk.LEFT)
         self.objeto3 = tk.Label(self.container1, text="Nome")
