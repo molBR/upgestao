@@ -18,14 +18,21 @@ def Teste():
 
 # menu principal
 class VendProd(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.listaProduto = []
-        self.listaSelec = []
-        self.SomaQuant = []
+        self.bd = db.Database()
+
+        self.fechaTela = tk.FALSE
+        self.resetValues()
         self.FazTela()
+
+    def resetValues(self):
+        self.listaProduto = []
+        self.listaProduto = self.bd.selectProduto()
+
+        self.listaSelec = []
+        self.SomaQuant = 0
 
     def todos_apertado(self):
         self.todos.config(relief=tk.SUNKEN, background=self.cor2)
@@ -133,13 +140,6 @@ class VendProd(tk.Frame):
                 self.populate2(self.listaSelec)
 
     def FazTela(self):
-        self.fechaTela = tk.FALSE
-        self.bd = db.Database()  # banco de dados
-        self.root = self.controller
-        self.listaProduto = self.bd.selectProduto()
-        #for widget in self.root.winfo_children():
-        #    widget.destroy()
-
         # menu
         toolbar1 = tk.Frame(self, bg="white")
 
@@ -326,11 +326,11 @@ class VendProd(tk.Frame):
 
         self.espaco1 = tk.Label(self.container3, text="               ", bg=self.cor3)
         self.espaco1.pack(side=tk.LEFT)
-        self.selecionar = tk.Button(self.container3, text="Selecionar", command=lambda:self.PegaCheck(), bg=self.cor3)
-        self.selecionar["font"] = ['bold']
-        self.selecionar['padx'] = 1
-        self.selecionar['pady'] = 1
-        self.selecionar.pack(side=tk.LEFT)
+        #self.selecionar = tk.Button(self.container3, text="Selecionar", command=lambda:self.PegaCheck(), bg=self.cor3)
+        #self.selecionar["font"] = ['bold']
+        #self.selecionar['padx'] = 1
+        #self.selecionar['pady'] = 1
+        #self.selecionar.pack(side=tk.LEFT)
         self.espaco2 = tk.Label(self.container3, text="           ", bg=self.cor3)
         self.espaco2.pack(side=tk.LEFT)
         self.pesquisar1 = tk.Label(self.container3, text="Pesquisar: ", bg=self.cor3)
@@ -349,11 +349,11 @@ class VendProd(tk.Frame):
         self.ok.pack(side=tk.LEFT)
         self.espaco4 = tk.Label(self.container3, text="                     ", bg=self.cor3)
         self.espaco4.pack(side=tk.LEFT)
-        self.remover = tk.Button(self.container3, text="Remover", command=lambda:self.RemoveCheck(), bg=self.cor3)
-        self.remover["font"] = ['bold']
-        self.remover['padx'] = 1
-        self.remover['pady'] = 1
-        self.remover.pack(side=tk.LEFT)
+        #self.remover = tk.Button(self.container3, text="Remover", command=lambda:self.RemoveCheck(), bg=self.cor3)
+        #self.remover["font"] = ['bold']
+        #self.remover['padx'] = 1
+        #self.remover['pady'] = 1
+        #self.remover.pack(side=tk.LEFT)
         self.espaco5 = tk.Label(self.container3, text="                             ", bg=self.cor3)
         self.espaco5.pack(side=tk.LEFT)
         self.total1 = tk.Label(self.container3, text="Total", bg=self.cor3)
@@ -378,7 +378,6 @@ class VendProd(tk.Frame):
         self.salto2.pack(side=tk.LEFT)
     # fim
 
-
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
             pacote[0].destroy()
@@ -388,11 +387,11 @@ class VendProd(tk.Frame):
         return
 
     #  self.pacote1 = [self.canvas1,self.frame1,self.vsb1]
-    def createCanvas(self,pacote):
+    def createCanvas(self, pacote):
         #Frame.__init__(self, self.root)
         pacote[0] = tk.Canvas(self, borderwidth=0, background="#ffffff")
         pacote[1] = tk.Frame(pacote[0], background="#f0f0f0")
-        pacote[2] = tk.Scrollbar(self, orient="vertical", command=pacote[0].yview)
+        pacote[2] = tk.Scrollbar(self, orient="vertical", command = pacote[0].yview)
         pacote[0].configure(yscrollcommand=pacote[2].set)
 
         pacote[0].pack(side="left", fill="both", expand=True)
@@ -401,6 +400,7 @@ class VendProd(tk.Frame):
                                   tags=pacote[3])
         pacote[1].bind("<Configure>", pacote[4])
 
+    """
     def PegaCheck(self):
         for i in range(len(self.listaProduto)):
             if(self.listaCheckbox[i].get()==1):
@@ -409,10 +409,9 @@ class VendProd(tk.Frame):
         self.listaSelec = tr.mergeSort(self.listaSelec)
         self.populate2(self.listaSelec)
 
-
     def RemoveCheck(self):
-        print self.listaSelec[0][0]
-        print self.listaCheckbox2
+        #print self.listaSelec[0][0]
+        #print self.listaCheckbox2
         aux = 0
         for i in range(len(self.listaSelec)):
             if(self.listaCheckbox2[i].get()==1):
@@ -420,14 +419,15 @@ class VendProd(tk.Frame):
                 aux = aux + 1
         del self.listaCheckbox2
         self.todos_apertado()
-
+    """
 
     def populate1(self,info): #comeco produtos
         self.deleteCanvas(self.pacote1)
         self.createCanvas(self.pacote1)
-        self.listaCheckbox = []
+        #self.listaCheckbox = []
         photo1 = tk.PhotoImage(file=os.getcwd() + "/source/images/arrow.gif")
         if(info!=None):
+            """
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -440,7 +440,7 @@ class VendProd(tk.Frame):
                     c = tk.Checkbutton(self.pacote1[1], variable=var, background=cor)
                     c.grid(row=row, column=0)
                 self.listaCheckbox.append(var)
-
+            """
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -517,9 +517,10 @@ class VendProd(tk.Frame):
     def populate2(self,info): #comeco venda
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
-        self.listaCheckbox2 = []
+        #self.listaCheckbox2 = []
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         if(info!=None):
+            """
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -532,6 +533,7 @@ class VendProd(tk.Frame):
                     c = tk.Checkbutton(self.pacote2[1], variable=var, background=cor)
                     c.grid(row=row, column=0)
                 self.listaCheckbox2.append(var)
+            """
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -584,16 +586,15 @@ class VendProd(tk.Frame):
                     ent1.config(textvariable=var, relief='flat')
                     ent1.grid(row=row, column=3)
             for row in range(len(info)):
-                if row % 2 == 0:
-                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                    button2.grid(row=row, column=4)
-                    button2.image = photo2
-                else:
-                    button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                    button2.grid(row=row, column=4)
-                    button2.image = photo2
+                button2 = tk.Button(self.pacote2[1], width=20, height=20, image=photo2, relief=tk.FLAT, command= lambda row=row: self.deselecionaProduto(row))
+                button2.grid(row=row, column=4)
+                button2.image = photo2
         #fim
 
+    def deselecionaProduto(self, row):
+        self.listaSelec.pop(row)
+        #del self.listaCheckbox2
+        self.todos_apertado()
 
     def onFrameConfigure2(self, event): #comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
