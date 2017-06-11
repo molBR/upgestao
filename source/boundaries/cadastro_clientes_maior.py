@@ -16,12 +16,46 @@ class CadClient(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.clientMenor = cadClientMenor.clienteCadastro()
         self.controller = controller
         self.FazTela()
+    #def visualiza(self,id):
+
+
+    def cadastraClin(self):
+        self.clientMenor.FazTela()
+        if(self.clientMenor.GetWindow()!=None):
+            self.clientMenor.GetWindow().wait_window()
+        self.populate1(self.bd.selectCliente())
+        self.populate2(self.bd.selectCliente())
+
+    def deleteCanvas(self,pacote):
+        if pacote[0] != None:
+            pacote[0].destroy()
+            pacote[1].destroy()
+            pacote[2].destroy()
+            pacote[0] = None
+        return
+
+    def createCanvas(self,pacote):
+        #Frame.__init__(self, self.root)
+        pacote[0] = tk.Canvas(self, borderwidth=0, background="#ffffff")
+        pacote[1] = tk.Frame(pacote[0], background="#ffffff")
+        pacote[2] = tk.Scrollbar(self, orient="vertical", command=pacote[0].yview)
+        pacote[0].configure(yscrollcommand=pacote[2].set)
+
+        pacote[0].pack(side="left", fill="both", expand=True)
+        pacote[2].pack(side="left", fill="y")
+        pacote[0].create_window((4,4), window=pacote[1], anchor="nw",
+                                tags=pacote[3])
+        pacote[1].bind("<Configure>", pacote[4])
+
 
     def FazTela(self):
 
             # menu principal
+
+
             toolbar1 = tk.Frame(self, bg="white")
             menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
                                command=lambda: self.controller.show_frame("menuInicial"))
@@ -91,7 +125,7 @@ class CadClient(tk.Frame):
             info = 53
 
             #Criação da classe de tela menor de cadastro de cliente
-            clientMenor = cadClientMenor.clienteCadastro()
+
 
 
             self.container1 = tk.Frame(self)
@@ -121,7 +155,7 @@ class CadClient(tk.Frame):
                                     bg=cor3)
             self.espaco1.pack(side=tk.LEFT)
             #self.formCadastro = tk.Toplevel()
-            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: clientMenor.FazTela(),
+            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: self.cadastraClin(),
                                       bg=cor3)
             self.cadastro["font"] = ['bold']
             self.cadastro['padx'] = 1
@@ -161,7 +195,7 @@ class CadClient(tk.Frame):
                                        tags="self.frame1")
 
             self.frame1.bind("<Configure>", self.onFrameConfigure1)
-
+            self.pacote1 = [self.canvas1, self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
             self.populate1(self.bd.selectCliente())
 
             #Frame.__init__(self, self.root)
@@ -176,29 +210,32 @@ class CadClient(tk.Frame):
                                        tags="self.frame2")
 
             self.frame2.bind("<Configure>", self.onFrameConfigure2)
-
+            self.pacote2 = [self.canvas2,self.frame2,self.vsb2,"self.frame2",self.onFrameConfigure2]
             self.populate2(self.bd.selectCliente())
 
     def populate1(self,info):
 
         '''Put in some fake data'''
         #info = 20
+        self.deleteCanvas(self.pacote1)
+        self.createCanvas(self.pacote1)
+
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(0,len(info)):
             if row % 2 == 0:
-                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.visualiza(info[row][0]))
                 button1.grid(row=row, column=0)
                 button1.image = photo1
             else:
-                button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
                 button1.grid(row=row, column=0)
                 button1.image = photo1
         for row in range(0,len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
+                ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -207,7 +244,7 @@ class CadClient(tk.Frame):
             else:
                 cor = '#f0f0f0'
                 t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=50)
+                ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=50)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -215,43 +252,36 @@ class CadClient(tk.Frame):
                 ent.grid(row=row, column=1)
         for row in range(0,len(info)):
             if row % 2 == 0:
-                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
                 button2.grid(row=row, column=2)
                 button2.image = photo2
             else:
-                button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
                 button2.grid(row=row, column=2)
                 button2.image = photo2
 
     def onFrameConfigure1(self, event):
         '''Reset the scroll region to encompass the inner frame'''
-        self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
+        self.pacote1[0].configure(scrollregion=self.pacote1[0].bbox("all"))
 
-    # Funcao chamada sempre que o botao inserir e apertado
-    def inserindo(self):
-        self.tm.FazTela()
-        if (self.tm.GetWindow() != None):
-            self.tm.GetWindow().wait_window()
-        #self.populate(bd.selectProduto())
-
-    # fim
 
     def populate2(self,info):
-        cor = '#fafafa'
+        self.deleteCanvas(self.pacote2)
+        self.createCanvas(self.pacote2)
+        cor = '#ffffff'
         nome = info[0][1]
         endereco = info[0][3]
         data = info[0][2]
         email = info[0][3]
         telefone = info[0][5]
         celular = info[0][5]
-
-        salto1 = tk.Label(self.frame2, text="               ", bg=cor)
+        salto1 = tk.Label(self.pacote2[1], text="               ", bg=cor)
         salto1.grid(row=0, column=0)
 
-        nome1 = tk.Label(self.frame2, text="Nome:", bg=cor)
+        nome1 = tk.Label(self.pacote2[1], text="Nome:", bg=cor)
         nome1['font'] = ['bold']
         nome1.grid(row=1, column=1, sticky=tk.W)
-        nome2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        nome2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         nome2["width"] = 58
         nome2["font"] = ['bold']
         var = tk.StringVar()
@@ -259,13 +289,13 @@ class CadClient(tk.Frame):
         nome2.config(textvariable=var, relief='flat')
         nome2.grid(row=2, column=1)
 
-        salto2 = tk.Label(self.frame2, text="", bg=cor)
+        salto2 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto2.grid(row=3, column=0)
 
-        endereco1 = tk.Label(self.frame2, text="Endereco:", bg=cor)
+        endereco1 = tk.Label(self.pacote2[1], text="Endereco:", bg=cor)
         endereco1['font'] = ['bold']
         endereco1.grid(row=4, column=1, sticky=tk.W)
-        endereco2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        endereco2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         endereco2["width"] = 58
         endereco2["font"] = ['bold']
         var = tk.StringVar()
@@ -273,13 +303,13 @@ class CadClient(tk.Frame):
         endereco2.config(textvariable=var, relief='flat')
         endereco2.grid(row=5, column=1)
 
-        salto3 = tk.Label(self.frame2, text="", bg=cor)
+        salto3 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto3.grid(row=6, column=0)
 
-        data1 = tk.Label(self.frame2, text="Data:", bg=cor)
+        data1 = tk.Label(self.pacote2[1], text="Data:", bg=cor)
         data1['font'] = ['bold']
         data1.grid(row=7, column=1, sticky=tk.W)
-        data2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        data2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         data2["width"] = 58
         data2["font"] = ['bold']
         var = tk.StringVar()
@@ -287,13 +317,13 @@ class CadClient(tk.Frame):
         data2.config(textvariable=var, relief='flat')
         data2.grid(row=8, column=1)
 
-        salto4 = tk.Label(self.frame2, text="", bg=cor)
+        salto4 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto4.grid(row=9, column=0)
 
-        email1 = tk.Label(self.frame2, text="Email:", bg=cor)
+        email1 = tk.Label(self.pacote2[1], text="Email:", bg=cor)
         email1['font'] = ['bold']
         email1.grid(row=10, column=1, sticky=tk.W)
-        email2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        email2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         email2["width"] = 58
         email2["font"] = ['bold']
         var = tk.StringVar()
@@ -301,13 +331,13 @@ class CadClient(tk.Frame):
         email2.config(textvariable=var, relief='flat')
         email2.grid(row=11, column=1)
 
-        salto5 = tk.Label(self.frame2, text="", bg=cor)
+        salto5 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto5.grid(row=12, column=0)
 
-        telefone1 = tk.Label(self.frame2, text="Telefone:", bg=cor)
+        telefone1 = tk.Label(self.pacote2[1], text="Telefone:", bg=cor)
         telefone1['font'] = ['bold']
         telefone1.grid(row=13, column=1, sticky=tk.W)
-        telefone2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        telefone2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         telefone2["width"] = 58
         telefone2["font"] = ['bold']
         var = tk.StringVar()
@@ -315,13 +345,13 @@ class CadClient(tk.Frame):
         telefone2.config(textvariable=var, relief='flat')
         telefone2.grid(row=14, column=1)
 
-        salto6 = tk.Label(self.frame2, text="", bg=cor)
+        salto6 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto6.grid(row=15, column=0)
 
-        celular1 = tk.Label(self.frame2, text="Celular:", bg=cor)
+        celular1 = tk.Label(self.pacote2[1], text="Celular:", bg=cor)
         celular1['font'] = ['bold']
         celular1.grid(row=16, column=1, sticky=tk.W)
-        celular2 = tk.Entry(self.frame2, text=nome, bg=cor)
+        celular2 = tk.Entry(self.pacote2[1], text=nome, bg=cor)
         celular2["width"] = 58
         celular2["font"] = ['bold']
         var = tk.StringVar()
@@ -329,11 +359,11 @@ class CadClient(tk.Frame):
         celular2.config(textvariable=var, relief='flat')
         celular2.grid(row=17, column=1)
 
-        salto7 = tk.Label(self.frame2, text="", bg=cor)
+        salto7 = tk.Label(self.pacote2[1], text="", bg=cor)
         salto7.grid(row=18, column=0)
 
     def onFrameConfigure2(self, event):  # comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
-        self.canvas2.configure(scrollregion=self.canvas2.bbox("all"))  # fim scroolbar frame2
+        self.pacote2[0].configure(scrollregion=self.pacote2[0].bbox("all"))  # fim scroolbar frame2
 # fim
 
