@@ -23,16 +23,19 @@ class clienteCadastro():
     def GetWindow(self):
         return self.top
 
-    def Testado(self, nome,endereco,email,telefone):
+    def Testado(self, nome,endereco,email,telefone,id):
         try:
             c1 = tr.ClientesReceive(nome,endereco,email,telefone)
+            c1.setId(id)
         except tr.ErroEntrada as e:
             tkMessageBox.showerror("Erro encontrado,e.message")
         else:
+            self.bd.deleteCliente(c1.getId())
             self.bd.insertCliente(c1)
         self.CloseWindow()
 
-    def FazTela(self):
+    def FazTela(self,bd,c1):
+
         #Condicional para que não sejam abertas duas janelas simultaneamente
         if(self.top!=None):
             return
@@ -53,6 +56,7 @@ class clienteCadastro():
         nome1['font']=['bold']
         nome1.grid(row=1, column=1, sticky=W)
         nome2 = Entry(info1)
+        nome2.insert(0, c1.getNome())
         nome2["width"]=40
         nome2["font"] = ("Arial", "10")
         nome2.grid(row=2, column=1)
@@ -64,6 +68,7 @@ class clienteCadastro():
         endereco1['font']=['bold']
         endereco1.grid(row=1, column=3, sticky=W)
         endereco2 = Entry(info1)
+        endereco2.insert(0, c1.getEndereco())
         endereco2["width"]=40
         endereco2["font"] = ("Arial", "10")
         endereco2.grid(row=2, column=3)
@@ -78,6 +83,7 @@ class clienteCadastro():
         telefone1['font']=['bold']
         telefone1.grid(row=4, column=1, sticky=W)
         telefone2 = Entry(info1)
+        telefone2.insert(0, c1.getTelefone())
         telefone2["width"]=40
         telefone2["font"] = ("Arial", "10")
         telefone2.grid(row=5, column=1)
@@ -86,6 +92,7 @@ class clienteCadastro():
         email1['font']=['bold']
         email1.grid(row=4, column=3, sticky=W)
         email2 = Entry(info1)
+        email2.insert(0, c1.getEmail())
         email2["width"]=40
         email2["font"] = ("Arial", "10")
         email2.grid(row=5, column=3)
@@ -100,7 +107,7 @@ class clienteCadastro():
         espaco1 = Label(info2, text="                                                                                                     ")
         espaco1.grid(row=0, column=0)
 
-        pronto = Button(info2, text="Pronto", bg=cor,command=lambda:self.Testado(nome2.get(),endereco2.get(),telefone2.get(),email2.get()))
+        pronto = Button(info2, text="Pronto", bg=cor,command=lambda:self.Testado(nome2.get(),endereco2.get(),telefone2.get(),email2.get(),c1.getId()))
         pronto["font"]=['bold']
         pronto['fg']='white'
         pronto['padx']=1

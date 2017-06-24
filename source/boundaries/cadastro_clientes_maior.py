@@ -5,7 +5,10 @@ import os as os
 import tkMessageBox
 
 import cadastro_clientes_menor as cadClientMenor
+import cadastro_clientes_menor_editar as editClientMenor
 from source.entities import database as db
+from source.entities import cliente as clin
+
 
 
 # funcao de teste
@@ -20,11 +23,20 @@ class CadClient(tk.Frame):
         self.clientMenor = cadClientMenor.clienteCadastro()
         self.controller = controller
         self.FazTela()
+        self.te = editClientMenor.clienteCadastro()
+
     def visualiza(self,id):
         self.populate2(self.bd.selectClienteId(id))
 
     def deletar(self,id):
         self.JanelaPequena(id)
+        self.populate1(self.bd.selectCliente())
+        self.populate2(self.bd.selectCliente())
+
+    def editando(self, id):
+        self.te.FazTela(self.bd, clin.Cliente.selectClienteId(id, self.bd))
+        if(self.te.GetWindow()!=None):
+            self.te.GetWindow().wait_window()
         self.populate1(self.bd.selectCliente())
         self.populate2(self.bd.selectCliente())
 
@@ -230,6 +242,7 @@ class CadClient(tk.Frame):
 
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
+        photo3 = tk.PhotoImage(file=os.getcwd() + "/source/images/pencil.gif")
         for row in range(0,len(info)):
             if row % 2 == 0:
                 button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.visualiza(info[row][0]))
@@ -258,14 +271,25 @@ class CadClient(tk.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=1)
+
+        for row in range(0,len(info)):
+            if row % 2 == 0:
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo3, relief=tk.FLAT,command=lambda row=row: self.editando((info[row][0])))
+                button2.grid(row=row, column=2)
+                button2.image = photo3
+            else:
+                button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo3, relief=tk.FLAT,command = lambda row=row: self.editando((info[row][0])))
+                button2.grid(row=row, column=2)
+                button2.image = photo3
+
         for row in range(0,len(info)):
             if row % 2 == 0:
                 button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=lambda row=row: self.deletar(info[row][0]))
-                button2.grid(row=row, column=2)
+                button2.grid(row=row, column=3)
                 button2.image = photo2
             else:
                 button2 = tk.Button(self.pacote1[1], width=20, height=20, image=photo2, relief=tk.FLAT, command=lambda row=row: self.deletar(info[row][0]))
-                button2.grid(row=row, column=2)
+                button2.grid(row=row, column=3)
                 button2.image = photo2
 
     def onFrameConfigure1(self, event):
@@ -277,11 +301,18 @@ class CadClient(tk.Frame):
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
         cor = '#ffffff'
-        nome = info[0][1]
-        endereco = info[0][3]
-        data = info[0][2]
-        email = info[0][5]
-        telefone = info[0][4]
+        if (info):
+            nome = info[0][1]
+            endereco = info[0][3]
+            data = info[0][2]
+            email = info[0][5]
+            telefone = info[0][4]
+        else:
+            nome = ""
+            endereco = ""
+            data = ""
+            email = ""
+            telefone = ""
         salto1 = tk.Label(self.pacote2[1], text="               ", bg=cor)
         salto1.grid(row=0, column=0)
 

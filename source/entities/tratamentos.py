@@ -53,7 +53,7 @@ def ClientesReceive(nome,endereco,telefone,email):
         raise e
     else:
         agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
-        c1 = cl.Cliente(nome,agora,endereco,telefone,email)
+        c1 = cl.Cliente(None,nome,agora,endereco,telefone,email)
         return c1
 
 def verificaArroba(email):
