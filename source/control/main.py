@@ -22,7 +22,7 @@ def raw_backup():
 
 
 def main():
-    print 'Gut\'s is running.'
+    print "Gut\'s is running."
 
 
     #Insert cliente pra rodar

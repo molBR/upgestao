@@ -8,6 +8,7 @@ import cadastro_clientes_menor as cadClientMenor
 import cadastro_clientes_menor_editar as editClientMenor
 from source.entities import database as db
 from source.entities import cliente as clin
+from source.entities import testefuzz as tf
 
 
 
@@ -31,6 +32,10 @@ class CadClient(tk.Frame):
     def deletar(self,id):
         self.JanelaPequena(id)
         self.populate1(self.bd.selectCliente())
+        self.populate2(self.bd.selectCliente())
+
+    def pesquisando(self):
+        self.populate1(tf.PassaFuzzy(self.bd.selectCliente(), self.pesquisar2.get()))
         self.populate2(self.bd.selectCliente())
 
     def editando(self, id):
@@ -192,7 +197,7 @@ class CadClient(tk.Frame):
             self.pesquisar2.pack(side=tk.LEFT)
             self.espaco3 = tk.Label(self.container3, text=" ", bg=cor3)
             self.espaco3.pack(side=tk.LEFT)
-            self.ok = tk.Button(self.container3, text="Ok", command=Teste, bg=cor3)
+            self.ok = tk.Button(self.container3, text="Ok", command=lambda: self.pesquisando(), bg=cor3)
             self.ok["font"] = ['bold']
             self.ok['padx'] = 1
             self.ok['pady'] = 1

@@ -1,8 +1,6 @@
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
-listaBD = ['beijinho','brigadeiro','coxinha','pao de queijo','empada','brigadeironha']
-
 def PassaFuzzy(listaBD,selecionado):
 	listaRetorna = []
 	for x in range(0,len(listaBD)):
@@ -13,4 +11,3 @@ def PassaFuzzy(listaBD,selecionado):
 	return listaRetorna
 	
 
-print PassaFuzzy(listaBD,"brigadeila")
