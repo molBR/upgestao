@@ -150,14 +150,24 @@ class VendEvent(tk.Frame):
         self.salto8 = tk.Label(self.container1, text=" ", width=20, background="#fafafa")
         self.salto8.grid(row=19, column=4)
 
-        self.espaco = tk.Label(self.container2, text="                                                                                                                                                      ")
-        self.espaco.pack(side=tk.LEFT)
-        self.continuar = tk.Button(self.container2, text="Continuar", command=Teste)
+        self.espaco1 = tk.Label(self.container2, text="                                                                                       ")
+        self.espaco1.pack(side=tk.LEFT)
+
+        self.voltar = tk.Button(self.container2, text="Voltar",
+                                   command=lambda: self.controller.show_frame('cadClientMaior'))
+        self.voltar["font"] = ("bold", "12")
+        self.voltar['padx'] = 10
+        self.voltar['pady'] = 10
+        self.voltar.pack(side=tk.LEFT)
+
+        self.espaco2 = tk.Label(self.container2, text="                                                                                                                                       ")
+        self.espaco2.pack(side=tk.LEFT)
+
+        self.continuar = tk.Button(self.container2, text="Continuar", command=lambda: self.controller.show_frame('vendProd'))
         self.continuar["font"] = ("bold", "12")
         self.continuar['padx'] = 10
         self.continuar['pady'] = 10
         self.continuar.pack(side=tk.LEFT)
-
 
 """
 Example(root).pack(side="top", fill="both", expand=True)

@@ -6,10 +6,9 @@ import tkMessageBox
 
 import cadastro_clientes_menor as cadClientMenor
 import cadastro_clientes_menor_editar as editClientMenor
-from source.entities import database as db
 from source.entities import cliente as clin
+from source.entities import database as db
 from source.entities import testefuzz as tf
-
 
 
 # funcao de teste
@@ -202,9 +201,21 @@ class CadClient(tk.Frame):
             self.ok['padx'] = 1
             self.ok['pady'] = 1
             self.ok.pack(side=tk.LEFT)
+            self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
+            self.espaco4.pack(side=tk.LEFT)
+            self.cadastrarEvento = tk.Button(self.container3, text="Cadastrar Evento", command=lambda: self.controller.show_frame('vendEvent'),
+                                      bg=cor3)
+            self.cadastrarEvento["font"] = ['bold']
+            self.cadastrarEvento['padx'] = 1
+            self.cadastrarEvento['pady'] = 1
+            self.cadastrarEvento.pack(side=tk.LEFT)
+
 
             self.salto2 = tk.Label(self.container4, text="", bg=cor3)
             self.salto2.pack(side=tk.LEFT)
+
+
+
             # fim
 
             # tabela dos itens

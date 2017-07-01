@@ -20,7 +20,7 @@ def Teste():
 
 #Classe que define os produtos selecionados na venda juntamente com sua quantidade
 class SelectedProd:
-    def __int__(self, prodInfo):
+    def __init__(self, prodInfo):
         self.prodInfo = prodInfo
 """
     def __int__(self, prodInfo, quant):
@@ -200,7 +200,7 @@ class VendProd(tk.Frame):
 
 
         # barra de 'status'
-        status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        status = tk.Label(self, text="Estado: Executando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
         status.pack(side=tk.BOTTOM, fill=tk.X)
         # fim
 
@@ -343,6 +343,11 @@ class VendProd(tk.Frame):
         # self.selecionar['padx'] = 1
         # self.selecionar['pady'] = 1
         # self.selecionar.pack(side=tk.LEFT)
+        self.voltar = tk.Button(self.container3, text="Voltar", command=lambda: self.controller.show_frame('vendEvent'), bg=self.cor3)
+        self.voltar["font"] = ['bold']
+        self.voltar['padx'] = 1
+        self.voltar['pady'] = 1
+        self.voltar.pack(side=tk.LEFT)
         self.espaco2 = tk.Label(self.container3, text="           ", bg=self.cor3)
         self.espaco2.pack(side=tk.LEFT)
         self.pesquisar1 = tk.Label(self.container3, text="Pesquisar: ", bg=self.cor3)

@@ -1,14 +1,15 @@
 # encoding: utf-8
 
 class Venda(object):
-    def __init__(self, id, nome_cliente, nome_contato, tipo_festa, num_pessoas, endereco_nome, telefone, \
-                    email, data_evento, data_insert, custo_local, custo_diversos, subtrair, valor_total):
+    def __init__(self, id, cliente, nome_contato, tipo_festa, num_adultos, num_criancas, endereco,  \
+                 telefone, email, data_evento, data_insert, custo_local, custo_diversos, subtrair, valor_total):
         self.id = id
+        self.cliente = cliente
         self.nome_contato = nome_contato
-        self.nome_cliente = nome_cliente
         self.tipo_festa = tipo_festa
-        self.num_pessoas = num_pessoas
-        self.endereco_nome = endereco_nome
+        self.num_adultos = num_adultos
+        self.num_criancas = num_criancas
+        self.endereco = endereco
         self.telefone = telefone
         self.email = email
         self.data_evento = data_evento
@@ -24,14 +25,17 @@ class Venda(object):
     def getNome_contato(self):
         return self.nome_contato
 
-    def getNome_cliente(self):
-        return self.nome_cliente
+    def getCliente(self):
+        return self.cliente
 
     def getTipo_festa(self):
         return self.tipo_festa
 
-    def getNum_pessoas(self):
-        return self.num_pessoas
+    def getNum_adultos(self):
+        return self.num_adultos
+
+    def getNum_criancas(self):
+        return self.num_criancas
 
     def getEndereco_nome(self):
         return self.endereco_nome
