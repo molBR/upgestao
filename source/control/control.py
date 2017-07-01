@@ -1,13 +1,15 @@
 # encoding: utf-8
 #All your base are belong to us
 
-import source.boundaries.cadastro_produto_maior as cadProdMaior
-import source.boundaries.cadastro_clientes_maior as cadClientMaior
-import source.boundaries.venda_produtos as vendProd
-import source.boundaries.vendas_historico as vendHist
-import source.boundaries.menu_inicial as menuInicial
-
 import Tkinter as tk
+
+import source.boundaries.cadastro_clientes_maior as cadClientMaior
+import source.boundaries.cadastro_produto_maior as cadProdMaior
+import source.boundaries.menu_inicial as menuInicial
+import source.boundaries.venda_produtos as vendProd
+import source.boundaries.vendas_evento as vendas_evento
+import source.boundaries.vendas_historico as vendHist
+
 
 class Control(tk.Tk):
 
@@ -25,6 +27,7 @@ class Control(tk.Tk):
         self.geometry('1120x600')
         self.protocol("WM_DELETE_WINDOW", lambda: quit())
 
+
         self.tela["menuInicial"] = menuInicial.Menu(parent=container, controller=self)
         self.tela["menuInicial"].grid(row=0, column=0, sticky="nsew")
         self.tela["cadProdMaior"] = cadProdMaior.CadProd(parent=container, controller=self)
@@ -35,6 +38,8 @@ class Control(tk.Tk):
         self.tela["vendHist"].grid(row=0, column=0, sticky="nsew")
         self.tela["vendProd"] = vendProd.VendProd(parent=container, controller=self)
         self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
+        self.tela["vendEvent"] = vendas_evento.VendEvent(parent=container, controller=self)
+        self.tela["vendEvent"].grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("menuInicial")
 
