@@ -20,7 +20,8 @@ class TelaMenorDel():
 #Janela de verificacao para a confirmacao da delecao
     def JanelaPequena(self,id,bd):
         x = bd.selectProdNameId(id)
-        if tkMessageBox.askokcancel("Deletar", "Deseja mesmo deletar " + str(x) + "?"):
+
+        if tkMessageBox.askokcancel("Deletar", "Deseja mesmo deletar " + x + "?"):
             bd.deleteProduto(id)
 
 #Retorna o objeto da janela
