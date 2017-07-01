@@ -7,10 +7,6 @@ class Database(object):
     dbCursor = None
 
     def __init__(self):
-        #if(loc==1):
-            #self.dbConnect = sqlite3.connect('GutsDados.db')
-        #else:
-            #self.dbConnect = sqlite3.connect('../GutsDados.db')
         self.dbConnect = sqlite3.connect('source/GutsDados.db')
         self.dbCursor = self.dbConnect.cursor()
 
@@ -108,9 +104,10 @@ class Database(object):
 
     def selectClienteId(self,id):
         value = [id]
-        self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id',value)
+        self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id', value)
         aux = self.dbCursor.fetchall()
         return aux
+
 #Seleciona todas as vendas
     def selectVenda(self):
         self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
@@ -220,6 +217,7 @@ class Database(object):
         print id
         self.dbCursor.execute('DELETE FROM Cliente WHERE id = ?', value)
         self.dbConnect.commit()
+
 #Deleta a categoria dado seu id         O CERTO É VERIFICAR SE ALGUM PRODUTO ESTÁ ATRELADA A CATEGORIA!!!!
     def deleteCategoria(self, id):
         value = [id]

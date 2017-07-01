@@ -2,8 +2,8 @@
 
 from datetime import datetime
 
-import produto as pr
 import cliente as cl
+import produto as pr
 
 
 #Classes criadas para caracterizar os erros do programa - Não utilizadas no momento
@@ -69,9 +69,26 @@ def verificaTamTel(telefone):
         raise ErroEntrada(telefone, "Tamanho do telefone é inválido")
     else: return True
 
+def swapComma2Dot(valor):
+    auxValue = ''
+    for i in range(len(valor)):
+        if (valor[i] == ','):
+            auxValue+= '.'
+        else:
+            auxValue+= valor[i]
+    return auxValue
+
+def swapDot2Comma(valor):
+    auxValue = ''
+    for i in range(len(valor)):
+        if (valor[i] == '.'):
+            auxValue+= ','
+        else:
+            auxValue+= valor[i]
+    return auxValue
 
 def mergeSort(alist):
-    print("Splitting ",alist)
+    #print("Splitting ",alist)
     if len(alist)>1:
         mid = len(alist)//2
         lefthalf = alist[:mid]
@@ -102,8 +119,6 @@ def mergeSort(alist):
             j=j+1
             k=k+1
     return alist
-
-
 
 #Recebe um id, faz a consulta no bd cria um objeto com as info do produto.
 def ObjetivaProduto(id, bd):
