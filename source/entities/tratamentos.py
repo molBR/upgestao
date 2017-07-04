@@ -88,7 +88,6 @@ def swapDot2Comma(valor):
     return auxValue
 
 def mergeSort(alist):
-    #print("Splitting ",alist)
     if len(alist)>1:
         mid = len(alist)//2
         lefthalf = alist[:mid]
@@ -101,7 +100,7 @@ def mergeSort(alist):
         j=0
         k=0
         while i < len(lefthalf) and j < len(righthalf):
-            if lefthalf[i][0] < righthalf[j][0]:
+            if lefthalf[i].getId() < righthalf[j].getId():
                 alist[k]=lefthalf[i]
                 i=i+1
             else:

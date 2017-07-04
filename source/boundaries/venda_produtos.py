@@ -20,14 +20,34 @@ def Teste():
 
 #Classe que define os produtos selecionados na venda juntamente com sua quantidade
 class SelectedProd:
-    def __init__(self, prodInfo):
-        self.prodInfo = prodInfo
-"""
-    def __int__(self, prodInfo, quant):
+
+    def __init__(self, prodInfo, quant):
         self.prodInfo = prodInfo
         self.quant = tk.IntVar()
         self.quant.set(quant)
-"""
+
+
+    def getProdInfo(self):
+        return self.prodInfo
+
+    def getId(self):
+        return self.prodInfo[0]
+
+    def getNome(self):
+        return self.prodInfo[1]
+
+    def getPreco(self):
+        return self.prodInfo[2]
+
+    def getData(self):
+        return self.prodInfo[3]
+
+    def getTipo(self):
+        return self.prodInfo[4]
+
+    def getQuant(self):
+        return self.quant
+
 # Menu de nova venda de produto
 class VendProd(tk.Frame):
     def __init__(self, parent, controller):
@@ -130,7 +150,7 @@ class VendProd(tk.Frame):
             percorre = 0
             while (percorre <= aux):
                 for j in range(len(self.listaSelec)):
-                    if (self.listaProduto[percorre] == self.listaSelec[j]):
+                    if (self.listaProduto[percorre][0] == self.listaSelec[j].getId()):
                         self.listaProduto.pop(percorre)
                         aux = aux - 1
                 percorre = percorre + 1
@@ -527,12 +547,11 @@ class VendProd(tk.Frame):
     def selecionaProduto(self, row):
         auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
         auxProdValue = tr.swapComma2Dot(self.listaProduto[row][2])
-        #auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
-        self.listaSelec.append(self.listaProduto[row])
-        self.todos_apertado()
+        auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
+        self.listaSelec.append(auxSelectedProd)
         self.listaSelec = tr.mergeSort(self.listaSelec)
-        self.populate2(self.listaSelec)
-        self.SomaQuant.set(tr.swapDot2Comma(str(float(auxProdValue) + float(auxSomaQuant))))
+        self.SomaQuant.set(tr.swapDot2Comma(str((float(auxProdValue)*int(auxSelectedProd.getQuant().get())) + float(auxSomaQuant))))
+        self.todos_apertado()
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
@@ -563,7 +582,7 @@ class VendProd(tk.Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row][0]
+                    t = info[row].getNome()
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -572,7 +591,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=1)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row][0]
+                    t = info[row].getNome()
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -582,7 +601,7 @@ class VendProd(tk.Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row][1]
+                    t = info[row].getPreco()
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -591,7 +610,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=2)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row][1]
+                    t = info[row].getPreco()
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -599,10 +618,9 @@ class VendProd(tk.Frame):
                     ent.config(textvariable=var, relief='flat')
                     ent.grid(row=row, column=2)
             for row in range(len(info)):
-                var = tk.IntVar()
-                var.set(1)
+                info[row].getQuant().trace("w", self.callback)
                 ent1 = tk.Entry(self.pacote2[1])
-                ent1.config(textvariable=var, relief='flat')
+                ent1.config(textvariable=info[row].getQuant(), relief='flat')
                 ent1.grid(row=row, column=3)
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -615,11 +633,18 @@ class VendProd(tk.Frame):
                 button2.grid(row=row, column=4)
                 button2.image = photo2
                 # fim
+    def callback(self,*args):
+        self.SomaQuant.set("0")
+        auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
+        for i in range(0,len(self.listaSelec)):
+            auxProdValue = tr.swapComma2Dot(self.listaSelec[i].getPreco())
+            self.SomaQuant.set(tr.swapDot2Comma(
+                str((float(auxProdValue) * int(self.listaSelec[i].getQuant().get())) + float(auxSomaQuant))))
 
     def deselecionaProduto(self, row):
         auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
         #auxProdValue = tr.swapComma2Dot(self.listaSelec.prodInfo[row][2])
-        auxProdValue = tr.swapComma2Dot(self.listaSelec[row][2])
+        auxProdValue = tr.swapComma2Dot(self.listaSelec[row].getPreco())
         self.listaSelec.pop(row)
         self.todos_apertado()
         self.SomaQuant.set(tr.swapDot2Comma(str(float(auxSomaQuant) - float(auxProdValue))))
