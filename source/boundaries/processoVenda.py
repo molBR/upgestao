@@ -16,10 +16,11 @@ class ProcessVend:
 
         self.tela["cadClientMaior"] = cadClientMaior.CadClient(parent=self.controller.container, controller=self)
         self.tela["cadClientMaior"].grid(row=0, column=0, sticky="nsew")
-        self.tela["vendProd"] = vendProd.VendProd(parent=self.controller.container, controller=self)
-        self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
-        self.tela["vendEvent"] = vendas_evento.VendEvent(parent=self.controller.container, controller=self)
+        self.tela["vendEvent"] = vendas_evento.VendEvent(parent=self.controller.container, controller=self,Cliente=self.tela["cadClientMaior"].getClienteSelec())
         self.tela["vendEvent"].grid(row=0, column=0, sticky="nsew")
+        self.tela["vendProd"] = vendProd.VendProd(parent=self.controller.container, controller=self,
+                                                  Cliente=self.tela["cadClientMaior"].getClienteSelec(),TipoEvento=self.tela["vendEvent"].getTipoEvento())
+        self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("cadClientMaior")
         #self.show_frame("vendEvent")
@@ -31,5 +32,10 @@ class ProcessVend:
         elif (page_name == 'vendProd'):
             self.controller.title('Gut\'s Orçamento - Nova Venda')
 
+        self.Setter()
         frame = self.tela[page_name]
         frame.tkraise()
+
+    def Setter(self):
+        self.tela["vendEvent"].setCliente(self.tela["cadClientMaior"].getClienteSelec())
+        self.tela["vendProd"].setCE(self.tela["cadClientMaior"].getClienteSelec(),self.tela["vendEvent"].getTipoEvento())

@@ -37,8 +37,8 @@ class Control(tk.Tk):
         self.tela["vendHist"].grid(row=0, column=0, sticky="nsew")
         #self.tela["vendProd"] = vendProd.VendProd(parent=self.container, controller=self)
         #self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
-        self.tela["vendEvent"] = vendas_evento.VendEvent(parent=self.container, controller=self)
-        self.tela["vendEvent"].grid(row=0, column=0, sticky="nsew")
+        #self.tela["vendEvent"] = vendas_evento.VendEvent(parent=self.container, controller=self)
+        #self.tela["vendEvent"].grid(row=0, column=0, sticky="nsew")
 
         #self.show_frame("vendProd")
 

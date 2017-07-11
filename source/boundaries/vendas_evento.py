@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 import Tkinter as tk
+import source.entities.tratamentos as tr
+import source.entities.tipoEvento as te
+import tkMessageBox
 
 def Teste():
     print("Testado")
@@ -8,10 +11,29 @@ def Teste():
 class VendEvent(tk.Frame):
 #root=Tk()
 
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller,Cliente):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.FazTela()
+        self.Cliente = Cliente
+        self.tipoEvento = te.tipoEvento(1,1,1,1,1,1,1,1,1)
+
+
+    def setCliente(self,Cliente):
+        self.Cliente = Cliente
+
+    def Insere(self,tipo,rua,numero,bairro,complemento,adultos,criancas,data):
+        print self.Cliente.getNome()
+        try:
+            self.tipoEvento = tr.EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data)
+        except tr.ErroEntrada as e:
+            tkMessageBox.showerror("Erro encontrado ", e.message)
+        else:
+            self.controller.show_frame('vendProd')
+
+
+    def getTipoEvento(self):
+        return self.tipoEvento
 
     def FazTela(self):
 
@@ -163,7 +185,10 @@ class VendEvent(tk.Frame):
         self.espaco2 = tk.Label(self.container2, text="                                                                                                                                       ")
         self.espaco2.pack(side=tk.LEFT)
 
-        self.continuar = tk.Button(self.container2, text="Continuar", command=lambda: self.controller.show_frame('vendProd'))
+        #self.continuar = tk.Button(self.container2, text="Continuar", command=lambda: self.controller.show_frame('vendProd'))
+        self.continuar = tk.Button(self.container2, text="Continuar",
+                                   command=lambda: self.Insere(self.tipo2.get(),self.rua2.get(),self.numero2.get(),self.bairro2.get(),
+                                                               self.complemento2.get(),self.adultos2.get(),self.criancas2.get(),self.data2.get()))
         self.continuar["font"] = ("bold", "12")
         self.continuar['padx'] = 10
         self.continuar['pady'] = 10

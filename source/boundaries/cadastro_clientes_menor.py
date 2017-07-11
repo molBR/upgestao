@@ -27,7 +27,7 @@ class clienteCadastro():
         try:
             c1 = tr.ClientesReceive(nome,endereco,email,telefone)
         except tr.ErroEntrada as e:
-            tkMessageBox.showerror("Erro encontrado,e.message")
+            tkMessageBox.showerror("Erro encontrado", e.message)
         else:
             self.bd.insertCliente(c1)
         self.CloseWindow()

@@ -25,6 +25,9 @@ class CadClient(tk.Frame):
         self.FazTela()
         self.te = editClientMenor.clienteCadastro()
 
+    def getClienteSelec(self):
+        return self.ClienteSelec
+
     def visualiza(self,id):
         self.populate2(self.bd.selectClienteId(id))
 
@@ -143,14 +146,11 @@ class CadClient(tk.Frame):
             # fim
 
             self.bd = db.Database()  # banco de dados
-            print self.bd.selectCliente()
 
             cor3 = '#E6E6E6'
             info = 53
 
             #Criação da classe de tela menor de cadastro de cliente
-
-
 
             self.container1 = tk.Frame(self)
             self.container2 = tk.Frame(self, bg=cor3)
@@ -317,12 +317,14 @@ class CadClient(tk.Frame):
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
         cor = '#ffffff'
+
         if (info):
             nome = info[0][1]
             endereco = info[0][3]
             data = info[0][2]
             email = info[0][5]
             telefone = info[0][4]
+            self.ClienteSelec = clin.Cliente(info[0][0],nome,endereco,data,email,telefone)
         else:
             nome = ""
             endereco = ""

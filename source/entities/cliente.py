@@ -15,8 +15,6 @@ class Cliente(object):
     @staticmethod
     def selectClienteId(id, bd):
         auxInfo = bd.selectClienteId(id)
-        print "OI"
-        print auxInfo
         auxClin = Cliente(auxInfo[0][0], auxInfo[0][1], auxInfo[0][2], auxInfo[0][3], auxInfo[0][4],auxInfo[0][5])
         return auxClin
 

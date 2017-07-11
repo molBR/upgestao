@@ -30,7 +30,7 @@ class SelectedProd:
 """
 # Menu de nova venda de produto
 class VendProd(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller,Cliente,TipoEvento):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.bd = db.Database()
@@ -38,6 +38,13 @@ class VendProd(tk.Frame):
         self.fechaTela = tk.FALSE
         self.resetValues()
         self.FazTela()
+        self.Cliente = Cliente
+        self.TipoEvento = TipoEvento
+
+
+    def setCE(self,Cliente,TipoEvento):
+        self.Cliente = Cliente
+        self.TipoEvento = TipoEvento
 
     def resetValues(self):
         self.listaProduto = []
@@ -68,7 +75,8 @@ class VendProd(tk.Frame):
         self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoDoces()))
         self.populate2(self.listaSelec)
-        # print self.SomaQuant
+        print self.Cliente.getNome()
+        print self.TipoEvento.getTipo()
 
     def salgados_apertado(self):
         self.todos.config(relief=tk.RAISED, background=self.cor1)
@@ -378,12 +386,13 @@ class VendProd(tk.Frame):
         self.total1["font"] = ['bold']
         self.total1.pack(side=tk.LEFT)
         self.total2 = tk.Label(self.container3, textvariable=self.SomaQuant, bg=self.cor3)
+
         self.total2["font"] = ['bold']
         self.total2.pack(side=tk.LEFT)
-        # self.photo = tk.PhotoImage(file= os.getcwd() + "/source/images/repeat.gif")
-        # self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=Teste)
-        # self.calcular.pack(side=tk.LEFT)
-        # self.calcular.image = self.photo
+        self.photo = tk.PhotoImage(file= os.getcwd() + "/source/images/repeat.gif")
+        self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=Teste)
+        self.calcular.pack(side=tk.LEFT)
+        self.calcular.image = self.photo
         self.espaco6 = tk.Label(self.container3, text="                             ", bg=self.cor3)
         self.espaco6.pack(side=tk.LEFT)
         self.continuar = tk.Button(self.container3, text="Continuar", command=Teste, bg=self.cor3)
