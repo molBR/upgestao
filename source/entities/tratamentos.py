@@ -113,7 +113,7 @@ def mergeSort(alist):
         j=0
         k=0
         while i < len(lefthalf) and j < len(righthalf):
-            if lefthalf[i][0] < righthalf[j][0]:
+            if lefthalf[i].getprodInfo()[0] < righthalf[j].getprodInfo()[0]:
                 alist[k]=lefthalf[i]
                 i=i+1
             else:

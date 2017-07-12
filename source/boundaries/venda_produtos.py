@@ -20,15 +20,18 @@ def Teste():
 
 #Classe que define os produtos selecionados na venda juntamente com sua quantidade
 class SelectedProd:
-    def __init__(self, prodInfo):
-        self.prodInfo = prodInfo
-"""
-    def __int__(self, prodInfo, quant):
+
+    def __init__(self, prodInfo, quant):
         self.prodInfo = prodInfo
         self.quant = tk.IntVar()
         self.quant.set(quant)
-"""
-# Menu de nova venda de produto
+
+    def getprodInfo(self):
+        return self.prodInfo
+
+    def getQuant(self):
+        return self.quant
+
 class VendProd(tk.Frame):
     def __init__(self, parent, controller,Cliente,TipoEvento):
         tk.Frame.__init__(self, parent)
@@ -61,7 +64,6 @@ class VendProd(tk.Frame):
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
         self.tipos.config(relief=tk.RAISED, background=self.cor1)
-        # self.listaProduto = self.bd.selectProduto()
         self.populate1(self.trataLista(self.bd.selectProduto()))
         self.populate2(self.listaSelec)
 
@@ -138,7 +140,7 @@ class VendProd(tk.Frame):
             percorre = 0
             while (percorre <= aux):
                 for j in range(len(self.listaSelec)):
-                    if (self.listaProduto[percorre] == self.listaSelec[j]):
+                    if (self.listaProduto[percorre][0] == self.listaSelec[j].getprodInfo()[0]):
                         self.listaProduto.pop(percorre)
                         aux = aux - 1
                 percorre = percorre + 1
@@ -158,6 +160,14 @@ class VendProd(tk.Frame):
                 # self.todos_apertado()
                 self.populate1(self.trataLista(self.bd.selectProdutoIdAll(id)))
                 self.populate2(self.listaSelec)
+
+    def calculaTotal(self):
+        valorTot = 0
+        if(self.listaSelec):
+            for i in range(len(self.listaSelec)):
+                auxProdValue = tr.swapComma2Dot(self.listaSelec[i].getprodInfo()[2])
+                valorTot = valorTot + float(auxProdValue) * int(self.listaSelec[i].getQuant().get())
+        self.SomaQuant.set(valorTot)
 
     def FazTela(self):
         # menu
@@ -346,11 +356,6 @@ class VendProd(tk.Frame):
 
         self.espaco1 = tk.Label(self.container3, text="               ", bg=self.cor3)
         self.espaco1.pack(side=tk.LEFT)
-        # self.selecionar = tk.Button(self.container3, text="Selecionar", command=lambda:self.PegaCheck(), bg=self.cor3)
-        # self.selecionar["font"] = ['bold']
-        # self.selecionar['padx'] = 1
-        # self.selecionar['pady'] = 1
-        # self.selecionar.pack(side=tk.LEFT)
         self.voltar = tk.Button(self.container3, text="Voltar", command=lambda: self.controller.show_frame('vendEvent'), bg=self.cor3)
         self.voltar["font"] = ['bold']
         self.voltar['padx'] = 1
@@ -390,7 +395,7 @@ class VendProd(tk.Frame):
         self.total2["font"] = ['bold']
         self.total2.pack(side=tk.LEFT)
         self.photo = tk.PhotoImage(file= os.getcwd() + "/source/images/repeat.gif")
-        self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=Teste)
+        self.calcular = tk.Button(self.container3, width=20, height=20, image=self.photo, relief=tk.FLAT, command=lambda:self.calculaTotal())
         self.calcular.pack(side=tk.LEFT)
         self.calcular.image = self.photo
         self.espaco6 = tk.Label(self.container3, text="                             ", bg=self.cor3)
@@ -428,26 +433,6 @@ class VendProd(tk.Frame):
                                 tags=pacote[3])
         pacote[1].bind("<Configure>", pacote[4])
 
-    """
-    def PegaCheck(self):
-        for i in range(len(self.listaProduto)):
-            if(self.listaCheckbox[i].get()==1):
-                self.listaSelec.append(self.listaProduto[i])
-        self.todos_apertado()
-        self.listaSelec = tr.mergeSort(self.listaSelec)
-        self.populate2(self.listaSelec)
-
-    def RemoveCheck(self):
-        #print self.listaSelec[0][0]
-        #print self.listaCheckbox2
-        aux = 0
-        for i in range(len(self.listaSelec)):
-            if(self.listaCheckbox2[i].get()==1):
-                self.listaSelec.pop(i-aux)
-                aux = aux + 1
-        del self.listaCheckbox2
-        self.todos_apertado()
-    """
 
     def populate1(self, info):  # comeco produtos
         self.deleteCanvas(self.pacote1)
@@ -455,20 +440,7 @@ class VendProd(tk.Frame):
         # self.listaCheckbox = []
         photo1 = tk.PhotoImage(file=os.getcwd() + "/source/images/arrow.gif")
         if (info != None):
-            """
-            for row in range(len(info)):
-                if row % 2 == 0:
-                    cor = '#ffffff'
-                    var = tk.IntVar()
-                    c = tk.Checkbutton(self.pacote1[1], variable=var, background=cor)
-                    c.grid(row=row, column=0)
-                else:
-                    cor = '#f0f0f0'
-                    var = tk.IntVar()
-                    c = tk.Checkbutton(self.pacote1[1], variable=var, background=cor)
-                    c.grid(row=row, column=0)
-                self.listaCheckbox.append(var)
-            """
+
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
@@ -536,12 +508,11 @@ class VendProd(tk.Frame):
     def selecionaProduto(self, row):
         auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
         auxProdValue = tr.swapComma2Dot(self.listaProduto[row][2])
-        #auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
-        self.listaSelec.append(self.listaProduto[row])
+        auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
+        self.listaSelec.append(auxSelectedProd)
         self.todos_apertado()
         self.listaSelec = tr.mergeSort(self.listaSelec)
         self.populate2(self.listaSelec)
-        self.SomaQuant.set(tr.swapDot2Comma(str(float(auxProdValue) + float(auxSomaQuant))))
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
@@ -555,24 +526,10 @@ class VendProd(tk.Frame):
 
         photo2 = tk.PhotoImage(file=os.getcwd() + "/source/images/x.gif")
         if (info != None):
-            """
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    var = tk.IntVar()
-                    c = tk.Checkbutton(self.pacote2[1], variable=var, background=cor)
-                    c.grid(row=row, column=0)
-                else:
-                    cor = '#f0f0f0'
-                    var = tk.IntVar()
-                    c = tk.Checkbutton(self.pacote2[1], variable=var, background=cor)
-                    c.grid(row=row, column=0)
-                self.listaCheckbox2.append(var)
-            """
-            for row in range(len(info)):
-                if row % 2 == 0:
-                    cor = '#ffffff'
-                    t = info[row][0]
+                    t = info[row].getprodInfo()[0]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -581,7 +538,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=1)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row][0]
+                    t = info[row].getprodInfo()[0]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -591,7 +548,7 @@ class VendProd(tk.Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row][1]
+                    t = info[row].getprodInfo()[1]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -600,7 +557,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=2)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row][1]
+                    t = info[row].getprodInfo()[1]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -608,8 +565,7 @@ class VendProd(tk.Frame):
                     ent.config(textvariable=var, relief='flat')
                     ent.grid(row=row, column=2)
             for row in range(len(info)):
-                var = tk.IntVar()
-                var.set(1)
+                var = self.listaSelec[row].getQuant()
                 ent1 = tk.Entry(self.pacote2[1])
                 ent1.config(textvariable=var, relief='flat')
                 ent1.grid(row=row, column=3)
@@ -627,11 +583,10 @@ class VendProd(tk.Frame):
 
     def deselecionaProduto(self, row):
         auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
-        #auxProdValue = tr.swapComma2Dot(self.listaSelec.prodInfo[row][2])
-        auxProdValue = tr.swapComma2Dot(self.listaSelec[row][2])
+        auxProdValue = tr.swapComma2Dot(self.listaSelec[row].getprodInfo()[2])
         self.listaSelec.pop(row)
         self.todos_apertado()
-        self.SomaQuant.set(tr.swapDot2Comma(str(float(auxSomaQuant) - float(auxProdValue))))
+        self.calculaTotal()
 
     def onFrameConfigure2(self, event):  # comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
