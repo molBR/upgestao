@@ -95,8 +95,8 @@ class CadProd (Tkin.Frame):
 
         #dir1 = os.getcwd() + "\images\pencil.gif"
 
-        self.photo1 = Tkin.PhotoImage(file= os.getcwd() + "\source\images\\pencil.gif")
-        self.photo2 = Tkin.PhotoImage(file= os.getcwd() + "\source\images\\trash.gif")
+        self.photo1 = Tkin.PhotoImage(file= os.path.join(os.getcwd(), 'source', 'images', 'pencil.gif'))
+        self.photo2 = Tkin.PhotoImage(file= os.path.join(os.getcwd(), "source",'images', 'trash.gif'))
         ###
         self.toolbar1 = Tkin.Frame(self, bg="white")
         self.menu = Tkin.Button(self.toolbar1, text="   Menu Inicial ", bg="white", relief=Tkin.FLAT,
