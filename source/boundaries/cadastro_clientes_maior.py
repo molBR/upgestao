@@ -24,6 +24,7 @@ class CadClient(tk.Frame):
         self.controller = controller
         self.FazTela()
         self.te = editClientMenor.clienteCadastro()
+        self.ClienteSelec = None
 
     def getClienteSelec(self):
         return self.ClienteSelec

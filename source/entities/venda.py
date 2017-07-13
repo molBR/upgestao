@@ -63,3 +63,48 @@ class Venda(object):
 
     def getValor_total(self):
         return self.valor_total
+
+    def setId(self,id):
+        self.id = id
+
+    def setNome_contato(self,nome_contato):
+        self.nome_contato = nome_contato
+
+    def setCliente(self,Cliente):
+        self.cliente = Cliente
+
+    def setTipo_festa(self,tipo_festa):
+        self.tipo_festa = tipo_festa
+
+    def setNum_adultos(self,num_adultos):
+        self.num_adultos = num_adultos
+
+    def setNum_criancas(self,num_criancas):
+        self.num_criancas = num_criancas
+
+    def setEndereco_nome(self,endereco_nome):
+        self.endereco_nome = endereco_nome
+
+    def setTelefone(self,telefone):
+        self.telefone = telefone
+
+    def setEmail(self,email):
+        self.email = email
+
+    def setData_evento(self,data_evento):
+        self.data_evento = data_evento
+
+    def setData_insert(self,data_insert):
+        self.data_insert = data_insert
+
+    def setCusto_local(self,custo_local):
+        self.custo_local = custo_local
+
+    def setCusto_diversos(self,custo_diversos):
+        self.custo_diversos = custo_diversos
+
+    def setSubtrair(self,subtrair):
+        self.subtrair = subtrair
+
+    def setValor_total(self,valor_total):
+        self.valor_total = valor_total

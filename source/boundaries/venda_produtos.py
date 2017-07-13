@@ -33,7 +33,7 @@ class SelectedProd:
         return self.quant
 
 class VendProd(tk.Frame):
-    def __init__(self, parent, controller,Cliente,TipoEvento):
+    def __init__(self, parent, controller,Cliente,Venda):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.bd = db.Database()
@@ -42,7 +42,7 @@ class VendProd(tk.Frame):
         self.resetValues()
         self.FazTela()
         self.Cliente = Cliente
-        self.TipoEvento = TipoEvento
+        self.Venda = Venda
 
 
     def insereTudo(self):
