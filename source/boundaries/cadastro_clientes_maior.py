@@ -91,6 +91,7 @@ class CadClient(tk.Frame):
             espaco1 = tk.Label(toolbar1, text=" | ", bg="white")
             espaco1["font"] = ("Arial", "12")
             espaco1.pack(side=tk.LEFT)
+            """
             novavenda = tk.Button(toolbar1, text="Nova Venda", bg="white", relief=tk.FLAT,
                           command=lambda: self.controller.show_frame("vendProd"))
             novavenda["font"] = ("Arial", "10")
@@ -98,7 +99,8 @@ class CadClient(tk.Frame):
             espaco2 = tk.Label(toolbar1, text=" | ", bg="white")
             espaco2["font"] = ("Arial", "12")
             espaco2.pack(side=tk.LEFT)
-            cadastrarcliente = tk.Button(toolbar1, text="Cadastrar Cliente", bg="light grey", relief=tk.FLAT)
+            """
+            cadastrarcliente = tk.Button(toolbar1, text="Clientes e Vendas", bg="light grey", relief=tk.FLAT)
             cadastrarcliente["font"] = ("Arial", "10")
             cadastrarcliente.pack(side=tk.LEFT, padx=1, pady=1)
             espaco3 = tk.Label(toolbar1, text=" | ", bg="white")
@@ -115,6 +117,7 @@ class CadClient(tk.Frame):
                           command=lambda: self.controller.show_frame("cadProdMaior"))
             inserirproduto["font"] = ("Arial", "10")
             inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
+            """
             espaco5 = tk.Label(toolbar1, text=" | ", bg="white")
             espaco5["font"] = ("Arial", "12")
             espaco5.pack(side=tk.LEFT)
@@ -122,7 +125,7 @@ class CadClient(tk.Frame):
                           command=lambda: Teste())
             inserirtipo["font"] = ("Arial", "10")
             inserirtipo.pack(side=tk.LEFT, padx=1, pady=1)
-
+            """
             toolbar1.pack(side=tk.TOP, fill=tk.X)
             # fim
 
@@ -203,7 +206,8 @@ class CadClient(tk.Frame):
             self.ok.pack(side=tk.LEFT)
             self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
             self.espaco4.pack(side=tk.LEFT)
-            self.cadastrarEvento = tk.Button(self.container3, text="Cadastrar Evento", command=lambda: self.controller.show_frame('vendEvent'),
+            self.cadastrarEvento = tk.Button(self.container3, text="Cadastrar Evento", command=lambda:
+            self.controller.show_frame('vendEvent'),
                                       bg=cor3)
             self.cadastrarEvento["font"] = ['bold']
             self.cadastrarEvento['padx'] = 1

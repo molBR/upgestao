@@ -1,17 +1,17 @@
 # encoding: utf-8
 
 import Tkinter as Tkin
-import tkMessageBox
 import os as os
+import tkMessageBox
 
 import cadastro_produto_deletar as cpd
 import cadastro_produto_editar_1 as cpe
 import cadastro_produto_editar_2 as cadProdEdit
 import cadastro_produto_menor as cpm
-
 from source.entities import database as db
-from source.entities import tratamentos as tr
 from source.entities import produto as prod
+from source.entities import tratamentos as tr
+
 
 def Teste():
     print("Testado")
@@ -106,6 +106,7 @@ class CadProd (Tkin.Frame):
         self.espaco1 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
         self.espaco1["font"] = ("Arial", "12")
         self.espaco1.pack(side=Tkin.LEFT)
+        """
         self.novavenda = Tkin.Button(self.toolbar1, text="Nova Venda", bg="white", relief=Tkin.FLAT,
                            command=lambda: self.controller.show_frame("vendProd"))
         self.novavenda["font"] = ("Arial", "10")
@@ -113,6 +114,7 @@ class CadProd (Tkin.Frame):
         self.espaco2 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
         self.espaco2["font"] = ("Arial", "12")
         self.espaco2.pack(side=Tkin.LEFT)
+        """
         self.cadastrarcliente = Tkin.Button(self.toolbar1, text="Cadastrar Cliente", bg="white", relief=Tkin.FLAT,
                            command=lambda: self.controller.show_frame("cadClientMaior"))
         self.cadastrarcliente["font"] = ("Arial", "10")
@@ -130,14 +132,16 @@ class CadProd (Tkin.Frame):
         self.inserirproduto = Tkin.Button(self.toolbar1, text="Inserir Produto", bg="light grey", relief=Tkin.FLAT)
         self.inserirproduto["font"] = ("Arial", "10")
         self.inserirproduto.pack(side=Tkin.LEFT, padx=1, pady=1)
+        """
         self.espaco5 = Tkin.Label(self.toolbar1, text=" | ", bg="white")
         self.espaco5["font"] = ("Arial", "12")
         self.espaco5.pack(side=Tkin.LEFT)
+
         self.inserirtipo = Tkin.Button(self.toolbar1, text="Inserir Tipo", bg="white", relief=Tkin.FLAT,
                            command=lambda: Teste())
         self.inserirtipo["font"] = ("Arial", "10")
         self.inserirtipo.pack(side=Tkin.LEFT, padx=1, pady=1)
-
+        """
         self.toolbar1.pack(side=Tkin.TOP, fill=Tkin.X)
         # fim
 

@@ -26,6 +26,7 @@ class VendHist(tk.Frame):
             self.espaco1 = tk.Label(toolbar1, text=" | ", bg="white")
             self.espaco1["font"] = ("Arial", "12")
             self.espaco1.pack(side=tk.LEFT)
+            """
             self.novavenda = tk.Button(toolbar1, text="Nova Venda", bg="white", relief=tk.FLAT,
                                command=lambda: self.controller.show_frame("vendProd"))
             self.novavenda["font"] = ("Arial", "10")
@@ -33,7 +34,8 @@ class VendHist(tk.Frame):
             self.espaco2 = tk.Label(toolbar1, text=" | ", bg="white")
             self.espaco2["font"] = ("Arial", "12")
             self.espaco2.pack(side=tk.LEFT)
-            self.cadastrarcliente = tk.Button(toolbar1, text="Cadastrar Cliente", bg="white", relief=tk.FLAT,
+            """
+            self.cadastrarcliente = tk.Button(toolbar1, text="Clientes e Vendas", bg="white", relief=tk.FLAT,
                                command=lambda: self.controller.show_frame("cadClientMaior"))
             self.cadastrarcliente["font"] = ("Arial", "10")
             self.cadastrarcliente.pack(side=tk.LEFT, padx=1, pady=1)
@@ -50,19 +52,21 @@ class VendHist(tk.Frame):
                                command=lambda: self.controller.show_frame("cadProdMaior"))
             self.inserirproduto["font"] = ("Arial", "10")
             self.inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
+            """
             self.espaco5 = tk.Label(toolbar1, text=" | ", bg="white")
             self.espaco5["font"] = ("Arial", "12")
             self.espaco5.pack(side=tk.LEFT)
+
             self.inserirtipo = tk.Button(toolbar1, text="Inserir Tipo", bg="white", relief=tk.FLAT,
                                command=lambda: Teste())
             self.inserirtipo["font"] = ("Arial", "10")
             self.inserirtipo.pack(side=tk.LEFT, padx=1, pady=1)
-
+            """
             toolbar1.pack(side=tk.TOP, fill=tk.X)
             # fim
 
             # barra de 'status'
-            status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
+            status = tk.Label(self, text="Estado: Executando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
             status.pack(side=tk.BOTTOM, fill=tk.X)
             # fim
 
