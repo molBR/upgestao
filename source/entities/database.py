@@ -91,6 +91,11 @@ class Database(object):
         aux = self.dbCursor.fetchall()
         return aux
 
+    def selectNomeCategoria(self,value):
+        self.dbCursor.execute('SELECT nome FROM Categoria WHERE id = ?', value)
+        aux = self.dbCursor.fetchall()
+        return aux
+
 # Seleciona todos os produtos
     def selectProduto(self):
         self.dbCursor.execute('SELECT * FROM Produto ORDER BY id')
@@ -121,7 +126,13 @@ class Database(object):
         aux = self.dbCursor.fetchall()
         return aux
 
-#Insere o produto recebendo um objeto produto
+
+    def insertProdVend(self,nome,valor,id_venda,nome_categoria):
+        values = [nome,valor,id_venda,nome_categoria]
+        self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (?, ?, ?, ?', values)
+        self.dbConnect.commit()
+
+    # Insere o produto recebendo um objeto produto
     def insertProduto(self, prod):
         values = [prod.getId(), prod.getNome(), prod.getValor_inic(),
                   prod.getData_insert(), prod.getId_categoria()]

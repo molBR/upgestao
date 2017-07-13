@@ -45,6 +45,9 @@ class VendProd(tk.Frame):
         self.TipoEvento = TipoEvento
 
 
+    def insereTudo(self):
+        print "Teste"
+
     def setCE(self,Cliente,TipoEvento):
         self.Cliente = Cliente
         self.TipoEvento = TipoEvento
@@ -400,7 +403,7 @@ class VendProd(tk.Frame):
         self.calcular.image = self.photo
         self.espaco6 = tk.Label(self.container3, text="                             ", bg=self.cor3)
         self.espaco6.pack(side=tk.LEFT)
-        self.continuar = tk.Button(self.container3, text="Continuar", command=Teste, bg=self.cor3)
+        self.continuar = tk.Button(self.container3, text="Continuar", command=lambda:self.insereTudo(), bg=self.cor3)
         self.continuar["font"] = ['bold']
         self.continuar['padx'] = 1
         self.continuar['pady'] = 1
@@ -529,7 +532,7 @@ class VendProd(tk.Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row].getprodInfo()[0]
+                    t = info[row].getprodInfo()[1]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -538,7 +541,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=1)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row].getprodInfo()[0]
+                    t = info[row].getprodInfo()[1]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -548,7 +551,7 @@ class VendProd(tk.Frame):
             for row in range(len(info)):
                 if row % 2 == 0:
                     cor = '#ffffff'
-                    t = info[row].getprodInfo()[1]
+                    t = info[row].getprodInfo()[2]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
@@ -557,7 +560,7 @@ class VendProd(tk.Frame):
                     ent.grid(row=row, column=2)
                 else:
                     cor = '#f0f0f0'
-                    t = info[row].getprodInfo()[1]
+                    t = info[row].getprodInfo()[2]
                     ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
