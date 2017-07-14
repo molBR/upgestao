@@ -5,6 +5,7 @@ from datetime import datetime
 import cliente as cl
 import produto as pr
 import venda as ve
+import tipoEvento as te
 
 
 #Classes criadas para caracterizar os erros do programa - Não utilizadas no momento
@@ -57,7 +58,7 @@ def ClientesReceive(nome,endereco,telefone,email):
         c1 = cl.Cliente(None,nome,agora,endereco,telefone,email)
         return c1
 
-def EventosReceive(tipo,Clientes,rua,numero,bairro,complemento,adultos,criancas,data):
+def EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data):
     try:
         VerificaDigit(numero)
         VerificaDigit(adultos)
@@ -66,8 +67,7 @@ def EventosReceive(tipo,Clientes,rua,numero,bairro,complemento,adultos,criancas,
         raise e
     else:
         agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
-        t1 = ve.Venda(0,Clientes.getNome(),tipo,adultos,criancas,Clientes.getEndereco(),Clientes.getTelefone(),
-                      Clientes.getEmail(),data,agora,None,None,None,None)
+        t1 = te.tipoEvento(0,tipo,rua,numero,bairro,complemento,adultos,criancas,data)
         return t1
 
 def verificaArroba(email):

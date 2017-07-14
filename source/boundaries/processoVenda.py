@@ -22,7 +22,7 @@ class ProcessVend:
         #                                          Cliente=self.tela["cadClientMaior"].getClienteSelec(),TipoEvento=self.tela["vendEvent"].getTipoEvento())
         self.tela["vendProd"] = vendProd.VendProd(parent=self.controller.container, controller=self,
                                                   Cliente=self.tela["cadClientMaior"].getClienteSelec(),
-                                                  Venda=self.tela["vendEvent"].getVenda())
+                                                  Venda=self.tela["vendEvent"].getTipoEvento())
         self.tela["vendProd"].grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("cadClientMaior")
@@ -41,7 +41,7 @@ class ProcessVend:
 
     def Setter(self):
         self.tela["vendEvent"].setCliente(self.tela["cadClientMaior"].getClienteSelec())
-        self.tela["vendProd"].setCE(self.tela["cadClientMaior"].getClienteSelec(),self.tela["vendEvent"].getVenda())
+        self.tela["vendProd"].setCE(self.tela["cadClientMaior"].getClienteSelec(),self.tela["vendEvent"].getTipoEvento())
 
     def terminate(self):
         self.tela = None

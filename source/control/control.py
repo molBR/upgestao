@@ -23,7 +23,7 @@ class Control(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         #self.title('Guts\' Orçamento - Menu Principal')
-        self.resizable(width=False, height=False)
+        self.resizable(width=True, height=True)
         self.geometry('1500x600')
         self.protocol("WM_DELETE_WINDOW", lambda: quit())
 
