@@ -36,7 +36,7 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
     else:
         nome = TrataStr(nome)
         valor = TrataValor(valor)
-        agora = datetime.now().strftime('%H:%M:%S')
+        agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
         if (tipo == "Doce"): tipo = 1
         if (tipo == "Salgado"): tipo = 2
         if (tipo == "Massa"): tipo = 3

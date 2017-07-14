@@ -126,6 +126,23 @@ class Database(object):
         aux = self.dbCursor.fetchall()
         return aux
 
+    def insertVenda(self,Venda):
+
+        values = [Venda.getCliente(),
+                  Venda.getNome_contato(),
+                  Venda.getTipo_festa(),
+                  Venda.getNum_adultos(),
+                  Venda.getNum_criancas(),
+                  Venda.getEndereco_nome(),
+                  Venda.getData_evento(),
+                  Venda.getData_insert(),
+                  Venda.getCusto_local().get(),
+                  Venda.getCusto_diversos().get(),
+                  Venda.getSubtrair().get(),
+                  Venda.getValor_total().get()]
+        print values
+        self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
+        self.dbConnect.commit()
 
     def insertProdVend(self,nome,valor,id_venda,nome_categoria):
         values = [nome,valor,id_venda,nome_categoria]

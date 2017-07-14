@@ -2,7 +2,7 @@
 
 import Tkinter as tk
 import source.entities.tratamentos as tr
-import source.entities.venda as ve
+import source.entities.tipoEvento as te
 import tkMessageBox
 
 def Teste():
@@ -16,25 +16,24 @@ class VendEvent(tk.Frame):
         self.controller = controller
         self.FazTela()
         self.Cliente = Cliente
-        self.Venda = ve.Venda(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+        self.tipoEvento = te.tipoEvento(1,1,1,1,1,1,1,1,1)
 
 
     def setCliente(self,Cliente):
-        self.Venda.setCliente(Cliente)
+        self.Cliente = Cliente
 
     def Insere(self,tipo,rua,numero,bairro,complemento,adultos,criancas,data):
-
+        print self.Cliente.getNome()
         try:
-            self.Venda= tr.EventosReceive(tipo,self.Cliente,rua,numero,bairro,complemento,adultos,criancas,data)
+            self.tipoEvento = tr.EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data)
         except tr.ErroEntrada as e:
             tkMessageBox.showerror("Erro encontrado ", e.message)
         else:
             self.controller.show_frame('vendProd')
-            print self.Venda.getCliente().getNome()
 
 
-    def getVenda(self):
-        return self.Venda
+    def getTipoEvento(self):
+        return self.tipoEvento
 
     def FazTela(self):
 

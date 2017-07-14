@@ -38,7 +38,7 @@ class Venda(object):
         return self.num_criancas
 
     def getEndereco_nome(self):
-        return self.endereco_nome
+        return self.endereco
 
     def getTelefone(self):
         return self.telefone

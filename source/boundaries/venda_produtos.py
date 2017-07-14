@@ -3,9 +3,11 @@
 import Tkinter as tk
 import os as os
 import tkMessageBox
+from datetime import datetime
 
 from source.entities import database as db
 from source.entities import tratamentos as tr
+from source.entities import venda as ve
 
 
 # funcao de teste
@@ -46,7 +48,17 @@ class VendProd(tk.Frame):
 
 
     def insereTudo(self):
-        print "Teste"
+        agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
+        if(not self.listaSelec):
+            print "VAZIO"
+        else:
+            self.calculaTotal()
+            v1 = ve.Venda(0,self.Cliente.getId(),self.Cliente.getNome(),self.TipoEvento.getTipo(),self.TipoEvento.getAdultos(),
+                          self.TipoEvento.getCriancas(),self.TipoEvento.getRua(),self.Cliente.getTelefone(),
+                          self.Cliente.getEmail(),self.TipoEvento.getData(),agora,self.SomaQuant,self.SomaQuant,
+                          self.SomaQuant,self.SomaQuant)
+            self.bd.insertVenda(v1)
+
 
     def setCE(self,Cliente,TipoEvento):
         self.Cliente = Cliente
