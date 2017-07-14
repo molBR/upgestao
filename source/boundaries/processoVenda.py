@@ -42,3 +42,7 @@ class ProcessVend:
     def Setter(self):
         self.tela["vendEvent"].setCliente(self.tela["cadClientMaior"].getClienteSelec())
         self.tela["vendProd"].setCE(self.tela["cadClientMaior"].getClienteSelec(),self.tela["vendEvent"].getVenda())
+
+    def terminate(self):
+        self.tela = None
+        self.controller.show_frame("menuInicial")

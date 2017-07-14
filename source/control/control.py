@@ -15,7 +15,8 @@ class Control(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.tela = {}
-        self.processVend  = None;
+        self.processVendIsOn = False
+        self.processVend  = None
         self.container = tk.Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
         self.container.grid_rowconfigure(0, weight=1)
@@ -47,6 +48,10 @@ class Control(tk.Tk):
 
     #Mostra a tela desejada, que é mandada por parametro
     def show_frame(self, page_name):
+        if(self.processVendIsOn):
+            self.processVend = None
+            self.processVendIsOn = False
+
         if(page_name == 'menuInicial'):
             self.title('Gut\'s Orçamento - Menu Inicial')
         elif (page_name == 'cadProdMaior'):
@@ -57,6 +62,7 @@ class Control(tk.Tk):
         #    self.title('Gut\'s Orçamento - Nova Venda')
         elif (page_name == 'cadClientMaior'):
             self.title('Guts\' Orçamento - Cadastro de Clientes')
+            self.processVendIsOn = True
             self.processVend = procVenda.ProcessVend(controller=self)
             return
         frame = self.tela[page_name]

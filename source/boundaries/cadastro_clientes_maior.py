@@ -83,176 +83,173 @@ class CadClient(tk.Frame):
 
 
     def FazTela(self):
-            # menu principal
-            toolbar1 = tk.Frame(self, bg="white")
-            menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
-                               command=lambda: self.controller.show_frame("menuInicial"))
-            menu["font"] = ("Arial", "10")
-            menu.pack(side=tk.LEFT)
-            espaco1 = tk.Label(toolbar1, text=" | ", bg="white")
-            espaco1["font"] = ("Arial", "12")
-            espaco1.pack(side=tk.LEFT)
-            """
-            novavenda = tk.Button(toolbar1, text="Nova Venda", bg="white", relief=tk.FLAT,
-                          command=lambda: self.controller.show_frame("vendProd"))
-            novavenda["font"] = ("Arial", "10")
-            novavenda.pack(side=tk.LEFT, padx=1, pady=1)
-            espaco2 = tk.Label(toolbar1, text=" | ", bg="white")
-            espaco2["font"] = ("Arial", "12")
-            espaco2.pack(side=tk.LEFT)
-            """
-            cadastrarcliente = tk.Button(toolbar1, text="Clientes e Vendas", bg="light grey", relief=tk.FLAT)
-            cadastrarcliente["font"] = ("Arial", "10")
-            cadastrarcliente.pack(side=tk.LEFT, padx=1, pady=1)
-            espaco3 = tk.Label(toolbar1, text=" | ", bg="white")
-            espaco3["font"] = ("Arial", "12")
-            espaco3.pack(side=tk.LEFT)
-            historicovenda = tk.Button(toolbar1, text="Historico de Vendas", bg="white", relief=tk.FLAT,
-                          command=lambda: self.controller.show_frame("vendHist"))
-            historicovenda["font"] = ("Arial", "10")
-            historicovenda.pack(side=tk.LEFT, padx=1, pady=1)
-            espaco4 = tk.Label(toolbar1, text=" | ", bg="white")
-            espaco4["font"] = ("Arial", "12")
-            espaco4.pack(side=tk.LEFT)
-            inserirproduto = tk.Button(toolbar1, text="Inserir Produto", bg="white", relief=tk.FLAT,
-                          command=lambda: self.controller.show_frame("cadProdMaior"))
-            inserirproduto["font"] = ("Arial", "10")
-            inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
-            """
-            espaco5 = tk.Label(toolbar1, text=" | ", bg="white")
-            espaco5["font"] = ("Arial", "12")
-            espaco5.pack(side=tk.LEFT)
-            inserirtipo = tk.Button(toolbar1, text="Inserir Tipo", bg="white", relief=tk.FLAT,
-                          command=lambda: Teste())
-            inserirtipo["font"] = ("Arial", "10")
-            inserirtipo.pack(side=tk.LEFT, padx=1, pady=1)
-            """
-            toolbar1.pack(side=tk.TOP, fill=tk.X)
-            # fim
 
-            # abas de opcoes
-            cor1 = '#D32F2F'
-            v = "valor"
+        """
+        # Menu de fluxo entre telas
+        toolbar1 = tk.Frame(self, bg="white")
+        menu = tk.Button(toolbar1, text="   Menu Inicial ", bg="white", relief=tk.FLAT,
+                           command=lambda: self.controller.show_frame("menuInicial"))
+        menu["font"] = ("Arial", "10")
+        menu.pack(side=tk.LEFT)
+        espaco1 = tk.Label(toolbar1, text=" | ", bg="white")
+        espaco1["font"] = ("Arial", "12")
+        espaco1.pack(side=tk.LEFT)
 
-            toolbar2 = tk.Frame(self, bg=cor1)
+        cadastrarcliente = tk.Button(toolbar1, text="Clientes e Vendas", bg="light grey", relief=tk.FLAT)
+        cadastrarcliente["font"] = ("Arial", "10")
+        cadastrarcliente.pack(side=tk.LEFT, padx=1, pady=1)
+        espaco3 = tk.Label(toolbar1, text=" | ", bg="white")
+        espaco3["font"] = ("Arial", "12")
+        espaco3.pack(side=tk.LEFT)
+        historicovenda = tk.Button(toolbar1, text="Historico de Vendas", bg="white", relief=tk.FLAT,
+                      command=lambda: self.controller.show_frame("vendHist"))
+        historicovenda["font"] = ("Arial", "10")
+        historicovenda.pack(side=tk.LEFT, padx=1, pady=1)
+        espaco4 = tk.Label(toolbar1, text=" | ", bg="white")
+        espaco4["font"] = ("Arial", "12")
+        espaco4.pack(side=tk.LEFT)
+        inserirproduto = tk.Button(toolbar1, text="Inserir Produto", bg="white", relief=tk.FLAT,
+                      command=lambda: self.controller.show_frame("cadProdMaior"))
+        inserirproduto["font"] = ("Arial", "10")
+        inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
+        
+        toolbar1.pack(side=tk.TOP, fill=tk.X)
+        """
+        # fim
 
-            clientes = tk.Label(toolbar2, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
-            clientes.pack(side=tk.LEFT, pady=10)
-            valor = tk.Label(toolbar2, text=v, bg=cor1, font="bold", fg="white")
-            valor.pack(side=tk.LEFT)
+        # abas de opcoes
+        cor1 = '#D32F2F'
+        v = "valor"
 
-            toolbar2.pack(side=tk.TOP, fill=tk.X)
-            # fim
+        toolbar2 = tk.Frame(self, bg=cor1)
 
-            # barra de 'status'
-            status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
-            status.pack(side=tk.BOTTOM, fill=tk.X)
-            # fim
+        clientes = tk.Label(toolbar2, text=" Clientes Cadastrados:", bg=cor1, font="bold", fg="white")
+        clientes.pack(side=tk.LEFT, pady=10)
+        valor = tk.Label(toolbar2, text=v, bg=cor1, font="bold", fg="white")
+        valor.pack(side=tk.LEFT)
 
-            self.bd = db.Database()  # banco de dados
+        toolbar2.pack(side=tk.TOP, fill=tk.X)
+        # fim
 
-            cor3 = '#E6E6E6'
-            info = 53
+        # barra de 'status'
+        status = tk.Label(self, text="Estado: Rodando", bg="white", bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        status.pack(side=tk.BOTTOM, fill=tk.X)
+        # fim
 
-            #Criação da classe de tela menor de cadastro de cliente
+        self.bd = db.Database()  # banco de dados
 
-            self.container1 = tk.Frame(self)
-            self.container2 = tk.Frame(self, bg=cor3)
-            self.container3 = tk.Frame(self, bg=cor3)
-            self.container4 = tk.Frame(self, bg=cor3)
-            self.container1.pack(fill=tk.X)
-            self.container2.pack(side=tk.BOTTOM, fill=tk.X)
-            self.container3.pack(side=tk.BOTTOM, fill=tk.X)
-            self.container4.pack(side=tk.BOTTOM, fill=tk.X)
+        cor3 = '#E6E6E6'
+        info = 53
 
-            self.cliente = tk.Label(self.container1, text="Clientes:")
-            self.cliente["font"] = ["bold"]
-            self.cliente.pack(side=tk.LEFT)
-            for espaco in range(info):
-                t = " "
-                tk.Label(self.container1, text=t).pack(side=tk.LEFT)
-            self.dados = tk.Label(self.container1, text="Dados:")
-            self.dados["font"] = ["bold"]
-            self.dados.pack(side=tk.LEFT)
+        #Criação da classe de tela menor de cadastro de cliente
 
-            # espaco com "salvar docx", "excluir" e "pesquisar"
-            self.salto1 = tk.Label(self.container2, text="", bg=cor3)
-            self.salto1.pack(side=tk.LEFT)
+        self.container1 = tk.Frame(self)
+        self.container2 = tk.Frame(self, bg=cor3)
+        self.container3 = tk.Frame(self, bg=cor3)
+        self.container4 = tk.Frame(self, bg=cor3)
+        self.container1.pack(fill=tk.X)
+        self.container2.pack(side=tk.BOTTOM, fill=tk.X)
+        self.container3.pack(side=tk.BOTTOM, fill=tk.X)
+        self.container4.pack(side=tk.BOTTOM, fill=tk.X)
 
-            self.espaco1 = tk.Label(self.container3, text="                                                          ",
-                                    bg=cor3)
-            self.espaco1.pack(side=tk.LEFT)
-            #self.formCadastro = tk.Toplevel()
-            self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: self.cadastraClin(),
-                                      bg=cor3)
-            self.cadastro["font"] = ['bold']
-            self.cadastro['padx'] = 1
-            self.cadastro['pady'] = 1
-            self.cadastro.pack(side=tk.LEFT)
-            self.espaco2 = tk.Label(self.container3, text="                    ", bg=cor3)
-            self.espaco2.pack(side=tk.LEFT)
-            self.pesquisar1 = tk.Label(self.container3, text="Pesquisar: ", bg=cor3)
-            self.pesquisar1["font"] = ['bold']
-            self.pesquisar1.pack(side=tk.LEFT)
-            self.pesquisar2 = tk.Entry(self.container3)
-            self.pesquisar2["width"] = 40
-            self.pesquisar2["font"] = ("Arial", "10")
-            self.pesquisar2.pack(side=tk.LEFT)
-            self.espaco3 = tk.Label(self.container3, text=" ", bg=cor3)
-            self.espaco3.pack(side=tk.LEFT)
-            self.ok = tk.Button(self.container3, text="Ok", command=lambda: self.pesquisando(), bg=cor3)
-            self.ok["font"] = ['bold']
-            self.ok['padx'] = 1
-            self.ok['pady'] = 1
-            self.ok.pack(side=tk.LEFT)
-            self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
-            self.espaco4.pack(side=tk.LEFT)
-            self.cadastrarEvento = tk.Button(self.container3, text="Cadastrar Evento", command=lambda:
-            self.controller.show_frame('vendEvent'),
-                                      bg=cor3)
-            self.cadastrarEvento["font"] = ['bold']
-            self.cadastrarEvento['padx'] = 1
-            self.cadastrarEvento['pady'] = 1
-            self.cadastrarEvento.pack(side=tk.LEFT)
+        self.cliente = tk.Label(self.container1, text="Clientes:")
+        self.cliente["font"] = ["bold"]
+        self.cliente.pack(side=tk.LEFT)
+        for espaco in range(info):
+            t = " "
+            tk.Label(self.container1, text=t).pack(side=tk.LEFT)
+        self.dados = tk.Label(self.container1, text="Dados:")
+        self.dados["font"] = ["bold"]
+        self.dados.pack(side=tk.LEFT)
+
+        # espaco com "salvar docx", "excluir" e "pesquisar"
+        self.salto1 = tk.Label(self.container2, text="", bg=cor3)
+        self.salto1.pack(side=tk.LEFT)
+
+        self.espaco0 = tk.Label(self.container3, text="                    ", bg=cor3)
+        self.espaco0.pack(side=tk.LEFT)
+
+        self.voltar = tk.Button(self.container3, text="Voltar", command=lambda: self.controller.terminate(),
+                                     bg = cor3)
+        self.voltar["font"] = ['bold']
+        self.voltar["padx"] = 1
+        self.voltar["pady"] = 1
+        self.voltar.pack(side=tk.LEFT)
+        self.espaco1 = tk.Label(self.container3, text="                    ", bg=cor3)
+        self.espaco1.pack(side=tk.LEFT)
+
+        #self.formCadastro = tk.Toplevel()
+        self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: self.cadastraClin(),
+                                  bg=cor3)
+        self.cadastro["font"] = ['bold']
+        self.cadastro['padx'] = 1
+        self.cadastro['pady'] = 1
+        self.cadastro.pack(side=tk.LEFT)
+        self.espaco2 = tk.Label(self.container3, text="                    ", bg=cor3)
+        self.espaco2.pack(side=tk.LEFT)
+        self.pesquisar1 = tk.Label(self.container3, text="Pesquisar: ", bg=cor3)
+        self.pesquisar1["font"] = ['bold']
+        self.pesquisar1.pack(side=tk.LEFT)
+        self.pesquisar2 = tk.Entry(self.container3)
+        self.pesquisar2["width"] = 40
+        self.pesquisar2["font"] = ("Arial", "10")
+        self.pesquisar2.pack(side=tk.LEFT)
+        self.espaco3 = tk.Label(self.container3, text=" ", bg=cor3)
+        self.espaco3.pack(side=tk.LEFT)
+        self.ok = tk.Button(self.container3, text="Ok", command=lambda: self.pesquisando(), bg=cor3)
+        self.ok["font"] = ['bold']
+        self.ok['padx'] = 1
+        self.ok['pady'] = 1
+        self.ok.pack(side=tk.LEFT)
+        self.espaco4 = tk.Label(self.container3, text="                    ", bg=cor3)
+        self.espaco4.pack(side=tk.LEFT)
+        self.cadastrarEvento = tk.Button(self.container3, text="Cadastrar Evento", command=lambda:
+        self.controller.show_frame('vendEvent'),
+                                  bg=cor3)
+        self.cadastrarEvento["font"] = ['bold']
+        self.cadastrarEvento['padx'] = 1
+        self.cadastrarEvento['pady'] = 1
+        self.cadastrarEvento.pack(side=tk.LEFT)
 
 
-            self.salto2 = tk.Label(self.container4, text="", bg=cor3)
-            self.salto2.pack(side=tk.LEFT)
+        self.salto2 = tk.Label(self.container4, text="", bg=cor3)
+        self.salto2.pack(side=tk.LEFT)
 
 
 
-            # fim
+        # fim
 
-            # tabela dos itens
-            #Frame.__init__(self, self.root)
-            self.canvas1 = tk.Canvas(self, borderwidth=0, background="#ffffff")
-            self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
-            self.vsb1 = tk.Scrollbar(self, orient="vertical", command=self.canvas1.yview)
-            self.canvas1.configure(yscrollcommand=self.vsb1.set)
+        # tabela dos itens
+        #Frame.__init__(self, self.root)
+        self.canvas1 = tk.Canvas(self, borderwidth=0, background="#ffffff")
+        self.frame1 = tk.Frame(self.canvas1, background="#f0f0f0")
+        self.vsb1 = tk.Scrollbar(self, orient="vertical", command=self.canvas1.yview)
+        self.canvas1.configure(yscrollcommand=self.vsb1.set)
 
-            self.canvas1.pack(side="left", fill="both", expand=True)
-            self.vsb1.pack(side="left", fill="y")
-            self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
-                                       tags="self.frame1")
+        self.canvas1.pack(side="left", fill="both", expand=True)
+        self.vsb1.pack(side="left", fill="y")
+        self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
+                                   tags="self.frame1")
 
-            self.frame1.bind("<Configure>", self.onFrameConfigure1)
-            self.pacote1 = [self.canvas1, self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
-            self.populate1(self.bd.selectCliente())
+        self.frame1.bind("<Configure>", self.onFrameConfigure1)
+        self.pacote1 = [self.canvas1, self.frame1,self.vsb1,"self.frame1",self.onFrameConfigure1]
+        self.populate1(self.bd.selectCliente())
 
-            #Frame.__init__(self, self.root)
-            self.canvas2 = tk.Canvas(self, borderwidth=0, background="#fafafa")
-            self.frame2 = tk.Frame(self.canvas2, background="#fafafa")
-            self.vsb2 = tk.Scrollbar(self, orient="vertical", command=self.canvas2.yview)
-            self.canvas2.configure(yscrollcommand=self.vsb2.set)
+        #Frame.__init__(self, self.root)
+        self.canvas2 = tk.Canvas(self, borderwidth=0, background="#fafafa")
+        self.frame2 = tk.Frame(self.canvas2, background="#fafafa")
+        self.vsb2 = tk.Scrollbar(self, orient="vertical", command=self.canvas2.yview)
+        self.canvas2.configure(yscrollcommand=self.vsb2.set)
 
-            self.canvas2.pack(side="left", fill="both", expand=True)
-            self.vsb2.pack(side="left", fill="y")
-            self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
-                                       tags="self.frame2")
+        self.canvas2.pack(side="left", fill="both", expand=True)
+        self.vsb2.pack(side="left", fill="y")
+        self.canvas2.create_window((4, 4), window=self.frame2, anchor="nw",
+                                   tags="self.frame2")
 
-            self.frame2.bind("<Configure>", self.onFrameConfigure2)
-            self.pacote2 = [self.canvas2,self.frame2,self.vsb2,"self.frame2",self.onFrameConfigure2]
-            self.populate2(self.bd.selectCliente())
+        self.frame2.bind("<Configure>", self.onFrameConfigure2)
+        self.pacote2 = [self.canvas2,self.frame2,self.vsb2,"self.frame2",self.onFrameConfigure2]
+        self.populate2(self.bd.selectCliente())
+
 
     def populate1(self,info):
 
