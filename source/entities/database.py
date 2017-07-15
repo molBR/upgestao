@@ -141,7 +141,7 @@ class Database(object):
                   Venda.getSubtrair().get(),
                   Venda.getValor_total().get()]
         print values
-        self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
+        self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
     def insertProdVend(self,nome,valor,id_venda,nome_categoria):
