@@ -58,6 +58,15 @@ class VendProd(tk.Frame):
                           self.Cliente.getEmail(),self.TipoEvento.getData(),agora,self.SomaQuant,self.SomaQuant,
                           self.SomaQuant,self.SomaQuant)
             self.bd.insertVenda(v1)
+            vend_id = self.bd.selectLastIdVenda()
+            print vend_id
+            for i in range(len(self.listaSelec)):
+                self.bd.insertProdVend(self.listaSelec[i].getprodInfo()[1],
+                                       self.listaSelec[i].getprodInfo()[2],
+                                       vend_id,
+                                       self.listaSelec[i].getprodInfo()[4])
+
+
 
 
     def setCE(self,Cliente,TipoEvento):

@@ -126,27 +126,33 @@ class Database(object):
         aux = self.dbCursor.fetchall()
         return aux
 
+    def selectLastIdVenda(self):
+        self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
+        aux = self.dbCursor.fetchall()
+        return aux[len(aux)-1][0]
+
     def insertVenda(self,Venda):
 
-        values = [Venda.getCliente(),
+        values = [
+                  Venda.getCliente(),
                   Venda.getNome_contato(),
                   Venda.getTipo_festa(),
                   Venda.getNum_adultos(),
-                  Venda.getNum_criancas(),
                   Venda.getEndereco_nome(),
                   Venda.getData_evento(),
                   Venda.getData_insert(),
                   Venda.getCusto_local().get(),
                   Venda.getCusto_diversos().get(),
                   Venda.getSubtrair().get(),
-                  Venda.getValor_total().get()]
-        print values
-        self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
+                  Venda.getValor_total().get(),
+                  Venda.getNum_criancas(),]
+        self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
     def insertProdVend(self,nome,valor,id_venda,nome_categoria):
         values = [nome,valor,id_venda,nome_categoria]
-        self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (?, ?, ?, ?', values)
+        print values
+        self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (NULL, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
     # Insere o produto recebendo um objeto produto
@@ -224,6 +230,8 @@ class Database(object):
         self.dbCursor.execute('SELECT nome_cliente FROM Cliente WHERE id = ?', value)
         x = self.dbCursor.fetchone()
         return x[0]
+
+
 #Verifica se o produto existe pelo seu id
     def ExistsProduto(self,id):
         value = [id]
