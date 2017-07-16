@@ -182,8 +182,6 @@ class VendHist(tk.Frame):
             self.canvas1.create_window((4, 4), window=self.frame1, anchor="nw",
                                        tags="self.frame1")
 
-            self.frame1.bind("<Configure>", self.onFrameConfigure1)
-
             self.populate1(self.bd.selectVenda())  # fim frame dos produtos
 
             #tk.Frame.__init__(self, self.root)  # comeco frame venda
@@ -205,9 +203,9 @@ class VendHist(tk.Frame):
     def populate1(self,info):  # comeco produtos
         #info = 40
         info_cliente = []
+        print info
         for i in range(self.bd.TamVenda()):
-            info_cliente.append("a")
-        print info_cliente
+            info_cliente.append(self.bd.selectClientNameId(info[i][1]))
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(len(info)):
@@ -222,8 +220,8 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                t = info_cliente[row]
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=20)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -231,8 +229,8 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
-                t = info[row][1]
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
+                t = info_cliente[row]
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=20)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -241,8 +239,8 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "data"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=10)
+                t = info[row][6]
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -250,8 +248,8 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
-                t = "data"
-                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=10)
+                t = info[row][6]
+                ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
@@ -260,7 +258,7 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "R$" "  valor"
+                t = info[row][11]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -269,7 +267,7 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=4)
             else:
                 cor = '#f0f0f0'
-                t = "R$"  "  valor"
+                t = info[row][11]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -279,11 +277,11 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                button2.grid(row=row, column=5)
+                button2.grid(row=row, column=6)
                 button2.image = photo2
             else:
                 button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
-                button2.grid(row=row, column=5)
+                button2.grid(row=row, column=6)
                 button2.image = photo2
                 # fim produtos
 
