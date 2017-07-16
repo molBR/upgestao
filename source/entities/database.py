@@ -175,6 +175,10 @@ class Database(object):
         self.dbCursor.execute('INSERT INTO Cliente VALUES (NULL, ?, ?, ?, ?, ?)', values) #O NULL no id do insert into cliente é para fazer com que o id seja auto incrementavel
         self.dbConnect.commit()
 
+    def selectVenda(self):
+        self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
+        return self.dbCursor.fetchall()
+
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):
         self.dbCursor.execute('Select * FROM Produto WHERE Id_Categoria = 1')
@@ -241,6 +245,10 @@ class Database(object):
             return False
         else:
             return True
+
+    def TamVenda(self):
+        self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
+        return len(self.dbCursor.fetchall())
 
 #Deleta o produto dado seu id
     def deleteProduto(self, id):

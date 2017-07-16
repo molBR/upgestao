@@ -2,6 +2,7 @@
 
 import Tkinter as tk
 import os as os
+from source.entities import database as db
 
 # funcao de teste
 def Teste():
@@ -12,7 +13,9 @@ class VendHist(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.bd = db.Database()
         self.FazTela()
+
 
     def FazTela(self):
 
@@ -181,7 +184,7 @@ class VendHist(tk.Frame):
 
             self.frame1.bind("<Configure>", self.onFrameConfigure1)
 
-            self.populate1()  # fim frame dos produtos
+            self.populate1(self.bd.selectVenda())  # fim frame dos produtos
 
             #tk.Frame.__init__(self, self.root)  # comeco frame venda
             self.canvas2 = tk.Canvas(self, borderwidth=0, background="#ffffff")
@@ -199,11 +202,15 @@ class VendHist(tk.Frame):
             self.populate2()  # fim frame venda
 
 
-    def populate1(self):  # comeco produtos
-        info = 40
+    def populate1(self,info):  # comeco produtos
+        #info = 40
+        info_cliente = []
+        for i in range(self.bd.TamVenda()):
+            info_cliente.append("a")
+        print info_cliente
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
                 button1.grid(row=row, column=1)
@@ -212,10 +219,10 @@ class VendHist(tk.Frame):
                 button1 = tk.Button(self.frame1, width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
                 button1.grid(row=row, column=1)
                 button1.image = photo1
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -224,14 +231,14 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=2)
             else:
                 cor = '#f0f0f0'
-                t = "nome"
+                t = info[row][1]
                 ent = tk.Entry(self.frame1, state='readonly', readonlybackground=cor, fg='black', width=25)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=2)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "data"
@@ -250,7 +257,7 @@ class VendHist(tk.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=3)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
                 t = "R$" "  valor"
@@ -269,7 +276,7 @@ class VendHist(tk.Frame):
                 var.set(t)
                 ent.config(textvariable=var, relief='flat')
                 ent.grid(row=row, column=4)
-        for row in range(info):
+        for row in range(len(info)):
             if row % 2 == 0:
                 button2 = tk.Button(self.frame1, width=20, height=20, image=photo2, relief=tk.FLAT, command=Teste)
                 button2.grid(row=row, column=5)
