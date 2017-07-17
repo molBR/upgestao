@@ -48,7 +48,7 @@ class VendHist(tk.Frame):
 
     def JanelaPequena(self,id):
         if tkMessageBox.askokcancel("Deletar","Deseja mesmo deletar?"):
-            lambda : self.bd.deleteVenda(id)
+            self.bd.deleteVenda(id)
 
 
     def FazTela(self):
