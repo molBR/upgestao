@@ -8,6 +8,7 @@ from datetime import datetime
 from source.entities import database as db
 from source.entities import tratamentos as tr
 from source.entities import venda as ve
+import venda_produtos_menor as vpm
 
 
 # funcao de teste
@@ -28,6 +29,7 @@ class SelectedProd:
         self.quant = tk.IntVar()
         self.quant.set(quant)
 
+
     def getprodInfo(self):
         return self.prodInfo
 
@@ -45,6 +47,7 @@ class VendProd(tk.Frame):
         self.FazTela()
         self.Cliente = Cliente
         self.Venda = Venda
+        self.vpm = vpm.Application()
 
 
     def insereTudo(self):
@@ -58,6 +61,10 @@ class VendProd(tk.Frame):
                           self.Cliente.getEmail(),self.TipoEvento.getData(),agora,self.SomaQuant,self.SomaQuant,
                           self.SomaQuant,self.SomaQuant)
             self.bd.insertVenda(v1)
+            self.vpm.FazTela(self.bd, v1)
+            if (self.vpm.GetWindow() != None):
+                self.vpm.GetWindow().wait_window()
+
             vend_id = self.bd.selectLastIdVenda()
             print vend_id
             for i in range(len(self.listaSelec)):
@@ -191,7 +198,7 @@ class VendProd(tk.Frame):
             for i in range(len(self.listaSelec)):
                 auxProdValue = tr.swapComma2Dot(self.listaSelec[i].getprodInfo()[2])
                 valorTot = valorTot + float(auxProdValue) * int(self.listaSelec[i].getQuant().get())
-        self.SomaQuant.set(valorTot)
+            self.SomaQuant.set(valorTot)
 
     def FazTela(self):
         # menu
@@ -606,9 +613,10 @@ class VendProd(tk.Frame):
                 # fim
 
     def deselecionaProduto(self, row):
+        self.listaSelec.pop(row)
         auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
         auxProdValue = tr.swapComma2Dot(self.listaSelec[row].getprodInfo()[2])
-        self.listaSelec.pop(row)
+
         self.todos_apertado()
         self.calculaTotal()
 

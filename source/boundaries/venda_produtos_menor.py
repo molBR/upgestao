@@ -1,10 +1,10 @@
+# encoding: utf-8
 from Tkinter import *
 from source.entities import database as db
 
 class Application:
     def __init__(self):
         self.top = None
-        self.bd = db.Database()
         self.cor1 = '#D32F2F'
 
     def CloseWindow(self):
@@ -14,12 +14,18 @@ class Application:
     def GetWindow(self):
         return self.top
 
+    def insereTudo(self,bd,v1):
+        print "oi"
 
-    def FazTela(self):
+    def FazTela(self,bd,v1):
+
+        if(self.top!=None):
+            return
 
         self.top = Toplevel()
         self.top.title('Guts\' Orçamento - Valor final')
-        container1 = Frame(self.top)
+        self.container1 = Frame(self.top)
+        self.container1.grid(row=0,column=0)
         self.espaco0 = Label(self.container1, text="          ")
         self.espaco0.grid (row=0, column=0)
         self.valor_final1 = Label(self.container1, text="Valor Final:")
@@ -31,7 +37,7 @@ class Application:
         self.valor_final2.grid(row=2, column=1)
         self.espaco1 = Label(self.container1, text="          ")
         self.espaco1.grid(row=3, column=2)
-        self.ok = Button(self.container1, text="OK", bg=self.cor1)
+        self.ok = Button(self.container1, text="OK", bg=self.cor1, command=lambda: self.insereTudo(bd,v1))
         self.ok['font']=['bold']
         self.ok['fg']='white'
         self.ok['padx'] = 2
@@ -40,7 +46,4 @@ class Application:
         self.espaco2 = Label(self.container1, text="          ")
         self.espaco2.grid(row=5, column=0)
 
-root = Tk()
-Application(root)
-root.title('Valor Final')
-root.mainloop()
+        self.top.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())
