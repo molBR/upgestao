@@ -7,6 +7,8 @@ class Application:
     def __init__(self):
         self.top = None
         self.cor1 = '#D32F2F'
+        self.vt = StringVar()
+        self.desconto = StringVar()
 
     def CloseWindow(self):
         self.top.destroy()
@@ -15,20 +17,27 @@ class Application:
     def GetWindow(self):
         return self.top
 
-    def insereTudo(self,bd,venda):
-        print "oi"
+    def insereTudo(self,bd,venda,controller):
+        self.desconto.set(float(self.vt.get()) - float(venda.getCusto_diversos().get()))
+        venda.setValor_total(self.vt)
+        venda.setSubtrair(self.desconto)
+        bd.insertVenda(venda)
+        controller.show_frame("cadClientMaior")
+        self.CloseWindow()
+
+
 
     def calculaTotal(self,v1):
         #try:
-            valor = float(self.valor_espaco2.get()) + float(v1.getValor_total().get())
+            self.vt.set(float(self.valor_espaco2.get()) + float(v1.getCusto_diversos().get()))
         #except Exception as e:
          #   return
         #else:
             #self.vt = valor
-            self.v2.set(str(valor))
+            self.v2.set(str(self.vt.get()))
 
 
-    def FazTela(self,bd,venda):
+    def FazTela(self,bd,venda,controller):
 
         if(self.top!=None):
             self.CloseWindow()
@@ -64,7 +73,7 @@ class Application:
         self.valor_final2.grid(row=4, column=1)
         self.espaco1 = Label(self.container1, text="          ")
         self.espaco1.grid(row=5, column=2)
-        self.ok = Button(self.container1, text="OK", bg=self.cor1, command=lambda: self.insereTudo(bd,venda))
+        self.ok = Button(self.container1, text="OK", bg=self.cor1, command=lambda: self.insereTudo(bd,venda,controller))
         self.ok['font']=['bold']
         self.ok['fg']='white'
         self.ok['padx'] = 2
@@ -72,5 +81,6 @@ class Application:
         self.ok.grid(row=6, column=1)
         self.espaco2 = Label(self.container1, text="          ")
         self.espaco2.grid(row=7, column=0)
+        self.calculaTotal(venda)
 
         self.top.protocol("WM_DELETE_WINDOW", lambda: self.CloseWindow())

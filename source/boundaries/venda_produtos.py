@@ -61,7 +61,7 @@ class VendProd(tk.Frame):
                           self.Cliente.getEmail(),self.TipoEvento.getData(),agora,self.SomaQuant,self.SomaQuant,
                           self.SomaQuant,self.SomaQuant)
             self.bd.insertVenda(v1)
-            self.vpm.FazTela(self.bd, v1)
+            self.vpm.FazTela(self.bd, v1,self.controller)
             if (self.vpm.GetWindow() != None):
                 self.vpm.GetWindow().wait_window()
 
