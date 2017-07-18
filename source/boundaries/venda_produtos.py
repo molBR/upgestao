@@ -60,12 +60,10 @@ class VendProd(tk.Frame):
                           self.TipoEvento.getCriancas(),self.TipoEvento.getRua(),self.Cliente.getTelefone(),
                           self.Cliente.getEmail(),self.TipoEvento.getData(),agora,self.SomaQuant,self.SomaQuant,
                           self.SomaQuant,self.SomaQuant)
-            self.bd.insertVenda(v1)
             self.vpm.FazTela(self.bd, v1,self.controller)
             if (self.vpm.GetWindow() != None):
                 self.vpm.GetWindow().wait_window()
-
-            vend_id = self.bd.selectLastIdVenda()
+            vend_id = self.bd.selectLastIdVenda()-1
             print vend_id
             for i in range(len(self.listaSelec)):
                 self.bd.insertProdVend(self.listaSelec[i].getprodInfo()[1],

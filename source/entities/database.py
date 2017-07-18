@@ -138,14 +138,14 @@ class Database(object):
                   Venda.getNome_contato(),
                   Venda.getTipo_festa(),
                   Venda.getNum_adultos(),
+                  Venda.getNum_criancas(),
                   Venda.getEndereco_nome(),
                   Venda.getData_evento(),
                   Venda.getData_insert(),
                   Venda.getCusto_local().get(),
                   Venda.getCusto_diversos().get(),
                   Venda.getSubtrair().get(),
-                  Venda.getValor_total().get(),
-                  Venda.getNum_criancas(),]
+                  Venda.getValor_total().get()]
         self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
