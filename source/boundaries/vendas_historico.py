@@ -239,7 +239,7 @@ class VendHist(tk.Frame):
 
             self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2", self.onFrameConfigure2]
 
-            self.populate2()  # fim frame venda
+            self.populate2(self.bd.selectFirstVenda(),self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
 
 
     def populate1(self,info):  # comeco produtos
@@ -303,7 +303,7 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = info[row][11]
+                t = info[row][12]
                 ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -312,7 +312,7 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=4)
             else:
                 cor = '#f0f0f0'
-                t = info[row][11]
+                t = info[row][12]
                 ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -334,8 +334,12 @@ class VendHist(tk.Frame):
         '''Reset the scroll region to encompass the inner frame'''
         self.pacote1[0].configure(scrollregion=self.pacote1[0].bbox("all"))  # fim scroolbar frame1
 
-    def populate2(self):  # comeco venda
+    def populate2(self,infoVenda,infoCliente,infoListaProduto):  # comeco venda
 
+        print "Aqui:"
+        print infoVenda
+        print infoCliente
+        print infoListaProduto
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
 

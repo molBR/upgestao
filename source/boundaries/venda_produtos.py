@@ -63,7 +63,7 @@ class VendProd(tk.Frame):
             self.vpm.FazTela(self.bd, v1,self.controller)
             if (self.vpm.GetWindow() != None):
                 self.vpm.GetWindow().wait_window()
-            vend_id = self.bd.selectLastIdVenda()-1
+            vend_id = self.bd.selectLastIdVenda()
             print vend_id
             for i in range(len(self.listaSelec)):
                 self.bd.insertProdVend(self.listaSelec[i].getprodInfo()[1],

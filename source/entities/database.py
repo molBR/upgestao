@@ -127,6 +127,22 @@ class Database(object):
         aux = self.dbCursor.fetchall()
         return aux
 
+    def selectProdVendIdVend(self,id):
+        if(id):
+            value = [id]
+            self.dbCursor.execute('SELECT * FROM Prod_Vendido WHERE id_venda = ? ORDER BY id',value)
+            aux = self.dbCursor.fetchall()
+            return aux
+        else: return None
+
+    def selectFirstVenda(self):
+        self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
+        aux = self.dbCursor.fetchall()
+        if(aux):
+            return aux[0]
+        else: return None
+
+
     def selectLastIdVenda(self):
         self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
         aux = self.dbCursor.fetchall()
