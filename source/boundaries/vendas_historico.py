@@ -347,23 +347,21 @@ class VendHist(tk.Frame):
         cor = '#fafafa'
         nada = ""
         nome1var = "Nome:"
-        nome2var = "nome"
+        nome2var = infoCliente[0][1]
         endereco1var = "Endereco:"
-        endereco2var = "endereco"
-        data1var = "Data:"
-        data2var = "data"
+        endereco2var =  infoCliente[0][3]
         email1var = "Email:"
-        email2var = "email"
+        email2var = infoCliente[0][5]
         telefone1var = "Telefone:"
-        telefone2var = "telefone"
-        celular1var = "Celular:"
-        celular2var = "celular"
+        telefone2var = infoCliente[0][4]
         festa1var = "Tipo de Festa:"
-        festa2var = "festa"
-        cliente1var = "Instituicao/Cliente:"
-        cliente2var = "cliente"
-        npessoas1var = "Numero de Pessoas:"
-        npessoas2var = "numero pessoas"
+        festa2var = infoVenda[3]
+        data1var = "Data:"
+        data2var = infoVenda[7]
+        npessoas1var = "Numero de Adultos:"
+        npessoas2var = infoVenda[4]
+        npessoasCrin1var = "Numero de Crianças"
+        npessoasCrin2var = "numero de criancas" #nao inserido ainda
         local1var = "Espaco/Local:"
         local2var = "local"
         produtosvar = "Produtos:"
@@ -494,18 +492,6 @@ class VendHist(tk.Frame):
         salto5.config(textvariable=var, relief='flat')
         salto5.grid(row=14, column=0)
 
-        #titulo e informacao
-        celular1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(celular1var)
-        celular1.config(textvariable=var, relief='flat')
-        celular1.grid(row=15, column=0)
-        celular2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(celular2var)
-        celular2.config(textvariable=var, relief='flat')
-        celular2.grid(row=16, column=0)
-
         #espaco
         salto6 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
@@ -533,16 +519,16 @@ class VendHist(tk.Frame):
         salto7.grid(row=20, column=0)
 
         #titulo e informacao
-        cliente1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
+        npessoas1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
-        var.set(cliente1var)
-        cliente1.config(textvariable=var, relief='flat')
-        cliente1.grid(row=21, column=0)
-        cliente2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
+        var.set(npessoas1var)
+        npessoas1.config(textvariable=var, relief='flat')
+        npessoas1.grid(row=21, column=0)
+        npessoas2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
-        var.set(cliente2var)
-        cliente2.config(textvariable=var, relief='flat')
-        cliente2.grid(row=22, column=0)
+        var.set(npessoas2var)
+        npessoas2.config(textvariable=var, relief='flat')
+        npessoas2.grid(row=22, column=0)
 
         #espaco
         salto8 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
@@ -552,11 +538,11 @@ class VendHist(tk.Frame):
         salto8.grid(row=23, column=0)
 
         #titulo e informacao
-        npessoas1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
+        npessoasCrin1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
-        var.set(npessoas1var)
-        npessoas1.config(textvariable=var, relief='flat')
-        npessoas1.grid(row=24, column=0)
+        var.set(npessoasCrin1var)
+        npessoasCrin1.config(textvariable=var, relief='flat')
+        npessoasCrin1.grid(row=24, column=0)
         npessoas2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(npessoas2var)
@@ -606,7 +592,8 @@ class VendHist(tk.Frame):
         var = tk.StringVar()
         var.set(QUANTIDADE)
         quantidade.config(textvariable=var, relief='flat')
-        quantidade.grid(row=31, column=1)
+        quantidade.grid(row=31
+                        , column=1)
         valor = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(VALOR)
