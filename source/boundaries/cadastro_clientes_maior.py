@@ -177,6 +177,7 @@ class CadClient(tk.Frame):
         self.espaco1 = tk.Label(self.container3, text="                    ", bg=cor3)
         self.espaco1.pack(side=tk.LEFT)
 
+
         #self.formCadastro = tk.Toplevel()
         self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: self.cadastraClin(),
                                   bg=cor3)

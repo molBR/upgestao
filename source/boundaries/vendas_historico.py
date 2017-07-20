@@ -19,6 +19,10 @@ class VendHist(tk.Frame):
         self.bd = db.Database()
         self.FazTela()
 
+    def visualiza(self,info):
+        print "Visualiza:"
+        print info
+
     def deletando(self,id):
         self.JanelaPequena(id)
         self.populate1(self.bd.selectVenda())
@@ -251,11 +255,11 @@ class VendHist(tk.Frame):
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(len(info)):
             if row % 2 == 0:
-                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.visualiza(info[row]))
                 button1.grid(row=row, column=1)
                 button1.image = photo1
             else:
-                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=Teste)
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=lambda row=row: self.visualiza(info[row]))
                 button1.grid(row=row, column=1)
                 button1.image = photo1
         for row in range(len(info)):

@@ -52,6 +52,7 @@ class Database(object):
             id INTEGER PRIMARY KEY NOT NULL,
             nome varchar(500) NOT NULL,
             valor varchar(100) NOT NULL,
+            quantidade varchar(100) NOT NULL,
             id_venda INTEGER NOT NULL,
             nome_categoria varchar(500) NOT NULL,
             FOREIGN KEY (id_venda) REFERENCES Venda(id)
@@ -149,10 +150,10 @@ class Database(object):
         self.dbCursor.execute('INSERT INTO Venda VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
-    def insertProdVend(self,nome,valor,id_venda,nome_categoria):
-        values = [nome,valor,id_venda,nome_categoria]
+    def insertProdVend(self,nome,valor,quantidade,id_venda,nome_categoria):
+        values = [nome,valor,quantidade,id_venda,nome_categoria]
         print values
-        self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (NULL, ?, ?, ?, ?)', values)
+        self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (NULL, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
     # Insere o produto recebendo um objeto produto

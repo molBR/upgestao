@@ -68,6 +68,7 @@ class VendProd(tk.Frame):
             for i in range(len(self.listaSelec)):
                 self.bd.insertProdVend(self.listaSelec[i].getprodInfo()[1],
                                        self.listaSelec[i].getprodInfo()[2],
+                                       self.listaSelec[i].getQuant().get(),
                                        vend_id,
                                        self.listaSelec[i].getprodInfo()[4])
 
