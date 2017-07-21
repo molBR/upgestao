@@ -336,10 +336,6 @@ class VendHist(tk.Frame):
 
     def populate2(self,infoVenda,infoCliente,infoListaProduto):  # comeco venda
 
-        print "Aqui:"
-        print infoVenda
-        print infoCliente
-        print infoListaProduto
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
 
@@ -361,9 +357,9 @@ class VendHist(tk.Frame):
         npessoas1var = "Numero de Adultos:"
         npessoas2var = infoVenda[4]
         npessoasCrin1var = "Numero de Crianças"
-        npessoasCrin2var = "numero de criancas" #nao inserido ainda
+        npessoasCrin2var = infoVenda[5] #nao inserido ainda
         local1var = "Espaco/Local:"
-        local2var = "local"
+        local2var = infoVenda[6]
         produtosvar = "Produtos:"
         NOME = "Nome"
         QUANTIDADE = "Quant."
@@ -377,7 +373,7 @@ class VendHist(tk.Frame):
         produtoquant = "quant"
         produtovalor = "valor"
         total1var = "Valor Total:"
-        total2var = "valor total"
+        total2var = infoVenda[12]
 
         #titulo
         nome1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
@@ -543,11 +539,11 @@ class VendHist(tk.Frame):
         var.set(npessoasCrin1var)
         npessoasCrin1.config(textvariable=var, relief='flat')
         npessoasCrin1.grid(row=24, column=0)
-        npessoas2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
+        npessoasCrin2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
-        var.set(npessoas2var)
-        npessoas2.config(textvariable=var, relief='flat')
-        npessoas2.grid(row=25, column=0)
+        var.set(npessoasCrin2var)
+        npessoasCrin2.config(textvariable=var, relief='flat')
+        npessoasCrin2.grid(row=25, column=0)
 
         #espaco
         salto9 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
@@ -636,364 +632,351 @@ class VendHist(tk.Frame):
         espaco6.config(textvariable=var, relief='flat')
         espaco6.grid(row=33, column=2)
 
-        doce1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        doce1.config(textvariable=var, relief='flat')
-        doce1.grid(row=34, column=0)
-        docequant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        docequant1.config(textvariable=var, relief='flat')
-        docequant1.grid(row=34, column=1)
-        docevalor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        docevalor1.config(textvariable=var, relief='flat')
-        docevalor1.grid(row=34, column=2)
 
-        doce2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        doce2.config(textvariable=var, relief='flat')
-        doce2.grid(row=35, column=0)
-        docequant2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        docequant2.config(textvariable=var, relief='flat')
-        docequant2.grid(row=35, column=1)
-        docevalor2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        docevalor2.config(textvariable=var, relief='flat')
-        docevalor2.grid(row=35, column=2)
-
-        doce3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        doce3.config(textvariable=var, relief='flat')
-        doce3.grid(row=36, column=0)
-        docequant3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        docequant3.config(textvariable=var, relief='flat')
-        docequant3.grid(row=36, column=1)
-        docevalor3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        docevalor3.config(textvariable=var, relief='flat')
-        docevalor3.grid(row=36, column=2)
-
-        doce4 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        doce4.config(textvariable=var, relief='flat')
-        doce4.grid(row=37, column=0)
-        docequant4 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        docequant4.config(textvariable=var, relief='flat')
-        docequant4.grid(row=37, column=1)
-        docevalor4 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        docevalor4.config(textvariable=var, relief='flat')
-        docevalor4.grid(row=37, column=2)
+        contaLinha = 0
+        for i in range(len(infoListaProduto)):
+            if (infoListaProduto[i][5] == "1"):
+                prodSel1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold",
+                                 width=33)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][1])
+                prodSel1.config(textvariable=var, relief='flat')
+                prodSel1.grid(row=34+contaLinha, column=0)
+                prodSelQuant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=10)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][3])
+                prodSelQuant1.config(textvariable=var, relief='flat')
+                prodSelQuant1.grid(row=34+contaLinha, column=1)
+                prodSelValor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=12)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][2])
+                prodSelValor1.config(textvariable=var, relief='flat')
+                prodSelValor1.grid(row=34+contaLinha, column=2)
+                contaLinha = contaLinha + 1
+        contaLinha = contaLinha + 1
 
         salto12 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(nada)
         salto12.config(textvariable=var, relief='flat')
-        salto12.grid(row=38, column=0)
+        salto12.grid(row=34+contaLinha, column=0)
 
         espaco7 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco7.config(textvariable=var, relief='flat')
-        espaco7.grid(row=38, column=1)
+        espaco7.grid(row=34+contaLinha, column=1)
 
         espaco8 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco8.config(textvariable=var, relief='flat')
-        espaco8.grid(row=38, column=2)
+        espaco8.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         salgados = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(salgadosvar)
         salgados.config(textvariable=var, relief='flat')
-        salgados.grid(row=39, column=0)
+        salgados.grid(row=34+contaLinha, column=0)
 
         espaco9 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco9.config(textvariable=var, relief='flat')
-        espaco9.grid(row=39, column=1)
+        espaco9.grid(row=34+contaLinha, column=1)
 
         espaco10 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco10.config(textvariable=var, relief='flat')
-        espaco10.grid(row=39, column=2)
+        espaco10.grid(row=34+contaLinha, column=2)
 
-        salgado1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        salgado1.config(textvariable=var, relief='flat')
-        salgado1.grid(row=40, column=0)
-        salgadoquant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        salgadoquant1.config(textvariable=var, relief='flat')
-        salgadoquant1.grid(row=40, column=1)
-        salgadovalor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        salgadovalor1.config(textvariable=var, relief='flat')
-        salgadovalor1.grid(row=40, column=2)
+        contaLinha = contaLinha + 1
 
-        salgado2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        salgado2.config(textvariable=var, relief='flat')
-        salgado2.grid(row=41, column=0)
-        salgadoquant2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        salgadoquant2.config(textvariable=var, relief='flat')
-        salgadoquant2.grid(row=41, column=1)
-        salgadovalor2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        salgadovalor2.config(textvariable=var, relief='flat')
-        salgadovalor2.grid(row=41, column=2)
+        for i in range(len(infoListaProduto)):
+            if (infoListaProduto[i][5] == "2"):
+                prodSel1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold",
+                                 width=33)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][1])
+                prodSel1.config(textvariable=var, relief='flat')
+                prodSel1.grid(row=34+contaLinha, column=0)
+                prodSelQuant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=10)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][3])
+                prodSelQuant1.config(textvariable=var, relief='flat')
+                prodSelQuant1.grid(row=34+contaLinha, column=1)
+                prodSelValor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=12)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][2])
+                prodSelValor1.config(textvariable=var, relief='flat')
+                prodSelValor1.grid(row=34+contaLinha, column=2)
+                contaLinha = contaLinha + 1
 
-        salgado3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        salgado3.config(textvariable=var, relief='flat')
-        salgado3.grid(row=42, column=0)
-        salgadoquant3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        salgadoquant3.config(textvariable=var, relief='flat')
-        salgadoquant3.grid(row=42, column=1)
-        salgadovalor3 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        salgadovalor3.config(textvariable=var, relief='flat')
-        salgadovalor3.grid(row=42, column=2)
+        contaLinha = contaLinha + 1
 
         salto13 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(nada)
         salto13.config(textvariable=var, relief='flat')
-        salto13.grid(row=43, column=0)
+        salto13.grid(row=34+contaLinha, column=0)
 
         espaco11 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco11.config(textvariable=var, relief='flat')
-        espaco11.grid(row=43, column=1)
+        espaco11.grid(row=34+contaLinha, column=1)
 
         espaco12 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco12.config(textvariable=var, relief='flat')
-        espaco12.grid(row=43, column=2)
+        espaco12.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         massas = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(massasvar)
         massas.config(textvariable=var, relief='flat')
-        massas.grid(row=44, column=0)
+        massas.grid(row=34+contaLinha, column=0)
 
         espaco13 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco13.config(textvariable=var, relief='flat')
-        espaco13.grid(row=44, column=1)
+        espaco13.grid(row=34+contaLinha, column=1)
 
         espaco14 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco14.config(textvariable=var, relief='flat')
-        espaco14.grid(row=44, column=2)
+        espaco14.grid(row=34+contaLinha, column=2)
 
-        massa1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        massa1.config(textvariable=var, relief='flat')
-        massa1.grid(row=45, column=0)
-        massaquant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        massaquant1.config(textvariable=var, relief='flat')
-        massaquant1.grid(row=45, column=1)
-        massavalor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        massavalor1.config(textvariable=var, relief='flat')
-        massavalor1.grid(row=45, column=2)
+        contaLinha = contaLinha + 1
 
-        massa2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        massa2.config(textvariable=var, relief='flat')
-        massa2.grid(row=46, column=0)
-        massaquant2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        massaquant2.config(textvariable=var, relief='flat')
-        massaquant2.grid(row=46, column=1)
-        massavalor2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        massavalor2.config(textvariable=var, relief='flat')
-        massavalor2.grid(row=46, column=2)
+        for i in range(len(infoListaProduto)):
+            if (infoListaProduto[i][5] == "3"):
+                prodSel1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold",
+                                 width=33)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][1])
+                prodSel1.config(textvariable=var, relief='flat')
+                prodSel1.grid(row=34+contaLinha, column=0)
+                prodSelQuant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=10)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][3])
+                prodSelQuant1.config(textvariable=var, relief='flat')
+                prodSelQuant1.grid(row=34+contaLinha, column=1)
+                prodSelValor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=12)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][2])
+                prodSelValor1.config(textvariable=var, relief='flat')
+                prodSelValor1.grid(row=34+contaLinha, column=2)
+                contaLinha = contaLinha + 1
+
+        contaLinha = contaLinha + 1
 
         salto14 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(nada)
         salto14.config(textvariable=var, relief='flat')
-        salto14.grid(row=47, column=0)
+        salto14.grid(row=34+contaLinha, column=0)
 
         espaco15 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco15.config(textvariable=var, relief='flat')
-        espaco15.grid(row=47, column=1)
+        espaco15.grid(row=34+contaLinha, column=1)
 
         espaco16 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco16.config(textvariable=var, relief='flat')
-        espaco16.grid(row=47, column=2)
+        espaco16.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         bebidas = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(bebidasvar)
         bebidas.config(textvariable=var, relief='flat')
-        bebidas.grid(row=48, column=0)
+        bebidas.grid(row=34+contaLinha, column=0)
 
         espaco17 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco17.config(textvariable=var, relief='flat')
-        espaco17.grid(row=48, column=1)
+        espaco17.grid(row=34+contaLinha, column=1)
 
         espaco18 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco18.config(textvariable=var, relief='flat')
-        espaco18.grid(row=48, column=2)
+        espaco18.grid(row=34+contaLinha, column=2)
 
-        bebida1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
-        var = tk.StringVar()
-        var.set(produtonome)
-        bebida1.config(textvariable=var, relief='flat')
-        bebida1.grid(row=49, column=0)
-        bebidaquant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
-        var = tk.StringVar()
-        var.set(produtoquant)
-        bebidaquant1.config(textvariable=var, relief='flat')
-        bebidaquant1.grid(row=49, column=1)
-        bebidavalor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
-        var = tk.StringVar()
-        var.set(produtovalor)
-        bebidavalor1.config(textvariable=var, relief='flat')
-        bebidavalor1.grid(row=49, column=2)
+        contaLinha = contaLinha + 1
+
+        for i in range(len(infoListaProduto)):
+            if (infoListaProduto[i][5] == "4"):
+                prodSel1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold",
+                                 width=33)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][1])
+                prodSel1.config(textvariable=var, relief='flat')
+                prodSel1.grid(row=34+contaLinha, column=0)
+                prodSelQuant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=10)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][3])
+                prodSelQuant1.config(textvariable=var, relief='flat')
+                prodSelQuant1.grid(row=34+contaLinha, column=1)
+                prodSelValor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=12)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][2])
+                prodSelValor1.config(textvariable=var, relief='flat')
+                prodSelValor1.grid(row=34+contaLinha, column=2)
+                contaLinha = contaLinha + 1
+
+        contaLinha = contaLinha + 1
 
         salto15 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(nada)
         salto15.config(textvariable=var, relief='flat')
-        salto15.grid(row=50, column=0)
+        salto15.grid(row=34+contaLinha, column=0)
 
         espaco19 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco19.config(textvariable=var, relief='flat')
-        espaco19.grid(row=50, column=1)
+        espaco19.grid(row=34+contaLinha, column=1)
 
         espaco20 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco20.config(textvariable=var, relief='flat')
-        espaco20.grid(row=50, column=2)
+        espaco20.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         outros = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(outrosvar)
         outros.config(textvariable=var, relief='flat')
-        outros.grid(row=51, column=0)
+        outros.grid(row=34+contaLinha, column=0)
 
         espaco21 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco21.config(textvariable=var, relief='flat')
-        espaco21.grid(row=51, column=1)
+        espaco21.grid(row=34+contaLinha, column=1)
 
         espaco22 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco22.config(textvariable=var, relief='flat')
-        espaco22.grid(row=51, column=2)
+        espaco22.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
+
+        for i in range(len(infoListaProduto)):
+            if (infoListaProduto[i][5] == "5"):
+                prodSel1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold",
+                                 width=33)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][1])
+                prodSel1.config(textvariable=var, relief='flat')
+                prodSel1.grid(row=34+contaLinha, column=0)
+                prodSelQuant1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=10)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][3])
+                prodSelQuant1.config(textvariable=var, relief='flat')
+                prodSelQuant1.grid(row=34+contaLinha, column=1)
+                prodSelValor1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black',
+                                      font="bold", width=12)
+                var = tk.StringVar()
+                var.set(infoListaProduto[i][2])
+                prodSelValor1.config(textvariable=var, relief='flat')
+                prodSelValor1.grid(row=34+contaLinha, column=2)
+                contaLinha = contaLinha + 1
+
+        contaLinha = contaLinha + 1
 
         salto16 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(nada)
         salto16.config(textvariable=var, relief='flat')
-        salto16.grid(row=52, column=0)
+        salto16.grid(row=34+contaLinha, column=0)
+
 
         espaco23 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco23.config(textvariable=var, relief='flat')
-        espaco23.grid(row=52, column=1)
+        espaco23.grid(row=34+contaLinha, column=1)
 
         espaco24 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco24.config(textvariable=var, relief='flat')
-        espaco24.grid(row=52, column=2)
+        espaco24.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         #titulo e informacao
         total1 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(total1var)
         total1.config(textvariable=var, relief='flat')
-        total1.grid(row=53, column=0)
+        total1.grid(row=34+contaLinha, column=0)
+
+        contaLinha = contaLinha + 1
+
         total2 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=33)
         var = tk.StringVar()
         var.set(total2var)
         total2.config(textvariable=var, relief='flat')
-        total2.grid(row=54, column=0)
+        total2.grid(row=34+contaLinha, column=0)
+
+        contaLinha = contaLinha + 1
 
         #preencher cor
         espaco25 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco25.config(textvariable=var, relief='flat')
-        espaco25.grid(row=53, column=1)
+        espaco25.grid(row=34+contaLinha, column=1)
 
         espaco26 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco26.config(textvariable=var, relief='flat')
-        espaco26.grid(row=53, column=2)
+        espaco26.grid(row=34+contaLinha, column=2)
+
+        contaLinha = contaLinha + 1
 
         espaco27 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=10)
         var = tk.StringVar()
         var.set(nada)
         espaco27.config(textvariable=var, relief='flat')
-        espaco27.grid(row=54, column=1)
+        espaco27.grid(row=34+contaLinha, column=1)
 
         espaco28 = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', font="bold", width=12)
         var = tk.StringVar()
         var.set(nada)
         espaco28.config(textvariable=var, relief='flat')
-        espaco28.grid(row=54, column=2)
+        espaco28.grid(row=34+contaLinha, column=2)
 
     def onFrameConfigure2(self, event):  # comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
