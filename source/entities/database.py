@@ -196,6 +196,15 @@ class Database(object):
         self.dbCursor.execute('SELECT * FROM Venda ORDER BY id')
         return self.dbCursor.fetchall()
 
+    def selectVendaId(self,id):
+        value = [id]
+        self.dbCursor.execute('SELECT * FROM Venda WHERE id = ? ORDER BY id',value)
+        aux = self.dbCursor.fetchall()
+        print aux
+        return aux[0]
+
+
+
 #Seleciona todos os produtos da categoria doces
     def selectProdutoDoces(self):
         self.dbCursor.execute('Select * FROM Produto WHERE Id_Categoria = 1')

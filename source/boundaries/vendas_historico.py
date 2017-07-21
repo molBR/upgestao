@@ -20,8 +20,9 @@ class VendHist(tk.Frame):
         self.FazTela()
 
     def visualiza(self,info):
-        print "Visualiza:"
-        print info
+        self.populate1(self.bd.selectVenda())
+        self.populate2(self.bd.selectVendaId(info[0]), self.bd.selectClienteId(info[1]),
+                       self.bd.selectProdVendIdVend(info[0]))
 
     def deletando(self,id):
         self.JanelaPequena(id)
