@@ -37,8 +37,12 @@ class CadClient(tk.Frame):
         self.populate2(self.bd.selectCliente())
 
     def pesquisando(self):
-        self.populate1(tf.PassaFuzzy(self.bd.selectCliente(), self.pesquisar2.get()))
-        self.populate2(self.bd.selectCliente())
+        if(self.pesquisar2.get()!= ""):
+            self.populate1(tf.PassaFuzzy(self.bd.selectCliente(), self.pesquisar2.get()))
+            self.populate2(self.bd.selectCliente())
+        else:
+            self.populate1(self.bd.selectCliente())
+            self.populate2(self.bd.selectCliente())
 
     def editando(self, id):
         self.te.FazTela(self.bd, clin.Cliente.selectClienteId(id, self.bd))
