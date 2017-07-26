@@ -4,6 +4,7 @@ import Tkinter as tk
 import os as os
 from source.entities import database as db
 import tkMessageBox
+from source.entities import testefuzz as tf
 
 
 
@@ -25,10 +26,16 @@ class VendHist(tk.Frame):
                        self.bd.selectProdVendIdVend(info[0]))
 
     def pesquisando(self,pesquisa):
-        if pesquisa == "":
+        if pesquisa == "" or self.pesquisar2.get() == " ":
             self.deleteCanvas(self.pacote1)
             self. deleteCanvas(self.pacote2)
             self.populate1(self.bd.selectVenda())
+            self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
+                           self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))
+        else:
+            self.deleteCanvas(self.pacote1)
+            self.deleteCanvas(self.pacote2)
+            self.populate1(tf.PassaHistFuzzy(self.bd.selectVenda(),self.pesquisar2.get()))
             self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
                            self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))
 
@@ -201,7 +208,7 @@ class VendHist(tk.Frame):
             self.pesquisar2.pack(side=tk.LEFT)
             self.espaco2 = tk.Label(self.container3, text=" ", bg=cor3)
             self.espaco2.pack(side=tk.LEFT)
-            self.ok = tk.Button(self.container3, text="Ok", command=Teste, bg=cor3)
+            self.ok = tk.Button(self.container3, text="Ok", command=lambda:self.pesquisando("1"), bg=cor3)
             self.ok["font"] = ['bold']
             self.ok['padx'] = 1
             self.ok['pady'] = 1
@@ -259,9 +266,11 @@ class VendHist(tk.Frame):
 
         self.deleteCanvas(self.pacote1)
         self.createCanvas(self.pacote1)
-
-        for i in range(self.bd.TamVenda()):
-            info_cliente.append(self.bd.selectClientNameId(info[i][1]))
+        try: #GAMBIARRA
+            for i in range(self.bd.TamVenda()):
+                info_cliente.append(self.bd.selectClientNameId(info[i][1]))
+        except IndexError:
+            pass
         photo1 = tk.PhotoImage(file= os.getcwd() + "/source/images/eye.gif")
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(len(info)):

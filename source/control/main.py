@@ -1,6 +1,11 @@
 # encoding: utf-8
 
 import Tkinter as tk
+import os
+
+
+os.chdir("C:\Users\Comedia\PycharmProjects\upgestao\ ")
+print os.getcwd()
 
 from source.entities import database as db
 from source.control import control as ctrl
