@@ -27,7 +27,8 @@ class VendHist(tk.Frame):
     def deletando(self,id):
         self.JanelaPequena(id)
         self.populate1(self.bd.selectVenda())
-        self.populate2()
+        self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
+                       self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
 
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
@@ -239,9 +240,10 @@ class VendHist(tk.Frame):
             self.frame2.bind("<Configure>", self.onFrameConfigure2)
 
             self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2", self.onFrameConfigure2]
-
-            self.populate2(self.bd.selectFirstVenda(),self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
-
+            try: #GAMBIARRA MONSTRA
+                self.populate2(self.bd.selectFirstVenda(),self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
+            except TypeError:
+                pass
 
     def populate1(self,info):  # comeco produtos
         #info = 40
