@@ -67,3 +67,4 @@ class Control(tk.Tk):
             return
         frame = self.tela[page_name]
         frame.tkraise()
+

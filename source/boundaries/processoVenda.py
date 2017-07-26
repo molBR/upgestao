@@ -46,3 +46,4 @@ class ProcessVend:
     def terminate(self):
         self.tela = None
         self.controller.show_frame("menuInicial")
+

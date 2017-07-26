@@ -170,9 +170,20 @@ class VendProd(tk.Frame):
             percorre = 0
             while (percorre <= aux):
                 for j in range(len(self.listaSelec)):
-                    if (self.listaProduto[percorre][0] == self.listaSelec[j].getprodInfo()[0]):
-                        self.listaProduto.pop(percorre)
-                        aux = aux - 1
+                    try:
+                        if (self.listaProduto[percorre][0] == self.listaSelec[j].getprodInfo()[0]):
+                        #if self.listaSelec[j].getprodInfo() in self.listaProduto:
+                            self.listaProduto.pop(percorre)
+                            aux = aux - 1
+                    except IndexError:
+                        print "Percorre:"
+                        print percorre
+                        print "Aux:"
+                        print aux
+                        print "Tamanho da listaProduto:"
+                        print len(self.listaProduto)
+                        print "Tamanho da listaSelec:"
+                        print len(self.listaSelec)
                 percorre = percorre + 1
         return self.listaProduto
 
@@ -536,13 +547,10 @@ class VendProd(tk.Frame):
                 # fim produtos
 
     def selecionaProduto(self, row):
-        auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
-        auxProdValue = tr.swapComma2Dot(self.listaProduto[row][2])
         auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
         self.listaSelec.append(auxSelectedProd)
-        self.todos_apertado()
         self.listaSelec = tr.mergeSort(self.listaSelec)
-        self.populate2(self.listaSelec)
+        self.todos_apertado()
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
@@ -613,11 +621,9 @@ class VendProd(tk.Frame):
 
     def deselecionaProduto(self, row):
         self.listaSelec.pop(row)
-        auxSomaQuant = tr.swapComma2Dot(self.SomaQuant.get())
-        auxProdValue = tr.swapComma2Dot(self.listaSelec[row].getprodInfo()[2])
 
-        self.todos_apertado()
         self.calculaTotal()
+        self.todos_apertado()
 
     def onFrameConfigure2(self, event):  # comeco scroolbar frame2
         '''Reset the scroll region to encompass the inner frame'''
