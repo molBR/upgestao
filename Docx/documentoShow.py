@@ -8,7 +8,7 @@ from docx.enum.text import WD_LINE_SPACING
 
 def docx(ItensSalgados,itensBebidas,ItensPessoal):
 
-    document = Document('../../Docx/GU.docx')
+    document = Document('GU.docx')
     #document = Document('GU.docx')
     nome = raw_input("Digite o nome completo: ")
     email = raw_input("Digite o email: ")
@@ -168,3 +168,5 @@ def docx(ItensSalgados,itensBebidas,ItensPessoal):
     nome1_stream = nome1
     document.save(nome1_stream)
     return 0
+It = 2
+docx(It,It,It)

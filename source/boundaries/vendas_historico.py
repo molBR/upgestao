@@ -24,6 +24,14 @@ class VendHist(tk.Frame):
         self.populate2(self.bd.selectVendaId(info[0]), self.bd.selectClienteId(info[1]),
                        self.bd.selectProdVendIdVend(info[0]))
 
+    def pesquisando(self,pesquisa):
+        if pesquisa == "":
+            self.deleteCanvas(self.pacote1)
+            self. deleteCanvas(self.pacote2)
+            self.populate1(self.bd.selectVenda())
+            self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
+                           self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))
+
     def deletando(self,id):
         self.JanelaPequena(id)
         self.populate1(self.bd.selectVenda())
@@ -287,7 +295,7 @@ class VendHist(tk.Frame):
         for row in range(len(info)):
             if row % 2 == 0:
                 cor = '#ffffff'
-                t = info[row][6]
+                t = info[row][7]
                 ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()
@@ -296,7 +304,7 @@ class VendHist(tk.Frame):
                 ent.grid(row=row, column=3)
             else:
                 cor = '#f0f0f0'
-                t = info[row][6]
+                t = info[row][7]
                 ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
                 ent["font"] = ("Arial", "13")
                 var = tk.StringVar()

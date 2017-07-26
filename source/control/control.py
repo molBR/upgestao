@@ -68,3 +68,6 @@ class Control(tk.Tk):
         frame = self.tela[page_name]
         frame.tkraise()
 
+    def fazTelaVH(self):
+        print "a"
+        self.tela["vendHist"].pesquisando("")

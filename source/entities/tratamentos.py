@@ -29,7 +29,6 @@ class ErroIntegridade(Erro):
 def ProdutosReceive(id, nome, valor, tipo,bd):
     try:
         VerificaDigit(id)
-        VerificaAlpha(nome)
         VerificaComma(valor)
         VerificaTipo(tipo)
     except Erro as e:

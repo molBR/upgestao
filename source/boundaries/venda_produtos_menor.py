@@ -18,14 +18,13 @@ class Application:
         return self.top
 
     def insereTudo(self,bd,venda,controller):
+        self.calculaTotal(venda)
         self.desconto.set(float(self.vt.get()) - float(venda.getCusto_diversos().get()))
         venda.setValor_total(self.vt)
         venda.setSubtrair(self.desconto)
         bd.insertVenda(venda)
         controller.show_frame("cadClientMaior")
         self.CloseWindow()
-
-
 
     def calculaTotal(self,v1):
         #try:
