@@ -8,6 +8,7 @@ import source.boundaries.menu_inicial as menuInicial
 import source.boundaries.processoVenda as procVenda
 import source.boundaries.vendas_evento as vendas_evento
 import source.boundaries.vendas_historico as vendHist
+import sys
 
 class Control(tk.Tk):
 
@@ -25,7 +26,7 @@ class Control(tk.Tk):
         #self.title('Guts\' Orçamento - Menu Principal')
         self.resizable(width=True, height=True)
         self.geometry('1500x600')
-        self.protocol("WM_DELETE_WINDOW", lambda: quit())
+        self.protocol("WM_DELETE_WINDOW", lambda: sys.exit())
 
 
         self.tela["menuInicial"] = menuInicial.Menu(parent=self.container, controller=self)

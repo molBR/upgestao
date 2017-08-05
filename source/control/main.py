@@ -4,7 +4,7 @@ import Tkinter as tk
 import os
 
 
-os.chdir("C:\Users\Comedia\PycharmProjects\upgestao\ ")
+#os.chdir("C:\Users\Comedia\PycharmProjects\upgestao\ ")
 print os.getcwd()
 
 from source.entities import database as db
