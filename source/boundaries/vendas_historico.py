@@ -5,6 +5,7 @@ import os as os
 from source.entities import database as db
 import tkMessageBox
 from source.entities import testefuzz as tf
+from Docx import documentoShow as ds
 
 
 
@@ -19,10 +20,14 @@ class VendHist(tk.Frame):
         self.controller = controller
         self.bd = db.Database()
         self.FazTela()
+        self.ClienteSelec = self.bd.selectClienteId(self.bd.selectVenda()[0][1])
+        self.VendaSelec = self.bd.selectVenda()[0]
 
-    def visualiza(self,info):
+    def visualiza(self,info,row):
         self.populate1(self.bd.selectVenda())
-        self.populate2(self.bd.selectVendaId(info[0]), self.bd.selectClienteId(info[1]),
+        self.ClienteSelec = self.bd.selectClienteId(info[0])
+        self.VendaSelec = self.bd.selectVendaId(info[1])
+        self.populate2(self.VendaSelec, self.ClienteSelec[0],
                        self.bd.selectProdVendIdVend(info[0]))
 
     def pesquisando(self,pesquisa):
@@ -215,7 +220,7 @@ class VendHist(tk.Frame):
             self.ok.pack(side=tk.LEFT)
             self.espaco3 = tk.Label(self.container3, text="                    ", bg=cor3)
             self.espaco3.pack(side=tk.LEFT)
-            self.salvar = tk.Button(self.container3, text="Salvar Docx", command=Teste, bg=cor3)
+            self.salvar = tk.Button(self.container3, text="Salvar Docx", command=lambda:ds.docx(self.ClienteSelec[0],self.VendaSelec,2,2,2), bg=cor3)
             self.salvar["font"] = ['bold']
             self.salvar['padx'] = 1
             self.salvar['pady'] = 1
@@ -256,7 +261,7 @@ class VendHist(tk.Frame):
 
             self.pacote2 = [self.canvas2, self.frame2, self.vsb2, "self.frame2", self.onFrameConfigure2]
             try: #GAMBIARRA MONSTRA
-                self.populate2(self.bd.selectFirstVenda(),self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
+                self.populate2(self.bd.selectFirstVenda(),self.bd.selectClienteId(self.bd.selectFirstVenda()[1])[0],self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
             except TypeError:
                 pass
 
@@ -275,11 +280,11 @@ class VendHist(tk.Frame):
         photo2 = tk.PhotoImage(file= os.getcwd() + "/source/images/x.gif")
         for row in range(len(info)):
             if row % 2 == 0:
-                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.visualiza(info[row]))
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command= lambda row=row: self.visualiza(info[row],row))
                 button1.grid(row=row, column=1)
                 button1.image = photo1
             else:
-                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=lambda row=row: self.visualiza(info[row]))
+                button1 = tk.Button(self.pacote1[1], width=20, height=20, image=photo1, relief=tk.FLAT, command=lambda row=row: self.visualiza(info[row],row))
                 button1.grid(row=row, column=1)
                 button1.image = photo1
         for row in range(len(info)):
@@ -363,13 +368,13 @@ class VendHist(tk.Frame):
         cor = '#fafafa'
         nada = ""
         nome1var = "Nome:"
-        nome2var = infoCliente[0][1]
+        nome2var = infoCliente[1]
         endereco1var = "Endereco:"
-        endereco2var =  infoCliente[0][3]
+        endereco2var =  infoCliente[3]
         email1var = "Email:"
-        email2var = infoCliente[0][5]
+        email2var = infoCliente[5]
         telefone1var = "Telefone:"
-        telefone2var = infoCliente[0][4]
+        telefone2var = infoCliente[4]
         festa1var = "Tipo de Festa:"
         festa2var = infoVenda[3]
         data1var = "Data:"

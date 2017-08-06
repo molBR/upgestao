@@ -6,43 +6,45 @@ from docx.enum.text import WD_LINE_SPACING
 
 
 
-def docx(ItensSalgados,itensBebidas,ItensPessoal):
+def docx(ClienteInfo,VendaInfo,ItensSalgados,itensBebidas,ItensPessoal):
 
-    document = Document('GU.docx')
+    print ClienteInfo
+    print VendaInfo
+    document = Document('Docx\GU.docx')
     #document = Document('GU.docx')
-    nome = raw_input("Digite o nome completo: ")
-    email = raw_input("Digite o email: ")
-    tipoevento = raw_input("Tipo evento: ")
-    tipocardapio = raw_input("tipo de cardapio: ")
-    data = raw_input("data: ")
-    numeropessoas = raw_input("numero de pessoas: ")
-    local = raw_input("Local: ")
-    horario = raw_input("Horario: ")
+    nome = ClienteInfo[1]
+    email = ClienteInfo[5]
+    telefone = ClienteInfo[4]
+    tipoevento = VendaInfo[3]
+    data = VendaInfo[7]
+    numeroAdulto = VendaInfo[4]
+    numeroCrianca = VendaInfo[5]
+    local = VendaInfo[6]
     p = document.add_paragraph()
     p.add_run('Nome completo: ').bold = True
     p.add_run(nome)
     p.add_run('\n')
     p.add_run('E-mail: ').bold = True
     p.add_run(email)
+    p.add_run('Telefone: ').bold = True
+    p.add_run(telefone)
     p.add_run('\n')
     p.add_run('Tipo do evento: ').bold = True
     p.add_run(tipoevento)
     p.add_run('\n')
-    p.add_run('Tipo do cardapio: ').bold = True
-    p.add_run(tipocardapio)
-    p.add_run('\n')
     p.add_run('Data do evento: ').bold = True
     p.add_run(data)
     p.add_run('\n')
-    p.add_run('Numero de pessoas: ').bold = True
-    p.add_run(numeropessoas)
+    p.add_run('Numero de Adultos: ').bold = True
+    p.add_run(numeroAdulto)
+    p.add_run('\n')
+    p.add_run('Numero de Criancas: ').bold = True
+    p.add_run(numeroCrianca)
     p.add_run('\n')
     p.add_run('Local do evento: ').bold = True
     p.add_run(local)
     p.add_run('\n')
-    p.add_run('Horario: ').bold = True
-    p.add_run(horario).bold = True
-    p.add_run('\n')
+
 
     salgados = [['kibe', '100', '123', ],
                 ['batata frita', '35', '19'],
@@ -166,7 +168,8 @@ def docx(ItensSalgados,itensBebidas,ItensPessoal):
 
     nome1 = nome + '.docx'
     nome1_stream = nome1
+    print nome1_stream
     document.save(nome1_stream)
     return 0
-It = 2
-docx(It,It,It)
+#It = 2
+#docx(It,It,It)
