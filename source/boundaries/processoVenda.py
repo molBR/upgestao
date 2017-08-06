@@ -34,7 +34,8 @@ class ProcessVend:
             self.controller.title('Guts\' Orçamento - Cadastro de Clientes')
         elif (page_name == 'vendProd'):
             self.controller.title('Gut\'s Orçamento - Nova Venda')
-
+        elif (page_name == 'menuInicial'):
+            return
         self.Setter()
         frame = self.tela[page_name]
         frame.tkraise()
