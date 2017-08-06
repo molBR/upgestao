@@ -6,10 +6,29 @@ from docx.enum.text import WD_LINE_SPACING
 
 
 
-def docx(ClienteInfo,VendaInfo,ItensSalgados,itensBebidas,ItensPessoal):
+def docx(ClienteInfo,VendaInfo,ProdInfo,ItensSalgados,itensBebidas,ItensPessoal):
 
+    print ProdInfo
     print ClienteInfo
     print VendaInfo
+
+    docesL = []
+    salgadosL = []
+    massasL = []
+    bebidasL = []
+    outrosL = []
+
+    for i in range(len(ProdInfo)):
+        if ProdInfo[i][5] == "1":
+            docesL.append(ProdInfo[i])
+        if ProdInfo[i][5] == "2":
+            salgadosL.append(ProdInfo[i])
+        if ProdInfo[i][5] == "3":
+            massasL.append(ProdInfo[i])
+        if ProdInfo[i][5] == "4":
+            bebidasL.append(ProdInfo[i])
+        if ProdInfo[i][5] == "5":
+            outrosL.append(ProdInfo[i])
     document = Document('Docx\GU.docx')
     #document = Document('GU.docx')
     nome = ClienteInfo[1]

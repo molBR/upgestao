@@ -22,13 +22,15 @@ class VendHist(tk.Frame):
         self.FazTela()
         self.ClienteSelec = self.bd.selectClienteId(self.bd.selectVenda()[0][1])
         self.VendaSelec = self.bd.selectVenda()[0]
+        self.listaProdSelec = self.bd.selectProdVendIdVend(self.bd.selectVenda()[0][1])
 
     def visualiza(self,info,row):
         self.populate1(self.bd.selectVenda())
         self.ClienteSelec = self.bd.selectClienteId(info[0])
         self.VendaSelec = self.bd.selectVendaId(info[1])
+        self.listaProdSelec = self.bd.selectProdVendIdVend(info[0])
         self.populate2(self.VendaSelec, self.ClienteSelec[0],
-                       self.bd.selectProdVendIdVend(info[0]))
+                       self.listaProdSelec)
 
     def pesquisando(self,pesquisa):
         if pesquisa == "" or self.pesquisar2.get() == " ":
@@ -220,7 +222,7 @@ class VendHist(tk.Frame):
             self.ok.pack(side=tk.LEFT)
             self.espaco3 = tk.Label(self.container3, text="                    ", bg=cor3)
             self.espaco3.pack(side=tk.LEFT)
-            self.salvar = tk.Button(self.container3, text="Salvar Docx", command=lambda:ds.docx(self.ClienteSelec[0],self.VendaSelec,2,2,2), bg=cor3)
+            self.salvar = tk.Button(self.container3, text="Salvar Docx", command=lambda:ds.docx(self.ClienteSelec[0],self.VendaSelec,self.listaProdSelec,2,2,2), bg=cor3)
             self.salvar["font"] = ['bold']
             self.salvar['padx'] = 1
             self.salvar['pady'] = 1
