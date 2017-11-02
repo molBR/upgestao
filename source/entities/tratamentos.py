@@ -34,7 +34,7 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
     except Erro as e:
         raise e             #Apenas repassando os possiveis erros para o nivel superior
     else:
-        nome = TrataStr(nome)
+        #nome = TrataStr(nome)
         valor = TrataValor(valor)
         agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
         if (tipo == "Doce"): tipo = 1

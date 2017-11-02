@@ -105,7 +105,7 @@ class Database(object):
 
 #Seleciona todos os clientes
     def selectCliente(self):
-        self.dbCursor.execute('SELECT * FROM Cliente WHERE nome_cliente != "del" ORDER BY id ')
+        self.dbCursor.execute('SELECT * FROM Cliente WHERE data_insert != "del" ORDER BY id ')
         aux = self.dbCursor.fetchall()
         return aux
 
@@ -290,7 +290,7 @@ class Database(object):
     def deleteCliente(self,id):
         value = [id]
         delName = 'del'
-        self.dbCursor.execute('UPDATE Cliente SET nome_cliente = "del" WHERE id = ?',value)
+        self.dbCursor.execute('UPDATE Cliente SET data_insert = "del" WHERE id = ?',value)
         #self.dbCursor.execute('DELETE FROM Cliente WHERE id = ?', value)
         self.dbConnect.commit()
 
