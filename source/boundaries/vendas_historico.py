@@ -24,11 +24,16 @@ class VendHist(tk.Frame):
         self.VendaSelec = self.bd.selectVenda()[0]
         self.listaProdSelec = self.bd.selectProdVendIdVend(self.bd.selectVenda()[0][1])
 
+
+
+
     def visualiza(self,info,row):
         self.populate1(self.bd.selectVenda())
-        self.ClienteSelec = self.bd.selectClienteId(info[0])
-        self.VendaSelec = self.bd.selectVendaId(info[1])
-        self.listaProdSelec = self.bd.selectProdVendIdVend(info[0])
+        print "OI"
+        print info
+        self.ClienteSelec = self.bd.selectClienteId(info[1])
+        self.VendaSelec = self.bd.selectVendaId(info[0])
+        self.listaProdSelec = self.bd.selectProdVendIdVend(info[1])
         self.populate2(self.VendaSelec, self.ClienteSelec[0],
                        self.listaProdSelec)
 

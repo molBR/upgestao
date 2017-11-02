@@ -105,14 +105,16 @@ class Database(object):
 
 #Seleciona todos os clientes
     def selectCliente(self):
-        self.dbCursor.execute('SELECT * FROM Cliente ORDER BY id')
+        self.dbCursor.execute('SELECT * FROM Cliente WHERE nome_cliente != "del" ORDER BY id ')
         aux = self.dbCursor.fetchall()
         return aux
 
     def selectClienteId(self,id):
         value = [id]
+        print value
         self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id', value)
         aux = self.dbCursor.fetchall()
+        print aux
         return aux
 
     def selectFirstCliente(self):
@@ -205,6 +207,7 @@ class Database(object):
         value = [id]
         self.dbCursor.execute('SELECT * FROM Venda WHERE id = ? ORDER BY id',value)
         aux = self.dbCursor.fetchall()
+        print aux
         return aux[0]
 
 #Seleciona todos os produtos da categoria doces
@@ -286,20 +289,22 @@ class Database(object):
 
     def deleteCliente(self,id):
         value = [id]
-        print value
-        print id
-        self.dbCursor.execute('DELETE FROM Cliente WHERE id = ?', value)
+        delName = 'del'
+        self.dbCursor.execute('UPDATE Cliente SET nome_cliente = "del" WHERE id = ?',value)
+        #self.dbCursor.execute('DELETE FROM Cliente WHERE id = ?', value)
         self.dbConnect.commit()
 
     def deleteVenda(self,id):
         value = [id]
         print id
+
         self.dbCursor.execute('DELETE FROM Venda WHERE id = ?',value)
         self.dbConnect.commit()
 
 #Deleta a categoria dado seu id         O CERTO É VERIFICAR SE ALGUM PRODUTO ESTÁ ATRELADA A CATEGORIA!!!!
     def deleteCategoria(self, id):
         value = [id]
+
         self.dbCursor.execute('DELETE FROM Categoria WHERE id = ?', value)
         self.dbConnect.commit()
 

@@ -49,7 +49,7 @@ def ProdutosReceive(id, nome, valor, tipo,bd):
 def ClientesReceive(nome,endereco,telefone,email):
     try:
         verificaArroba(email)
-        verificaTamTel(telefone)
+        #verificaTamTel(telefone)
     except Erro as e:
         raise e
     else:
