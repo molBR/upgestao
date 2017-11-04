@@ -111,10 +111,8 @@ class Database(object):
 
     def selectClienteId(self,id):
         value = [id]
-        print value
         self.dbCursor.execute('SELECT * FROM Cliente WHERE id = ? ORDER BY id', value)
         aux = self.dbCursor.fetchall()
-        print aux
         return aux
 
     def selectFirstCliente(self):
@@ -175,7 +173,6 @@ class Database(object):
 
     def insertProdVend(self,nome,valor,quantidade,id_venda,nome_categoria):
         values = [nome,valor,quantidade,id_venda,nome_categoria]
-        print values
         self.dbCursor.execute( 'INSERT INTO Prod_Vendido VALUES (NULL, ?, ?, ?, ?, ?)', values)
         self.dbConnect.commit()
 
@@ -207,7 +204,6 @@ class Database(object):
         value = [id]
         self.dbCursor.execute('SELECT * FROM Venda WHERE id = ? ORDER BY id',value)
         aux = self.dbCursor.fetchall()
-        print aux
         return aux[0]
 
 #Seleciona todos os produtos da categoria doces
@@ -296,8 +292,6 @@ class Database(object):
 
     def deleteVenda(self,id):
         value = [id]
-        print id
-
         self.dbCursor.execute('DELETE FROM Venda WHERE id = ?',value)
         self.dbConnect.commit()
 

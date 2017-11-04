@@ -77,7 +77,6 @@ def verificaArroba(email):
     raise ErroEntrada(email,"O e-mail não tem '@'")
 
 def verificaTamTel(telefone):
-    print "bbb"
     if len(telefone)>15:
         raise ErroEntrada(telefone, "Tamanho do telefone é inválido")
     else: return True
