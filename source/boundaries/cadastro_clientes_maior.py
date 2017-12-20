@@ -160,8 +160,8 @@ class CadClient(tk.Frame):
         self.cliente = tk.Label(self.container1, text="Clientes:")
         self.cliente["font"] = ["bold"]
         self.cliente.pack(side=tk.LEFT)
-        for espaco in range(info):
-            t = " "
+        t = "                                                                                                                "
+        for i in range(0,2):
             tk.Label(self.container1, text=t).pack(side=tk.LEFT)
         self.dados = tk.Label(self.container1, text="Dados:")
         self.dados["font"] = ["bold"]

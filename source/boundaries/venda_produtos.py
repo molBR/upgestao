@@ -93,7 +93,6 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.RAISED, background=self.cor1)
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProduto()))
         self.populate2(self.listaSelec)
 
@@ -104,7 +103,6 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.RAISED, background=self.cor1)
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoDoces()))
         self.populate2(self.listaSelec)
         print self.Cliente.getNome()
@@ -117,7 +115,6 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.RAISED, background=self.cor1)
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoSalgados()))
         self.populate2(self.listaSelec)
 
@@ -128,7 +125,7 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.SUNKEN, background=self.cor2)
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
+  #      self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoMassas()))
         self.populate2(self.listaSelec)
 
@@ -139,7 +136,6 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.RAISED, background=self.cor1)
         self.bebidas.config(relief=tk.SUNKEN, background=self.cor2)
         self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoBebidas()))
         self.populate2(self.listaSelec)
 
@@ -150,18 +146,9 @@ class VendProd(tk.Frame):
         self.massas.config(relief=tk.RAISED, background=self.cor1)
         self.bebidas.config(relief=tk.RAISED, background=self.cor1)
         self.outros.config(relief=tk.SUNKEN, background=self.cor2)
-        self.tipos.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoOutros()))
         self.populate2(self.listaSelec)
 
-    def tipos_apertado(self):
-        self.todos.config(relief=tk.RAISED, background=self.cor1)
-        self.doces.config(relief=tk.RAISED, background=self.cor1)
-        self.salgados.config(relief=tk.RAISED, background=self.cor1)
-        self.massas.config(relief=tk.RAISED, background=self.cor1)
-        self.bebidas.config(relief=tk.RAISED, background=self.cor1)
-        self.outros.config(relief=tk.RAISED, background=self.cor1)
-        self.tipos.config(relief=tk.SUNKEN, background=self.cor2)
 
     def trataLista(self, commandBD):
         self.listaProduto = commandBD
@@ -208,7 +195,8 @@ class VendProd(tk.Frame):
             for i in range(len(self.listaSelec)):
                 auxProdValue = tr.swapComma2Dot(self.listaSelec[i].getprodInfo()[2])
                 valorTot = valorTot + float(auxProdValue) * int(self.listaSelec[i].getQuant().get())
-            self.SomaQuant.set(valorTot)
+            valorTot = "%.2f" % round(valorTot,2) #arredondar com 2 casas decimais. OBRIGADO STACKOVERFLOW
+        self.SomaQuant.set(valorTot)
 
     def FazTela(self):
         # menu
@@ -275,10 +263,11 @@ class VendProd(tk.Frame):
         self.outros["font"] = ("Arial", "12")
         self.outros['fg'] = 'white'
         self.outros.pack(side=tk.LEFT, padx=1, pady=1)
-        self.tipos = tk.Button(toolbar2, text="   Tipos   ", bg=self.cor1, command=self.tipos_apertado)
-        self.tipos["font"] = ("Arial", "12")
-        self.tipos['fg'] = 'white'
-        self.tipos.pack(side=tk.LEFT, padx=1, pady=1)
+        #Apagar se der certo!
+        #self.tipos = tk.Button(toolbar2, text="   Tipos   ", bg=self.cor1, command=self.tipos_apertado)
+        #self.tipos["font"] = ("Arial", "12")
+        #self.tipos['fg'] = 'white'
+        #self.tipos.pack(side=tk.LEFT, padx=1, pady=1)
 
         toolbar2.pack(side=tk.TOP, fill=tk.X)
         # fim
@@ -297,7 +286,7 @@ class VendProd(tk.Frame):
         self.container4.pack(side=tk.BOTTOM, fill=tk.X)
 
         # "cabecalho" da tabela dos itens
-        self.objeto1 = tk.Label(self.container1, text="Codigo\t")
+        self.objeto1 = tk.Label(self.container1, text="Cod\t")
         self.objeto1["font"] = ["bold"]
         self.objeto1.pack(side=tk.LEFT)
         self.objeto2 = tk.Label(self.container1, text="\t")
@@ -306,25 +295,31 @@ class VendProd(tk.Frame):
         self.objeto3 = tk.Label(self.container1, text="Nome")
         self.objeto3["font"] = ["bold"]
         self.objeto3.pack(side=tk.LEFT)
-        self.objeto4 = tk.Label(self.container1, text="                                            ")
+        t = "                            " #quando a distancia, multiplica-se por t
+        for i in range(0,2):
+            t = t + t
+        self.objeto4 = tk.Label(self.container1, text=t)
         self.objeto4["font"] = ["bold"]
         self.objeto4.pack(side=tk.LEFT)
         self.objeto5 = tk.Label(self.container1, text="Valor")
         self.objeto5["font"] = ["bold"]
         self.objeto5.pack(side=tk.LEFT)
-        self.objeto6 = tk.Label(self.container1, text="                            ")
+        self.objeto6 = tk.Label(self.container1, text="                                        ")
         self.objeto6["font"] = ["bold"]
         self.objeto6.pack(side=tk.LEFT)
-        self.objeto7 = tk.Label(self.container1, text="Codigo")
+        self.objeto7 = tk.Label(self.container1, text="Nome")
         self.objeto7["font"] = ["bold"]
         self.objeto7.pack(side=tk.LEFT)
-        self.objeto8 = tk.Label(self.container1, text="                   ")
+        t = "                         "  # quando a distancia, multiplica-se por t
+        for i in range(0,2):
+            t=t+t
+        self.objeto8 = tk.Label(self.container1, text=t)
         self.objeto8["font"] = ["bold"]
         self.objeto8.pack(side=tk.LEFT)
-        self.objeto9 = tk.Label(self.container1, text="Nome")
+        self.objeto9 = tk.Label(self.container1, text="Valor")
         self.objeto9["font"] = ["bold"]
         self.objeto9.pack(side=tk.LEFT)
-        self.objeto10 = tk.Label(self.container1, text="                                           ")
+        self.objeto10 = tk.Label(self.container1, text=" ")
         self.objeto10["font"] = ["bold"]
         self.objeto10.pack(side=tk.LEFT)
         self.objeto11 = tk.Label(self.container1, text="Quantidade")
@@ -467,7 +462,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t = info[row][0]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=4)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -476,7 +471,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row][0]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=4)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -486,7 +481,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t = info[row][1]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=55)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -495,7 +490,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row][1]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=55)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -531,7 +526,9 @@ class VendProd(tk.Frame):
         auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
         self.listaSelec.append(auxSelectedProd)
         self.listaSelec = tr.mergeSort(self.listaSelec)
-        self.todos_apertado()
+        #self.todos_apertado()
+        self.populate1(self.trataLista(self.bd.selectProduto()))
+        self.populate2(self.listaSelec)
 
     def onFrameConfigure1(self, event):  # comeco scroolbar frame1
         '''Reset the scroll region to encompass the inner frame'''
@@ -549,7 +546,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t = info[row].getprodInfo()[1]
-                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=50)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -558,7 +555,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row].getprodInfo()[1]
-                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=50)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -568,7 +565,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t = info[row].getprodInfo()[2]
-                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=5)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -577,7 +574,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row].getprodInfo()[2]
-                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=25)
+                    ent = tk.Entry(self.pacote2[1], state='readonly', readonlybackground=cor, fg='black', width=5)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -602,7 +599,6 @@ class VendProd(tk.Frame):
 
     def deselecionaProduto(self, row):
         self.listaSelec.pop(row)
-
         self.calculaTotal()
         self.todos_apertado()
 
