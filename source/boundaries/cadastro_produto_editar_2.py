@@ -24,13 +24,17 @@ class ProdutoEdicao():
         return self.top
 
 #Manda para tratemento para verificacao de erros
-    def SendToTR(self,id,nome,valor,tipo,bd):
+    def SendToTR(self,id,nome,valor,tipo,idAntigo,bd):
+        print id
         try:
-            p1 = tr.ProdutosReceive(id,nome,valor,tipo,bd)
+            if(not bd.ExistsProduto(id)):
+                p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
+            else:
+                raise tr.ErroEntrada(id, "O ID digitado (" + id + ") já existe no atual banco de dados. Escolha outro Id")
         except tr.Erro as e:
             tkMessageBox.showerror("Erro encontrado", e.message)
         else:
-            bd.deleteProduto(id)
+            bd.deleteProduto(idAntigo)
             bd.insertProduto(p1)
         finally:
             self.CloseWindow()
@@ -64,7 +68,8 @@ class ProdutoEdicao():
             id1['font'] = ['bold']
             id1.grid(row=1, column=1, sticky=tk.W)
 
-            id2 = tk.Label(info,text = p1.getId())
+            id2 = tk.Entry(info)
+            id2.insert(0,p1.getId())
             id2["width"] = 20
             id2["font"] = ("Arial", "10")
             id2.grid(row=2, column=1) #fim id
@@ -108,7 +113,7 @@ class ProdutoEdicao():
             salto5.grid(row=11, column=0)
 
             #comeco pronto
-            pronto = tk.Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(str(p1.getId()), nome2.get(), valor2.get(), variable.get(), bd))
+            pronto = tk.Button(info, text="Pronto", bg=self.cor1, command=lambda: self.SendToTR(str(id2.get()), nome2.get(), valor2.get(), variable.get(),p1.getId(), bd))
             pronto['font']=['bold']
             pronto['fg']='white'
             pronto['padx'] = 1

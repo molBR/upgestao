@@ -23,7 +23,6 @@ class VendEvent(tk.Frame):
         self.Cliente = Cliente
 
     def Insere(self,tipo,rua,numero,bairro,complemento,adultos,criancas,data):
-        print self.Cliente.getNome()
         try:
             self.tipoEvento = tr.EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data)
         except tr.ErroEntrada as e:

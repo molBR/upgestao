@@ -26,8 +26,10 @@ class CadClient(tk.Frame):
         self.te = editClientMenor.clienteCadastro()
 
     def getClienteSelec(self):
-        return self.ClienteSelec
-
+        try:
+            return self.ClienteSelec
+        except:
+            pass
     def visualiza(self,id):
         self.populate2(self.bd.selectClienteId(id))
 
@@ -183,7 +185,7 @@ class CadClient(tk.Frame):
 
 
         #self.formCadastro = tk.Toplevel()
-        self.cadastro = tk.Button(self.container3, text="Cadastrar", command=lambda: self.cadastraClin(),
+        self.cadastro = tk.Button(self.container3, text="Cadastrar Cliente", command=lambda: self.cadastraClin(),
                                   bg=cor3)
         self.cadastro["font"] = ['bold']
         self.cadastro['padx'] = 1

@@ -62,6 +62,7 @@ def EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data):
         VerificaDigit(numero)
         VerificaDigit(adultos)
         VerificaDigit(criancas)
+        VerificaData(data)
     except Erro as e:
         raise e
     else:
@@ -69,8 +70,23 @@ def EventosReceive(tipo,rua,numero,bairro,complemento,adultos,criancas,data):
         t1 = te.tipoEvento(0,tipo,rua,numero,bairro,complemento,adultos,criancas,data)
         return t1
 
+def VerificaData(data):
+
+    if(len(data)==10 and data[2]=='/' and data[5] == '/'): #checa o tamanho e se as barras estão nos lugares corretos
+        #exemplo: 12/02/2016
+        data1 = data[:2]  #12
+        data2 = data[3:] #/02/2016
+        data2 = data2[:2] #02
+        data3 = data[6:] #2016
+        if(data1.isdigit() and data2.isdigit() and data3.isdigit()):
+            pass
+        else:
+            raise ErroEntrada(data,"Data só pode conter números no formato dd/mm/aaaa")
+    else:
+        raise ErroEntrada(data, "A data deve ter um formato dd/mm/aaaa!")
+
+
 def verificaArroba(email):
-    print len(email)
     for i in range(0,len(email)):
         if(email[i]=='@'):
             return True
@@ -100,7 +116,6 @@ def swapDot2Comma(valor):
     return auxValue
 
 def mergeSort(alist):
-    #print("Splitting ",alist)
     if len(alist)>1:
         mid = len(alist)//2
         lefthalf = alist[:mid]

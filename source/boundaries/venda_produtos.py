@@ -234,26 +234,7 @@ class VendProd(tk.Frame):
         self.espaco3 = tk.Label(toolbar1, text=" | ", bg="white")
         self.espaco3["font"] = ("Arial", "12")
         self.espaco3.pack(side=tk.LEFT)
-        #self.historicovenda = tk.Button(toolbar1, text="Historico de Vendas", bg="white", relief=tk.FLAT,
-        #                                command=lambda: self.controller.show_frame("vendHist"))
-        #self.historicovenda["font"] = ("Arial", "10")
-        #self.historicovenda.pack(side=tk.LEFT, padx=1, pady=1)
-        #self.espaco4 = tk.Label(toolbar1, text=" | ", bg="white")
-        #self.espaco4["font"] = ("Arial", "12")
-        #self.espaco4.pack(side=tk.LEFT)
-        #self.inserirproduto = tk.Button(toolbar1, text="Inserir Produto", bg="white", relief=tk.FLAT,
-        #                                command=lambda: self.controller.show_frame("cadProdMaior"))
-        #self.inserirproduto["font"] = ("Arial", "10")
-        #self.inserirproduto.pack(side=tk.LEFT, padx=1, pady=1)
-        #self.espaco5 = tk.Label(toolbar1, text=" | ", bg="white")
-        #self.espaco5["font"] = ("Arial", "12")
-        #self.espaco5.pack(side=tk.LEFT)
-        #self.inserirtipo = tk.Button(toolbar1, text="Inserir Tipo", bg="white", relief=tk.FLAT,
-         #                            command=lambda: Teste())
-        #self.inserirtipo["font"] = ("Arial", "10")
-        #self.inserirtipo.pack(side=tk.LEFT, padx=1, pady=1)
 
-        # toolbar1.pack(side=tk.TOP, fill=tk.X)
         toolbar1.pack(side=tk.TOP, fill=tk.X)
         # fim
 

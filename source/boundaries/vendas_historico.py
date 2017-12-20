@@ -16,14 +16,16 @@ def Teste():
 class VendHist(tk.Frame):
 
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        self.bd = db.Database()
-        self.FazTela()
-        self.ClienteSelec = self.bd.selectClienteId(self.bd.selectVenda()[0][1])
-        self.VendaSelec = self.bd.selectVenda()[0]
-        self.listaProdSelec = self.bd.selectProdVendIdVend(self.bd.selectVenda()[0][1])
-
+        try:
+            tk.Frame.__init__(self, parent)
+            self.controller = controller
+            self.bd = db.Database()
+            self.FazTela()
+            self.ClienteSelec = self.bd.selectClienteId(self.bd.selectVenda()[0][1])
+            self.VendaSelec = self.bd.selectVenda()[0]
+            self.listaProdSelec = self.bd.selectProdVendIdVend(self.bd.selectVenda()[0][1])
+        except:
+            pass
 
 
 
@@ -52,8 +54,12 @@ class VendHist(tk.Frame):
     def deletando(self,id):
         self.JanelaPequena(id)
         self.populate1(self.bd.selectVenda())
-        self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
+        try:
+            self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
                        self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))  # fim frame venda
+        except:
+            pass
+
 
     def deleteCanvas(self,pacote):
         if pacote[0] != None:
