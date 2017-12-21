@@ -526,7 +526,7 @@ class VendProd(tk.Frame):
         auxSelectedProd = SelectedProd(self.listaProduto[row], 1)
         self.listaSelec.append(auxSelectedProd)
         self.listaSelec = tr.mergeSort(self.listaSelec)
-        #self.todos_apertado()
+        self.calculaTotal()
         self.populate1(self.trataLista(self.bd.selectProduto()))
         self.populate2(self.listaSelec)
 

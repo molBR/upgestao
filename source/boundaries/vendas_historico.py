@@ -379,7 +379,15 @@ class VendHist(tk.Frame):
         cor = '#fafafa'
         nada = ""
         nome1var = "Nome:"
-        nome2var = infoCliente[1]
+        try:
+            nome2var = infoCliente[0][1]
+        except:
+            try:
+                nome2var = infoCliente[1]
+            except:
+                pass
+        else:
+            infoCliente = infoCliente[0]
         endereco1var = "Endereco:"
         endereco2var =  infoCliente[3]
         email1var = "Email:"
