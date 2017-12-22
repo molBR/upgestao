@@ -42,8 +42,12 @@ class VendHist(tk.Frame):
             self.deleteCanvas(self.pacote1)
             self. deleteCanvas(self.pacote2)
             self.populate1(self.bd.selectVenda())
-            self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
+            try:
+                self.populate2(self.bd.selectFirstVenda(), self.bd.selectClienteId(self.bd.selectFirstVenda()[1]),
                            self.bd.selectProdVendIdVend(self.bd.selectFirstVenda()[0]))
+            except:
+                pass
+
         else:
             self.deleteCanvas(self.pacote1)
             self.deleteCanvas(self.pacote2)

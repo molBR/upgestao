@@ -53,7 +53,7 @@ class VendProd(tk.Frame):
     def insereTudo(self):
         agora = datetime.now().strftime('%d/%m/%y - %H:%M:%S')
         if(not self.listaSelec):
-            print "VAZIO"
+           pass
         else:
             self.calculaTotal()
             v1 = ve.Venda(0,self.Cliente.getId(),self.Cliente.getNome(),self.TipoEvento.getTipo(),self.TipoEvento.getAdultos(),
@@ -64,7 +64,6 @@ class VendProd(tk.Frame):
             if (self.vpm.GetWindow() != None):
                 self.vpm.GetWindow().wait_window()
             vend_id = self.bd.selectLastIdVenda()
-            print vend_id
             for i in range(len(self.listaSelec)):
                 self.bd.insertProdVend(self.listaSelec[i].getprodInfo()[1],
                                        self.listaSelec[i].getprodInfo()[2],
@@ -105,8 +104,6 @@ class VendProd(tk.Frame):
         self.outros.config(relief=tk.RAISED, background=self.cor1)
         self.populate1(self.trataLista(self.bd.selectProdutoDoces()))
         self.populate2(self.listaSelec)
-        print self.Cliente.getNome()
-        print self.TipoEvento.getTipo()
 
     def salgados_apertado(self):
         self.todos.config(relief=tk.RAISED, background=self.cor1)
@@ -163,14 +160,7 @@ class VendProd(tk.Frame):
                             self.listaProduto.pop(percorre)
                             aux = aux - 1
                     except IndexError:
-                        print "Percorre:"
-                        print percorre
-                        print "Aux:"
-                        print aux
-                        print "Tamanho da listaProduto:"
-                        print len(self.listaProduto)
-                        print "Tamanho da listaSelec:"
-                        print len(self.listaSelec)
+                        pass
                 percorre = percorre + 1
         return self.listaProduto
 

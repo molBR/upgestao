@@ -14,7 +14,7 @@ class Control(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-
+        self.Frame = None
         self.tela = {}
         self.processVendIsOn = False
         self.processVend  = None
@@ -52,7 +52,6 @@ class Control(tk.Tk):
         if(self.processVendIsOn):
             self.processVend = None
             self.processVendIsOn = False
-
         if(page_name == 'menuInicial'):
             self.title('Gut\'s Orçamento - Menu Inicial')
         elif (page_name == 'cadProdMaior'):
@@ -66,9 +65,8 @@ class Control(tk.Tk):
             self.processVendIsOn = True
             self.processVend = procVenda.ProcessVend(controller=self)
             return
-        frame = self.tela[page_name]
-        frame.tkraise()
+        self.frame = self.tela[page_name]
+        self.frame.tkraise()
 
     def fazTelaVH(self):
-        print "a"
         self.tela["vendHist"].pesquisando("")
