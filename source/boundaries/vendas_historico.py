@@ -33,7 +33,7 @@ class VendHist(tk.Frame):
         self.populate1(self.bd.selectVenda())
         self.ClienteSelec = self.bd.selectClienteId(info[1])
         self.VendaSelec = self.bd.selectVendaId(info[0])
-        self.listaProdSelec = self.bd.selectProdVendIdVend(info[1])
+        self.listaProdSelec = self.bd.selectProdVendIdVend(info[0])
         self.populate2(self.VendaSelec, self.ClienteSelec[0],
                        self.listaProdSelec)
 
@@ -376,6 +376,7 @@ class VendHist(tk.Frame):
 
     def populate2(self,infoVenda,infoCliente,infoListaProduto):  # comeco venda
 
+        print infoListaProduto
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
 

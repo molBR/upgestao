@@ -294,6 +294,8 @@ class Database(object):
         value = [id]
         self.dbCursor.execute('DELETE FROM Venda WHERE id = ?',value)
         self.dbConnect.commit()
+        self.dbCursor.execute('DELETE FROM Prod_Vendido WHERE id_venda = ?', value)
+        self.dbConnect.commit()
 
 #Deleta a categoria dado seu id         O CERTO É VERIFICAR SE ALGUM PRODUTO ESTÁ ATRELADA A CATEGORIA!!!!
     def deleteCategoria(self, id):
