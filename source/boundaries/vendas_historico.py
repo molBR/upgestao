@@ -191,7 +191,7 @@ class VendHist(tk.Frame):
             self.nome = tk.Label(self.container1, text=" Nome:")
             self.nome["font"] = ["bold"]
             self.nome.pack(side=tk.LEFT)
-            self.pulo1 = tk.Label(self.container1, text="                                                 ")
+            self.pulo1 = tk.Label(self.container1, text="                                     ")
             self.pulo1["font"] = ["bold"]
             self.pulo1.pack(side=tk.LEFT)
             self.data = tk.Label(self.container1, text="Data:")
@@ -203,7 +203,9 @@ class VendHist(tk.Frame):
             self.valor = tk.Label(self.container1, text="Valor:")
             self.valor["font"] = ["bold"]
             self.valor.pack(side=tk.LEFT)
-            self.pulo3 = tk.Label(self.container1, text="                                ")
+            espaco = "                                                             "
+            espaco = espaco + espaco
+            self.pulo3 = tk.Label(self.container1, text=espaco)
             self.pulo3.pack(side=tk.LEFT)
             self.dados = tk.Label(self.container1, text="Dados Gerais:")
             self.dados["font"] = ["bold"]
