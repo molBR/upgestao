@@ -180,13 +180,16 @@ class VendProd(tk.Frame):
                 self.populate2(self.listaSelec)
 
     def calculaTotal(self):
+        print "oi"
         valorTot = 0
         if(self.listaSelec):
             for i in range(len(self.listaSelec)):
                 auxProdValue = tr.swapComma2Dot(self.listaSelec[i].getprodInfo()[2])
                 valorTot = valorTot + float(auxProdValue) * int(self.listaSelec[i].getQuant().get())
             valorTot = "%.2f" % round(valorTot,2) #arredondar com 2 casas decimais. OBRIGADO STACKOVERFLOW
+        valorTot = tr.swapDot2Comma(valorTot)
         self.SomaQuant.set(valorTot)
+
 
     def FazTela(self):
         # menu
@@ -490,7 +493,7 @@ class VendProd(tk.Frame):
                 if row % 2 == 0:
                     cor = '#ffffff'
                     t = info[row][2]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)
@@ -499,7 +502,7 @@ class VendProd(tk.Frame):
                 else:
                     cor = '#f0f0f0'
                     t = info[row][2]
-                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=15)
+                    ent = tk.Entry(self.pacote1[1], state='readonly', readonlybackground=cor, fg='black', width=10)
                     ent["font"] = ("Arial", "13")
                     var = tk.StringVar()
                     var.set(t)

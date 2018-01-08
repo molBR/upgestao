@@ -2,6 +2,7 @@
 from Tkinter import *
 import os
 from source.entities import database as db
+from source.entities import tratamentos as tr
 
 class Application:
     def __init__(self):
@@ -19,7 +20,9 @@ class Application:
 
     def insereTudo(self,bd,venda,controller):
         self.calculaTotal(venda)
-        self.desconto.set(float(self.vt.get()) - float(venda.getCusto_diversos().get()))
+        desconto = float(tr.swapComma2Dot(self.vt.get())) - float(tr.swapComma2Dot(venda.getCusto_diversos().get()))
+        #self.desconto.set(float(self.vt.get()) - float(venda.getCusto_diversos().get()))
+        self.desconto.set(desconto)
         venda.setValor_total(self.vt)
         venda.setSubtrair(self.desconto)
         bd.insertVenda(venda)
@@ -27,13 +30,16 @@ class Application:
         self.CloseWindow()
 
     def calculaTotal(self,v1):
+        valor_espaco2 = tr.swapComma2Dot(self.valor_espaco2.get())
+        valor_getCusto_diversos = tr.swapComma2Dot(v1.getCusto_diversos().get())
+        vt = tr.swapDot2Comma(str(float(valor_espaco2) + float(valor_getCusto_diversos)))
         #try:
-            self.vt.set(float(self.valor_espaco2.get()) + float(v1.getCusto_diversos().get()))
+        self.vt.set(vt)
         #except Exception as e:
          #   return
         #else:
             #self.vt = valor
-            self.v2.set(str(self.vt.get()))
+        self.v2.set(str(self.vt.get()))
 
 
     def FazTela(self,bd,venda,controller):
