@@ -5,7 +5,8 @@ import os as os
 from source.entities import database as db
 import tkMessageBox
 from source.entities import testefuzz as tf
-from Docx import documentoShow as ds
+#from Docx import documentoShow as ds
+from Docx import excel as exc
 
 
 
@@ -237,7 +238,7 @@ class VendHist(tk.Frame):
             self.ok.pack(side=tk.LEFT)
             self.espaco3 = tk.Label(self.container3, text="                    ", bg=cor3)
             self.espaco3.pack(side=tk.LEFT)
-            self.salvar = tk.Button(self.container3, text="Salvar Docx", command=lambda:ds.docx(self.ClienteSelec[0],self.VendaSelec,self.listaProdSelec,2,2,2), bg=cor3)
+            self.salvar = tk.Button(self.container3, text="Salvar Excel", command=lambda:exc.saveExcel(self.VendaSelec[0]), bg=cor3)
             self.salvar["font"] = ['bold']
             self.salvar['padx'] = 1
             self.salvar['pady'] = 1

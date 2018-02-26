@@ -7,6 +7,7 @@ class Database(object):
     dbCursor = None
 
     def __init__(self):
+
         self.dbConnect = sqlite3.connect('source/GutsDados.db')
         self.dbCursor = self.dbConnect.cursor()
 
