@@ -30,7 +30,6 @@ class ProdutoEdicao():
             if (int(idAntigo) == int(id)):
                 p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
             elif(not bd.ExistsProduto(id)):
-                print "oi"
                 p1 = tr.ProdutosReceive(id, nome, valor, tipo, bd)
             else:
                 raise tr.ErroEntrada(id, "O ID digitado (" + id + ") já existe no atual banco de dados. Escolha outro Id")

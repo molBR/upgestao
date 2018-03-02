@@ -379,7 +379,6 @@ class VendHist(tk.Frame):
 
     def populate2(self,infoVenda,infoCliente,infoListaProduto):  # comeco venda
 
-        print infoListaProduto
         self.deleteCanvas(self.pacote2)
         self.createCanvas(self.pacote2)
 
